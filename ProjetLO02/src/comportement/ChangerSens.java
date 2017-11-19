@@ -1,6 +1,6 @@
-//package pckg.comportement;
+package comportement;
+import pckg.Partie;
 
-//import pckg.Partie;
 
 public class ChangerSens implements Effet{
 	public void effet(){
