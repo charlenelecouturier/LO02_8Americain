@@ -3,7 +3,7 @@
  */
 
 /**
- * @author charlene
+ * @author Charlene et Robin
  *
  */
 public class Carte {
