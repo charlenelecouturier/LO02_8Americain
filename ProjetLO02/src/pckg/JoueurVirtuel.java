@@ -1,3 +1,5 @@
+package pckg;
+
 //package pckg;
 
 public class JoueurVirtuel extends Joueur{

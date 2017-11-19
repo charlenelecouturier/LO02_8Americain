@@ -1,3 +1,4 @@
+package pckg;
 import java.util.ArrayList;
 
 public class VarianteMinimale extends Variante {

@@ -1,4 +1,4 @@
-//package pckg;
+package pckg;
 import java.util.Scanner;
 
 public class JoueurPhysique extends Joueur {
