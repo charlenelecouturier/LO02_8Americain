@@ -1,4 +1,4 @@
-package comportement;
+package pckg.comportement;
 
 
 public class ChangerFamille implements Effet{
