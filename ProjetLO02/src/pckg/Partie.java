@@ -1,6 +1,7 @@
 package pckg;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Partie {
@@ -12,7 +13,7 @@ public class Partie {
 	private int tourJoueur ;
 	private static int sens ;
 	private Talon talon;
-	private Joueur[] joueur; //peut-être une collection plus adaptée?
+	private ArrayList<Joueur> joueur = new ArrayList<Joueur>();//Collection plus adaptée qu'un tableau pour gérer les joueurs
 	private Variante variantePartie;
 	private Pioche pioche;
 	
@@ -27,13 +28,13 @@ public class Partie {
 		setNbJoueursVirtuels(nbJoueursVirtuels);
 		
 		
-		this.joueur=new Joueur[this.nbJoueursVirtuels+1];
+		//this.joueur=new Joueur[this.nbJoueursVirtuels+1];
 		
 		//instanciation des joueurs
-		this.joueur[0]= new JoueurPhysique();
+		this.joueur.add( new JoueurPhysique());
 		int i;
 		for (i=1;i<=this.nbJoueursVirtuels;i++) {
-			this.joueur[i]= new JoueurVirtuel();
+			this.joueur.add(new JoueurVirtuel());
 		}
 		
 		int nbJoueursEnCours= this.nbJoueursVirtuels +1;
@@ -79,7 +80,18 @@ public class Partie {
 		return Partie.instancePartie;		
 	}
 
+public void gagnePartie() { 
+int i;
+for (i=0;i<this.nbJoueursEnCours;i++) {
+	if (this.joueur.get(i).getCartes().isEmpty()) {
+		System.out.println(this.joueur.get(i).getName()+"a gagné.");
+		this.joueur.remove(i);
+		
+	}
 
+}
+	
+}
 
 	public static void main(String[] args) {
 		
@@ -96,7 +108,8 @@ public class Partie {
 	    while (p.etat=="EN COURS") // tant que la partie est en cours
 	    	{
 	    // P.tourJoueur correspond au numéro du joueur qui doit jouer
-	    	p.joueur[p.tourJoueur-1].jouerTour(); // l'incrémentation ou la décrémentation de "tourJoueur" est générée dans la methode "jouerTour()" ,car, selon la carte posée, un tour peut etre sauté ou le sens du jeu peut être changé
+	    	p.joueur.get(p.tourJoueur-1).jouerTour();
+	    	p.gagnePartie();// l'incrémentation ou la décrémentation de "tourJoueur" est générée dans la methode "jouerTour()" ,car, selon la carte posée, un tour peut etre sauté ou le sens du jeu peut être changé
 	    	//p.joueur[0].jouerTour();//TEST SUR JOUEUR PHYSIQUE
 	    	}
 	    
@@ -135,7 +148,7 @@ public class Partie {
 	/**
 	 * @return the joueur
 	 */
-	public Joueur[] getJoueur() {
+	public ArrayList<Joueur> getJoueur() {
 		return joueur;
 	}
 
@@ -146,7 +159,7 @@ public class Partie {
 	/**
 	 * @param joueur the joueur to set
 	 */
-	public void setJoueur(Joueur[] joueur) {
+	public void setJoueur(ArrayList<Joueur> joueur) {
 		this.joueur = joueur;
 	}
 

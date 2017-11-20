@@ -68,8 +68,8 @@ public class Pioche extends PorteurCarte {
 		{
 			for (i=0;i<nbJoueurs;i++) {
 				
-			Partie.getPartie().getJoueur()[i].getCartes().add(this.cartes.get(this.nbCartes-1)); // on ajoute une carte dans le jeu du joueur i : celle qui est au dessus de la pioche
-			Partie.getPartie().getJoueur()[i].setNbCartes(Partie.getPartie().getJoueur()[i].getNbCartes()+1); // on enleve une carte à la pioche
+			Partie.getPartie().getJoueur().get(i).getCartes().add(this.cartes.get(this.nbCartes-1)); // on ajoute une carte dans le jeu du joueur i : celle qui est au dessus de la pioche
+			Partie.getPartie().getJoueur().get(i).setNbCartes(Partie.getPartie().getJoueur().get(i).getNbCartes()+1); // on enleve une carte à la pioche
 
 			
 			this.cartes.remove(this.nbCartes-1); // on supprime cette carte de la pioche
