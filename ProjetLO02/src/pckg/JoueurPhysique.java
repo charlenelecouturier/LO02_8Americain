@@ -9,6 +9,7 @@ public class JoueurPhysique extends Joueur {
 		
 		System.out.println("Entrez votre nom svp : ");
 		this.name = sc.nextLine();
+		System.out.println("OK "+ this.name);
 	}
 
 	public int choisirCarte() { // doit renvoyer un int et non une Carte car sinon on crée une nouvelle carte, et on ne peut plus utiliser remove(cartePose) dans jouerTour

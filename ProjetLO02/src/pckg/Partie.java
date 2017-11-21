@@ -108,7 +108,14 @@ for (i=0;i<this.nbJoueursEnCours;i++) {
 	    while (p.etat=="EN COURS") // tant que la partie est en cours
 	    	{
 	    // P.tourJoueur correspond au numéro du joueur qui doit jouer
+	    	try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    	p.joueur.get(p.tourJoueur-1).jouerTour();
+	    	
 	    	p.gagnePartie();// l'incrémentation ou la décrémentation de "tourJoueur" est générée dans la methode "jouerTour()" ,car, selon la carte posée, un tour peut etre sauté ou le sens du jeu peut être changé
 	    	//p.joueur[0].jouerTour();//TEST SUR JOUEUR PHYSIQUE
 	    	}
