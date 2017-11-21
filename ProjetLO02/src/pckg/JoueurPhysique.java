@@ -18,18 +18,32 @@ public class JoueurPhysique extends Joueur {
 
 	public int choisirCarte() { // doit renvoyer un int et non une Carte car sinon on crée une nouvelle carte, et on ne peut plus utiliser remove(cartePose) dans jouerTour
 		
-		//System.out.println("Quelle carte voulez-vous poser?");
-		System.out.println("Carte du talon : "+ Partie.getPartie().getTalon().getCarteDessus());
-		System.out.println("Vos cartes : ");
-		int i;
-		for(i=1;i<=this.cartes.size();i++) {
-			System.out.println(i+" : " +this.cartes.get(i-1));	
-		}
-		System.out.println("Numéro de la carte choisie ?");
-		int numero =sc.nextInt()-1;
+		
+		boolean choix; // variable qui permet la gestion des erreur : si le joueur entre un numéro trop grand ou trop petit, qui ne correspond à aucun numéro de carte
+		int numero;
 		
 		
-		return numero;
+		do{ 
+		
+			choix= true;
+			System.out.println("Carte du talon : "+ Partie.getPartie().getTalon().getCarteDessus());
+			System.out.println("Vos cartes : ");
+			int i;
+			for(i=1;i<=this.cartes.size();i++) {
+				System.out.println(i+" : " +this.cartes.get(i-1));	
+			}
+			System.out.println("Numéro de la carte choisie ?");
+			numero =sc.nextInt();
+			if (numero<0|| numero > this.cartes.size()) // verification du néméo de carte choisi
+				{
+				choix = false;
+				System.out.println("Erreur, numéro inexistant, faites un nouveau choix");
+			}
+		
+		} while(!choix);
+		
+		
+		return numero-1;
 	}
 
 	public void changerFamille() {

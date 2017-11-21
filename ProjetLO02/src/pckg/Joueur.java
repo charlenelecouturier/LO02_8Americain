@@ -93,9 +93,23 @@ public abstract class Joueur extends PorteurCarte {
 			System.out.println("Vous ne pouvez pas jouer, vous piochez.");
 			this.piocher(1);
 		}
-		int tour= this.getNumero()+1;
-		if( tour > Partie.getPartie().getNbJoueursEnCours()) {
-			tour=1;		
+		
+		// on cherche le tour du joueur suivant
+		int tour;
+		// on regarde le sens de la partie
+		if (Partie.getPartie().getSens()==1) {
+			tour= this.getNumero()+1;
+			// si on depasse le numéro du dernier joueur, on revient au joueur 1 ( joueur physique)
+			if( tour > Partie.getPartie().getNbJoueursEnCours()) {
+				tour=1;		
+			}
+			}
+		else {
+			// si on trouve un numéro négatif, on revient au tour du dernier joueur ( joueur ayant le dernier numéro)
+			tour = this.getNumero()-1;
+			if (tour<0) {
+				tour=5;
+			}
 		}
 		Partie.getPartie().setTourJoueur(tour);
 	}

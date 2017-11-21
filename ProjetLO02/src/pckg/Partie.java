@@ -126,6 +126,7 @@ for (i=0;i<this.nbJoueursEnCours;i++) {
 			}
 	    	// P.tourJoueur correspond au numéro du joueur qui doit jouer
 	    	p.joueur.get(p.tourJoueur-1).jouerTour();
+	    	System.out.println("\n");
 	    	
 	    	p.gagnePartie();// l'incrémentation ou la décrémentation de "tourJoueur" est générée dans la methode "jouerTour()" ,car, selon la carte posée, un tour peut etre sauté ou le sens du jeu peut être changé
 	    	//p.joueur[0].jouerTour();//TEST SUR JOUEUR PHYSIQUE
