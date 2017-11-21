@@ -34,7 +34,7 @@ public class JoueurPhysique extends Joueur {
 			}
 			System.out.println("Numéro de la carte choisie ?");
 			numero =sc.nextInt();
-			if (numero<0|| numero > this.cartes.size()) // verification du néméo de carte choisi
+			if (numero<0|| numero > this.cartes.size()) // verification du numéro de carte choisi
 				{
 				choix = false;
 				System.out.println("Erreur, numéro inexistant, faites un nouveau choix");

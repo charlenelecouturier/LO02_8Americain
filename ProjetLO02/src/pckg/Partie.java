@@ -74,12 +74,12 @@ public class Partie {
 		
 				
 	}
-/** Singleton 
- * *
- * 
- * @return Partie instance unique de la classe Partie
- */
-public static Partie getPartie() {
+	/** Singleton 
+	 * *
+	 * 
+	 * @return Partie instance unique de la classe Partie
+	 */
+	public static Partie getPartie() {
 		
 		if (Partie.instancePartie==null)
 			
@@ -90,26 +90,26 @@ public static Partie getPartie() {
 		return Partie.instancePartie;		
 	}
 
-public boolean gagnePartie() { 
+	public boolean gagnePartie() { 
 	
-int i;
-for (i=0;i<this.nbJoueursEnCours;i++) {
-	if (this.joueur.get(i).getCartes().isEmpty()) {
-		System.out.println(this.joueur.get(i).getName()+" a gagné.");
-		this.classementJoueurs.add(this.joueur.get(i));
-		this.joueur.remove(i);
-		this.nbJoueursEnCours=this.nbJoueursEnCours -1;
-		int j;
-		for (j=0;j<this.nbJoueursEnCours;j++) {
+		int i;
+		for (i=0;i<this.nbJoueursEnCours;i++) {
+			if (this.joueur.get(i).getCartes().isEmpty()) {
+				System.out.println(this.joueur.get(i).getName()+" a gagné.");
+				this.classementJoueurs.add(this.joueur.get(i));
+				this.joueur.remove(i);
+				this.nbJoueursEnCours=this.nbJoueursEnCours -1;
+				int j;
+				for (j=0;j<this.nbJoueursEnCours;j++) {
 			
-			this.joueur.get(j).setNumero(j+1);;
-		}
-		return true;
-		}
+					this.joueur.get(j).setNumero(j+1);;
+				}
+				return true;
+			}
 	
-}
-return false;	
-}
+		}
+		return false;	
+	}
 
 	public static void main(String[] args) {
 		
