@@ -1,8 +1,5 @@
 package pckg;
 import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.lang.Object;
 
 
 public class JoueurPhysique extends Joueur {
