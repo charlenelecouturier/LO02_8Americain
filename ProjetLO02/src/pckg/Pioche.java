@@ -1,4 +1,6 @@
 package pckg;
+import java.util.Collections;
+
 
 import java.util.Random;
 
@@ -20,8 +22,8 @@ public class Pioche extends PorteurCarte {
 	public Pioche() {
 		//nb cartes definie dans la variante
 		int i;
-		this.nbCartes=Partie.getPartie().getVariantePartie().getNbCartes();
-	  			for(i=this.nbCartes-1;i>=0;i--) {
+		int nbCartes=Partie.getPartie().getVariantePartie().getNbCartes();
+	  			for(i=nbCartes-1;i>=0;i--) {
 				
 					Carte carte = Partie.getPartie().getVariantePartie().getCartes().get(i);
 					Partie.getPartie().getVariantePartie().getCartes().remove(i);
@@ -41,14 +43,14 @@ public class Pioche extends PorteurCarte {
 
 	
 	public void melanger() {
-
+/*
 		int place;
 		int i;
 		
-			for (i=0;i<this.nbCartes;i++) {
+			for (i=0;i<this.cartes.size();i++) {
 		
 				Random r = new Random();
-				place = 0 + r.nextInt(this.nbCartes - 1);// on choisit une place aleatoirement dans le paquet (nombre choisi entre 0 et nbCartes-1)
+				place = 0 + r.nextInt(this.cartes.size() - 1);// on choisit une place aleatoirement dans le paquet (nombre choisi entre 0 et nbCartes-1)
 				// on échange les cartes
 				Carte c=this.cartes.get(place); // on met dans la référence c la carte qui est la place "place"
 				this.cartes.set(place, this.cartes.get(i)); // on met à la position "place" la carte qui est à la position i
@@ -56,7 +58,8 @@ public class Pioche extends PorteurCarte {
 		
 			
 			}
-	
+	*/
+	Collections.shuffle(this.cartes);
 		
 		
 	}
@@ -69,29 +72,24 @@ public class Pioche extends PorteurCarte {
 		{
 			for (i=0;i<nbJoueurs;i++) {
 				
-			Partie.getPartie().getJoueur().get(i).getCartes().add(this.cartes.get(this.nbCartes-1)); // on ajoute une carte dans le jeu du joueur i : celle qui est au dessus de la pioche
-			Partie.getPartie().getJoueur().get(i).setNbCartes(Partie.getPartie().getJoueur().get(i).getNbCartes()+1); // on enleve une carte à la pioche
+			Partie.getPartie().getJoueur().get(i).getCartes().add(this.cartes.get(this.cartes.size()-1)); // on ajoute une carte dans le jeu du joueur i : celle qui est au dessus de la pioche
 
 			
-			this.cartes.remove(this.nbCartes-1); // on supprime cette carte de la pioche
+			this.cartes.remove(this.cartes.size()-1); // on supprime cette carte de la pioche
 
 			// la carte du dessus de la pioche va dans le jeu de carte du joueur "i" au tour numéro "tour"
-			
-			this.nbCartes--; // on enleve une carte à la pioche
 			
 			}
 			tour ++;
 		}
 		//derniere carte = carte du talon
-		Partie.getPartie().getTalon().setCarteDessus(this.cartes.get(this.nbCartes-1));
-		this.cartes.remove(this.nbCartes-1);
-		this.nbCartes--;
-	
+		Partie.getPartie().getTalon().setCarteDessus(this.cartes.get(this.cartes.size()-1));
+		this.cartes.remove(this.cartes.size()-1);
 		
 		System.out.println(Partie.getPartie().getJoueur().get(0).getCartes().get(0));		//TEST
 		System.out.println(Partie.getPartie().getJoueur().get(0).getCartes().size());		//TEST
 
-		System.out.println(Partie.getPartie().getPioche().getNbCartes());		//TEST*/
+		System.out.println(this.cartes.size());		//TEST*/
 
 		
 	}

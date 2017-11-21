@@ -13,7 +13,7 @@ public class PorteurCarte {
 	
 	protected ArrayList<Carte> cartes= new ArrayList<Carte>(); // on fait une arraylist pour les cartes au lieu d'un tableau car cest plus simple à manipuler
 	
-	int nbCartes;
+	
 	/**
 	 * @return the cartes
 	 */
@@ -38,18 +38,6 @@ public class PorteurCarte {
 //	public void setCartes(Carte carte, int place) {
 //		this.cartes[place] = carte;
 //	}
-	/**
-	 * @return the nbCartes
-	 */
-	public int getNbCartes() {
-		return nbCartes;
-	}
-	/**
-	 * @param nbCartes the nbCartes to set
-	 */
-	public void setNbCartes(int nbCartes) {
-		this.nbCartes = nbCartes;
-	}
 	
 	
 	

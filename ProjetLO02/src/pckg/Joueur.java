@@ -9,7 +9,7 @@ package pckg;
 public abstract class Joueur extends PorteurCarte {
 	//**********attributs**************
 	protected String name ;
-	private int classement, numero ; 
+	private int classement, numero ;  // numéro est compris entre 1 et le nombre de joueurs en cours dans la partie
 	private static int donneurNum = 1;
 	
 	//**********Constructeur************
@@ -64,6 +64,7 @@ public abstract class Joueur extends PorteurCarte {
 	 * @param P
 	 */
 	public void jouerTour() {
+		boolean gagne=false;
 	//1. on vérifie si le joueur peut jouer avec les cartes qu'il a dans la main
 		if (Partie.getPartie().getVariantePartie().estPossibleDeJouer(this.cartes)) {
 	//2.1. Le joueur choisit la carte qu'il desire poser sur le talon.
@@ -79,12 +80,15 @@ public abstract class Joueur extends PorteurCarte {
 			}
 			System.out.println("Vous posez "+ cartePose);
 	//4.1 Le joueur pose la carte choisie sur le talon.
+			Partie.getPartie().getTalon().getCartes().add(cartePose);
 			Partie.getPartie().getTalon().setCarteDessus(cartePose);
 	//5.1 Le joueur perd la carte qu'il a posée de sa main
 			cartes.remove(cartePose);
 			if(this.cartes.size()==1) {
 				this.DireCarte();
 				}
+			gagne =Partie.getPartie().gagnePartie();
+
 			}
 			
 		
@@ -94,34 +98,56 @@ public abstract class Joueur extends PorteurCarte {
 			this.piocher(1);
 		}
 		
-		// on cherche le tour du joueur suivant
+		// On cherche le tour du joueur suivant
 		int tour;
-		// on regarde le sens de la partie
+		tour= Partie.getPartie().getTourJoueur();
+		// On regarde le sens de la partie
 		if (Partie.getPartie().getSens()==1) {
-			tour= this.getNumero()+1;
-			// si on depasse le numéro du dernier joueur, on revient au joueur 1 ( joueur physique)
+			
+			if(!gagne) {
+				tour++;
+			}
+						// Si on depasse le numéro du dernier joueur, on revient au joueur 1 ( joueur physique)
 			if( tour > Partie.getPartie().getNbJoueursEnCours()) {
 				tour=1;		
 			}
-			}
-		else {
+		}
+		else {// sens =-1
 			// si on trouve un numéro négatif, on revient au tour du dernier joueur ( joueur ayant le dernier numéro)
-			tour = this.getNumero()-1;
+			tour--;
 			if (tour<0) {
-				tour=5;
+				tour=Partie.getPartie().getNbJoueursEnCours();
 			}
 		}
 		Partie.getPartie().setTourJoueur(tour);
 	}
 	
 	
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
 	public abstract void changerFamille();
 	
 	public abstract int choisirCarte();
 	public abstract void DireCarte();
 	public abstract void DireContreCarte();
 	
-	public abstract void piocher(int nombrePioche); 
+	public void piocher(int nombrePioche) {
+		
+		if(Partie.getPartie().getPioche().getCartes().size()< nombrePioche) {
+			Partie.getPartie().getTalon().devenirPioche();
+		}
+		//la boucle tourne autant de fois que le joueur doit piocher
+		for (int i=1;i<=nombrePioche;i++) {
+			//Ajoute aux cartes du joueur la dernière carte de la pioche
+			Carte cartePioche =Partie.getPartie().getPioche().cartes.get(Partie.getPartie().getPioche().cartes.size()-1); // -1 car indice commence à 0
+			cartes.add(cartePioche);
+			//Retire cette carte de la pioche
+			Partie.getPartie().getPioche().cartes.remove(Partie.getPartie().getPioche().cartes.size()-1);
+			System.out.println(this.name+ " a pioché " + cartePioche);
+		}
+		
+	}
 }
 	
 

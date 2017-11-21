@@ -55,12 +55,12 @@ public class JoueurPhysique extends Joueur {
 		// TODO Auto-generated method stub
 		
 		
-		
+		Scanner scan = new Scanner(System.in);
 		System.out.println("Vite ! Dites'CARTE' :");
 		long t = System.currentTimeMillis();// date actuelle en millisecondes
-        String reponse = sc.nextLine();
+        String reponse = scan.nextLine();
 		long t2 = System.currentTimeMillis();
-		if (t2-t>3800 || (!reponse.equals("carte") && !reponse.equals("Carte") && !reponse.equals("CARTE")))
+		if (t2-t>8000 || (!reponse.equals("carte") && !reponse.equals("Carte") && !reponse.equals("CARTE")))
 		{
 			System.out.println("Vous n'avez pas dit 'CARTE' à temps ! CONTRE-CARTE !");
 			this.piocher(1);
@@ -81,17 +81,6 @@ public class JoueurPhysique extends Joueur {
 		
 	}
 	
-	@Override
-	public void piocher(int nombrePioche) {
-		//la boucle tourne autant de fois que le joueur doit piocher
-		for (int i=1;i<=nombrePioche;i++) {
-			//Ajoute aux cartes du joueur la dernière carte de la pioche
-			Carte cartePioche =Partie.getPartie().getPioche().cartes.get(Partie.getPartie().getPioche().cartes.size()-1); // -1 car indice commence à 0
-			cartes.add(cartePioche);
-			//Retire cette carte de la pioche
-			Partie.getPartie().getPioche().cartes.remove(Partie.getPartie().getPioche().cartes.size()-1);
-			System.out.println(this.name+ " a pioché " + cartePioche);
-		}
-		
-	}
+	
+	
 }

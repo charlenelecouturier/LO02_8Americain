@@ -14,6 +14,7 @@ public class Partie {
 	private static int sens ;
 	private Talon talon;
 	private ArrayList<Joueur> joueur = new ArrayList<Joueur>();//Collection plus adaptée qu'un tableau pour gérer les joueurs
+	private ArrayList<Joueur> classementJoueurs = new ArrayList<Joueur>();
 	private Variante variantePartie;
 	private Pioche pioche;
 	
@@ -89,18 +90,25 @@ public static Partie getPartie() {
 		return Partie.instancePartie;		
 	}
 
-public void gagnePartie() { 
+public boolean gagnePartie() { 
 	
 int i;
 for (i=0;i<this.nbJoueursEnCours;i++) {
 	if (this.joueur.get(i).getCartes().isEmpty()) {
-		System.out.println(this.joueur.get(i).getName()+"a gagné.");
+		System.out.println(this.joueur.get(i).getName()+" a gagné.");
+		this.classementJoueurs.add(this.joueur.get(i));
 		this.joueur.remove(i);
-		
-	}
-
-}
+		this.nbJoueursEnCours=this.nbJoueursEnCours -1;
+		int j;
+		for (j=0;j<this.nbJoueursEnCours;j++) {
+			
+			this.joueur.get(j).setNumero(j+1);;
+		}
+		return true;
+		}
 	
+}
+return false;	
 }
 
 	public static void main(String[] args) {
@@ -115,7 +123,7 @@ for (i=0;i<this.nbJoueursEnCours;i++) {
 	    // on distribue la pioche
 	    p.pioche.distribuer();
 	    
-	    while (p.etat=="EN COURS") // tant que la partie est en cours
+	    while (p.etat=="EN COURS" ) // tant que la partie est en cours
 	    	{
 	    // temps de délais entre chaque tour
 	    	try {
@@ -125,11 +133,10 @@ for (i=0;i<this.nbJoueursEnCours;i++) {
 				e.printStackTrace();
 			}
 	    	// P.tourJoueur correspond au numéro du joueur qui doit jouer
-	    	p.joueur.get(p.tourJoueur-1).jouerTour();
+	    	p.joueur.get(p.tourJoueur-1).jouerTour();	    	// l'incrémentation ou la décrémentation de "tourJoueur" est générée dans la methode "jouerTour()" ,car, selon la carte posée, un tour peut etre sauté ou le sens du jeu peut être changé
+
 	    	System.out.println("\n");
 	    	
-	    	p.gagnePartie();// l'incrémentation ou la décrémentation de "tourJoueur" est générée dans la methode "jouerTour()" ,car, selon la carte posée, un tour peut etre sauté ou le sens du jeu peut être changé
-	    	//p.joueur[0].jouerTour();//TEST SUR JOUEUR PHYSIQUE
 	    	}
 	    
 	}
