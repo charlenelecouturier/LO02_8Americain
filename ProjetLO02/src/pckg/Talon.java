@@ -15,7 +15,9 @@ public class Talon extends PorteurCarte{
  
  /** methode qui permet de mettre toutes les cartes du talon dans la pioche (lorsque cette dernière ne permet
   *  pas au joueur de piocher le bon nombre de cartes), sauf la carte du dessus du talon qui reste, et on 
-  *  conserve les dernieres cartes de la pioche au dessus de celle-ci*/
+  *  conserve les dernieres cartes de la pioche au dessus de celle-ci
+  *  La methode ne renvoie rien en retour*/
+ 
  public void devenirPioche() { 
 	 int nombreCartesPioche =Partie.getPartie().getPioche().getCartes().size();
 	 ArrayList<Carte> cartesRestantes = new ArrayList<Carte>(); // les dernieres cartes qui restaient de la pioche
@@ -36,19 +38,17 @@ public class Talon extends PorteurCarte{
 	 for (i=0;i<nombreCartesPioche;i++) {
 		 Partie.getPartie().getPioche().getCartes().add(cartesRestantes.get(i));
 		 cartesRestantes.remove(i);
-	 }
-
-	 
+	 }	 
  }
+ 
+ 
 	public Carte getCarteDessus() {
 		return this.carteDessus;
 	}
 	/**
 	 * @param carteDessus
 	 */
-	//public Talon(Carte carteDessus) {
-	//	this.carteDessus = carteDessus;
-	//}
+
 	public void setCarteDessus(Carte carteDessus) {
 		this.carteDessus = carteDessus;
 	}

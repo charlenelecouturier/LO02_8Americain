@@ -43,14 +43,14 @@ public class Pioche extends PorteurCarte {
 
 	
 	public void melanger() {
-/*
+
 		int place;
 		int i;
 		
 			for (i=0;i<this.cartes.size();i++) {
 		
 				Random r = new Random();
-				place = 0 + r.nextInt(this.cartes.size() - 1);// on choisit une place aleatoirement dans le paquet (nombre choisi entre 0 et nbCartes-1)
+				place = 0 + r.nextInt(this.cartes.size()-1);// on choisit une place aleatoirement dans le paquet (nombre choisi entre 0 et nbCartes-1)
 				// on échange les cartes
 				Carte c=this.cartes.get(place); // on met dans la référence c la carte qui est la place "place"
 				this.cartes.set(place, this.cartes.get(i)); // on met à la position "place" la carte qui est à la position i
@@ -58,8 +58,7 @@ public class Pioche extends PorteurCarte {
 		
 			
 			}
-	*/
-	Collections.shuffle(this.cartes);
+	//Collections.shuffle(this.cartes);
 		
 		
 	}

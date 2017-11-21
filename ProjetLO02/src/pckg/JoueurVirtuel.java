@@ -26,6 +26,7 @@ public class JoueurVirtuel extends Joueur{
 					Carte cartePose = this.cartes.get(numeroCarte);
 			//4.1 Le joueur pose la carte choisie sur le talon.
 					Partie.getPartie().getTalon().setCarteDessus(cartePose);
+					Partie.getPartie().getTalon().getCartes().add(cartePose);
 					System.out.println(this.getName() + " joue " + cartePose);
 			//5.1 Le joueur perd la carte qu'il a posée de sa main
 					cartes.remove(cartePose);
