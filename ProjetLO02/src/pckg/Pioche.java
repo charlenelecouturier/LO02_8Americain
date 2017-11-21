@@ -8,6 +8,7 @@ import java.util.Random;
  * Elle hérite de PorteurCarte qui définit les collections de cartes.
  * @author Robin & Charlène
  * @see PorteurCarte
+ * 
  */
 public class Pioche extends PorteurCarte {
 	
@@ -86,8 +87,8 @@ public class Pioche extends PorteurCarte {
 		this.nbCartes--;
 	
 		
-		/*System.out.println(Partie.getPartie().getJoueur()[0].getCartes().get(0));		//TEST
-		System.out.println(Partie.getPartie().getJoueur()[0].getNbCartes());		//TEST
+		System.out.println(Partie.getPartie().getJoueur().get(0).getCartes().get(0));		//TEST
+		System.out.println(Partie.getPartie().getJoueur().get(0).getCartes().size());		//TEST
 
 		System.out.println(Partie.getPartie().getPioche().getNbCartes());		//TEST*/
 

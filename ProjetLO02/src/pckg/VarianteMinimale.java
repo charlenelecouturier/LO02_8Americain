@@ -53,11 +53,12 @@ public class VarianteMinimale extends Variante {
 	/**
 	 * 
 	 */
-	public VarianteMinimale() {
+	public VarianteMinimale(int nbPaquet) {
 		this.carteSpeciale = new Carte[8];
-		this.nbCartes=52;
-		
+		this.nbCartes=52*nbPaquet;
+		int k;
 			//nb cartes definie dans la variante
+		for(k=1;k<=nbPaquet; k++) {
 			int i,j;
 		    String[] symboles=new String[]{"TREFLE","COEUR","CARREAU","PIQUE"};
 			String[] valeurs=new String[]{"1","2","3","4","5","6","7","8","9","10","VALET","DAME","ROI"};
@@ -69,6 +70,7 @@ public class VarianteMinimale extends Variante {
 						this.jeuDeCartes.add(carte);
 						}
 				}
+			}
 			
 			}
 	

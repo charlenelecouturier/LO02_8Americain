@@ -23,9 +23,10 @@ public class Partie {
 		
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
-	    System.out.println("Saisissez le nombre de joueurs virtuels (maximum 4) :"); // le joueur physique choisit le nombre de joueurs virtuels
+	    System.out.println("Saisissez le nombre de joueurs virtuels :"); // le joueur physique choisit le nombre de joueurs virtuels
 	    int nbJoueursVirtuels = sc.nextInt();
 		setNbJoueursVirtuels(nbJoueursVirtuels);
+		
 		
 		
 		//this.joueur=new Joueur[this.nbJoueursVirtuels+1];
@@ -50,11 +51,19 @@ public class Partie {
 		this.talon = new Talon();
 		
 		//choix de la variante
+		
 		System.out.println("Saisissez la variante :\n1=Variante minimale ");
 		int variante = sc.nextInt();
 		if (variante == 1 )
 		{
-			this.variantePartie= new VarianteMinimale();
+		// si il ya plus de 5 joueurs en tout au départ on rentre dans la boucle if(), car on utilise 1 paquet pour 5 joueur
+		
+		int nombreDePaquet=1;
+		if(this.nbJoueursVirtuels>4) {
+			
+			nombreDePaquet +=(this.nbJoueursVirtuels +1)/5;
+		}
+			this.variantePartie= new VarianteMinimale(nombreDePaquet);
 			System.out.println("Variante minimale choisie");
 
 		}
@@ -69,7 +78,7 @@ public class Partie {
  * 
  * @return Partie instance unique de la classe Partie
  */
-	public static Partie getPartie() {
+public static Partie getPartie() {
 		
 		if (Partie.instancePartie==null)
 			
@@ -81,6 +90,7 @@ public class Partie {
 	}
 
 public void gagnePartie() { 
+	
 int i;
 for (i=0;i<this.nbJoueursEnCours;i++) {
 	if (this.joueur.get(i).getCartes().isEmpty()) {
@@ -107,13 +117,14 @@ for (i=0;i<this.nbJoueursEnCours;i++) {
 	    
 	    while (p.etat=="EN COURS") // tant que la partie est en cours
 	    	{
-	    // P.tourJoueur correspond au numéro du joueur qui doit jouer
+	    // temps de délais entre chaque tour
 	    	try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+	    	// P.tourJoueur correspond au numéro du joueur qui doit jouer
 	    	p.joueur.get(p.tourJoueur-1).jouerTour();
 	    	
 	    	p.gagnePartie();// l'incrémentation ou la décrémentation de "tourJoueur" est générée dans la methode "jouerTour()" ,car, selon la carte posée, un tour peut etre sauté ou le sens du jeu peut être changé
