@@ -82,7 +82,12 @@ public abstract class Joueur extends PorteurCarte {
 			Partie.getPartie().getTalon().setCarteDessus(cartePose);
 	//5.1 Le joueur perd la carte qu'il a posée de sa main
 			cartes.remove(cartePose);
-		}
+			if(this.cartes.size()==1) {
+				this.DireCarte();
+				}
+			}
+			
+		
 	//2.2. Le joueur ne peut jouer aucune carte, donc il pioche.
 		else {
 			System.out.println("Vous ne pouvez pas jouer, vous piochez.");

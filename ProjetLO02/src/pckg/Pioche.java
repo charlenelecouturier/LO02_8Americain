@@ -76,6 +76,7 @@ public class Pioche extends PorteurCarte {
 			this.cartes.remove(this.nbCartes-1); // on supprime cette carte de la pioche
 
 			// la carte du dessus de la pioche va dans le jeu de carte du joueur "i" au tour numéro "tour"
+			
 			this.nbCartes--; // on enleve une carte à la pioche
 			
 			}

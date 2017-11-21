@@ -1,5 +1,7 @@
 package pckg;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class JoueurPhysique extends Joueur {
 	Scanner sc = new Scanner(System.in);
@@ -35,6 +37,19 @@ public class JoueurPhysique extends Joueur {
 	@Override
 	public void DireCarte() {
 		// TODO Auto-generated method stub
+		System.out.println("Vite : dire 'CARTE'");
+		
+		long temps = 5000;                      // délai avant de répéter la tache : 5000 = 5 seconde
+        long startTime = 0;                    // délai avant la mise en route (0 demarre immediatement)
+        Timer timer = new Timer();             // création du timer
+        TimerTask tache = new TimerTask() {     // création et spécification de la tache à effectuer
+            @Override
+                public void run() {
+                       String reponse = sc.nextLine();// ici se qui doit être effectué
+                }
+        };
+        timer.scheduleAtFixedRate(tache,startTime,temps);
+		
 		
 	}
 
