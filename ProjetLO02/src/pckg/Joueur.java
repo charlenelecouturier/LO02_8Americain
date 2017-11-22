@@ -11,6 +11,7 @@ public abstract class Joueur extends PorteurCarte {
 	protected String name ;
 	private int classement, numero ;  // numéro est compris entre 1 et le nombre de joueurs en cours dans la partie
 	private static int donneurNum = 1;
+	private int score; // score du joueur
 	
 	//**********Constructeur************
 /**
@@ -21,6 +22,7 @@ public abstract class Joueur extends PorteurCarte {
 		joueur un nouveau numéro */
 		this.numero = donneurNum;
 		donneurNum++;
+		this.score=0; // initialement le joueur a 0 points
 	}
 	//********** Getter et Setters **********
 	/**
@@ -148,6 +150,14 @@ public abstract class Joueur extends PorteurCarte {
 		}
 		
 	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	
 }
 	
 

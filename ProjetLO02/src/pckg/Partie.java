@@ -17,6 +17,7 @@ public class Partie {
 	private ArrayList<Joueur> classementJoueurs = new ArrayList<Joueur>();
 	private Variante variantePartie;
 	private Pioche pioche;
+	private String modeComptage;
 	
 
 	
@@ -72,6 +73,11 @@ public class Partie {
 			System.out.println("Erreur : variante inexistante");
 		}
 		
+		// mode de comptage des points 
+		System.out.println("Saisir le mode de comptage : 'POSITIF' ou 'NEGATIF'");
+		Scanner text = new Scanner(System.in);
+		this.modeComptage=text.nextLine();
+		
 				
 	}
 	/** Singleton 
@@ -110,6 +116,51 @@ public class Partie {
 		}
 		return false;	
 	}
+	
+	
+	
+	public boolean terminerPartie() {
+		
+	boolean terminer = false;
+	// s'il y a 3 gagnant on arrette la partie  ( comptage positif)
+	if (this.modeComptage.equals("POSITIF")) {
+		if( this.classementJoueurs.size()==3 || this.nbJoueursEnCours==1) {
+			terminer = true;
+			int i; 
+			// on met tous les joueurs restant dans le classement
+			for(i=0; i<this.joueur.size();i++) {
+				this.classementJoueurs.add(this.joueur.get(i));
+				this.joueur.remove(i);
+		
+			}		
+		}
+	}
+	return terminer;
+		
+	
+	}
+	
+	public void compterPoints() {
+		
+	if (this.modeComptage.equals("POSITIF")) {
+		
+		int i;
+		this.classementJoueurs.get(0).setScore(this.classementJoueurs.get(0).getScore() + 50 );
+		this.classementJoueurs.get(1).setScore(this.classementJoueurs.get(1).getScore() + 20 );
+		
+		if(this.classementJoueurs.size()>2) { // s'il y a plus de 2 joueurs
+			
+			this.classementJoueurs.get(2).setScore(this.classementJoueurs.get(2).getScore() + 10 );
+
+		}
+			
+			
+		}
+				
+	}
+		
+	
+	
 
 	public static void main(String[] args) {
 		
@@ -123,7 +174,7 @@ public class Partie {
 	    // on distribue la pioche
 	    p.pioche.distribuer();
 	    
-	    while (p.etat=="EN COURS" ) // tant que la partie est en cours
+	    while (! p.terminerPartie()) // tant que la partie est en cours
 	    	{
 	    // temps de délais entre chaque tour
 	    	try {
@@ -138,6 +189,8 @@ public class Partie {
 	    	System.out.println("\n");
 	    	
 	    	}
+	    System.out.println("Partie terminée !" );
+	    p.compterPoints();
 	    
 	}
 	    
