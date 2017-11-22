@@ -121,12 +121,23 @@ public class Partie {
 		if( this.classementJoueurs.size()==3 || this.nbJoueursEnCours==1) {
 			terminer = true;
 			while(!this.joueur.isEmpty()) {
-			/*int i; 
+			 
 			// on met tous les joueurs restant dans le classement
-			for(i=0; i<this.joueur.size();i++) {*/
 				this.classementJoueurs.add(this.joueur.get(0));
 				this.joueur.remove(0);
-			}		
+			}
+			// test
+			int i;
+			System.out.println("Manche terminée !" );
+							
+			//test : verification du classement
+			System.out.println("Classement de la manche :");
+			for(i=0;i<this.classementJoueurs.size();i++) {
+				System.out.println((i+1) +"e : " + this.classementJoueurs.get(i).getName());
+			}
+			System.out.println("\nLe premier gagne 50 points, le deuxième 20 points, et le troisième 10 points");
+							
+
 		}
 	}
 	return terminer;
@@ -149,20 +160,26 @@ public class Partie {
 			
 		// on ordonne la collection classementJoueurPartie : classement général 
 		// tri des joueurs par insertion
-		//on ajoute le joueur dans l'ordre de leurs scores croissants
+		//on ajoute le joueur dans l'ordre de leurs scores décroissants
 		int j;
 		for(i=0; i< this.classementJoueursPartie.size();i++) {
 			  Joueur joueurJ =this.classementJoueursPartie.get(i);
 			          
 			   j=i;
-			   while(j> 0 && this.classementJoueursPartie.get(j-1).getScore()<joueurJ.getScore()) {
+			   while(j> 0 && this.classementJoueursPartie.get(j-1).getScore()<joueurJ.getScore()) 
+			   {
 			        	  this.classementJoueursPartie.set(j,this.classementJoueursPartie.get(j-1));
 			        	  j = j - 1;
-			          }
-			          this.classementJoueursPartie.set(j,joueurJ);
-			     }
-		
+			   }
+			   this.classementJoueursPartie.set(j,joueurJ);
 		}
+		
+	}
+	int i;
+	System.out.println("\nClassement général : ");
+	 for(i= 1;i<=this.classementJoueursPartie.size();i++) {
+		 	System.out.println(i + "e : " + this.classementJoueursPartie.get(i-1).getName() + " -- SCORE : " +this.classementJoueursPartie.get(i-1).getScore());
+	 }
 				
 	}
 	
@@ -190,7 +207,7 @@ public class Partie {
 			}
 		
 		// tri des joueurs par insertion
-		//on ajoute le joueur dans l'ordre de leurs numéros décroissants
+		//on ajoute le joueur dans l'ordre de leurs numéros croissants
 	   for(i=0; i< this.joueur.size();i++) {
 	    	 Joueur joueurJ =this.joueur.get(i);
 	          
@@ -234,10 +251,7 @@ public class Partie {
 				terminer= true;
 				this.etat="TERMINEE";
 				 int i;
-				 System.out.println("Partie terminée!\nClassement : ");
-				 for(i= 1;i<=this.classementJoueursPartie.size();i++) {
-				    System.out.println(i + " : " + this.classementJoueursPartie.get(i-1).getName() + " -SCORE : " +this.classementJoueursPartie.get(i-1).getScore());
-				 }
+				 System.out.println("Partie terminée! Un joueur a eu au moins 60 point !");
 			}
 			
 		}
@@ -253,11 +267,11 @@ public class Partie {
 
 	public static void main(String[] args) {
 		
-	   	 //creation d'une partie
+		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
+	   	//creation d'une partie
 		Partie p = Partie.getPartie();
 		//creation de la pioche
 		p.pioche =new Pioche();
-
 		// on melange la pioche
 	    p.pioche.melanger();
 	    // on distribue la pioche
@@ -273,32 +287,19 @@ public class Partie {
 					e.printStackTrace();
 				}
 				// P.tourJoueur correspond au numéro du joueur qui doit jouer
-				p.joueur.get(p.tourJoueur-1).jouerTour();	    	// l'incrémentation ou la décrémentation de "tourJoueur" est générée dans la methode "jouerTour()" ,car, selon la carte posée, un tour peut etre sauté ou le sens du jeu peut être changé
+				p.joueur.get(p.tourJoueur-1).jouerTour();// l'incrémentation ou la décrémentation de "tourJoueur" est générée dans la methode "jouerTour()" ,car, selon la carte posée, un tour peut etre sauté ou le sens du jeu peut être changé
 
 				System.out.println("\n");
 	    	
 	    		}
 			
-			// test
-			int i;
-				System.out.println("Manche terminée !" );
-				
-				//test : verification du classement
-				for(i=0;i<p.classementJoueurs.size();i++) {
-					
-				System.out.println("nom : " + p.classementJoueurs.get(i).getName());
-				}
-				
 				p.compterPoints();
 				if(!p.terminerPartie())
 				{	
+					System.out.println("\nNOUVELLE MANCHE\n");
 					p.changerManche();
 				}
-				
-
-		    }
-	    
-	    
+		}
 	}
 	    
 	    
@@ -372,14 +373,12 @@ public class Partie {
 
 
 
-
 	/**
 	 * @return the variantePartie
 	 */
 	public Variante getVariantePartie() {
 		return variantePartie;
 	}
-
 
 
 
@@ -413,14 +412,10 @@ public class Partie {
 	}
 
 
-
-
 	public void setNbJoueursEnCours(int nbJoueursEnCours) {
 		
 		this.nbJoueursEnCours = nbJoueursEnCours;
 	}
-
-
 
 
 	public String getEtat() {
@@ -428,13 +423,9 @@ public class Partie {
 	}
 
 
-
-
 	public void setEtat(String etat) {
 		this.etat = etat;
 	}
-
-
 
 
 	public int getTourJoueur() {
