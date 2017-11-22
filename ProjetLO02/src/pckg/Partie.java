@@ -398,6 +398,7 @@ public class Partie {
 
 
 
+	
 
 	public void setNbJoueursVirtuels( int nbJoueursVirtuels) {
 
