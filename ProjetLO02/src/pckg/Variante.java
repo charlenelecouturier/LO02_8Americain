@@ -16,7 +16,8 @@ public abstract class Variante {
 	 */
 	protected Carte[] carteSpeciale;
 	protected int nbCartes;
-	protected ArrayList<Carte> jeuDeCartes= new ArrayList<Carte>();
+	protected ArrayList<Carte> jeuDeCartes;
+	public abstract ArrayList<Carte> creerJeuDeCartes(int nbPaquet);
 
 	/**
 	 * @param nbCartes the nbCartes to set

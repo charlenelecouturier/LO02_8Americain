@@ -53,26 +53,49 @@ public class VarianteMinimale extends Variante {
 	/**
 	 * 
 	 */
-	public VarianteMinimale(int nbPaquet) {
-		this.carteSpeciale = new Carte[8];
-		this.nbCartes=52*nbPaquet;
-		int k;
-			//nb cartes definie dans la variante
-		for(k=1;k<=nbPaquet; k++) {
-			int i,j;
-		    String[] symboles=new String[]{"TREFLE","COEUR","CARREAU","PIQUE"};
-			String[] valeurs=new String[]{"1","2","3","4","5","6","7","8","9","10","VALET","DAME","ROI"};
+	
 
-				for(i=0;i<symboles.length;i++) {
+		
+		
+	public VarianteMinimale(int nbJoueursVirtuels) {
+		
+		this.carteSpeciale = new Carte[8];
+		// si il ya plus de 5 joueurs en tout au départ on rentre dans la boucle if(), car on utilise 1 paquet pour 5 joueur
+		
+		int nbPaquet=1;
+		if(nbJoueursVirtuels>4) { // boucle infinie ici{
 					
-					for(j=0;j<valeurs.length;j++){
-						Carte carte = new Carte(valeurs[j],symboles[i]);
-						this.jeuDeCartes.add(carte);
-						}
+					nbPaquet +=(nbJoueursVirtuels+1)/5;
 				}
-			}
+		this.nbCartes=52*nbPaquet;
+		this.jeuDeCartes=this.creerJeuDeCartes(nbPaquet);
+		
+	
 			
 			}
+
+	@Override
+	public ArrayList<Carte> creerJeuDeCartes(int nbPaquet) {
+		ArrayList<Carte> jeuDeCartes= new ArrayList<Carte>();
+		int k;
+		//nb cartes definie dans la variante
+		for(k=1;k<=nbPaquet; k++) {
+		int i,j;
+	    String[] symboles=new String[]{"TREFLE","COEUR","CARREAU","PIQUE"};
+		String[] valeurs=new String[]{"1","2","3","4","5","6","7","8","9","10","VALET","DAME","ROI"};
+
+			for(i=0;i<symboles.length;i++) {
+				
+				for(j=0;j<valeurs.length;j++){
+					Carte carte = new Carte(valeurs[j],symboles[i]);
+					jeuDeCartes.add(carte);
+					}
+			}
+		}
+		return jeuDeCartes;		
+	}
+
+	}
 	
 	
-}
+

@@ -47,14 +47,16 @@ public abstract class Joueur extends PorteurCarte {
 	public String getName() {
 		return this.name;
 	}
-	//Pas de setter pour Numero, on ne doit pas pouvoir y toucher une fois instanciÃ©
+	//Pas de setter pour Numero, on ne doit pas pouvoir y toucher une fois instancié
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	/**
 	 * Mutateur du classement, détermine la place à laquelle un joueur finit.
 	 * @param classe
 	 */
-	public void setName(String name) {
-		this.name = name;
-	}
 	public void setClassement(int classe) {
 		this.classement = classe;
 	}
@@ -63,7 +65,6 @@ public abstract class Joueur extends PorteurCarte {
 	/**
 	 * Le corps meme de cette classe, jouerTour permet à un joueur physique ou virtuel de
 	 * choisir une carte dans son jeu et la poser sur le talon.
-	 * @param P
 	 */
 	public void jouerTour() {
 		boolean gagne=false;

@@ -4,6 +4,6 @@ import pckg.Partie;
 
 public class ChangerSens implements Effet{
 	public void effet(){
-		Partie.setSens();
+		Partie.getPartie().setSens();
 	}
 }

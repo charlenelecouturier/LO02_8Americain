@@ -83,11 +83,9 @@ public class Pioche extends PorteurCarte {
 		}
 		//derniere carte = carte du talon
 		Partie.getPartie().getTalon().setCarteDessus(this.cartes.get(this.cartes.size()-1));
-		this.cartes.remove(this.cartes.size()-1);
-		
+		this.cartes.remove(this.cartes.size()-1);	
 		System.out.println(Partie.getPartie().getJoueur().get(0).getCartes().get(0));		//TEST
 		System.out.println(Partie.getPartie().getJoueur().get(0).getCartes().size());		//TEST
-
 		System.out.println(this.cartes.size());		//TEST*/
 
 		
