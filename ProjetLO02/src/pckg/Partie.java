@@ -15,6 +15,7 @@ public class Partie {
 	private Talon talon;
 	private ArrayList<Joueur> joueur;//Collection plus adaptée qu'un tableau pour gérer les joueurs
 	private ArrayList<Joueur> classementJoueurs;
+	private ArrayList<Joueur> classementJoueursPartie;
 	private Variante variantePartie;
 	private Pioche pioche;
 	private String modeComptage;
@@ -29,7 +30,8 @@ public class Partie {
 	    int nbJoueursVirtuels = sc.nextInt();
 		setNbJoueursVirtuels(nbJoueursVirtuels);
 		this.classementJoueurs=	 new ArrayList<Joueur>();
-		
+		this.classementJoueursPartie=	 new ArrayList<Joueur>();
+
 		//instanciation des joueurs
 		this.joueur= new ArrayList<Joueur>();
 		this.joueur.add( new JoueurPhysique());
@@ -37,7 +39,11 @@ public class Partie {
 		for (i=1;i<=this.nbJoueursVirtuels;i++) {
 			this.joueur.add(new JoueurVirtuel());
 		}
+		// on initialise le classement de la partie 
 		
+		for (i=0;i<this.joueur.size();i++) {
+			this.classementJoueursPartie.add(this.joueur.get(i));
+		}
 		int nbJoueursEnCours= this.nbJoueursVirtuels +1;
 		this.nbJoueursEnCours = nbJoueursEnCours;
 		
@@ -133,16 +139,29 @@ public class Partie {
 	if (this.modeComptage.equals("POSITIF")) {
 		
 		int i;
+		// on ajoute les points correspondant aux 3 premiers
 		this.classementJoueurs.get(0).setScore(this.classementJoueurs.get(0).getScore() + 50 );
 		this.classementJoueurs.get(1).setScore(this.classementJoueurs.get(1).getScore() + 20 );
 		
 		if(this.classementJoueurs.size()>2) { // s'il y a plus de 2 joueurs
-			
 			this.classementJoueurs.get(2).setScore(this.classementJoueurs.get(2).getScore() + 10 );
-
 		}
 			
-			
+		// on ordonne la collection classementJoueurPartie : classement général 
+		// tri des joueurs par insertion
+		//on ajoute le joueur dans l'ordre de leurs scores croissants
+		int j;
+		for(i=0; i< this.classementJoueursPartie.size();i++) {
+			  Joueur joueurJ =this.classementJoueursPartie.get(i);
+			          
+			   j=i;
+			   while(j> 0 && this.classementJoueursPartie.get(j-1).getScore()<joueurJ.getScore()) {
+			        	  this.classementJoueursPartie.set(j,this.classementJoueursPartie.get(j-1));
+			        	  j = j - 1;
+			          }
+			          this.classementJoueursPartie.set(j,joueurJ);
+			     }
+		
 		}
 				
 	}
@@ -171,7 +190,7 @@ public class Partie {
 			}
 		
 		// tri des joueurs par insertion
-		//on ajoute le joueur dans l'ordre de leurs numéros croissants
+		//on ajoute le joueur dans l'ordre de leurs numéros décroissants
 	   for(i=0; i< this.joueur.size();i++) {
 	    	 Joueur joueurJ =this.joueur.get(i);
 	          
@@ -207,7 +226,30 @@ public class Partie {
 	}
 		
 	
-	
+	public boolean terminerPartie(){
+		boolean terminer =false;
+		if (this.modeComptage.equals("POSITIF")) {
+			// la partie se joue en 200 points mais on test avec 60			
+			if(this.classementJoueursPartie.get(0).getScore()>= 60) {
+				terminer= true;
+				this.etat="TERMINEE";
+				 int i;
+				 System.out.println("Partie terminée!\nClassement : ");
+				 for(i= 1;i<=this.classementJoueursPartie.size();i++) {
+				    System.out.println(i + " : " + this.classementJoueursPartie.get(i-1).getName() + " -SCORE : " +this.classementJoueursPartie.get(i-1).getScore());
+				 }
+			}
+			
+		}
+		
+		else {
+			
+		}
+		return terminer;
+		
+		
+		
+	}
 
 	public static void main(String[] args) {
 		
@@ -240,12 +282,18 @@ public class Partie {
 			// test
 			int i;
 				System.out.println("Manche terminée !" );
+				
+				//test : verification du classement
 				for(i=0;i<p.classementJoueurs.size();i++) {
 					
 				System.out.println("nom : " + p.classementJoueurs.get(i).getName());
 				}
+				
 				p.compterPoints();
-				p.changerManche();
+				if(!p.terminerPartie())
+				{	
+					p.changerManche();
+				}
 				
 
 		    }
@@ -255,7 +303,7 @@ public class Partie {
 	    
 	    
 	    
-	  
+	
 	    
 		
 
