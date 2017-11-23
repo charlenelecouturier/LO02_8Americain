@@ -1,5 +1,5 @@
 package pckg;
-
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,8 +13,8 @@ public class Partie {
 	private int tourJoueur ;
 	private int sens ;
 	private Talon talon;
-	private ArrayList<Joueur> joueur;//Collection plus adaptée qu'un tableau pour gérer les joueurs
-	private ArrayList<Joueur> classementJoueurs;
+	private LinkedList<Joueur> joueur;//Collection plus adaptée qu'un tableau pour gérer les joueurs
+	private LinkedList<Joueur> classementJoueurs;
 	private ArrayList<Joueur> classementJoueursPartie;
 	private Variante variantePartie;
 	private Pioche pioche;
@@ -29,11 +29,11 @@ public class Partie {
 	    System.out.println("Saisissez le nombre de joueurs virtuels :"); // le joueur physique choisit le nombre de joueurs virtuels
 	    int nbJoueursVirtuels = sc.nextInt();
 		setNbJoueursVirtuels(nbJoueursVirtuels);
-		this.classementJoueurs=	 new ArrayList<Joueur>();
+		this.classementJoueurs=	 new LinkedList<Joueur>();
 		this.classementJoueursPartie=	 new ArrayList<Joueur>();
 
 		//instanciation des joueurs
-		this.joueur= new ArrayList<Joueur>();
+		this.joueur= new LinkedList<Joueur>();
 		this.joueur.add( new JoueurPhysique());
 		int i;
 		for (i=1;i<=this.nbJoueursVirtuels;i++) {
@@ -93,23 +93,6 @@ public class Partie {
 		}
 		return Partie.instancePartie;		
 	}
-
-	public boolean gagnePartie() { 
-	
-		int i;
-		for (i=0;i<this.nbJoueursEnCours;i++) {
-			if (this.joueur.get(i).getCartes().isEmpty()) {
-				System.out.println(this.joueur.get(i).getName()+" a gagné.");
-				this.classementJoueurs.add(this.joueur.get(i));
-				this.joueur.remove(i);
-				this.nbJoueursEnCours=this.nbJoueursEnCours -1;
-				return true;
-			}
-	
-		}
-		return false;	
-	}
-	
 	
 	
 	public boolean terminerManche() {
@@ -123,20 +106,12 @@ public class Partie {
 			while(!this.joueur.isEmpty()) {
 			 
 			// on met tous les joueurs restant dans le classement
-				this.classementJoueurs.add(this.joueur.get(0));
-				this.joueur.remove(0);
+				this.classementJoueurs.add(this.joueur.poll());
+				//this.joueur.remove(0);
 			}
 			// test
 			int i;
-			System.out.println("Manche terminée !" );
-							
-			//On donne le classsement de la manche
-			System.out.println("Classement de la manche :");
-			for(i=0;i<this.classementJoueurs.size();i++) {
-				System.out.println((i+1) +"e : " + this.classementJoueurs.get(i).getName());
-			}
-			System.out.println("\nLe premier gagne 50 points, le deuxième 20 points, et le troisième 10 points");
-							
+			System.out.println("Manche terminée !" );				
 
 		}
 	}
@@ -148,8 +123,8 @@ public class Partie {
 			while(!this.joueur.isEmpty()) {
 			 
 			// on met tous les joueurs restant dans le classement
-				this.classementJoueurs.add(this.joueur.get(0));
-				this.joueur.remove(0);
+				this.classementJoueurs.add(this.joueur.poll());
+				//this.joueur.remove(0);
 			}
 			System.out.println("Manche terminée !" );	
 		
@@ -161,10 +136,7 @@ public class Partie {
 	
 	}
 	
-	public void compterPoints() {
-		
-	if (this.modeComptage.equals("POSITIF")) {
-		
+	public void compterPointsPositif() {
 		int i;
 		// on ajoute les points correspondant aux 3 premiers
 		this.classementJoueurs.get(0).setScore(this.classementJoueurs.get(0).getScore() + 50 );
@@ -191,17 +163,32 @@ public class Partie {
 			   }
 			   this.classementJoueursPartie.set(j,joueurJ);
 		}
+		//On donne le classsement de la manche
+		System.out.println("Classement de la manche :");
+		for(i=0;i<this.classementJoueurs.size();i++) {
+			System.out.println((i+1) +"e : " + this.classementJoueurs.get(i).getName());
+		}
+		System.out.println("\nLe premier gagne 50 points, le deuxième 20 points, et le troisième 10 points");
+		// on donne le classemnet général de la partie
+		System.out.println("\nClassement général : ");
+		 for(i= 1;i<=this.classementJoueursPartie.size();i++) {
+			 	System.out.println(i + "e : " + this.classementJoueursPartie.get(i-1).getName() + " -- SCORE : " +this.classementJoueursPartie.get(i-1).getScore());
+		 }
 		
 	}
 	
-	
-	
+
+	public void compterPointsNegatif() {
 	// mode de comptage négatif
-	else { 
+
 		int k, h;
 		//ON PARCOURT LES JOUEURS
 			for (k=0; k<this.classementJoueurs.size();k++) {
+				//ON SELECTIONNE UN JOUEUR
 				Joueur joueurSelect = this.classementJoueurs.get(k);
+				// ON MET LE SCORE INITIAL DE LA MANCHE A 0 POUR LE JOUEUR
+				joueurSelect.setScoreManche(0);
+				
 				// ON PARCOURT LES CARTES RESTANTES DU JOUEUR SELECTIONNE
 				// on initialise les points qu'il va prendre à 0
 				int points =0;
@@ -226,14 +213,36 @@ public class Partie {
 						points+=Integer.parseInt(c.getValeur()) ;
 					}
 				}
+				//modification du score génaral
 				joueurSelect.setScore(joueurSelect.getScore()+points);
+				//pour afficher le score de la manche
+				joueurSelect.setScoreManche(points);
 				System.out.println(joueurSelect.getName()+ " prend "+ points +" points");
 				
 			}
+			// on ordonne la collection classementJoueurs : classement de la manche
+			//on ajoute le joueur dans l'ordre de leurs scores croissants 
+			//(le meilleur est celui qui a le MOINS de points)
+						int j,i;
+						for(i=0; i< this.classementJoueurs.size();i++) {
+							  Joueur joueurJ =this.classementJoueurs.get(i);
+							          
+							   j=i;
+							   while(j> 0 && this.classementJoueurs.get(j-1).getScoreManche()>joueurJ.getScoreManche()) 
+							   {
+							        	  this.classementJoueurs.set(j,this.classementJoueurs.get(j-1));
+							        	  j = j - 1;
+							   }
+							   this.classementJoueurs.set(j,joueurJ);
+						}
+				// on donne le classement de la manche
+				System.out.println("\nClassement de la manche : ");
+				 for(i= 1;i<=this.classementJoueurs.size();i++) {
+					 	System.out.println(i + "e : " + this.classementJoueurs.get(i-1).getName() + " -- SCORE : " +this.classementJoueurs.get(i-1).getScoreManche());
+				 }
 			// on ordonne la collection classementJoueurPartie : classement général  de la partie
 			//on ajoute le joueur dans l'ordre de leurs scores croissants 
 			//(le meilleur est celui qui a le MOINS de points)
-			int j,i;
 			for(i=0; i< this.classementJoueursPartie.size();i++) {
 				  Joueur joueurJ =this.classementJoueursPartie.get(i);
 				          
@@ -245,8 +254,6 @@ public class Partie {
 				   }
 				   this.classementJoueursPartie.set(j,joueurJ);
 			}
-	}
-	int i;
 	// on donne le classemnet général de la partie
 	System.out.println("\nClassement général : ");
 	 for(i= 1;i<=this.classementJoueursPartie.size();i++) {
@@ -278,8 +285,8 @@ public class Partie {
 		int i,j;
 		while(this.classementJoueurs.size()>0)
 		{
-			this.joueur.add(this.classementJoueurs.get(0));
-			this.classementJoueurs.remove(0);
+			this.joueur.add(this.classementJoueurs.poll());
+			//this.classementJoueurs.remove(0);
 			}
 		
 		// tri des joueurs par insertion
@@ -388,8 +395,13 @@ public class Partie {
 				System.out.println("\n");
 	    	
 	    		}
-			
-				p.compterPoints();
+				if (p.modeComptage.equals("POSITIF"))
+				{
+					p.compterPointsPositif();
+					}
+				else {
+					p.compterPointsNegatif();
+				}
 				
 				// Si la partie n'est pas terminée, on debute une nouvelle manche
 				if(!p.terminerPartie())
@@ -433,7 +445,7 @@ public class Partie {
 	/**
 	 * @return the joueur
 	 */
-	public ArrayList<Joueur> getJoueur() {
+	public LinkedList<Joueur> getJoueur() {
 		return joueur;
 	}
 
@@ -444,7 +456,7 @@ public class Partie {
 	/**
 	 * @param joueur the joueur to set
 	 */
-	public void setJoueur(ArrayList<Joueur> joueur) {
+	public void setJoueur(LinkedList<Joueur> joueur) {
 		this.joueur = joueur;
 	}
 
@@ -550,6 +562,54 @@ public class Partie {
 
 	public void setSens() {
 		sens = sens*(-1);
+	}
+
+
+	/**
+	 * @return the classementJoueurs
+	 */
+	public LinkedList<Joueur> getClassementJoueurs() {
+		return classementJoueurs;
+	}
+
+
+	/**
+	 * @param classementJoueurs the classementJoueurs to set
+	 */
+	public void setClassementJoueurs(LinkedList<Joueur> classementJoueurs) {
+		this.classementJoueurs = classementJoueurs;
+	}
+
+
+	/**
+	 * @return the classementJoueursPartie
+	 */
+	public ArrayList<Joueur> getClassementJoueursPartie() {
+		return classementJoueursPartie;
+	}
+
+
+	/**
+	 * @param classementJoueursPartie the classementJoueursPartie to set
+	 */
+	public void setClassementJoueursPartie(ArrayList<Joueur> classementJoueursPartie) {
+		this.classementJoueursPartie = classementJoueursPartie;
+	}
+
+
+	/**
+	 * @return the modeComptage
+	 */
+	public String getModeComptage() {
+		return modeComptage;
+	}
+
+
+	/**
+	 * @param modeComptage the modeComptage to set
+	 */
+	public void setModeComptage(String modeComptage) {
+		this.modeComptage = modeComptage;
 	}
 
 }

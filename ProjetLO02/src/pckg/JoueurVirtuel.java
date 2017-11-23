@@ -31,7 +31,7 @@ public class JoueurVirtuel extends Joueur{
 			//5.1 Le joueur perd la carte qu'il a posée de sa main
 					cartes.remove(cartePose);
 					// on test si le joueur a gagné
-					gagne = Partie.getPartie().gagnePartie();
+					gagne = this.gagnePartie();
 				}
 			//2.2. Le joueur ne peut jouer aucune carte, donc il pioche.
 				else {

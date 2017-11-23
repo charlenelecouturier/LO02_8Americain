@@ -12,6 +12,7 @@ public abstract class Joueur extends PorteurCarte {
 	private int classement, numero ;  // numéro est compris entre 1 et le nombre de joueurs en cours dans la partie
 	private static int donneurNum = 1;
 	private int score; // score du joueur
+	private int scoreManche;
 	
 	//**********Constructeur************
 /**
@@ -90,7 +91,7 @@ public abstract class Joueur extends PorteurCarte {
 			if(this.cartes.size()==1) {
 				this.DireCarte();
 				}
-			gagne =Partie.getPartie().gagnePartie();
+			gagne =this.gagnePartie();
 
 			}
 			
@@ -151,12 +152,42 @@ public abstract class Joueur extends PorteurCarte {
 		}
 		
 	}
+	
+	
+	
+	public boolean gagnePartie() { 
+		if (this.cartes.isEmpty()) {
+			System.out.println(this.name+" a gagné.");
+			Partie.getPartie().getClassementJoueurs().add(this);
+			Partie.getPartie().getJoueur().remove(this);
+			Partie.getPartie().setNbJoueursEnCours(Partie.getPartie().getNbJoueursEnCours()-1);
+			return true;
+				
+		}
+		return false;	
+	}
+	
 	public int getScore() {
 		return score;
 	}
 	public void setScore(int score) {
 		this.score = score;
 	}
+	/**
+	 * @return the scoreManche
+	 */
+	public int getScoreManche() {
+		return scoreManche;
+	}
+	/**
+	 * @param scoreManche the scoreManche to set
+	 */
+	public void setScoreManche(int scoreManche) {
+		this.scoreManche = scoreManche;
+	}
+	
+	
+	
 	
 	
 }
