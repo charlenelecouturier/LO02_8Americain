@@ -134,7 +134,7 @@ public abstract class Joueur extends PorteurCarte {
 	
 	public abstract int choisirCarte();
 	public abstract void DireCarte();
-	public abstract void DireContreCarte();
+	public abstract boolean DireContreCarte();
 	
 	public void piocher(int nombrePioche) {
 		

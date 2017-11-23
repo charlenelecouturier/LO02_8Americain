@@ -10,7 +10,7 @@ public class JoueurPhysique extends Joueur {
 		
 		System.out.println("Entrez votre nom svp : ");
 		this.name = sc.nextLine();
-		System.out.println("OK "+ this.name);
+		System.out.println("OK Joueur1  : "+ this.name);
 	}
 
 	public int choisirCarte() { // doit renvoyer un int et non une Carte car sinon on crée une nouvelle carte, et on ne peut plus utiliser remove(cartePose) dans jouerTour
@@ -73,8 +73,24 @@ public class JoueurPhysique extends Joueur {
 
 
 	@Override
-	public void DireContreCarte() {
-		// TODO Auto-generated method stub
+	public boolean DireContreCarte() {
+
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Vite ce joueur n'a plus qu'une carte ! Dites'CONTRECARTE' :");
+		long t = System.currentTimeMillis();// date actuelle en millisecondes
+        String reponse = scan.nextLine();
+		long t2 = System.currentTimeMillis();
+		if (t2-t>8000 || (!reponse.equals("contrecarte") && !reponse.equals("Contrecarte") && !reponse.equals("CONTRECARTE")))
+		{
+			System.out.println("Ce joueur a dit 'CARTE' !\nVous n'avez pas dit 'CONTRECARTE' à temps !  ");
+			return false;
+		}
+		else { 
+			System.out.println("Vous dites 'CONTRECARTE'! ");
+			return true;
+		
+                }
+
 		
 	}
 	

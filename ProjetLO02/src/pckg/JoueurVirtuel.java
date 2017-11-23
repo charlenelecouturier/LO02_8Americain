@@ -1,4 +1,6 @@
 package pckg;
+import java.util.Random;
+
 
 //package pckg;
 
@@ -48,6 +50,13 @@ public class JoueurVirtuel extends Joueur{
 				// On regarde le sens de la partie
 				if (Partie.getPartie().getSens()==1) {
 					if(!gagne) {
+						// s'il n'a plus qu'une carte il est possible qu'un joueur dise contre carte
+						if(this.cartes.size()==1) {
+							boolean contrecarte =Partie.getPartie().getJoueur().get(0).DireContreCarte();
+							if(contrecarte) {
+								this.piocher(1);
+							}
+						}
 						tour ++;
 					}// si le joueur a gagné, on a décalé les joueurs dans la collection Partie.joueur donc ca reste le tour du joueur à la place actuelle
 					// Si on depasse le numéro du dernier joueur, on revient au joueur 1 ( joueur physique)
@@ -74,6 +83,7 @@ public class JoueurVirtuel extends Joueur{
 	/** choisit la première carte compatible de son jeu*/
 	public int choisirCarte() {
 		int i=0;
+		System.out.println(this.name + " a " + this.cartes.size() + " carte(s)");
 		System.out.println("Carte du talon : "+ Partie.getPartie().getTalon().getCarteDessus());
 		while(!Partie.getPartie().getVariantePartie().estCompatible(this.cartes.get(i)))
 		{
@@ -92,8 +102,32 @@ public class JoueurVirtuel extends Joueur{
 
 
 	@Override
-	public void DireContreCarte() {
+	public boolean DireContreCarte() {
 		// TODO Auto-generated method stub
+		System.out.println("Ce joueur n'a plus qu'une carte !");
+		// Un joueur virtuel a une chance sur 4 de dire contre-carte
+		Random r = new Random();
+		int proba1Sur4 = 1 + r.nextInt(3);
+		
+		if (proba1Sur4 ==1) {
+			// si le joueur a la place 0 est le joueur qui n'a plus qu'une carte
+			if(Partie.getPartie().getJoueur().get(Partie.getPartie().getTourJoueur()-1).equals(Partie.getPartie().getJoueur().get(0))){
+				
+			// on choisi un numéro de joueur au hasard , sauf celui a la place 0 pour dire carte
+			int numJoueurDitContreCarte =r.nextInt(Partie.getPartie().getJoueur().size()-1);
+			System.out.println(Partie.getPartie().getJoueur().get(numJoueurDitContreCarte).getName()+ " dit CONTRE-CARTE");	
+			return true;}
+			//sinon c'est le joueur à l'emplacement 0 qui dit carte
+			else {
+				System.out.println(this.name + " dit CONTRE-CARTE");	
+				return true;
+			}
+		}
+		else {
+			System.out.println("Ce joueur dit 'Carte'");
+			return false;
+		}
+		
 		
 	}
 
