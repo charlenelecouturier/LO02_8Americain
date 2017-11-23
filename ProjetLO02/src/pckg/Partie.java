@@ -15,7 +15,7 @@ public class Partie {
 	private Talon talon;
 	private LinkedList<Joueur> joueur;//Collection plus adaptée qu'un tableau pour gérer les joueurs
 	private LinkedList<Joueur> classementJoueurs;
-	private ArrayList<Joueur> classementJoueursPartie;
+	private LinkedList<Joueur> classementJoueursPartie;
 	private Variante variantePartie;
 	private Pioche pioche;
 	private String modeComptage;
@@ -30,7 +30,7 @@ public class Partie {
 	    int nbJoueursVirtuels = sc.nextInt();
 		setNbJoueursVirtuels(nbJoueursVirtuels);
 		this.classementJoueurs=	 new LinkedList<Joueur>();
-		this.classementJoueursPartie=	 new ArrayList<Joueur>();
+		this.classementJoueursPartie=	 new LinkedList<Joueur>();
 
 		//instanciation des joueurs
 		this.joueur= new LinkedList<Joueur>();
@@ -151,18 +151,7 @@ public class Partie {
 		//on ajoute le joueur dans l'ordre de leurs scores décroissants
 		// (le meilleur est celui qui a le PLUS de points)
 
-		int j;
-		for(i=0; i< this.classementJoueursPartie.size();i++) {
-			  Joueur joueurJ =this.classementJoueursPartie.get(i);
-			          
-			   j=i;
-			   while(j> 0 && this.classementJoueursPartie.get(j-1).getScore()<joueurJ.getScore()) 
-			   {
-			        	  this.classementJoueursPartie.set(j,this.classementJoueursPartie.get(j-1));
-			        	  j = j - 1;
-			   }
-			   this.classementJoueursPartie.set(j,joueurJ);
-		}
+		this.triInsertionDecroisScore(this.classementJoueursPartie);
 		//On donne le classsement de la manche
 		System.out.println("Classement de la manche :");
 		for(i=0;i<this.classementJoueurs.size();i++) {
@@ -181,7 +170,7 @@ public class Partie {
 	public void compterPointsNegatif() {
 	// mode de comptage négatif
 
-		int k, h;
+		int k,i, h;
 		//ON PARCOURT LES JOUEURS
 			for (k=0; k<this.classementJoueurs.size();k++) {
 				//ON SELECTIONNE UN JOUEUR
@@ -223,37 +212,18 @@ public class Partie {
 			// on ordonne la collection classementJoueurs : classement de la manche
 			//on ajoute le joueur dans l'ordre de leurs scores croissants 
 			//(le meilleur est celui qui a le MOINS de points)
-						int j,i;
-						for(i=0; i< this.classementJoueurs.size();i++) {
-							  Joueur joueurJ =this.classementJoueurs.get(i);
-							          
-							   j=i;
-							   while(j> 0 && this.classementJoueurs.get(j-1).getScoreManche()>joueurJ.getScoreManche()) 
-							   {
-							        	  this.classementJoueurs.set(j,this.classementJoueurs.get(j-1));
-							        	  j = j - 1;
-							   }
-							   this.classementJoueurs.set(j,joueurJ);
-						}
+			this.triInsertionCroisScoreManche(classementJoueurs);
+							 
 				// on donne le classement de la manche
-				System.out.println("\nClassement de la manche : ");
-				 for(i= 1;i<=this.classementJoueurs.size();i++) {
-					 	System.out.println(i + "e : " + this.classementJoueurs.get(i-1).getName() + " -- SCORE : " +this.classementJoueurs.get(i-1).getScoreManche());
-				 }
+			System.out.println("\nClassement de la manche : ");
+			for(i= 1;i<=this.classementJoueurs.size();i++) {
+				System.out.println(i + "e : " + this.classementJoueurs.get(i-1).getName() + " -- SCORE : " +this.classementJoueurs.get(i-1).getScoreManche());
+				}
 			// on ordonne la collection classementJoueurPartie : classement général  de la partie
 			//on ajoute le joueur dans l'ordre de leurs scores croissants 
 			//(le meilleur est celui qui a le MOINS de points)
-			for(i=0; i< this.classementJoueursPartie.size();i++) {
-				  Joueur joueurJ =this.classementJoueursPartie.get(i);
-				          
-				   j=i;
-				   while(j> 0 && this.classementJoueursPartie.get(j-1).getScore()>joueurJ.getScore()) 
-				   {
-				        	  this.classementJoueursPartie.set(j,this.classementJoueursPartie.get(j-1));
-				        	  j = j - 1;
-				   }
-				   this.classementJoueursPartie.set(j,joueurJ);
-			}
+			this.triInsertionCroisScore(this.classementJoueursPartie);
+				  
 	// on donne le classemnet général de la partie
 	System.out.println("\nClassement général : ");
 	 for(i= 1;i<=this.classementJoueursPartie.size();i++) {
@@ -358,7 +328,54 @@ public class Partie {
 		return terminer;
 					
 	}
+	
+	public void triInsertionCroisScore(LinkedList<Joueur> classementJoueurs) {
+		int j;
+		for(int i=0; i< classementJoueurs.size();i++) {
+			  Joueur joueurJ =classementJoueurs.get(i);
+			          
+			   j=i;
+			   while(j> 0 && classementJoueurs.get(j-1).getScore()>joueurJ.getScore()) 
+			   {
+			        	 classementJoueurs.set(j,classementJoueurs.get(j-1));
+			        	  j = j - 1;
+			   }
+			   classementJoueurs.set(j,joueurJ);
+		}
+		
+	}
+	
+	public void triInsertionCroisScoreManche(LinkedList<Joueur> classementJoueurs) {
+		int j;
+		for(int i=0; i< classementJoueurs.size();i++) {
+			  Joueur joueurJ =classementJoueurs.get(i);
+			          
+			   j=i;
+			   while(j> 0 && classementJoueurs.get(j-1).getScoreManche()>joueurJ.getScoreManche()) 
+			   {
+			        	 classementJoueurs.set(j,classementJoueurs.get(j-1));
+			        	  j = j - 1;
+			   }
+			   classementJoueurs.set(j,joueurJ);
+		}
+		
+	}
+	public void triInsertionDecroisScore(LinkedList<Joueur> classementJoueurs) {
 
+		int j;
+		for(int i=0; i< classementJoueurs.size();i++) {
+			  Joueur joueurJ =classementJoueurs.get(i);
+			          
+			   j=i;
+			   while(j> 0 && classementJoueurs.get(j-1).getScore()<joueurJ.getScore()) 
+			   {
+			        	 classementJoueurs.set(j,classementJoueurs.get(j-1));
+			        	  j = j - 1;
+			   }
+			   classementJoueurs.set(j,joueurJ);
+		}
+		
+	}
 	
 	
 	public static void main(String[] args) 
@@ -584,7 +601,7 @@ public class Partie {
 	/**
 	 * @return the classementJoueursPartie
 	 */
-	public ArrayList<Joueur> getClassementJoueursPartie() {
+	public LinkedList<Joueur> getClassementJoueursPartie() {
 		return classementJoueursPartie;
 	}
 
@@ -592,7 +609,7 @@ public class Partie {
 	/**
 	 * @param classementJoueursPartie the classementJoueursPartie to set
 	 */
-	public void setClassementJoueursPartie(ArrayList<Joueur> classementJoueursPartie) {
+	public void setClassementJoueursPartie(LinkedList<Joueur> classementJoueursPartie) {
 		this.classementJoueursPartie = classementJoueursPartie;
 	}
 
