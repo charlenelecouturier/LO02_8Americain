@@ -143,7 +143,7 @@ public class Partie {
 	// mode de comptage negatif
 	else {
 		//si un joueur a gagne, on arrete la manche
-		if( this.classementJoueurs.size()==3 ) {
+		if( this.classementJoueurs.size()==1 ) {
 			terminer = true;
 			while(!this.joueur.isEmpty()) {
 			 
@@ -177,6 +177,8 @@ public class Partie {
 		// on ordonne la collection classementJoueurPartie : classement général de la partie
 		// tri des joueurs par insertion
 		//on ajoute le joueur dans l'ordre de leurs scores décroissants
+		// (le meilleur est celui qui a le PLUS de points)
+
 		int j;
 		for(i=0; i< this.classementJoueursPartie.size();i++) {
 			  Joueur joueurJ =this.classementJoueursPartie.get(i);
@@ -192,13 +194,16 @@ public class Partie {
 		
 	}
 	
+	
+	
+	// mode de comptage négatif
 	else { 
 		int k, h;
 		//ON PARCOURT LES JOUEURS
 			for (k=0; k<this.classementJoueurs.size();k++) {
 				Joueur joueurSelect = this.classementJoueurs.get(k);
 				// ON PARCOURT LES CARTES RESTANTES DU JOUEUR SELECTIONNE
-				
+				// on initialise les points qu'il va prendre à 0
 				int points =0;
 				for(h=0;h<joueurSelect.getCartes().size();h++) {
 					Carte c = joueurSelect.getCartes().get(h);
@@ -226,7 +231,8 @@ public class Partie {
 				
 			}
 			// on ordonne la collection classementJoueurPartie : classement général  de la partie
-			//on ajoute le joueur dans l'ordre de leurs scores croissants
+			//on ajoute le joueur dans l'ordre de leurs scores croissants 
+			//(le meilleur est celui qui a le MOINS de points)
 			int j,i;
 			for(i=0; i< this.classementJoueursPartie.size();i++) {
 				  Joueur joueurJ =this.classementJoueursPartie.get(i);
@@ -248,6 +254,10 @@ public class Partie {
 	 }
 				
 	}
+	
+	
+	
+	
 	
 	
 	public void changerManche() {
@@ -313,7 +323,9 @@ public class Partie {
 	
 	
 	public boolean terminerPartie(){
+		// On initialise terminer a false
 		boolean terminer =false;
+		// mode de comptage positif
 		if (this.modeComptage.equals("POSITIF")) {
 			// la partie se joue en 200 points mais on test avec 60			
 			if(this.classementJoueursPartie.get(0).getScore()>= 60) {
@@ -326,15 +338,25 @@ public class Partie {
 		}
 		
 		else {
+			// mode de comptage négatif, le premier qui arrive a 100 point a perdu et la partie se termine
+			if(this.classementJoueursPartie.get(this.classementJoueurs.size()-1).getScore()>= 100) {
+				terminer= true;
+				this.etat="TERMINEE";
+				 int i;
+				 System.out.println("Partie terminée! Un joueur a eu au moins 100 point !");
+			}
 			
 		}
+		
 		return terminer;
-		
-		
-		
+					
 	}
 
-	public static void main(String[] args) {
+	
+	
+	public static void main(String[] args) 
+	
+	{
 		// présentation du jeu
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
 		
