@@ -72,7 +72,7 @@ public class Partie {
 		}
 		
 		// mode de comptage des points 
-		System.out.println("Saisir le mode de comptage : 'POSITIF' ou 'NEGATIF'");
+		System.out.println("Saisir le mode de comptage des points : 'POSITIF' ou 'NEGATIF'");
 		Scanner text = new Scanner(System.in);
 		this.modeComptage=text.nextLine();
 		
@@ -115,7 +115,7 @@ public class Partie {
 	public boolean terminerManche() {
 		
 	boolean terminer = false;
-	// s'il y a 3 gagnant on arrette la partie  ( comptage positif)
+	// s'il y a 3 gagnant on arrette la manche  ( comptage positif)
 	if (this.modeComptage.equals("POSITIF")) {
 		// s'il y a 3 joueurs qui ont gagné, on s'il ne reste plus qu'un joueur
 		if( this.classementJoueurs.size()==3 || this.nbJoueursEnCours==1) {
@@ -130,7 +130,7 @@ public class Partie {
 			int i;
 			System.out.println("Manche terminée !" );
 							
-			//test : verification du classement
+			//On donne le classsement de la manche
 			System.out.println("Classement de la manche :");
 			for(i=0;i<this.classementJoueurs.size();i++) {
 				System.out.println((i+1) +"e : " + this.classementJoueurs.get(i).getName());
@@ -139,6 +139,22 @@ public class Partie {
 							
 
 		}
+	}
+	// mode de comptage negatif
+	else {
+		//si un joueur a gagne, on arrete la manche
+		if( this.classementJoueurs.size()==3 ) {
+			terminer = true;
+			while(!this.joueur.isEmpty()) {
+			 
+			// on met tous les joueurs restant dans le classement
+				this.classementJoueurs.add(this.joueur.get(0));
+				this.joueur.remove(0);
+			}
+			System.out.println("Manche terminée !" );	
+		
+		}
+		
 	}
 	return terminer;
 		
@@ -158,7 +174,7 @@ public class Partie {
 			this.classementJoueurs.get(2).setScore(this.classementJoueurs.get(2).getScore() + 10 );
 		}
 			
-		// on ordonne la collection classementJoueurPartie : classement général 
+		// on ordonne la collection classementJoueurPartie : classement général de la partie
 		// tri des joueurs par insertion
 		//on ajoute le joueur dans l'ordre de leurs scores décroissants
 		int j;
@@ -175,7 +191,57 @@ public class Partie {
 		}
 		
 	}
+	
+	else { 
+		int k, h;
+		//ON PARCOURT LES JOUEURS
+			for (k=0; k<this.classementJoueurs.size();k++) {
+				Joueur joueurSelect = this.classementJoueurs.get(k);
+				// ON PARCOURT LES CARTES RESTANTES DU JOUEUR SELECTIONNE
+				
+				int points =0;
+				for(h=0;h<joueurSelect.getCartes().size();h++) {
+					Carte c = joueurSelect.getCartes().get(h);
+					
+					//ROI OU DAME
+					if(c.getValeur().equals("DAME")|| c.getValeur().equals("ROI")) {
+						points+=10;
+						}
+					//CARTE A EFFET FORT
+					else if(c.getValeur().equals("1")|| c.getValeur().equals("8")|| c.getValeur().equals("JOKER")) {
+						points+=50;
+					}
+					//CARTE EFFET MOYEN
+					else if(c.getValeur().equals("10")|| c.getValeur().equals("7")||c.getValeur().equals("2") ||c.getValeur().equals("VALET")) {
+						points+=20;
+
+					}
+					//AUTRE CARTE : ON AJOUTE LA VALEUR DE LA CARTE
+					else {
+						points+=Integer.parseInt(c.getValeur()) ;
+					}
+				}
+				joueurSelect.setScore(joueurSelect.getScore()+points);
+				System.out.println(joueurSelect.getName()+ " prend "+ points +" points");
+				
+			}
+			// on ordonne la collection classementJoueurPartie : classement général  de la partie
+			//on ajoute le joueur dans l'ordre de leurs scores croissants
+			int j,i;
+			for(i=0; i< this.classementJoueursPartie.size();i++) {
+				  Joueur joueurJ =this.classementJoueursPartie.get(i);
+				          
+				   j=i;
+				   while(j> 0 && this.classementJoueursPartie.get(j-1).getScore()>joueurJ.getScore()) 
+				   {
+				        	  this.classementJoueursPartie.set(j,this.classementJoueursPartie.get(j-1));
+				        	  j = j - 1;
+				   }
+				   this.classementJoueursPartie.set(j,joueurJ);
+			}
+	}
 	int i;
+	// on donne le classemnet général de la partie
 	System.out.println("\nClassement général : ");
 	 for(i= 1;i<=this.classementJoueursPartie.size();i++) {
 		 	System.out.println(i + "e : " + this.classementJoueursPartie.get(i-1).getName() + " -- SCORE : " +this.classementJoueursPartie.get(i-1).getScore());
@@ -243,6 +309,9 @@ public class Partie {
 	}
 		
 	
+	
+	
+	
 	public boolean terminerPartie(){
 		boolean terminer =false;
 		if (this.modeComptage.equals("POSITIF")) {
@@ -266,8 +335,9 @@ public class Partie {
 	}
 
 	public static void main(String[] args) {
-		
+		// présentation du jeu
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
+		
 	   	//creation d'une partie
 		Partie p = Partie.getPartie();
 		//creation de la pioche
@@ -277,15 +347,19 @@ public class Partie {
 	    // on distribue la pioche
 	    p.pioche.distribuer();
 	    
-	    while(p.etat.equals("EN COURS")) { 
-			while (! p.terminerManche()) // tant que la partie est en cours
+	    while(p.etat.equals("EN COURS")) {  // tant que la partie n'est pas terminée, on joue des manches
+	    	
+			while (! p.terminerManche()) // tant que la manche n'est pas terminée, on joue des tours
 	    		{
-				// temps de délais entre chaque tour
+				
+				// Temps de délais entre chaque tour
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				
+				
 				// P.tourJoueur correspond au numéro du joueur qui doit jouer
 				p.joueur.get(p.tourJoueur-1).jouerTour();// l'incrémentation ou la décrémentation de "tourJoueur" est générée dans la methode "jouerTour()" ,car, selon la carte posée, un tour peut etre sauté ou le sens du jeu peut être changé
 
@@ -294,6 +368,8 @@ public class Partie {
 	    		}
 			
 				p.compterPoints();
+				
+				// Si la partie n'est pas terminée, on debute une nouvelle manche
 				if(!p.terminerPartie())
 				{	
 					System.out.println("\nNOUVELLE MANCHE\n");

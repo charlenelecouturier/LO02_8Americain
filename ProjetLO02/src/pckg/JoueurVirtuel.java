@@ -42,6 +42,7 @@ public class JoueurVirtuel extends Joueur{
 
 				// On cherche le tour du joueur suivant
 				int tour;
+				// on conserve le tour actuel dans une variable tour
 				tour= Partie.getPartie().getTourJoueur();
 
 				// On regarde le sens de la partie
@@ -64,6 +65,11 @@ public class JoueurVirtuel extends Joueur{
 				}
 				Partie.getPartie().setTourJoueur(tour);
 			}
+	
+	
+	
+	
+	
 	
 	/** choisit la première carte compatible de son jeu*/
 	public int choisirCarte() {
