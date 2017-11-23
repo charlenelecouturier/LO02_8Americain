@@ -100,6 +100,9 @@ public class JoueurVirtuel extends Joueur{
 		
 	}
 
+	
+	/** cette methode est appelée si le joueur physique n'est plus dans le jeu ( s'il a gagné)
+	 * un joueur virtuel peut alors avoir une chance sur 4 de dire contre carte*/
 
 	@Override
 	public boolean DireContreCarte() {
