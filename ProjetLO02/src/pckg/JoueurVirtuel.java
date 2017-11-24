@@ -1,3 +1,17 @@
+	/* pour Strategy : 
+	 * 
+	 * faire en sorte que changerFamille() soit cohérent avec les cartes que le joueurVirtuel a en main
+	 * ex : il choisit 'coeur' si il a le + de coeur dans son jeu
+	 * 
+	 * dans choisirCarte : 
+	 * faire en sorte de jouer un 10 de pique ,par exemple, ( qui Oblige a rejouer) si il possede au moins 
+	 * un autre pique dans son jeu ou sil ne peut jouer que ca
+	 * 
+	 * */
+
+
+
+
 package pckg;
 import java.util.Random;
 
