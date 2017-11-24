@@ -153,21 +153,21 @@
 		// pas l'ArrayList "cartes" du talon
 		case 1:
 			Partie.getPartie().getTalon().getCarteDessus().setSymbole("TREFLE");
-			System.out.println("Vous avez mis un nouveau symbole : TREFLE ! ");
+			System.out.println("Vous avez choisi comme symbole : TREFLE ! ");
 			break;
 		case 2:
 			Partie.getPartie().getTalon().getCarteDessus().setSymbole("PIQUE");
-			System.out.println("Vous avez mis un nouveau symbole : PIQUE! ");
+			System.out.println("Vous avez choisi comme symbole : PIQUE! ");
 
 			break;
 		case 3:
 			Partie.getPartie().getTalon().getCarteDessus().setSymbole("COEUR");
-			System.out.println("Vous avez mis un nouveau symbole : COEUR ! ");
+			System.out.println("Vous avez choisi comme symbole : COEUR ! ");
 
 			break;
 		case 4:
 			Partie.getPartie().getTalon().getCarteDessus().setSymbole("CARREAU");
-			System.out.println("Vous avez mis un nouveau symbole : CARREAU ! ");
+			System.out.println("Vous avez choisi comme symbole : CARREAU ! ");
 
 			break;
 		default:
