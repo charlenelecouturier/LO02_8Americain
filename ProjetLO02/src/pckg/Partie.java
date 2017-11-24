@@ -277,8 +277,10 @@ public class Partie {
 		
 		//initialisation de la nouvelle partie
 		// on retire les eventuelles cartes restantes des joueurs
+		// Les joueur on pour etat "JOUE"
 		for(i=0; i< this.joueur.size();i++) {
 			this.joueur.get(i).getCartes().clear();
+		
 		}
 		// on crée un nouveau talon
 		this.talon= new Talon();
@@ -400,7 +402,7 @@ public class Partie {
 				
 				// Temps de délais entre chaque tour
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

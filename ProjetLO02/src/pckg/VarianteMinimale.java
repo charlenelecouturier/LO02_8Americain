@@ -34,7 +34,6 @@ public class VarianteMinimale extends Variante {
 	@Override
 	public boolean estCompatible(Carte carte) {
 		Carte carteDessusTalon;
-		//System.out.println(carte);
 		Talon talon = Partie.getPartie().getTalon();
 		carteDessusTalon = talon.getCarteDessus();
 		String carteSymbole= carte.getSymbole();
@@ -62,7 +61,7 @@ public class VarianteMinimale extends Variante {
 		
 		this.carteSpeciale = new LinkedList<Carte>();
 		this.carteSpeciale.add(new Carte("8", "NIMPORTE"));
-		//this.carteSpeciale.add(new Carte("10", "NIMPORTE"));
+		this.carteSpeciale.add(new Carte("10", "NIMPORTE"));
 		
 		
 		

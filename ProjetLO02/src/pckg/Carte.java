@@ -83,6 +83,11 @@ public class Carte {
 			changerFamille.effet();
 			
 		}
+		else if(effet.equals("AucunEffet")) {
+			Effet aucunEffet= new AucunEffet();
+			aucunEffet.effet();
+			
+		}
 		
 	}
 	
