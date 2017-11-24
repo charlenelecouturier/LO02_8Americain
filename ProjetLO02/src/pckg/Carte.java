@@ -23,7 +23,7 @@ public class Carte {
 		
 		int i;
 		for (i=0;i<Partie.getPartie().getVariantePartie().getCarteSpeciale().size();i++) {
-			if (this.valeur.equals(Partie.getPartie().getVariantePartie().getCarteSpeciale().get(i))) {
+			if (this.valeur.equals(Partie.getPartie().getVariantePartie().getCarteSpeciale().get(i).getValeur())) {
 				this.setCarteSpeciale(true);
 				return this.carteSpeciale;
 			}

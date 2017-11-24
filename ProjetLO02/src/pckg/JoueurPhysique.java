@@ -94,7 +94,7 @@ public class JoueurPhysique extends Joueur {
 	@Override
 	public void changerFamille() {
 		
-		System.out.println("Quel Symbole voulez-vous mettre ?\n1 : TREFLE\n2 : PIQUE\n3 : COEUR\n 4 : CARREAU");
+		System.out.println("Quel Symbole voulez-vous mettre ?\n1 : TREFLE\n2 : PIQUE\n3 : COEUR\n4 : CARREAU");
 		Scanner scan = new Scanner(System.in);
 		int rep = scan.nextInt();
 		switch (rep)
@@ -104,15 +104,22 @@ public class JoueurPhysique extends Joueur {
 		//pas l'ArrayList "cartes" du talon
 		  case 1:
 		    Partie.getPartie().getTalon().getCarteDessus().setSymbole("TREFLE");
+		    System.out.println("Vous avez mis un nouveau symbole : TREFLE ! ");
 		    break;   
 		  case 2:
 			    Partie.getPartie().getTalon().getCarteDessus().setSymbole("PIQUE");
+			    System.out.println("Vous avez mis un nouveau symbole : PIQUE! ");
+
 			    break;
 		  case 3:
 			    Partie.getPartie().getTalon().getCarteDessus().setSymbole("COEUR");
+			    System.out.println("Vous avez mis un nouveau symbole : COEUR ! ");
+
 			    break;
 		  case 4:
 			    Partie.getPartie().getTalon().getCarteDessus().setSymbole("CARREAU");
+			    System.out.println("Vous avez mis un nouveau symbole : CARREAU ! ");
+
 			    break;
 		  default:
 		    System.out.println("Mauvaise saisie, recommencez :");

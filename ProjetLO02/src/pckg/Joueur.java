@@ -90,10 +90,10 @@ public abstract class Joueur extends PorteurCarte {
 	//5.1 Le joueur perd la carte qu'il a posée de sa main
 			cartes.remove(cartePose);
 	//6.1 On regarde si c'est une carte Speciale
-		/*	if (cartePose.isCarteSpeciale()) {
+			if (cartePose.isCarteSpeciale()) {
 				String effet =Partie.getPartie().getVariantePartie().effetCarte(cartePose);
 				cartePose.appliquerEffet(effet);
-			}*/
+			}
 			
 			
 			
