@@ -135,7 +135,8 @@ public abstract class Joueur extends PorteurCarte {
 	
 	public void piocher(int nombrePioche) {
 		
-		if(Partie.getPartie().getPioche().getCartes().size()< nombrePioche) {
+		if(Partie.getPartie().getPioche().getCartes().size()< nombrePioche) 
+		{
 			Partie.getPartie().getTalon().devenirPioche();
 		}
 		//la boucle tourne autant de fois que le joueur doit piocher
@@ -146,6 +147,8 @@ public abstract class Joueur extends PorteurCarte {
 			//Retire cette carte de la pioche
 			Partie.getPartie().getPioche().cartes.remove(Partie.getPartie().getPioche().cartes.size()-1);
 			System.out.println(this.name+ " a pioché " + cartePioche);
+			System.out.println("\nTest : il reste "+ Partie.getPartie().getPioche().getCartes().size()+" cartes dans la pioche");
+
 		}
 		
 	}

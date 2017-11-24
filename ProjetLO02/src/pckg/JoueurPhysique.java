@@ -34,6 +34,7 @@
 				System.out.println("Vous posez "+ cartePose);
 		//4.1 Le joueur pose la carte choisie sur le talon.
 				Partie.getPartie().getTalon().getCartes().add(cartePose);
+				System.out.println("Test : il y a "+ Partie.getPartie().getTalon().getCartes().size()+" cartes dans le talon");
 				// on change la carte du dessus du Talon qui est un simple attribut de type Carte
 				//Partie.getPartie().getTalon().setCarteDessus(cartePose);
 				Partie.getPartie().getTalon().getCarteDessus().setSymbole(cartePose.getSymbole());
@@ -103,7 +104,7 @@
 		// TODO Auto-generated method stub
 
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Vite vous n'avez plus qu'une carte ! Dites'CARTE' :");
+		System.out.println("\nVite vous n'avez plus qu'une carte ! Dites'CARTE' :");
 		long t = System.currentTimeMillis();// date actuelle en millisecondes
 		String reponse = scan.nextLine();
 		long t2 = System.currentTimeMillis();
@@ -121,16 +122,16 @@
 	public boolean DireContreCarte() {
 
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Vite ce joueur n'a plus qu'une carte ! Dites'CONTRECARTE' :");
+		System.out.println("\nVite ce joueur n'a plus qu'une carte ! Dites'CONTRECARTE' :");
 		long t = System.currentTimeMillis();// date actuelle en millisecondes
 		String reponse = scan.nextLine();
 		long t2 = System.currentTimeMillis();
 		if (t2 - t > 8000 || (!reponse.equals("contrecarte") && !reponse.equals("Contrecarte")
 				&& !reponse.equals("CONTRECARTE"))) {
-			System.out.println("Ce joueur a dit 'CARTE' !\nVous n'avez pas dit 'CONTRECARTE' à temps !  ");
+			System.out.println("Ce joueur a dit 'CARTE' !\nVous n'avez pas dit 'CONTRECARTE' à temps !\n");
 			return false;
 		} else {
-			System.out.println("Vous dites 'CONTRECARTE'! ");
+			System.out.println("Vous dites 'CONTRECARTE'!\n");
 			return true;
 
 		}

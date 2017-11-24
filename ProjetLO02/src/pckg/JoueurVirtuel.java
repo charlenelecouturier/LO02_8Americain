@@ -142,21 +142,23 @@ public class JoueurVirtuel extends Joueur{
 		int proba1Sur4 = 1 + r.nextInt(3);
 		
 		if (proba1Sur4 ==1) {
+			
 			// si le joueur a la place 0 est le joueur qui n'a plus qu'une carte
-			if(Partie.getPartie().getJoueur().get(Partie.getPartie().getTourJoueur()-1).equals(Partie.getPartie().getJoueur().get(0))){
-				
-			// on choisi un numéro de joueur au hasard , sauf celui a la place 0 pour dire carte
+			if(Partie.getPartie().getJoueur().get(Partie.getPartie().getTourJoueur()-1).equals(Partie.getPartie().getJoueur().get(0)))
+			{
+			//On choisi un numéro de joueur au hasard , sauf celui a la place 0 pour dire carte
 			int numJoueurDitContreCarte =1+r.nextInt(Partie.getPartie().getJoueur().size()-2);
 			System.out.println(Partie.getPartie().getJoueur().get(numJoueurDitContreCarte).getName()+ " dit CONTRE-CARTE");	
 			return true;}
-			//sinon c'est le joueur à l'emplacement 0 qui dit carte
+			//Sinon c'est le joueur à l'emplacement 0 qui dit carte
 			else {
 				System.out.println(this.name + " dit CONTRE-CARTE");	
 				return true;
 			}
 		}
+		// le joueur a 3 chance sur 4 de dire assez rapidemment 'CARTE'
 		else {
-			System.out.println("Ce joueur dit 'Carte'");
+			System.out.println("Ce joueur dit 'CARTE'");
 			return false;
 		}
 		

@@ -51,9 +51,9 @@ public class Talon extends PorteurCarte {
 			Partie.getPartie().getPioche().getCartes().remove(i);
 		}
 		// On met toutes les cartes du talon, sauf la carte du dessus , dans la pioche
-		for (i = 0; i < this.cartes.size() - 1; i++) {
-			Partie.getPartie().getPioche().getCartes().add(this.cartes.get(i));
-			this.cartes.remove(i);
+		while(this.cartes.size()>1) {
+			Partie.getPartie().getPioche().getCartes().add(this.cartes.get(0));
+			this.cartes.remove(0);
 		}
 		// On melange la pioche
 		Partie.getPartie().getPioche().melanger();

@@ -88,13 +88,10 @@ public class Pioche extends PorteurCarte {
 		pour quon puisse la changer si il y a un effet (8) mais sans changer veritablement la carte du paquet du talon*/
 		Partie.getPartie().getTalon().getCarteDessus().setSymbole(this.cartes.get(this.cartes.size()-1).getSymbole());
 		Partie.getPartie().getTalon().getCarteDessus().setValeur(this.cartes.get(this.cartes.size()-1).getValeur());
-
+		//On la supprime du paquet de carte de la pioche
 		this.cartes.remove(this.cartes.size()-1);	
-		System.out.println(Partie.getPartie().getJoueur().get(0).getCartes().get(0));		//TEST
-		System.out.println(Partie.getPartie().getJoueur().get(0).getCartes().size());		//TEST
-		System.out.println(this.cartes.size());		//TEST*/
-
-		
+		System.out.println("Test : nombre de cartes du joueur 1 : " +Partie.getPartie().getJoueur().get(0).getCartes().size());		
+		System.out.println("Test : nombre de cartes de la pioche : "+this.cartes.size()+"\n");	
 	}
 
 }
