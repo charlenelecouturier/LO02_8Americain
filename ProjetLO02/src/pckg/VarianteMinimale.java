@@ -62,7 +62,7 @@ public class VarianteMinimale extends Variante {
 		
 		this.carteSpeciale = new LinkedList<Carte>();
 		this.carteSpeciale.add(new Carte("8", "NIMPORTE"));
-		this.carteSpeciale.add(new Carte("10", "NIMPORTE"));
+		//this.carteSpeciale.add(new Carte("10", "NIMPORTE"));
 		
 		
 		

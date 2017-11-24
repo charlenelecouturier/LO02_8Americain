@@ -43,9 +43,6 @@ public class JoueurPhysique extends Joueur {
 		return numero-1;
 	}
 
-	public void changerFamille() {
-		// TODO 
-	}
 
 	@Override
 	public void DireCarte() {
@@ -70,8 +67,6 @@ public class JoueurPhysique extends Joueur {
 
 	}
 		
-
-
 	@Override
 	public boolean DireContreCarte() {
 
@@ -93,6 +88,40 @@ public class JoueurPhysique extends Joueur {
 
 		
 	}
+	
+	
+	//**********Effets************
+	@Override
+	public void changerFamille() {
+		
+		System.out.println("Quel Symbole voulez-vous mettre ?\n1 : TREFLE\n2 : PIQUE\n3 : COEUR\n 4 : CARREAU");
+		Scanner scan = new Scanner(System.in);
+		int rep = scan.nextInt();
+		switch (rep)
+		{
+		// On change le symbole de la carte du dessus du talon, mais on ne change pas vraiment le paquet 
+		//de cartes correspondant au talon : on change seulement l'attribut carteDessus, 
+		//pas l'ArrayList "cartes" du talon
+		  case 1:
+		    Partie.getPartie().getTalon().getCarteDessus().setSymbole("TREFLE");
+		    break;   
+		  case 2:
+			    Partie.getPartie().getTalon().getCarteDessus().setSymbole("PIQUE");
+			    break;
+		  case 3:
+			    Partie.getPartie().getTalon().getCarteDessus().setSymbole("COEUR");
+			    break;
+		  case 4:
+			    Partie.getPartie().getTalon().getCarteDessus().setSymbole("CARREAU");
+			    break;
+		  default:
+		    System.out.println("Mauvaise saisie, recommencez :");
+		    this.changerFamille();
+		    
+		}
+		
+	}
+
 	
 	
 	

@@ -85,6 +85,7 @@ public abstract class Joueur extends PorteurCarte {
 			System.out.println("Vous posez "+ cartePose);
 	//4.1 Le joueur pose la carte choisie sur le talon.
 			Partie.getPartie().getTalon().getCartes().add(cartePose);
+			// on change la carte du dessus du Talon qui est un simple attribut de type Carte
 			Partie.getPartie().getTalon().setCarteDessus(cartePose);
 	//5.1 Le joueur perd la carte qu'il a posée de sa main
 			cartes.remove(cartePose);
@@ -164,6 +165,8 @@ public abstract class Joueur extends PorteurCarte {
 	
 	
 	
+	
+	
 	public boolean gagnePartie() { 
 		if (this.cartes.isEmpty()) {
 			System.out.println(this.name+" a gagné.");
@@ -195,6 +198,8 @@ public abstract class Joueur extends PorteurCarte {
 		this.scoreManche = scoreManche;
 	}
 	
+
+
 	
 	
 	
