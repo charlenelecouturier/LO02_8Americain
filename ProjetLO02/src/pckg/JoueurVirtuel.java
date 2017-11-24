@@ -27,8 +27,12 @@ public class JoueurVirtuel extends Joueur{
 					int numeroCarte = this.choisirCarte();
 					Carte cartePose = this.cartes.get(numeroCarte);
 			//4.1 Le joueur pose la carte choisie sur le talon.
-					Partie.getPartie().getTalon().setCarteDessus(cartePose);
 					Partie.getPartie().getTalon().getCartes().add(cartePose);
+
+					// on change la carte du dessus du Talon qui est un simple attribut de type Carte
+					//Partie.getPartie().getTalon().setCarteDessus(cartePose);
+					Partie.getPartie().getTalon().getCarteDessus().setSymbole(cartePose.getSymbole());
+					Partie.getPartie().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
 					System.out.println(this.getName() + " joue " + cartePose);
 			//5.1 Le joueur perd la carte qu'il a posée de sa main
 					cartes.remove(cartePose);
@@ -117,7 +121,7 @@ public class JoueurVirtuel extends Joueur{
 			if(Partie.getPartie().getJoueur().get(Partie.getPartie().getTourJoueur()-1).equals(Partie.getPartie().getJoueur().get(0))){
 				
 			// on choisi un numéro de joueur au hasard , sauf celui a la place 0 pour dire carte
-			int numJoueurDitContreCarte =r.nextInt(Partie.getPartie().getJoueur().size()-1);
+			int numJoueurDitContreCarte =1+r.nextInt(Partie.getPartie().getJoueur().size()-2);
 			System.out.println(Partie.getPartie().getJoueur().get(numJoueurDitContreCarte).getName()+ " dit CONTRE-CARTE");	
 			return true;}
 			//sinon c'est le joueur à l'emplacement 0 qui dit carte

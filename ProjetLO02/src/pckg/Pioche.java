@@ -82,7 +82,13 @@ public class Pioche extends PorteurCarte {
 			tour ++;
 		}
 		//derniere carte = carte du talon
-		Partie.getPartie().getTalon().setCarteDessus(this.cartes.get(this.cartes.size()-1));
+		//Partie.getPartie().getTalon().setCarteDessus(this.cartes.get(this.cartes.size()-1));
+		Partie.getPartie().getTalon().getCartes().add(this.cartes.get(this.cartes.size()-1));
+		/*on veut que la carte du dessus du talon ne soit pas une référence vers la vraie carte du dessus du paquet
+		pour quon puisse la changer si il y a un effet (8) mais sans changer veritablement la carte du paquet du talon*/
+		Partie.getPartie().getTalon().getCarteDessus().setSymbole(this.cartes.get(this.cartes.size()-1).getSymbole());
+		Partie.getPartie().getTalon().getCarteDessus().setValeur(this.cartes.get(this.cartes.size()-1).getValeur());
+
 		this.cartes.remove(this.cartes.size()-1);	
 		System.out.println(Partie.getPartie().getJoueur().get(0).getCartes().get(0));		//TEST
 		System.out.println(Partie.getPartie().getJoueur().get(0).getCartes().size());		//TEST

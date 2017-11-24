@@ -86,7 +86,9 @@ public abstract class Joueur extends PorteurCarte {
 	//4.1 Le joueur pose la carte choisie sur le talon.
 			Partie.getPartie().getTalon().getCartes().add(cartePose);
 			// on change la carte du dessus du Talon qui est un simple attribut de type Carte
-			Partie.getPartie().getTalon().setCarteDessus(cartePose);
+			//Partie.getPartie().getTalon().setCarteDessus(cartePose);
+			Partie.getPartie().getTalon().getCarteDessus().setSymbole(cartePose.getSymbole());
+			Partie.getPartie().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
 	//5.1 Le joueur perd la carte qu'il a posée de sa main
 			cartes.remove(cartePose);
 	//6.1 On regarde si c'est une carte Speciale
