@@ -1,4 +1,4 @@
-package pckg.comportement;
+package pckg;
 
 public interface Effet {
 	public void effet();

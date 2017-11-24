@@ -19,11 +19,11 @@ public class Carte {
 	/**
 	 * @return the carteSpeciale
 	 */
-	public boolean isCarteSpeciale(Partie P) {
+	public boolean isCarteSpeciale() {
 		
 		int i;
-		for (i=0;i<P.getVariantePartie().getCarteSpeciale().length;i++) {
-			if (this==P.getVariantePartie().getCarteSpeciale()[i]) {
+		for (i=0;i<Partie.getPartie().getVariantePartie().getCarteSpeciale().size();i++) {
+			if (this.valeur.equals(Partie.getPartie().getVariantePartie().getCarteSpeciale().get(i))) {
 				this.setCarteSpeciale(true);
 				return this.carteSpeciale;
 			}
@@ -71,7 +71,18 @@ public class Carte {
 		
 	}
 	
-	public void appliquerEffet() {
+	public void appliquerEffet(String effet) {
+		if(effet.equals("ObligeRejouer")) {
+			Effet obligerRejouer= new ObligeRejouer();
+			obligerRejouer.effet();
+			
+			
+		}
+		else if(effet.equals("ChangerFamille")) {
+			Effet changerFamille= new ChangerFamille();
+			changerFamille.effet();
+			
+		}
 		
 	}
 	

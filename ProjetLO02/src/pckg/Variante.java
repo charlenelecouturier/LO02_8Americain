@@ -1,5 +1,6 @@
 package pckg;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * 
@@ -14,7 +15,7 @@ public abstract class Variante {
 	/**
 	 * @param args
 	 */
-	protected Carte[] carteSpeciale;
+	protected LinkedList<Carte> carteSpeciale;
 	protected int nbCartes;
 	protected ArrayList<Carte> jeuDeCartes;
 	public abstract ArrayList<Carte> creerJeuDeCartes(int nbPaquet);
@@ -53,14 +54,14 @@ public abstract class Variante {
 	/**
 	 * @return the carteSpeciale
 	 */
-	public Carte[] getCarteSpeciale() {
+	public LinkedList<Carte> getCarteSpeciale() {
 		return carteSpeciale;
 	}
 
 	/**
 	 * @param carteSpeciale the carteSpeciale to set
 	 */
-	public void setCarteSpeciale(Carte[] carteSpeciale) {
+	public void setCarteSpeciale(LinkedList<Carte> carteSpeciale) {
 		this.carteSpeciale = carteSpeciale;
 	}
 

@@ -1,5 +1,6 @@
 package pckg;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class VarianteMinimale extends Variante {
 
@@ -9,9 +10,9 @@ public class VarianteMinimale extends Variante {
 		if (carteValeur=="10") {
 			return "ObligeRejouer";}
 		else if (carteValeur=="8") {
-			return "ChangerCouleur";
+			return "ChangerFamille";
 		}
-		else return  "PasEffet";
+		else return  "PasEffet";// pas forcément utile car on a deja checké si c'etait une carte spéciale
 		
 		
 	}
@@ -59,10 +60,15 @@ public class VarianteMinimale extends Variante {
 		
 	public VarianteMinimale(int nbJoueursVirtuels) {
 		
-		this.carteSpeciale = new Carte[8];
-		// si il ya plus de 5 joueurs en tout au départ on rentre dans la boucle if(), car on utilise 1 paquet pour 5 joueur
+		this.carteSpeciale = new LinkedList<Carte>();
+		this.carteSpeciale.add(new Carte("8", "NIMPORTE"));
+		this.carteSpeciale.add(new Carte("10", "NIMPORTE"));
 		
-		int nbPaquet=1;
+		
+		
+		int nbPaquet=1;	
+		// si il ya plus de 5 joueurs en tout au départ on rentre dans la boucle if(), car on utilise 1 paquet pour 5 joueur
+
 		if(nbJoueursVirtuels>4) { // boucle infinie ici{
 					
 					nbPaquet +=(nbJoueursVirtuels+1)/5;

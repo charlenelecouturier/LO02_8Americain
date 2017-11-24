@@ -88,6 +88,15 @@ public abstract class Joueur extends PorteurCarte {
 			Partie.getPartie().getTalon().setCarteDessus(cartePose);
 	//5.1 Le joueur perd la carte qu'il a posée de sa main
 			cartes.remove(cartePose);
+	//6.1 On regarde si c'est une carte Speciale
+			if (cartePose.isCarteSpeciale()) {
+				String effet =Partie.getPartie().getVariantePartie().effetCarte(cartePose);
+				cartePose.appliquerEffet(effet);
+			}
+			
+			
+			
+	//6.2 si il n'a plus qu'une carte, le joueur a la possibilité de dire Carte
 			if(this.cartes.size()==1) {
 				this.DireCarte();
 				}

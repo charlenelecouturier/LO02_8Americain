@@ -1,5 +1,4 @@
-package pckg.comportement;
-import pckg.Partie;
+package pckg;
 
 
 public class ChangerSens implements Effet{
