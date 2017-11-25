@@ -1,3 +1,2 @@
 INDEX VERSION 1.130+/Users/Jarvis/Documents/GitHub/LO02_8Americain/.metadata/.plugins/org.eclipse.jdt.core
-3595670711.index
 3835738501.index
