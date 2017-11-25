@@ -18,16 +18,16 @@
 			
 			String effet="AucunEffet";
 	
-			//1. on vérifie si le joueur peut jouer avec les cartes qu'il a dans la main
+			//1. on vï¿½rifie si le joueur peut jouer avec les cartes qu'il a dans la main
 			if (Partie.getPartie().getVariantePartie().estPossibleDeJouer(this.cartes)) {
 		//2.1. Le joueur choisit la carte qu'il desire poser sur le talon.
 				System.out.println("Choisissez la carte que vous souhaitez jouer :");
 				int numeroCarte = this.choisirCarte();
 				Carte cartePose = this.cartes.get(numeroCarte);
 		//3.1. Si le joueur choisit une carte qu'il ne peut pas jouer, 
-			// il rentre dans une boucle jusqu'à  ce qu'il choisisse une bonne carte
+			// il rentre dans une boucle jusqu'ï¿½ ce qu'il choisisse une bonne carte
 				while  (!Partie.getPartie().getVariantePartie().estCompatible(cartePose)) {
-					System.out.println("Cette carte ne peut être jouée, choisissez en une autre");
+					System.out.println("Cette carte ne peut ï¿½tre jouï¿½e, choisissez en une autre");
 					numeroCarte= this.choisirCarte();
 					cartePose = this.cartes.get(numeroCarte);
 				}
@@ -36,14 +36,13 @@
 				Partie.getPartie().getTalon().getCartes().add(cartePose);
 				System.out.println("Test : il y a "+ Partie.getPartie().getTalon().getCartes().size()+" cartes dans le talon");
 				// on change la carte du dessus du Talon qui est un simple attribut de type Carte
-				//Partie.getPartie().getTalon().setCarteDessus(cartePose);
 				Partie.getPartie().getTalon().getCarteDessus().setSymbole(cartePose.getSymbole());
 				Partie.getPartie().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
-		//5.1 Le joueur perd la carte qu'il a posée de sa main
+		//5.1 Le joueur perd la carte qu'il a posï¿½e de sa main
 				cartes.remove(cartePose);
 				
 				
-		//6.1 si il n'a plus qu'une carte, le joueur a la possibilité de dire Carte
+		//6.1 si il n'a plus qu'une carte, le joueur a la possibilitï¿½ de dire Carte
 				if(this.cartes.size()==1) {
 					this.DireCarte();
 					}
@@ -70,11 +69,11 @@
 	
 	
 
-	public int choisirCarte() { // doit renvoyer un int et non une Carte car sinon on crée une nouvelle carte,
+	public int choisirCarte() { // doit renvoyer un int et non une Carte car sinon on crï¿½e une nouvelle carte,
 								// et on ne peut plus utiliser remove(cartePose) dans jouerTour
 
-		boolean choix; // variable qui permet la gestion des erreur : si le joueur entre un numéro trop
-						// grand ou trop petit, qui ne correspond à aucun numéro de carte
+		boolean choix; // variable qui permet la gestion des erreur : si le joueur entre un numï¿½ro trop
+						// grand ou trop petit, qui ne correspond ï¿½ aucun numï¿½ro de carte
 		int numero;
 
 		do {
@@ -86,12 +85,12 @@
 			for (i = 1; i <= this.cartes.size(); i++) {
 				System.out.println(i + " : " + this.cartes.get(i - 1));
 			}
-			System.out.println("Numéro de la carte choisie ?");
+			System.out.println("Numï¿½ro de la carte choisie ?");
 			numero = sc.nextInt();
-			if (numero < 0 || numero > this.cartes.size()) // verification du numéro de carte choisi
+			if (numero < 0 || numero > this.cartes.size()) // verification du numï¿½ro de carte choisi
 			{
 				choix = false;
-				System.out.println("Erreur, numéro inexistant, faites un nouveau choix");
+				System.out.println("Erreur, numï¿½ro inexistant, faites un nouveau choix");
 			}
 
 		} while (!choix);
@@ -99,9 +98,8 @@
 		return numero - 1;
 	}
 
-	@Override
+	
 	public void DireCarte() {
-		// TODO Auto-generated method stub
 
 		Scanner scan = new Scanner(System.in);
 		System.out.println("\nVite vous n'avez plus qu'une carte ! Dites'CARTE' :");
@@ -109,7 +107,7 @@
 		String reponse = scan.nextLine();
 		long t2 = System.currentTimeMillis();
 		if (t2 - t > 8000 || (!reponse.equals("carte") && !reponse.equals("Carte") && !reponse.equals("CARTE"))) {
-			System.out.println("Vous n'avez pas dit 'CARTE' à temps ! CONTRE-CARTE !");
+			System.out.println("Vous n'avez pas dit 'CARTE' ï¿½ temps ! CONTRE-CARTE !");
 			this.piocher(1);
 		} else {
 			System.out.println("Vous dites 'CARTE'! ");
@@ -118,7 +116,6 @@
 
 	}
 
-	@Override
 	public boolean DireContreCarte() {
 
 		Scanner scan = new Scanner(System.in);
@@ -128,7 +125,7 @@
 		long t2 = System.currentTimeMillis();
 		if (t2 - t > 8000 || (!reponse.equals("contrecarte") && !reponse.equals("Contrecarte")
 				&& !reponse.equals("CONTRECARTE"))) {
-			System.out.println("Ce joueur a dit 'CARTE' !\nVous n'avez pas dit 'CONTRECARTE' à temps !\n");
+			System.out.println("Ce joueur a dit 'CARTE' !\nVous n'avez pas dit 'CONTRECARTE' ï¿½ temps !\n");
 			return false;
 		} else {
 			System.out.println("Vous dites 'CONTRECARTE'!\n");
@@ -139,7 +136,7 @@
 	}
 
 	// **********Effets************
-	@Override
+
 	public void changerFamille() {
 
 		System.out.println("Quel Symbole voulez-vous mettre ?\n1 : TREFLE\n2 : PIQUE\n3 : COEUR\n4 : CARREAU");
