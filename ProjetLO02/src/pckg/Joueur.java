@@ -1,4 +1,7 @@
 package pckg;
+
+import java.util.ArrayList;
+
 /**
  * Joueur est la classe qui represente les participants au jeu, qu'ils soient physiques ou virtuels.
  * Il ne sera pas possible de creer un joueur dont le type n'est pas précisé dans le jeu
