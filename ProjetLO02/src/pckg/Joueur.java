@@ -13,6 +13,7 @@ public abstract class Joueur extends PorteurCarte {
 	private static int donneurNum = 1;
 	private int score; // score du joueur
 	private int scoreManche;
+	protected Strategie strategie;
 	
 	//**********Constructeur************
 /**

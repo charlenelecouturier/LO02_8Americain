@@ -26,6 +26,7 @@ public class JoueurVirtuel extends Joueur {
 	public JoueurVirtuel() {
 		super();
 		setName("Joueur" + getNumero());
+		this.strategie=new StratDefensive();
 	}
 	
 	
