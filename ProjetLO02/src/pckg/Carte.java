@@ -10,7 +10,7 @@ package pckg;
  */
 public class Carte {
 
-	
+	public final static String[] symboles = {"PIQUE", "COEUR", "CARREAU", "TREFLE"};
 	private boolean carteSpeciale;
 	private String symbole;
 	private String valeur;

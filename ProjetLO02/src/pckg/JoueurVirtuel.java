@@ -26,7 +26,7 @@ public class JoueurVirtuel extends Joueur {
 	public JoueurVirtuel() {
 		super();
 		setName("Joueur" + getNumero());
-		this.strategie=new StratDefensive();
+		this.strategie=new StrategieDeBase();
 	}
 	
 	
@@ -113,10 +113,19 @@ public class JoueurVirtuel extends Joueur {
 	
 	/** choisit la premi�re carte compatible de son jeu*/
 	public int choisirCarte() {
+		int j;
+		System.out.println("Cartes de "+ this.name+" : ");
+		for (j = 1; j <= this.cartes.size(); j++) {
+			System.out.println(j + " : " + this.cartes.get(j - 1));
+		}
 		int numeroCarte;
 		//On créé une liste des cartes jouables par le joueur en fonction du talon
 		ArrayList<Carte> cartesJouables = new ArrayList<Carte>();
-		cartesJouables = this.getCartes();
+		int i;
+		for(i=0;i<this.cartes.size();i++) {
+			cartesJouables.add(this.cartes.get(i));
+		}
+		//cartesJouables = this.getCartes();
 		ListIterator<Carte> parcourirCarteJouable = cartesJouables.listIterator();
 		while (parcourirCarteJouable.hasNext()) {
 			//on vérifie à chaque itération que la carte est compatible
@@ -126,7 +135,11 @@ public class JoueurVirtuel extends Joueur {
 			}	
 		}
 		//
+<<<<<<< HEAD
 		numeroCarte = this.strategie.choixCarte(cartesJouables);
+=======
+		numeroCarte =this.strategie.choixCarte(cartesJouables);
+>>>>>>> 5f659850b031722622630184599f823dabe853aa
 		/*
 		//1 . Le Joueur virtuel regarde quel est le prochain joueur à jouer son tour
 		int tour= Partie.getPartie().getTourJoueur();
@@ -163,16 +176,6 @@ public class JoueurVirtuel extends Joueur {
 		*/
 		
 		return numeroCarte;
-		/*
-		int i=0;
-		System.out.println(this.name + " a " + this.cartes.size() + " carte(s)");
-		System.out.println("Carte du talon : "+ Partie.getPartie().getTalon().getCarteDessus());
-		while(!Partie.getPartie().getVariantePartie().estCompatible(this.cartes.get(i)))
-		{
-			i++;
-		}
-		
-		return i;*/
 	}
 
 
@@ -219,7 +222,7 @@ public class JoueurVirtuel extends Joueur {
 	}
 	 @Override
 	public void changerFamille() {
-		
+		this.strategie.changerFamille();
 	}
 
 
