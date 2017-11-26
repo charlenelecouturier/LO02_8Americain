@@ -13,31 +13,30 @@ public class StratAvancee implements Strategie{
 		//on regarde si le joueur a un 10 jouable : si oui, on regardera si il peut jouer une autre carte
 		while (parcourirCartesCompatibles.hasNext()) {
 			if(parcourirCartesCompatibles.next().getValeur().equals("10")) {
-				if(this.jouer10(parcourirCartesCompatibles.next())) {
-					System.out.println("HAHA! JE PEUX POSER DEUX CARTES D'AFFILÉE!");
+				if(this.jouer10(parcourirCartesCompatibles.next(), joueurEnCours)) {
+					System.out.println("HAHA! JE PEUX POSER DEUX CARTES D'AFFILLEE!");
 					carteChoisie = joueurEnCours.getCartes().indexOf(parcourirCartesCompatibles.next());
 					return carteChoisie;
 				}
 			}
 			parcourirCartesCompatibles.next();
 		}
-		//Si le joueur n'a pas de 10, il joue la première carte qu'il aie qui ne soit pas un 8
-		System.out.println("Oh.. Je n'ai pas de 10.. je joue n'importe quelle carte sauf un 8");
+		//Si le joueur n'a pas de 10, il joue la premiÃ¨re carte qu'il aie qui ne soit pas un 8
 		while(parcourirCartesCompatibles.hasPrevious() && parcourirCartesCompatibles.previous().getValeur().equals("8")) {
 			parcourirCartesCompatibles.previous();
 		}
-		//Si la carte sur laquelle la boucle s'arrête n'est pas un 8, il la pose
+		//Si la carte sur laquelle la boucle s'arrÃªte n'est pas un 8, il la pose
 		if(!parcourirCartesCompatibles.previous().getValeur().equals("8")){
+			System.out.println("Oh.. Je n'ai pas de 10.. je joue n'importe quelle carte sauf un 8");
 			carteChoisie = joueurEnCours.getCartes().indexOf(parcourirCartesCompatibles.previous());
 			return carteChoisie;
 		}
 		else {
-			System.out.println("Oh non.. Je suis obligé de jouer mon 8..");
+			System.out.println("Oh non.. Je suis oblige de jouer mon 8..");
 			carteChoisie = joueurEnCours.getCartes().indexOf(parcourirCartesCompatibles.next());
 			return carteChoisie;
 		}
 	}
-	
 	
 	
 	public void changerFamille() {
@@ -136,13 +135,25 @@ public class StratAvancee implements Strategie{
 		
 	}
 	
-	public boolean jouer10() {
-		
-		
-		int i;
-		//Iterator<Carte> it = cartesCompatibles.iterator();
-		return true;
+	
+	public boolean jouer10(Carte carte10, Joueur joueurEnCours) {
+		String symbole10 = carte10.getSymbole();
+		Iterator<Carte> it = joueurEnCours.getCartes().iterator();
+		//on parcourt les cartes du joueur, et on s'arrête si il n'y a plus de cartes ou si la prochaine carte est de la même famille que le 10
+		while (it.hasNext() 
+				&& (!it.next().getSymbole().equals(symbole10)
+				|| (it.next().getSymbole().equals(symbole10) 
+						&& it.next().getValeur().equals("10")))) {
+			it.next();
+		}
+		if (!it.hasNext()) {
+		return false;
+		}
+		else {
+			return true;
+		}
 	}
+	
 	
 	
 }

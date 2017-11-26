@@ -135,11 +135,9 @@ public class JoueurVirtuel extends Joueur {
 			}	
 		}
 		//
-<<<<<<< HEAD
+
 		numeroCarte = this.strategie.choixCarte(cartesJouables);
-=======
-		numeroCarte =this.strategie.choixCarte(cartesJouables);
->>>>>>> 5f659850b031722622630184599f823dabe853aa
+
 		/*
 		//1 . Le Joueur virtuel regarde quel est le prochain joueur à jouer son tour
 		int tour= Partie.getPartie().getTourJoueur();
