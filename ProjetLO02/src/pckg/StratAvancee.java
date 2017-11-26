@@ -7,33 +7,49 @@ import java.util.Iterator;
 public class StratAvancee implements Strategie{
 	
 	public int choixCarte(ArrayList<Carte> cartesCompatibles) {
+		System.out.println("Carte du talon : "+ Partie.getPartie().getTalon().getCarteDessus());
+		System.out.println("Nombre de cartes compatibles : "+ cartesCompatibles.size());
+
 		Joueur joueurEnCours = Partie.getPartie().getJoueur().get(Partie.getPartie().getTourJoueur()-1);
 		int carteChoisie;
 		ListIterator<Carte> parcourirCartesCompatibles = cartesCompatibles.listIterator();
-		//on regarde si le joueur a un 10 jouable : si oui, on regardera si il peut jouer une autre carte
-		while (parcourirCartesCompatibles.hasNext()) {
-			if(parcourirCartesCompatibles.next().getValeur().equals("10")) {
-				if(this.jouer10(parcourirCartesCompatibles.next(), joueurEnCours)) {
-					System.out.println("HAHA! JE PEUX POSER DEUX CARTES D'AFFILLEE!");
-					carteChoisie = joueurEnCours.getCartes().indexOf(parcourirCartesCompatibles.next());
+		
+		//On regarde si le joueur a un 10 jouable : si oui, on regardera si il peut jouer une autre carte
+		Carte carteNext;
+
+		do {
+			carteNext =parcourirCartesCompatibles.next();
+			if(carteNext.getValeur().equals("10") && this.jouer10(carteNext, joueurEnCours)) {
+					carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
 					return carteChoisie;
-				}
 			}
-			parcourirCartesCompatibles.next();
-		}
+			
+		}while (parcourirCartesCompatibles.hasNext());
+		
+		System.out.println("Oh.. Je n'ai pas de 10 qui me permetterait de rejouer.. je joue n'importe quelle carte sauf un 8");
+
 		//Si le joueur n'a pas de 10, il joue la premiÃ¨re carte qu'il aie qui ne soit pas un 8
-		while(parcourirCartesCompatibles.hasPrevious() && parcourirCartesCompatibles.previous().getValeur().equals("8")) {
-			parcourirCartesCompatibles.previous();
-		}
-		//Si la carte sur laquelle la boucle s'arrÃªte n'est pas un 8, il la pose
-		if(!parcourirCartesCompatibles.previous().getValeur().equals("8")){
-			System.out.println("Oh.. Je n'ai pas de 10.. je joue n'importe quelle carte sauf un 8");
-			carteChoisie = joueurEnCours.getCartes().indexOf(parcourirCartesCompatibles.previous());
+		while(parcourirCartesCompatibles.hasPrevious() ) {
+
+			
+			//Si la carte sur laquelle la boucle s'arrÃªte n'est pas un 8, il la pose
+			if(!carteNext.getValeur().equals("8")){
+				carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
+				return carteChoisie;
+			}
+			carteNext =parcourirCartesCompatibles.previous();
+
+
+		} 
+// la premiere carte na pas ete etudiee dans la precedente boucle, on s'est arretée a celle d'avant
+		if(!cartesCompatibles.get(0).getValeur().equals("8")){
+			carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
 			return carteChoisie;
 		}
+		
 		else {
 			System.out.println("Oh non.. Je suis oblige de jouer mon 8..");
-			carteChoisie = joueurEnCours.getCartes().indexOf(parcourirCartesCompatibles.next());
+			carteChoisie = this.jouer8(joueurEnCours);
 			return carteChoisie;
 		}
 	}
@@ -123,35 +139,61 @@ public class StratAvancee implements Strategie{
 		
 	
 	
-	public boolean jouer8( ArrayList<Carte> cartesCompatibles ) {
+	public int jouer8(Joueur joueurEnCours) {
 
 
-		if(cartesCompatibles.size()==1 && cartesCompatibles.get(0).getValeur().equals("8") )
-		{	return true;
+		int i=0;
+		boolean trouve8=false;
+		while(!trouve8) {
+			
+			if (joueurEnCours.getCartes().get(i).getValeur().equals("8")) {
+				trouve8=true;	
+			}
+			else {
+				i++;
+			}
 		}
-		else {
-			return false;
-		}
-		
+		return i;
 	}
 	
 	
 	public boolean jouer10(Carte carte10, Joueur joueurEnCours) {
 		String symbole10 = carte10.getSymbole();
 		Iterator<Carte> it = joueurEnCours.getCartes().iterator();
-		//on parcourt les cartes du joueur, et on s'arrête si il n'y a plus de cartes ou si la prochaine carte est de la même famille que le 10
-		while (it.hasNext() 
-				&& (!it.next().getSymbole().equals(symbole10)
-				|| (it.next().getSymbole().equals(symbole10) 
-						&& it.next().getValeur().equals("10")))) {
+		
+		boolean trouveAutreCarteCompatible=false;
+		//on parcourt les cartes du joueur, tant qu'il reste des cartes et quon a pas trouve de compatibilité
+		// on return true ( jouer un 10 ) si la prochaine carte est de la même famille que le 10 ou alors si c'est au autre 10
+		Carte carteNext =it.next();
+		while (it.hasNext()) {
+			if((carteNext.getSymbole().equals(symbole10)
+				|| (!carteNext.getSymbole().equals(symbole10) && carteNext.getValeur().equals("10")))) {
+					System.out.println("HAHA! JE PEUX POSER DEUX CARTES D'AFFILLEE!");
+					trouveAutreCarteCompatible=true;
+					return trouveAutreCarteCompatible;
+			}
+			
+			
 			it.next();
 		}
-		if (!it.hasNext()) {
-		return false;
-		}
-		else {
+		
+		// on regarde aussi la derniere carte de la main
+		if((carteNext.getSymbole().equals(symbole10)
+				|| (!carteNext.getSymbole().equals(symbole10) && carteNext.getValeur().equals("10")))) {
+			System.out.println("HAHA! JE PEUX POSER DEUX CARTES D'AFFILLEE!");
+
+				trouveAutreCarteCompatible=true;
+				return trouveAutreCarteCompatible;
+			}
+		if(joueurEnCours.getCartes().size()==1) {
+			// le joueur n'a plus qu'un 10 il doit le jouer
+			System.out.println("Mince, je dois jouer mon 10...");	
 			return true;
 		}
+		
+		
+			return trouveAutreCarteCompatible;
+			
 	}
 	
 	
