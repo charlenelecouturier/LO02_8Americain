@@ -126,7 +126,7 @@ public class JoueurVirtuel extends Joueur {
 			}	
 		}
 		//
-		StratDefensive.choixCarte(cartesJouables);
+		numeroCarte = this.strategie.choixCarte(cartesJouables);
 		/*
 		//1 . Le Joueur virtuel regarde quel est le prochain joueur à jouer son tour
 		int tour= Partie.getPartie().getTourJoueur();
