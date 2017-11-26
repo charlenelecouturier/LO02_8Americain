@@ -16,6 +16,7 @@ package pckg;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Random;
+import java.util.Scanner;
 
 
 //package pckg;
@@ -26,7 +27,16 @@ public class JoueurVirtuel extends Joueur {
 	public JoueurVirtuel() {
 		super();
 		setName("Joueur" + getNumero());
-		this.strategie=new StratAvancee();
+		System.out.println("\nNiveau du " + this.name +" ? 1 OU 2");
+		Scanner sc = new Scanner(System.in);
+		int strat = sc.nextInt();
+		if(strat==1) {
+			this.strategie=new StrategieDeBase();
+		}
+		else {
+			this.strategie= new StratAvancee(); // par defaut si l'utilisateur se trompe
+		}
+			
 	}
 	
 	

@@ -34,7 +34,7 @@ public class StratAvancee implements Strategie{
 
 			
 			//Si la carte sur laquelle la boucle s'arrÃªte n'est pas un 8, il la pose
-			if(!carteNext.getValeur().equals("8")){
+			if(!carteNext.getValeur().equals("8")&&!carteNext.getValeur().equals("10")){
 				carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
 				return carteChoisie;
 			}
@@ -43,13 +43,13 @@ public class StratAvancee implements Strategie{
 
 		} 
 // la premiere carte na pas ete etudiee dans la precedente boucle, on s'est arretée a celle d'avant
-		if(!cartesCompatibles.get(0).getValeur().equals("8")){
+		if(!carteNext.getValeur().equals("8")&&!carteNext.getValeur().equals("10")){
 			carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
 			return carteChoisie;
 		}
 		
 		else {
-			System.out.println("Oh non.. Je suis oblige de jouer mon 8..");
+			System.out.println("Je suis oblige de jouer mon 8...");
 			carteChoisie = this.jouer8(joueurEnCours);
 			return carteChoisie;
 		}
@@ -167,28 +167,41 @@ public class StratAvancee implements Strategie{
 		
 		boolean trouveAutreCarteCompatible=false;
 		//on parcourt les cartes du joueur, tant qu'il reste des cartes, et quon a pas trouve de compatibilité
-		// on return true ( jouer un 10 ) si la prochaine carte est de la même famille que le 10 ( et que ce n'est pas la 10) ou alors si c'est au autre 10
+		// on return true ( jouer un 10 ) si la prochaine carte est de la même famille que le 10 ( et que ce n'est pas la 10) ou alors si c'est un autre 10
 		Carte carteNext =it.next();
 		while (it.hasNext()) {
+			
+			
 			if(((carteNext.getSymbole().equals(symbole10) && !(carteNext.getValeur().equals("10")))
-				|| (!(carteNext.getSymbole().equals(symbole10)) && carteNext.getValeur().equals("10")))) {
+					
+				|| (!(carteNext.getSymbole().equals(symbole10)) && (carteNext.getValeur().equals("10")))
+				|| (carteNext.getValeur().equals("8"))))
+			
+			
+			{
 					System.out.println("HAHA! JE PEUX POSER DEUX CARTES D'AFFILLEE!");
 					trouveAutreCarteCompatible=true;
 					return trouveAutreCarteCompatible;
 			}
 			
 			
-			it.next();
+			carteNext =it.next();
 		}
 		
 		
 		
 		
 		// on regarde aussi la derniere carte de la main
-		if((carteNext.getSymbole().equals(symbole10)
-				|| (!(carteNext.getSymbole().equals(symbole10)) && carteNext.getValeur().equals("10")))) {
-			System.out.println("HAHA! JE PEUX POSER DEUX CARTES D'AFFILLEE!");
-
+		if(
+				((carteNext.getSymbole().equals(symbole10) && !(carteNext.getValeur().equals("10")))
+				
+				|| (!(carteNext.getSymbole().equals(symbole10)) && (carteNext.getValeur().equals("10")))
+				|| (carteNext.getValeur().equals("8")))
+				
+				)
+		
+		{
+					System.out.println("HAHA! JE PEUX POSER DEUX CARTES D'AFFILLEE!");
 				trouveAutreCarteCompatible=true;
 				return trouveAutreCarteCompatible;
 			}
