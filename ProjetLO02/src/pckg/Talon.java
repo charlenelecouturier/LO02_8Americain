@@ -44,11 +44,11 @@ public class Talon extends PorteurCarte {
 		int nombreCartesPioche = Partie.getPartie().getPioche().getCartes().size();
 		System.out.println("\nIl reste " + nombreCartesPioche + " cartes dans la pioche, on tranfère le talon dans la pioche !");
 		ArrayList<Carte> cartesRestantes = new ArrayList<Carte>(); // les dernieres cartes qui restaient de la pioche
-		int i;
+
 		// on stocke les dernieres cartes de la pioche dans une collection, dans l'ordre
-		for (i = 0; i < nombreCartesPioche; i++) {
-			cartesRestantes.add(Partie.getPartie().getPioche().getCartes().get(i));
-			Partie.getPartie().getPioche().getCartes().remove(i);
+		while(Partie.getPartie().getPioche().getCartes().size()>0) {
+			cartesRestantes.add(Partie.getPartie().getPioche().getCartes().get(0));
+			Partie.getPartie().getPioche().getCartes().remove(0);
 		}
 		// On met toutes les cartes du talon, sauf la carte du dessus , dans la pioche
 		while(this.cartes.size()>1) {
@@ -59,9 +59,9 @@ public class Talon extends PorteurCarte {
 		Partie.getPartie().getPioche().melanger();
 		// On rajoute les dernieres cartes a piocher (qui n'étaient pas suffisantes pour
 		// que le joueur puisse piocher correctement), dans la pioche
-		for (i = 0; i < nombreCartesPioche; i++) {
-			Partie.getPartie().getPioche().getCartes().add(cartesRestantes.get(i));
-			cartesRestantes.remove(i);
+		while (cartesRestantes.size()>0) {
+			Partie.getPartie().getPioche().getCartes().add(cartesRestantes.get(0));
+			cartesRestantes.remove(0);
 		}
 	}
 

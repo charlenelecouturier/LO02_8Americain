@@ -36,6 +36,12 @@ public class StratAvancee implements Strategie{
 			//Si la carte sur laquelle la boucle s'arrÃªte n'est pas un 8, il la pose
 			if(!carteNext.getValeur().equals("8")&&!carteNext.getValeur().equals("10")){
 				carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
+				if(joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
+					Variante5.nombreAs ++;
+				}
+				if(joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("8")&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
+					Variante5.nombreAs=0;
+				}
 				return carteChoisie;
 			}
 			carteNext =parcourirCartesCompatibles.previous();
@@ -45,6 +51,12 @@ public class StratAvancee implements Strategie{
 // la premiere carte na pas ete etudiee dans la precedente boucle, on s'est arretée a celle d'avant
 		if(!carteNext.getValeur().equals("8")&&!carteNext.getValeur().equals("10")){
 			carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
+			if(joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
+				Variante5.nombreAs ++;
+			}
+			if(joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("8")&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
+				Variante5.nombreAs=0;
+			}
 			return carteChoisie;
 		}
 		

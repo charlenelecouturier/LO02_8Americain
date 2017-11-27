@@ -3,6 +3,11 @@ package pckg;
 
 public class ChangerSens implements Effet{
 	public void effet(){
-		Partie.getPartie().setSens();
-	}
+		
+
+		System.out.println("\nLa carte jouée change de sens !\n");
+
+			Partie.getPartie().setSens();
+						
+		}
 }

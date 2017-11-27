@@ -58,13 +58,20 @@ public class Partie {
 		
 		//choix de la variante
 		
-		System.out.println("Saisissez la variante :\n1=Variante minimale ");
+		System.out.println("Saisissez la variante :\n1=Variante minimale\n2=Variante 5 ");
 		int variante = sc.nextInt();
 		if (variante == 1 )
 		{
 		
 			this.variantePartie= new VarianteMinimale(this.nbJoueursVirtuels);
 			System.out.println("Variante minimale choisie");
+
+		}
+		if (variante == 2 )
+		{
+		
+			this.variantePartie= new Variante5(this.nbJoueursVirtuels);
+			System.out.println("Variante 5");
 
 		}
 		else {

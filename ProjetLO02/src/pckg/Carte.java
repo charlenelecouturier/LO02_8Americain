@@ -89,6 +89,18 @@ public class Carte {
 			
 		}
 		
+		else if(effet.equals("ChangerSens")) {
+			Effet changerSens= new ChangerSens();
+			changerSens.effet();
+			
+		}
+		else if(effet.equals("Pioche2Cartes")) {
+			Effet pioche2cartes= new Piocher2Cartes();
+			pioche2cartes.effet();
+			
+		}
+		
+		
 	}
 	
 	

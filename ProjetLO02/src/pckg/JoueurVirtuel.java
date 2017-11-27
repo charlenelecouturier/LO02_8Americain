@@ -46,11 +46,12 @@ public class JoueurVirtuel extends Joueur {
 		boolean gagne = false;
 		//Le joueur pose une carte
 		effet=this.poserCarte();
+		this.EffetVariante="Aucun";
 		//On test si le joueur a gagnï¿½
 		gagne = this.gagnePartie();
 
 			// si il n'y a pas eu d'effet modifiant le tour du joueur suivant
-			if((!effet.equals("BloquerSuivant") &&  !effet.equals("ChangerSens"))|| effet.equals("AucunEffet")) {
+			if(!effet.equals("BloquerSuivant")) {
 				// On cherche le tour du joueur suivant
 				int tour;
 				tour= Partie.getPartie().getTourJoueur();
@@ -110,10 +111,15 @@ public class JoueurVirtuel extends Joueur {
 
 		}		
 				
-	//2.2. Le joueur ne peut jouer aucune carte, donc il pioche.
+		//2.2. Le joueur ne peut jouer aucune carte, donc il pioche.
+		//( a condition que la variante n'ai pas entrainé un effet comme 3piocher 2 cartes")
+		// Dans ce cas, le fait de piocher 2 cartes est géré par la variante
 		else {
-			System.out.println(this.getName() + " ne peut pas jouer, il pioche");
-			this.piocher(1);
+			if(this.EffetVariante.equals("Aucun")) {
+				System.out.println(this.getName() + " ne peut pas jouer !");
+				this.piocher(1);
+			}
+			
 		}
 	return effet;
 	}

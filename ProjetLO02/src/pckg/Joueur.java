@@ -17,12 +17,14 @@ public abstract class Joueur extends PorteurCarte {
 	private int score; // score du joueur
 	private int scoreManche;
 	protected Strategie strategie;
+	protected String EffetVariante;
 	
 	//**********Constructeur************
 /**
  * le Constructeur de Joueur ne doit pas être utilisé directement, il simplifie le code de ses classes filles.
  */
 	public Joueur() {
+		this.EffetVariante="Aucun";
 		/*Permet de donner à chaque nouvelle instance de 
 		joueur un nouveau numéro */
 		this.numero = donneurNum;
@@ -30,6 +32,7 @@ public abstract class Joueur extends PorteurCarte {
 		this.score=0; // initialement le joueur a 0 points
 	}
 	//********** Getter et Setters **********
+	
 	/**
 	 * Accesseur du classement.
 	 * @return la place à laquelle un joueur a fini
@@ -68,6 +71,20 @@ public abstract class Joueur extends PorteurCarte {
 	
 	
 	/**
+	 * @return the effetVariante
+	 */
+	public String getEffetVariante() {
+		return EffetVariante;
+	}
+
+	/**
+	 * @param effetVariante the effetVariante to set
+	 */
+	public void setEffetVariante(String effetVariante) {
+		EffetVariante = effetVariante;
+	}
+
+	/**
 	 * Le corps meme de cette classe, jouerTour permet à un joueur physique ou virtuel de
 	 * choisir une carte dans son jeu et la poser sur le talon.
 	 */
@@ -79,7 +96,7 @@ public abstract class Joueur extends PorteurCarte {
 		// on regarde si le fait d'avoir posé une carte permet au joueur de gagner la manche
 		gagne =this.gagnePartie();
 		// si il n'y a pas eu d'effet modifiant le tour du joueur suivant
-		if((!effet.equals("BloquerSuivant") &&  !effet.equals("ChangerSens"))|| effet.equals("AucunEffet")) {
+		if(!effet.equals("BloquerSuivant") ) {
 			// On cherche le tour du joueur suivant
 			int tour;
 			tour= Partie.getPartie().getTourJoueur();
@@ -97,7 +114,7 @@ public abstract class Joueur extends PorteurCarte {
 			else {// sens =-1
 				// si on trouve un numéro négatif, on revient au tour du dernier joueur ( joueur ayant le dernier numéro)
 				tour--;
-				if (tour<0) {
+				if (tour<=0) {
 					tour=Partie.getPartie().getNbJoueursEnCours();
 				}
 			}
@@ -138,6 +155,7 @@ public abstract class Joueur extends PorteurCarte {
 	public abstract boolean DireContreCarte();
 	
 	public void piocher(int nombrePioche) {
+		System.out.println(this.name + " pioche "+ nombrePioche + " carte(s) !");
 		
 		if(Partie.getPartie().getPioche().getCartes().size()< nombrePioche) 
 		{

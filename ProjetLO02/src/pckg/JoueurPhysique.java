@@ -59,10 +59,16 @@
 			}		
 					
 		//2.2. Le joueur ne peut jouer aucune carte, donc il pioche.
-		else {
-				System.out.println("Vous ne pouvez pas jouer, vous piochez.");
-				this.piocher(1);
-				}
+			//( a condition que la variante n'ai pas entrainé un effet comme 3piocher 2 cartes")
+			// Dans ce cas, le fait de piocher 2 cartes est géré par la variante
+		else {	
+			if(this.EffetVariante.equals("Aucun")) {
+			//System.out.println(this.getName() + " ne peut pas jouer, il pioche");
+			System.out.println("Vous ne pouvez pas jouer, vous piochez.");
+			this.piocher(1);
+			}
+				
+		}
 		return effet;
 		}
 		
@@ -95,7 +101,12 @@
 			}
 
 		} while (!choix);
-
+		if(this.cartes.get(numero-1).getValeur().equals("1")&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
+			Variante5.nombreAs ++;
+		}
+		if(this.cartes.get(numero-1).getValeur().equals("8")&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
+			Variante5.nombreAs=0;
+		}
 		return numero - 1;
 	}
 
