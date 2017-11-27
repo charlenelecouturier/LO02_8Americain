@@ -49,6 +49,7 @@ public class Partie {
 		
 		this.etat = "EN COURS";
 		
+		//tourJoueur correspond eu numéro du joueur et est choisit au hasard
 		Random r = new Random();
 		int tourJoueur = 1 + r.nextInt(nbJoueursEnCours - 1); // le joueur qui debute la partie est choisi aleatoirement  	
 		this.tourJoueur = tourJoueur;
@@ -71,7 +72,7 @@ public class Partie {
 		{
 		
 			this.variantePartie= new Variante5(this.nbJoueursVirtuels);
-			System.out.println("Variante 5");
+			System.out.println("Variante 5 choisie ");
 
 		}
 		else {
@@ -253,13 +254,19 @@ public class Partie {
 	
 	public void changerManche() {
 		//posibilité de changer la variante
-		System.out.println("Saisissez la variante :\n1=Variante minimale ");
+		System.out.println("Saisissez la variante :\n1=Variante minimale\n2 : Variante 5 ");
 		Scanner scanner = new Scanner(System.in);
 		int variante = scanner.nextInt();
 		if (variante == 1 ) // variante minimale choisie
 		{
 			this.variantePartie= new VarianteMinimale(this.nbJoueursVirtuels);
 			System.out.println("Variante minimale choisie");
+
+			}
+		else if (variante == 2 ) // variante minimale choisie
+		{
+			this.variantePartie= new Variante5(this.nbJoueursVirtuels);
+			System.out.println("Variante 5 choisie");
 
 			}
 		else {

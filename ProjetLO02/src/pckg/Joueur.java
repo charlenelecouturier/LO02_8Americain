@@ -88,39 +88,7 @@ public abstract class Joueur extends PorteurCarte {
 	 * Le corps meme de cette classe, jouerTour permet à un joueur physique ou virtuel de
 	 * choisir une carte dans son jeu et la poser sur le talon.
 	 */
-	public void jouerTour() {
-		
-		boolean gagne=false;
-		String effet="AucunEffet";
-		effet=this.poserCarte();
-		// on regarde si le fait d'avoir posé une carte permet au joueur de gagner la manche
-		gagne =this.gagnePartie();
-		// si il n'y a pas eu d'effet modifiant le tour du joueur suivant
-		if(!effet.equals("BloquerSuivant") ) {
-			// On cherche le tour du joueur suivant
-			int tour;
-			tour= Partie.getPartie().getTourJoueur();
-			// On regarde le sens de la partie
-			if (Partie.getPartie().getSens()==1) {
-				
-				if(!gagne) {
-					tour++;
-				}
-				// Si on depasse le numéro du dernier joueur, on revient au joueur 1 ( joueur physique)
-				if( tour > Partie.getPartie().getNbJoueursEnCours()) {
-					tour=1;		
-				}
-			}
-			else {// sens =-1
-				// si on trouve un numéro négatif, on revient au tour du dernier joueur ( joueur ayant le dernier numéro)
-				tour--;
-				if (tour<=0) {
-					tour=Partie.getPartie().getNbJoueursEnCours();
-				}
-			}
-			Partie.getPartie().setTourJoueur(tour);
-		}
-	}
+	public abstract void jouerTour();
 	
 	
 	public abstract String poserCarte();
@@ -169,7 +137,7 @@ public abstract class Joueur extends PorteurCarte {
 			//Retire cette carte de la pioche
 			Partie.getPartie().getPioche().cartes.remove(Partie.getPartie().getPioche().cartes.size()-1);
 			System.out.println(this.name+ " a pioché " + cartePioche);
-			System.out.println("\nTest : il reste "+ Partie.getPartie().getPioche().getCartes().size()+" cartes dans la pioche");
+			System.out.println("\nTest : il reste "+ Partie.getPartie().getPioche().getCartes().size()+" cartes dans la pioche\n");
 
 		}
 		

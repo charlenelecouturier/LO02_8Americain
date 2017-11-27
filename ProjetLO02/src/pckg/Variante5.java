@@ -15,8 +15,11 @@ public static int nombreAs=0;
 		else if (carteValeur=="8") {
 			return "ChangerFamille";
 		}
-		else if (carteValeur=="7") {
+		else if (carteValeur=="7" && Partie.getPartie().getNbJoueursEnCours()>2) {
 			return "ChangerSens";
+		}
+		else if (carteValeur=="7" && Partie.getPartie().getNbJoueursEnCours()==2) {
+			return "ObligeRejouer";
 		}
 		else if (carteValeur=="1") {
 			return "Pioche2Cartes";
@@ -50,8 +53,9 @@ public static int nombreAs=0;
 					return true; // le joueur peut jouer
 				}
 			}
-			
-			joueurActuel.piocher(2*this.nombreAs);
+			System.out.println("Le joueur n'a ni d'As ni de 8 ...");
+			joueurActuel.piocher(2*Variante5.nombreAs);
+			Variante5.nombreAs=0;
 			}
 		
 		return false; // le joueur ne peut pas jouer

@@ -14,6 +14,43 @@
 			System.out.println("OK Joueur1  : " + this.name);
 		}
 		
+		@Override
+		public void jouerTour() {
+			System.out.println("effet : "+ this.EffetVariante);
+
+			boolean gagne=false;
+			String effet="AucunEffet";
+			effet=this.poserCarte();
+			this.EffetVariante="Aucun";
+			// on regarde si le fait d'avoir posé une carte permet au joueur de gagner la manche
+			gagne =this.gagnePartie();
+			// si il n'y a pas eu d'effet modifiant le tour du joueur suivant
+			if(!effet.equals("BloquerSuivant") ) {
+				// On cherche le tour du joueur suivant
+				int tour;
+				tour= Partie.getPartie().getTourJoueur();
+				// On regarde le sens de la partie
+				if (Partie.getPartie().getSens()==1) {
+					
+					if(!gagne) {
+						tour++;
+					}
+					// Si on depasse le numéro du dernier joueur, on revient au joueur 1 ( joueur physique)
+					if( tour > Partie.getPartie().getNbJoueursEnCours()) {
+						tour=1;		
+					}
+				}
+				else {// sens =-1
+					// si on trouve un numéro négatif, on revient au tour du dernier joueur ( joueur ayant le dernier numéro)
+					tour--;
+					if (tour<=0) {
+						tour=Partie.getPartie().getNbJoueursEnCours();
+					}
+				}
+				Partie.getPartie().setTourJoueur(tour);
+			}
+		}	
+		
 	public String poserCarte() {
 			
 			String effet="AucunEffet";
@@ -63,9 +100,8 @@
 			// Dans ce cas, le fait de piocher 2 cartes est géré par la variante
 		else {	
 			if(this.EffetVariante.equals("Aucun")) {
-			//System.out.println(this.getName() + " ne peut pas jouer, il pioche");
-			System.out.println("Vous ne pouvez pas jouer, vous piochez.");
-			this.piocher(1);
+				System.out.println("Vous ne pouvez pas jouer, vous piochez.");
+				this.piocher(1);
 			}
 				
 		}

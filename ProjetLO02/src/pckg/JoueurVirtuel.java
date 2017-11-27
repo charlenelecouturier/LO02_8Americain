@@ -42,6 +42,7 @@ public class JoueurVirtuel extends Joueur {
 	
 	@Override
 	public void jouerTour() {
+		System.out.println("effet : "+ this.EffetVariante);
 		String effet="AucunEffet";
 		boolean gagne = false;
 		//Le joueur pose une carte
@@ -69,7 +70,7 @@ public class JoueurVirtuel extends Joueur {
 				else {// sens =-1
 					// si on trouve un num�ro n�gatif, on revient au tour du dernier joueur ( joueur ayant le dernier num�ro)
 					tour--;
-					if (tour<0) {
+					if (tour<=0) {
 						tour=Partie.getPartie().getNbJoueursEnCours();
 					}
 				}

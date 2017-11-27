@@ -6,7 +6,6 @@ public class ChangerSens implements Effet{
 		
 
 		System.out.println("\nLa carte jouée change de sens !\n");
-
 			Partie.getPartie().setSens();
 						
 		}
