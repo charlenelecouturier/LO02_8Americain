@@ -42,7 +42,7 @@ public class Talon extends PorteurCarte {
 	public void devenirPioche() {
 		
 		int nombreCartesPioche = Partie.getPartie().getPioche().getCartes().size();
-		System.out.println("\nIl reste " + nombreCartesPioche + " cartes dans la pioche, on tranfère le talon dans la pioche !");
+		System.out.println("\nIl reste " + nombreCartesPioche + " cartes dans la pioche, on tranfère le talon dans la pioche !\n");
 		ArrayList<Carte> cartesRestantes = new ArrayList<Carte>(); // les dernieres cartes qui restaient de la pioche
 
 		// on stocke les dernieres cartes de la pioche dans une collection, dans l'ordre

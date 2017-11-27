@@ -39,9 +39,7 @@ public class StratAvancee implements Strategie{
 				if(joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
 					Variante5.nombreAs ++;
 				}
-				if(joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("8")&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
-					Variante5.nombreAs=0;
-				}
+	
 				return carteChoisie;
 			}
 			carteNext =parcourirCartesCompatibles.previous();
@@ -54,15 +52,17 @@ public class StratAvancee implements Strategie{
 			if(joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
 				Variante5.nombreAs ++;
 			}
-			if(joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("8")&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
-				Variante5.nombreAs=0;
-			}
+
 			return carteChoisie;
 		}
 		
 		else {
 			System.out.println("Je suis oblige de jouer mon 8...");
 			carteChoisie = this.jouer8(joueurEnCours);
+			// jouer un 8 contre une attaque dans la variante5
+			if(Partie.getPartie().getVariantePartie() instanceof Variante5) {
+				Variante5.nombreAs=0;
+			}
 			return carteChoisie;
 		}
 	}

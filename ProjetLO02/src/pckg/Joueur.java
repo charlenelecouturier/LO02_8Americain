@@ -136,16 +136,12 @@ public abstract class Joueur extends PorteurCarte {
 			cartes.add(cartePioche);
 			//Retire cette carte de la pioche
 			Partie.getPartie().getPioche().cartes.remove(Partie.getPartie().getPioche().cartes.size()-1);
-			System.out.println(this.name+ " a pioché " + cartePioche);
+			System.out.println("\n"+this.name+ " a pioché " + cartePioche);
 			System.out.println("\nTest : il reste "+ Partie.getPartie().getPioche().getCartes().size()+" cartes dans la pioche\n");
 
 		}
 		
 	}
-	
-	
-	
-	
 	
 	public boolean gagnePartie() { 
 		if (this.cartes.isEmpty()) {

@@ -53,7 +53,7 @@ public static int nombreAs=0;
 					return true; // le joueur peut jouer
 				}
 			}
-			System.out.println("Le joueur n'a ni d'As ni de 8 ...");
+			System.out.println(joueurActuel.getName()+" n'a ni d'As ni de 8 ...");
 			joueurActuel.piocher(2*Variante5.nombreAs);
 			Variante5.nombreAs=0;
 			}

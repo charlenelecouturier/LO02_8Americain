@@ -254,7 +254,7 @@ public class Partie {
 	
 	public void changerManche() {
 		//posibilité de changer la variante
-		System.out.println("Saisissez la variante :\n1=Variante minimale\n2 : Variante 5 ");
+		System.out.println("Saisissez la variante :\n1=Variante minimale\n2=Variante 5 ");
 		Scanner scanner = new Scanner(System.in);
 		int variante = scanner.nextInt();
 		if (variante == 1 ) // variante minimale choisie
