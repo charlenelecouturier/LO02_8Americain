@@ -62,14 +62,14 @@ public class Partie {
 		
 		
 		// mode de comptage des points 
-		System.out.println("Saisir le mode de comptage des points : 'POSITIF' ou 'NEGATIF'");
+		System.out.println("\nSaisir le mode de comptage des points : 'POSITIF' ou 'NEGATIF'");
 		Scanner text = new Scanner(System.in);
 		this.modeComptage=text.nextLine();
 		if(this.modeComptage.equals("POSITIF")) {
-			System.out.println("\nMode de comptage des points choisi : POSITIF ! Le premier joueur arrivé à 60 points gagne la partie ! Lorsque 3 joueur ont finissent la manche, celle si se termine\n");
+			System.out.println("\nMode de comptage des points choisi : POSITIF ! Le premier joueur arrivé à 60 points gagne la partie ! \nLorsque 3 joueurs ont fini la manche, celle-ci se termine\n");
 		}
 		else {
-			System.out.println("\nMode de comptage des points choisi : NEGATIF ! Lorsqu'un joueur atteint 100 point, il perd la partie ! Une manche se termine dès qu'un joueur a fini !\n");
+			System.out.println("\nMode de comptage des points choisi : NEGATIF ! Lorsqu'un joueur atteint 100 point, il perd la partie ! \nUne manche se termine dès qu'un joueur a fini !\n");
 
 		}
 		
