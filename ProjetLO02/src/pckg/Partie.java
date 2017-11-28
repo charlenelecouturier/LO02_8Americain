@@ -58,26 +58,8 @@ public class Partie {
 		this.talon = new Talon();
 		
 		//choix de la variante
+		this.variantePartie= choisirVariante();
 		
-		System.out.println("Saisissez la variante :\n1=Variante minimale\n2=Variante 5 ");
-		int variante = sc.nextInt();
-		if (variante == 1 )
-		{
-		
-			this.variantePartie= new VarianteMinimale(this.nbJoueursVirtuels);
-			System.out.println("Variante minimale choisie");
-
-		}
-		if (variante == 2 )
-		{
-		
-			this.variantePartie= new Variante5(this.nbJoueursVirtuels);
-			System.out.println("Variante 5 choisie ");
-
-		}
-		else {
-			System.out.println("Erreur : variante inexistante");
-		}
 		
 		// mode de comptage des points 
 		System.out.println("Saisir le mode de comptage des points : 'POSITIF' ou 'NEGATIF'");
@@ -92,6 +74,43 @@ public class Partie {
 		}
 		
 				
+	}
+	
+	
+	public Variante choisirVariante() {
+		Scanner sc= new Scanner(System.in);
+		System.out.println("Saisissez la variante :\n1=Variante minimale\n2=Variante 5\n3=Variante 4 ");
+		int variante = sc.nextInt();
+		Variante choixVariante;
+		if (variante == 1 )
+		{
+		
+			choixVariante= new VarianteMinimale(this.nbJoueursVirtuels);
+			System.out.println("Variante minimale choisie");
+
+		}
+		else if (variante == 2 )
+		{
+		
+			choixVariante= new Variante5(this.nbJoueursVirtuels);
+			System.out.println("Variante 5 choisie ");
+
+		}
+		
+		else if (variante == 3 )
+		{
+		
+			choixVariante= new Variante4(this.nbJoueursVirtuels);
+			System.out.println("Variante 4 choisie ");
+
+		}
+		else {
+			System.out.println("Erreur : variante inexistante, choisissez à nouveau");
+			choixVariante =choisirVariante();
+			
+		}
+		
+		return choixVariante;
 	}
 	
 	
@@ -254,24 +273,7 @@ public class Partie {
 	
 	public void changerManche() {
 		//posibilité de changer la variante
-		System.out.println("Saisissez la variante :\n1=Variante minimale\n2=Variante 5 ");
-		Scanner scanner = new Scanner(System.in);
-		int variante = scanner.nextInt();
-		if (variante == 1 ) // variante minimale choisie
-		{
-			this.variantePartie= new VarianteMinimale(this.nbJoueursVirtuels);
-			System.out.println("Variante minimale choisie");
-
-			}
-		else if (variante == 2 ) // variante minimale choisie
-		{
-			this.variantePartie= new Variante5(this.nbJoueursVirtuels);
-			System.out.println("Variante 5 choisie");
-
-			}
-		else {
-			System.out.println("Erreur : variante inexistante");
-			}
+		this.variantePartie= choisirVariante();
 		// On remet les joueurs dans le tableau de joueurs :
 		int i,j;
 		while(this.classementJoueurs.size()>0)

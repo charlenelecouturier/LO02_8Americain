@@ -1,12 +1,11 @@
 package pckg;
 
-import java.util.ListIterator;
 import java.util.LinkedList;
 
-public class Piocher2Cartes implements Effet {
+public class Piocher4Cartes implements Effet {
 	
 	public void effet() {
-		System.out.println("Le joueur suivant pioche 2 cartes");
+		System.out.println("Le joueur suivant pioche 4 cartes");
 		
 		
 		
@@ -36,7 +35,7 @@ public class Piocher2Cartes implements Effet {
 		
 		Joueur joueurSuivant = Partie.getPartie().getJoueur().get(tour-1);
 		
-		joueurSuivant.piocher(2);
+		joueurSuivant.piocher(4);
 		// le joueur suivant ne peut pas jouer
 		Effet bloquerSuivant= new BloquerSuivant();
 		bloquerSuivant.effet();
@@ -45,5 +44,4 @@ public class Piocher2Cartes implements Effet {
 		
 		
 	}
-
 

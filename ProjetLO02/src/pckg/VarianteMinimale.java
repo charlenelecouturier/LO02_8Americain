@@ -4,28 +4,10 @@ import java.util.LinkedList;
 
 public class VarianteMinimale extends Variante {
 
-	@Override
-	public String effetCarte(Carte carte) {
-		String carteValeur=carte.getValeur();
-		if (carteValeur=="10") {
-			return "ObligeRejouer";}
-		else if (carteValeur=="8") {
-			return "ChangerFamille";
-		}
-		else return  "PasEffet";// pas forcément utile car on a deja checké si c'etait une carte spéciale
-		
-		
-	}
-
 
 
 
 	public VarianteMinimale(int nbJoueursVirtuels) {
-		
-		this.carteSpeciale = new LinkedList<Carte>();
-		this.carteSpeciale.add(new Carte("8", "NIMPORTE"));
-		this.carteSpeciale.add(new Carte("10", "NIMPORTE"));
-		
 		
 		
 		int nbPaquet=1;	
@@ -55,6 +37,13 @@ public class VarianteMinimale extends Variante {
 				
 				for(j=0;j<valeurs.length;j++){
 					Carte carte = new Carte(valeurs[j],Carte.symboles[i]);
+					if(carte.getValeur().equals("8")) {
+						carte.setEffet("ChangerFamille");
+
+					}
+					else if(carte.getValeur().equals("10")) {
+						carte.setEffet("ObligeRejouer");
+					}
 					jeuDeCartes.add(carte);
 					}
 			}

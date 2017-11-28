@@ -1,6 +1,5 @@
 package pckg;
 
-import java.util.ArrayList;
 
 /**
  * Joueur est la classe qui represente les participants au jeu, qu'ils soient physiques ou virtuels.
@@ -91,7 +90,7 @@ public abstract class Joueur extends PorteurCarte {
 	public abstract void jouerTour();
 	
 	
-	public abstract String poserCarte();
+	public abstract void poserCarte();
 	
 	
 	public void setNumero(int numero) {
@@ -123,7 +122,7 @@ public abstract class Joueur extends PorteurCarte {
 	public abstract boolean DireContreCarte();
 	
 	public void piocher(int nombrePioche) {
-		System.out.println(this.name + " pioche "+ nombrePioche + " carte(s) !");
+		System.out.println("\n" +this.name + " pioche "+ nombrePioche + " carte(s) !");
 		
 		if(Partie.getPartie().getPioche().getCartes().size()< nombrePioche) 
 		{

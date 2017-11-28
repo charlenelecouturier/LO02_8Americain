@@ -15,7 +15,6 @@ public abstract class Variante {
 	/**
 	 * @param args
 	 */
-	protected LinkedList<Carte> carteSpeciale;
 	protected int nbCartes;
 	protected ArrayList<Carte> jeuDeCartes;
 	public abstract ArrayList<Carte> creerJeuDeCartes(int nbPaquet);
@@ -27,8 +26,7 @@ public abstract class Variante {
 		this.nbCartes = nbCartes;
 	}
 
-	public abstract String effetCarte(Carte carte); 
-	
+
 
 	
 	public boolean estPossibleDeJouer(ArrayList<Carte> carte) {
@@ -64,20 +62,6 @@ public abstract class Variante {
 	
 
 	
-	/**
-	 * @return the carteSpeciale
-	 */
-	public LinkedList<Carte> getCarteSpeciale() {
-		return carteSpeciale;
-	}
-
-	/**
-	 * @param carteSpeciale the carteSpeciale to set
-	 */
-	public void setCarteSpeciale(LinkedList<Carte> carteSpeciale) {
-		this.carteSpeciale = carteSpeciale;
-	}
-
 	public ArrayList<Carte> getCartes() {
 		return jeuDeCartes;
 	}

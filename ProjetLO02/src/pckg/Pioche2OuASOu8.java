@@ -1,17 +1,10 @@
 package pckg;
 
-import java.util.ListIterator;
-import java.util.LinkedList;
-
-public class Piocher2Cartes implements Effet {
+public class Pioche2OuASOu8 implements Effet {
 	
 	public void effet() {
-		System.out.println("Le joueur suivant pioche 2 cartes");
-		
-		
-		
-
-		
+		System.out.println("Si le joueur suivant n'a pas de 8 ou d'AS alors : + 2 cartes");
+		// on cherche la joueur suivant
 		int tour;
 		tour= Partie.getPartie().getTourJoueur();
 		// On regarde le sens de la partie
@@ -36,14 +29,10 @@ public class Piocher2Cartes implements Effet {
 		
 		Joueur joueurSuivant = Partie.getPartie().getJoueur().get(tour-1);
 		
-		joueurSuivant.piocher(2);
-		// le joueur suivant ne peut pas jouer
-		Effet bloquerSuivant= new BloquerSuivant();
-		bloquerSuivant.effet();
+		joueurSuivant.setEffetVariante("Pioche2ouAsou8");
 
 		}
 		
 		
 	}
-
 

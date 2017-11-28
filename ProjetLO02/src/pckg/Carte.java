@@ -11,33 +11,12 @@ package pckg;
 public class Carte {
 
 	public final static String[] symboles = {"PIQUE", "COEUR", "CARREAU", "TREFLE"};
-	private boolean carteSpeciale;
 	private String symbole;
 	private String valeur;
+	private String effet;
 	
 		
-	/**
-	 * @return the carteSpeciale
-	 */
-	public boolean isCarteSpeciale() {
-		
-		int i;
-		for (i=0;i<Partie.getPartie().getVariantePartie().getCarteSpeciale().size();i++) {
-			if (this.valeur.equals(Partie.getPartie().getVariantePartie().getCarteSpeciale().get(i).getValeur())) {
-				this.setCarteSpeciale(true);
-				return this.carteSpeciale;
-			}
-		}
-		this.setCarteSpeciale(false);
-		return this.carteSpeciale;
-			}
 
-	/**
-	 * @param carteSpeciale the carteSpeciale to set
-	 */
-	public void setCarteSpeciale(boolean carteSpeciale) {
-		this.carteSpeciale = carteSpeciale;
-	}
 
 	/**
 	 * @return the symbole
@@ -67,38 +46,72 @@ public class Carte {
 		this.valeur = valeur;
 	}
 
-	public void estSpeciale() {
-		
-	}
+
 	
-	public void appliquerEffet(String effet) {
-		if(effet.equals("ObligeRejouer")) {
+	/**
+	 * @return the effet
+	 */
+	public String getEffet() {
+		return effet;
+	}
+
+	/**
+	 * @param effet the effet to set
+	 */
+	public void setEffet(String effet) {
+		this.effet = effet;
+	}
+
+	public void appliquerEffet() {
+		if(this.effet.equals("ObligeRejouer")) {
 			Effet obligerRejouer= new ObligeRejouer();
 			obligerRejouer.effet();
 			
 			
 		}
-		else if(effet.equals("ChangerFamille")) {
+		else if(this.effet.equals("ChangerFamille")) {
 			Effet changerFamille= new ChangerFamille();
 			changerFamille.effet();
 			
 		}
-		else if(effet.equals("AucunEffet")) {
-			Effet aucunEffet= new AucunEffet();
-			aucunEffet.effet();
-			
-		}
 		
-		else if(effet.equals("ChangerSens")) {
+		else if(this.effet.equals("ChangerSens")) {
 			Effet changerSens= new ChangerSens();
 			changerSens.effet();
 			
 		}
-		else if(effet.equals("Pioche2Cartes")) {
-			Effet pioche2cartes= new Piocher2Cartes();
-			pioche2cartes.effet();
+		else if(this.effet.equals("Pioche2OuAsOu8")) {
+			Effet pioche2cartesOuAsOu8= new Pioche2OuASOu8();
+			pioche2cartesOuAsOu8.effet();
 			
 		}
+		else if(this.effet.equals("BloquerSuivant")) {
+			Effet bloqueSuivant= new BloquerSuivant();
+			bloqueSuivant.effet();
+			
+		}
+		else if(this.effet.equals("Piocher2")) {
+			Effet pioche2= new Piocher2Cartes();
+			pioche2.effet();
+			
+		}
+		else if(this.effet.equals("Piocher2")) {
+			Effet pioche4= new Piocher4Cartes();
+			pioche4.effet();
+			
+		}
+		else if(this.effet.equals("JouerToutesCartesMemeSymbole")) {
+			Effet JouerToutesCartesMemeSymbole= new JouerMemeCouleur();
+			JouerToutesCartesMemeSymbole.effet();
+			
+		}
+		else if(this.effet.equals("ChangerFamilleEtPioche5")) {
+			Effet changerFamilleEtPioche5= new ChangerFamilleEtPioche5();
+			changerFamilleEtPioche5.effet();
+			
+		}
+		
+		
 		
 		
 	}
@@ -107,6 +120,7 @@ public class Carte {
 	public Carte(String valeur, String symbole) {
 		this.symbole=symbole;
 		this.valeur=valeur;
+		this.effet="Aucun";
 
 	}
 	public String toString () {

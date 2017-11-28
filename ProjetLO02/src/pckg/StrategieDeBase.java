@@ -17,6 +17,9 @@ public class StrategieDeBase implements Strategie
 		if(joueurEnCours.getCartes().get(i).getValeur().equals("1")&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
 			Variante5.nombreAs ++;
 		}
+		if (joueurEnCours.getCartes().get(i).getValeur().equals("1") && Partie.getPartie().getVariantePartie() instanceof Variante4) {
+			Variante4.couleur.setSymbole(joueurEnCours.getCartes().get(i).getSymbole());
+		}
 		if(joueurEnCours.getCartes().get(i).getValeur().equals("8")&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
 			Variante5.nombreAs=0;
 		}

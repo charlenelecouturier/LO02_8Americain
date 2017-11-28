@@ -14,12 +14,12 @@ public class StratAvancee implements Strategie{
 		int carteChoisie;
 		ListIterator<Carte> parcourirCartesCompatibles = cartesCompatibles.listIterator();
 		
-		//On regarde si le joueur a un 10 jouable : si oui, on regardera si il peut jouer une autre carte
+		//On regarde si le joueur a une carte "Rejouer" jouable : si oui, on regardera si elle lui permet de rejouer ou si il n'a que celleci de compatible
 		Carte carteNext;
 
 		do {
 			carteNext =parcourirCartesCompatibles.next();
-			if(carteNext.getValeur().equals("10") && this.jouer10(carteNext, joueurEnCours,cartesCompatibles)) {
+			if(carteNext.getEffet().equals("ObligeRejouer") && this.jouer10(carteNext, joueurEnCours,cartesCompatibles)) {
 					carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
 					return carteChoisie;
 			}
@@ -27,17 +27,20 @@ public class StratAvancee implements Strategie{
 		}while (parcourirCartesCompatibles.hasNext());
 
 		
-		System.out.println("Oh.. Je n'ai pas de 10 qui me permetterait de rejouer.. je joue n'importe quelle carte sauf un 8");
+		System.out.println("Oh.. Je n'ai pas de carte qui me permetterait de rejouer.. je joue n'importe quelle carte sauf une carte Changer de Famille");
 
-		//Si le joueur n'a pas de 10, il joue la premiere carte dans sa main qui n'est pas un 8
+		//Si le joueur ne joue pas de carte qui l'oblige a rejouer, il joue la premiere carte dans sa main qui n'est pas une carte changer de couleur
 		while(parcourirCartesCompatibles.hasPrevious() ) {
 
 			
-			//Si la carte sur laquelle la boucle s'arrÃªte n'est pas un 8, il la pose
-			if(!carteNext.getValeur().equals("8")&&!carteNext.getValeur().equals("10")){
+			//Si la carte sur laquelle la boucle s'arrette n'est pas une carte changer de famille, il la pose
+			if(!carteNext.getEffet().equals("ChangerFamille")&&!carteNext.getEffet().equals("ObligeRejouer")){
 				carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
 				if(joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
 					Variante5.nombreAs ++;
+				}
+				if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1") && Partie.getPartie().getVariantePartie() instanceof Variante4) {
+					Variante4.couleur.setSymbole(joueurEnCours.getCartes().get(carteChoisie).getSymbole());
 				}
 	
 				return carteChoisie;
@@ -47,7 +50,7 @@ public class StratAvancee implements Strategie{
 
 		} 
 // la premiere carte na pas ete etudiee dans la precedente boucle, on s'est arretée a celle d'avant
-		if(!carteNext.getValeur().equals("8")&&!carteNext.getValeur().equals("10")){
+		if(!carteNext.getValeur().equals("ChangerFamille")&&!carteNext.getValeur().equals("ObligeRejouer")){
 			carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
 			if(joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
 				Variante5.nombreAs ++;
@@ -57,7 +60,7 @@ public class StratAvancee implements Strategie{
 		}
 		
 		else {
-			System.out.println("Je suis oblige de jouer mon 8...");
+			System.out.println("Je suis oblige de jouer ma carte 'Changer Famille'...");
 			carteChoisie = this.jouer8(joueurEnCours);
 			// jouer un 8 contre une attaque dans la variante5
 			if(Partie.getPartie().getVariantePartie() instanceof Variante5) {
@@ -159,7 +162,7 @@ public class StratAvancee implements Strategie{
 		boolean trouve8=false;
 		while(!trouve8) {
 			
-			if (joueurEnCours.getCartes().get(i).getValeur().equals("8")) {
+			if (joueurEnCours.getCartes().get(i).getEffet().equals("ChangerFamille")) {
 				trouve8=true;	
 			}
 			else {
@@ -170,8 +173,9 @@ public class StratAvancee implements Strategie{
 	}
 	
 	
-	public boolean jouer10(Carte carte10, Joueur joueurEnCours,ArrayList<Carte> cartesCompatibles) {
-		String symbole10 = carte10.getSymbole();
+	public boolean jouer10(Carte carteRejouer, Joueur joueurEnCours,ArrayList<Carte> cartesCompatibles) {
+		String symboleCarteRejouer = carteRejouer.getSymbole();
+		String valeurCarteRejouer = carteRejouer.getValeur();
 		Iterator<Carte> it = joueurEnCours.getCartes().iterator();
 		
 		
@@ -184,9 +188,9 @@ public class StratAvancee implements Strategie{
 		while (it.hasNext()) {
 			
 			
-			if(((carteNext.getSymbole().equals(symbole10) && !(carteNext.getValeur().equals("10")))
+			if(((carteNext.getSymbole().equals(symboleCarteRejouer) && !(carteNext.getValeur().equals(valeurCarteRejouer)))
 					
-				|| (!(carteNext.getSymbole().equals(symbole10)) && (carteNext.getValeur().equals("10")))
+				|| (!(carteNext.getSymbole().equals(symboleCarteRejouer)) && (carteNext.getValeur().equals(valeurCarteRejouer)))
 				|| (carteNext.getValeur().equals("8"))))
 			
 			
@@ -205,9 +209,9 @@ public class StratAvancee implements Strategie{
 		
 		// on regarde aussi la derniere carte de la main
 		if(
-				((carteNext.getSymbole().equals(symbole10) && !(carteNext.getValeur().equals("10")))
+				((carteNext.getSymbole().equals(symboleCarteRejouer) && !(carteNext.getValeur().equals(valeurCarteRejouer)))
 				
-				|| (!(carteNext.getSymbole().equals(symbole10)) && (carteNext.getValeur().equals("10")))
+				|| (!(carteNext.getSymbole().equals(symboleCarteRejouer)) && (carteNext.getValeur().equals(valeurCarteRejouer)))
 				|| (carteNext.getValeur().equals("8")))
 				
 				)
@@ -219,7 +223,7 @@ public class StratAvancee implements Strategie{
 			}
 		if(cartesCompatibles.size()==1) {
 			// le joueur n'a plus qu'un 10 il doit le jouer
-			System.out.println("Mince, je dois jouer mon 10...Il va me forcer à piocher");	
+			System.out.println("Mince, je dois jouer mon ma carte 'Rejouer'... Elle va me forcer à piocher");	
 			return true;
 		}
 		
