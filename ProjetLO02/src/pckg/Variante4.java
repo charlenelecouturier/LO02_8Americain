@@ -16,7 +16,7 @@ public class Variante4 extends Variante {
 
 			nbPaquet += (nbJoueursVirtuels + 1) / 5;
 		}
-		this.nbCartes = 52 * nbPaquet;
+		this.nbCartes = 53 * nbPaquet;
 		this.jeuDeCartes = this.creerJeuDeCartes(nbPaquet);
 
 	}
@@ -106,6 +106,7 @@ public class Variante4 extends Variante {
 			for (i = 0; i < Carte.symboles.length; i++) {
 
 				for (j = 0; j < valeurs.length; j++) {
+					
 					Carte carte = new Carte(valeurs[j], Carte.symboles[i]);
 					if (carte.getValeur().equals("8")) {
 						carte.setEffet("ChangerFamille");
