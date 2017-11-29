@@ -294,9 +294,6 @@ public class Partie {
 	          }
 	          this.joueur.set(j,joueurJ);
 	     }
-			  	
-		System.out.println(this.joueur.size());//TEST
-		System.out.println(this.classementJoueurs.size());//TEST
 		
 		//initialisation de la nouvelle partie
 		// on retire les eventuelles cartes restantes des joueurs
