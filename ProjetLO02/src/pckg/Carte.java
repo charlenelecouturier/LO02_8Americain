@@ -111,12 +111,26 @@ public class Carte {
 	}
 
 	public String toString() {
-		if (this.symbole.equals("JOKER")) {
-			return this.symbole;
-		} 
+		if(this.effet.equals("Aucun")) {
+			if (this.symbole.equals("JOKER")) {
+				return this.symbole;
+			} 
+			else {
+	
+				return valeur + " de " + symbole;
+			}
+		}
+		
 		else {
-
-			return valeur + " de " + symbole;
+			if (this.symbole.equals("JOKER")) {
+				return this.symbole + " -- effet : "+ this.effet;
+			} 
+			else {
+	
+				return valeur + " de " + symbole+ " -- effet : "+ this.effet;
+			}
+			
+			
 		}
 
 	}

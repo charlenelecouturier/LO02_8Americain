@@ -192,7 +192,7 @@ public class Partie {
 			System.out.println((i+1) +"e : " + this.classementJoueurs.get(i).getName());
 		}
 		System.out.println("\nLe premier gagne 50 points, le deuxième 20 points, et le troisième 10 points");
-		// on donne le classemnet général de la partie
+		// on donne le classement général de la partie
 		System.out.println("\nClassement général : ");
 		 for(i= 1;i<=this.classementJoueursPartie.size();i++) {
 			 	System.out.println(i + "e : " + this.classementJoueursPartie.get(i-1).getName() + " -- SCORE : " +this.classementJoueursPartie.get(i-1).getScore());
