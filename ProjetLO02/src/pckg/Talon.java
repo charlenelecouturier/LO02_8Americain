@@ -6,11 +6,12 @@ import java.util.ArrayList;
  * @author Robin et Charlene
  *
  */
-public class Talon extends PorteurCarte {
+public class Talon {
 
 	/**
 	 * @param args
 	 */
+	protected ArrayList<Carte> cartes= new ArrayList<Carte>(); // on fait une arraylist pour les cartes 
 	private Carte carteDessus;
 
 	
@@ -76,5 +77,20 @@ public class Talon extends PorteurCarte {
 	public void setCarteDessus(Carte carteDessus) {
 		this.carteDessus = carteDessus;
 	}
+
+	
+	/**
+	 * @return the cartes
+	 */
+	public ArrayList<Carte> getCartes() {
+		return cartes;
+	}
+	/**
+	 * @param cartes the cartes to set
+	 */
+	public void setCartes(ArrayList<Carte> cartes) {
+		this.cartes = cartes;
+	}
+
 
 }

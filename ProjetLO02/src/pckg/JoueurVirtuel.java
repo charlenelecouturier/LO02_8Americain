@@ -67,7 +67,6 @@ public class JoueurVirtuel extends Joueur {
 			}
 		}
 		Partie.getPartie().setTourJoueur(tour);
-
 	}
 
 	@Override
@@ -112,7 +111,6 @@ public class JoueurVirtuel extends Joueur {
 				System.out.println(this.getName() + " ne peut pas jouer !");
 				this.piocher(1);
 			}
-
 		}
 	}
 
@@ -139,10 +137,7 @@ public class JoueurVirtuel extends Joueur {
 				parcourirCarteJouable.remove();
 			}
 		}
-		//
-
 		numeroCarte = this.strategie.choixCarte(cartesJouables);
-
 		/*
 		 * //1 . Le Joueur virtuel regarde quel est le prochain joueur à jouer son tour
 		 * int tour= Partie.getPartie().getTourJoueur(); //on regarde le sens de la
@@ -158,9 +153,11 @@ public class JoueurVirtuel extends Joueur {
 		 * Partie.getPartie().getJoueur().get(tour-1).getCartes().size();
 		 * 
 		 * //3. On compare le nombre de cartes du prochain joueur avec le sien if
-		 * (nbCartesProchain <= this.getCartes().size()) { //3.1 Si le prochain joueur a
+		 * (nbCartesProchain <= this.getCartes().size()) { 
+		 * //3.1 Si le prochain joueur a
 		 * plus de cartes que le Joueur virtuel, on joue la strat défensive Strategie
-		 * stratDef = new StratDefensive(); numeroCarte = stratDef.strategie(); } //3.2
+		 * stratDef = new StratDefensive(); numeroCarte = stratDef.strategie(); } 
+		 * //3.2
 		 * Si le prochain joueur a moins de cartes que le Joueur virtuel, on joue la
 		 * strat offensive else { Strategie stratOff = new StratOffensive(); numeroCarte
 		 * = stratOff.strategie(); }
@@ -219,5 +216,4 @@ public class JoueurVirtuel extends Joueur {
 	public void changerFamille() {
 		this.strategie.changerFamille();
 	}
-
 }

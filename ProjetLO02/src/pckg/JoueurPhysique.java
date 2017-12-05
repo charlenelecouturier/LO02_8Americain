@@ -53,7 +53,6 @@ public class JoueurPhysique extends Joueur {
 
 	public void poserCarte() {
 
-
 		// 1. on vérifie si le joueur peut jouer avec les cartes qu'il a dans la main
 		if (Partie.getPartie().getVariantePartie().estPossibleDeJouer(this.cartes)) {
 			// 2.1. Le joueur choisit la carte qu'il desire poser sur le talon.
@@ -86,7 +85,7 @@ public class JoueurPhysique extends Joueur {
 			}
 
 			// 6.2 On regarde si c'est une carte Speciale
-			
+
 			String effet = cartePose.getEffet();
 			if (!effet.equals("Aucun")) {
 				cartePose.appliquerEffet();
@@ -195,10 +194,8 @@ public class JoueurPhysique extends Joueur {
 		int rep = scan.nextInt();
 		switch (rep) {
 		// On change le symbole de la carte du dessus du talon, mais on ne change pas
-		// vraiment le paquet
-		// de cartes correspondant au talon : on change seulement l'attribut
-		// carteDessus,
-		// pas l'ArrayList "cartes" du talon
+		// vraiment le paquet de cartes correspondant au talon : on change seulement
+		// l'attribut carteDessus, pas l'ArrayList "cartes" du talon
 		case 1:
 			Partie.getPartie().getTalon().getCarteDessus().setSymbole("TREFLE");
 			System.out.println("Vous avez choisi comme symbole : TREFLE ! ");
@@ -206,24 +203,18 @@ public class JoueurPhysique extends Joueur {
 		case 2:
 			Partie.getPartie().getTalon().getCarteDessus().setSymbole("PIQUE");
 			System.out.println("Vous avez choisi comme symbole : PIQUE! ");
-
 			break;
 		case 3:
 			Partie.getPartie().getTalon().getCarteDessus().setSymbole("COEUR");
 			System.out.println("Vous avez choisi comme symbole : COEUR ! ");
-
 			break;
 		case 4:
 			Partie.getPartie().getTalon().getCarteDessus().setSymbole("CARREAU");
 			System.out.println("Vous avez choisi comme symbole : CARREAU ! ");
-
 			break;
 		default:
 			System.out.println("Mauvaise saisie, recommencez :");
 			this.changerFamille();
-
 		}
-
 	}
-
 }

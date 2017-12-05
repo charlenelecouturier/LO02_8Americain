@@ -1,5 +1,6 @@
 package pckg;
 
+import java.util.ArrayList;
 
 /**
  * Joueur est la classe qui represente les participants au jeu, qu'ils soient physiques ou virtuels.
@@ -8,8 +9,9 @@ package pckg;
  * @see JoueurVirtuel 
  * @see JoueurPhysique
  */
-public abstract class Joueur extends PorteurCarte {
+public abstract class Joueur {
 	//**********attributs**************
+	protected ArrayList<Carte> cartes= new ArrayList<Carte>(); // on fait une arraylist pour les cartes 
 	protected String name ;
 	private int classement, numero ;  // numéro est compris entre 1 et le nombre de joueurs en cours dans la partie
 	private static int donneurNum = 1;
@@ -31,7 +33,21 @@ public abstract class Joueur extends PorteurCarte {
 		this.score=0; // initialement le joueur a 0 points
 	}
 	//********** Getter et Setters **********
+
 	
+	/**
+	 * @return the cartes
+	 */
+	public ArrayList<Carte> getCartes() {
+		return cartes;
+	}
+	/**
+	 * @param cartes the cartes to set
+	 */
+	public void setCartes(ArrayList<Carte> cartes) {
+		this.cartes = cartes;
+	}
+
 	/**
 	 * Accesseur du classement.
 	 * @return la place à laquelle un joueur a fini
