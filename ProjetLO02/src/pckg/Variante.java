@@ -1,6 +1,6 @@
 package pckg;
+
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 /**
  * 
@@ -17,6 +17,7 @@ public abstract class Variante {
 	 */
 	protected int nbCartes;
 	protected ArrayList<Carte> jeuDeCartes;
+
 	public abstract ArrayList<Carte> creerJeuDeCartes(int nbPaquet);
 
 	/**
@@ -26,48 +27,43 @@ public abstract class Variante {
 		this.nbCartes = nbCartes;
 	}
 
-
-
-	
 	public boolean estPossibleDeJouer(ArrayList<Carte> carte) {
 		int i;
-		for (i=0;i<carte.size();i++)
-		{
-			if (carte.get(i).getSymbole().equals(Partie.getPartie().getTalon().getCarteDessus().getSymbole()) || carte.get(i).getValeur().equals(Partie.getPartie().getTalon().getCarteDessus().getValeur()) ||carte.get(i).getValeur().equals("8")) 
-			//Si une des cartes a le meme symbole que le talon ou la meme valeur , ou si cette carte est un 8
+		for (i = 0; i < carte.size(); i++) {
+			if (carte.get(i).getSymbole().equals(Partie.getPartie().getTalon().getCarteDessus().getSymbole())
+					|| carte.get(i).getValeur().equals(Partie.getPartie().getTalon().getCarteDessus().getValeur())
+					|| carte.get(i).getValeur().equals("8"))
+			// Si une des cartes a le meme symbole que le talon ou la meme valeur , ou si
+			// cette carte est un 8
 			{
 				return true; // le joueur peut jouer
 			}
-			}
+		}
 		return false; // le joueur ne peut pas jouer
 	}
-	
+
 	public boolean estCompatible(Carte carte) {
 		Carte carteDessusTalon;
 		Talon talon = Partie.getPartie().getTalon();
 		carteDessusTalon = talon.getCarteDessus();
-		String carteSymbole= carte.getSymbole();
-		String carteDessusTalonSymbole=carteDessusTalon.getSymbole();
-		String carteValeur= carte.getValeur();
-		String carteDessusTalonValeur=carteDessusTalon.getValeur();
-		
-		if(carteSymbole.equals(carteDessusTalonSymbole) ||carteValeur.equals(carteDessusTalonValeur)|| carteValeur.equals("8") ) 
-		{
+		String carteSymbole = carte.getSymbole();
+		String carteDessusTalonSymbole = carteDessusTalon.getSymbole();
+		String carteValeur = carte.getValeur();
+		String carteDessusTalonValeur = carteDessusTalon.getValeur();
+
+		if (carteSymbole.equals(carteDessusTalonSymbole) || carteValeur.equals(carteDessusTalonValeur)
+				|| carteValeur.equals("8")) {
 			return true; // la carte choisie par le joueur est compatible
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
-	
 
-	
 	public ArrayList<Carte> getCartes() {
 		return jeuDeCartes;
 	}
-	
+
 	public int getNbCartes() {
 		return nbCartes;
 	}
-	
 }

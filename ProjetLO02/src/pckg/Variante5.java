@@ -1,7 +1,6 @@
 package pckg;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Variante5 extends Variante {
 
@@ -105,7 +104,6 @@ public class Variante5 extends Variante {
 					Carte carte = new Carte(valeurs[j], Carte.symboles[i]);
 					if (carte.getValeur().equals("8")) {
 						carte.setEffet("ChangerFamille");
-
 					} else if (carte.getValeur().equals("10")) {
 						carte.setEffet("ObligeRejouer");
 					} else if (carte.getValeur().equals("1")) {
@@ -120,5 +118,4 @@ public class Variante5 extends Variante {
 		return jeuDeCartes;
 
 	}
-
 }

@@ -2,9 +2,7 @@ package pckg;
 
 
 public class ObligeRejouer implements Effet{
-	private boolean joueurAGagne;
-	
-	
+
 	public void effet(){
 		
 		//On selectionne le joueur à qui c'est le tour (celui qui vient de poser une carte)

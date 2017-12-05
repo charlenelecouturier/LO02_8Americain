@@ -160,17 +160,20 @@ public class Partie {
 	}
 
 	public void compterPointsNegatif() {
+
+		int i;
 		// mode de comptage négatif
-		int k, i, h;
 		ListIterator<Joueur> parcourirJoueurs = classementJoueurs.listIterator(); // on parcourt les joueurs
 		Joueur joueurSelect;
 		do {
-			joueurSelect = parcourirJoueurs.next(); //On selectionne un joueur
+			joueurSelect = parcourirJoueurs.next(); // On selectionne un joueur
 			joueurSelect.setScoreManche(0);
 			int points = 0;// on initialise les points qu'il va prendre à 0
-			// ON PARCOURT LES CARTES RESTANTES DU JOUEUR SELECTIONNE
-			for (h = 0; h < joueurSelect.getCartes().size(); h++) {
-				Carte c = joueurSelect.getCartes().get(h);
+			// on parcourt les cartes restantes du joueur selectionné
+			ListIterator<Carte> parcourirCartesJoueur = joueurSelect.getCartes().listIterator();
+			Carte c;
+			while (parcourirCartesJoueur.hasNext()) {
+				c = parcourirCartesJoueur.next();
 
 				// ROI OU DAME
 				if (c.getValeur().equals("DAME") || c.getValeur().equals("ROI")) {
@@ -323,6 +326,7 @@ public class Partie {
 		}
 	}
 
+	//*******Setter et getter*******
 	
 	/**
 	 * @return the pioche
@@ -350,14 +354,6 @@ public class Partie {
 	 */
 	public Variante getVariantePartie() {
 		return variantePartie;
-	}
-
-	/**
-	 * @param variantePartie
-	 *            the variantePartie to set
-	 */
-	public void setVariantePartie(Variante variantePartie) {
-		this.variantePartie = variantePartie;
 	}
 
 	public int getNbJoueursEnCours() {
@@ -425,14 +421,12 @@ public class Partie {
 
 			while (!p.terminerManche()) // tant que la manche n'est pas terminée, on joue des tours
 			{
-
 				// Temps de délais entre chaque tour
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-
 				// P.tourJoueur correspond au numéro du joueur qui doit jouer
 				p.joueur.get(p.tourJoueur - 1).jouerTour();
 				System.out.println("\n");
@@ -442,7 +436,6 @@ public class Partie {
 			} else {
 				p.compterPointsNegatif();
 			}
-
 			// Si la partie n'est pas terminée, on debute une nouvelle manche
 			if (!p.terminerPartie()) {
 				System.out.println("\nNOUVELLE MANCHE\n");

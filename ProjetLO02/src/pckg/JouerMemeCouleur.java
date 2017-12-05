@@ -7,14 +7,11 @@ public class JouerMemeCouleur implements Effet {
 	public void effet() {
 
 		Joueur joueurActuel = Partie.getPartie().getJoueur().get(Partie.getPartie().getTourJoueur() - 1);
-		System.out.println("\n"+ joueurActuel.getName() +" peut se defausser de toutes ses cartes du même symbole\n");
-
-		Carte cartePose=new Carte(" "," ");
+		System.out.println("\n" + joueurActuel.getName() + " peut se defausser de toutes ses cartes du même symbole\n");
+		Carte cartePose = new Carte(" ", " ");
 		joueurActuel.setEffetVariante("JouerMêmeCouleur");
 		ArrayList<Carte> mainJoueurActuel = joueurActuel.getCartes();
-		
-		// lejoueur actuel rejoue jusqu'a ce qu'il se soit debarrassé de toutes ses
-		// cartes de la meme couleur que l'AS
+		// lejoueur actuel rejoue jusqu'a ce qu'il se soit debarrassé de toutes ses cartes de la meme couleur que l'AS
 		// La derniere carte défaussée peut avoir un effet
 		while (Partie.getPartie().getVariantePartie().estPossibleDeJouer(mainJoueurActuel)) {
 
@@ -24,8 +21,6 @@ public class JouerMemeCouleur implements Effet {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
-			
 			if (joueurActuel instanceof JoueurPhysique) {
 
 				System.out.println("Choisissez la carte que vous souhaitez jouer :");
@@ -41,8 +36,7 @@ public class JouerMemeCouleur implements Effet {
 				System.out.println("Vous posez " + cartePose);
 				// 4.1 Le joueur pose la carte choisie sur le talon.
 				Partie.getPartie().getTalon().getCartes().add(cartePose);
-				// on change la carte du dessus du Talon qui est un simple attribut de type
-				// Carte
+				// on change la carte du dessus du Talon qui est un simple attribut de type Carte
 				// Partie.getPartie().getTalon().setCarteDessus(cartePose);
 				Partie.getPartie().getTalon().getCarteDessus().setSymbole(cartePose.getSymbole());
 				Partie.getPartie().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
@@ -53,10 +47,7 @@ public class JouerMemeCouleur implements Effet {
 				if (joueurActuel.getCartes().size() == 1) {
 					joueurActuel.DireCarte();
 				}
-
-			}
-
-			else {
+			} else {
 				// 2.1. Le joueur choisit la carte qu'il desire poser sur le talon.
 				int numeroCarte = joueurActuel.choisirCarte();
 				cartePose = joueurActuel.cartes.get(numeroCarte);
@@ -76,17 +67,12 @@ public class JouerMemeCouleur implements Effet {
 						joueurActuel.piocher(1);
 					}
 				}
-
 			}
-
-		
 		}
-		// 6.2 On regarde si la derniere carte posée est une carte Speciale, on ne prend
-		// pas en compte les effets des autres cartes
+		// 6.2 On regarde si la derniere carte posée est une carte Speciale, on ne prend pas en compte les effets des autres cartes
 		String effet = cartePose.getEffet();
 		if (!effet.equals("Aucun")) {
 			cartePose.appliquerEffet();
 		}
 	}
 }
-	

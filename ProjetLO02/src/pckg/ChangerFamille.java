@@ -1,6 +1,5 @@
 package pckg;
 
-
 public class ChangerFamille implements Effet{
 	public void effet() {
 		//On selectionne le joueur à qui c'est le tour (celui qui vient de poser une carte)

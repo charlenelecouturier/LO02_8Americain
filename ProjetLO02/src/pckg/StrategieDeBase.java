@@ -24,8 +24,8 @@ public class StrategieDeBase implements Strategie
 			Variante5.nombreAs=0;
 		}
 		return i;
-		
 	}
+	
 	public void changerFamille() {
 		
 	    Random r= new Random();
@@ -33,6 +33,5 @@ public class StrategieDeBase implements Strategie
 	    String random = Carte.symboles[i];
 	    Partie.getPartie().getTalon().getCarteDessus().setSymbole(random);
 		System.out.println("Symbole choisi: "+random);
-		
-	}
+		}
 }

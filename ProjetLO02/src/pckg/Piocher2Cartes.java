@@ -1,49 +1,30 @@
 package pckg;
 
-import java.util.ListIterator;
-import java.util.LinkedList;
-
 public class Piocher2Cartes implements Effet {
-	
+
 	public void effet() {
 		System.out.println("Le joueur suivant pioche 2 cartes");
-		
-		
-		
-
-		
 		int tour;
-		tour= Partie.getPartie().getTourJoueur();
+		tour = Partie.getPartie().getTourJoueur();
 		// On regarde le sens de la partie
-		if (Partie.getPartie().getSens()==1) {
-			
-				tour++;
-			
+		if (Partie.getPartie().getSens() == 1) {
+			tour++;
 			// Si on depasse le numéro du dernier joueur, on revient au joueur 1 ( joueur physique)
-			if( tour > Partie.getPartie().getNbJoueursEnCours()) {
-				tour=1;		
+			if (tour > Partie.getPartie().getNbJoueursEnCours()) {
+				tour = 1;
 			}
-		}
-		else {// sens =-1
-			// si on trouve un numéro négatif, on revient au tour du dernier joueur ( joueur ayant le dernier numéro)
+		} else {// sens =-1
+				// si on trouve un numéro négatif, on revient au tour du dernier joueur ( joueur
+				// ayant le dernier numéro)
 			tour--;
-			if (tour<=0) {
-				tour=Partie.getPartie().getNbJoueursEnCours();
+			if (tour <= 0) {
+				tour = Partie.getPartie().getNbJoueursEnCours();
 			}
-			
-			
 		}
-		
-		Joueur joueurSuivant = Partie.getPartie().getJoueur().get(tour-1);
-		
+		Joueur joueurSuivant = Partie.getPartie().getJoueur().get(tour - 1);
 		joueurSuivant.piocher(2);
 		// le joueur suivant ne peut pas jouer
-		Effet bloquerSuivant= new BloquerSuivant();
+		Effet bloquerSuivant = new BloquerSuivant();
 		bloquerSuivant.effet();
-
-		}
-		
-		
 	}
-
-
+}

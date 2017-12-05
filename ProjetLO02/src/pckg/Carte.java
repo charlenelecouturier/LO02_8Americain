@@ -68,71 +68,50 @@ public class Carte {
 		} else if (this.effet.equals("ChangerFamille")) {
 			Effet changerFamille = new ChangerFamille();
 			changerFamille.effet();
-
-		}
-
-		else if (this.effet.equals("ChangerSens")) {
+		} else if (this.effet.equals("ChangerSens")) {
 			Effet changerSens = new ChangerSens();
 			changerSens.effet();
-
 		} else if (this.effet.equals("Pioche2OuAsOu8")) {
 			Effet pioche2cartesOuAsOu8 = new Pioche2OuASOu8();
 			pioche2cartesOuAsOu8.effet();
-
 		} else if (this.effet.equals("BloquerSuivant")) {
 			Effet bloqueSuivant = new BloquerSuivant();
 			bloqueSuivant.effet();
-
 		} else if (this.effet.equals("Piocher2")) {
 			Effet pioche2 = new Piocher2Cartes();
 			pioche2.effet();
-
 		} else if (this.effet.equals("Piocher4")) {
 			Effet pioche4 = new Piocher4Cartes();
 			pioche4.effet();
-
 		} else if (this.effet.equals("JouerToutesCartesMemeSymbole")) {
 			Effet JouerToutesCartesMemeSymbole = new JouerMemeCouleur();
 			JouerToutesCartesMemeSymbole.effet();
-
 		} else if (this.effet.equals("ChangerFamilleEtPioche5")) {
 			Effet changerFamilleEtPioche5 = new ChangerFamilleEtPioche5();
 			changerFamilleEtPioche5.effet();
-
 		}
-
 	}
 
 	public Carte(String valeur, String symbole) {
 		this.symbole = symbole;
 		this.valeur = valeur;
 		this.effet = "Aucun";
-
 	}
 
 	public String toString() {
-		if(this.effet.equals("Aucun")) {
+		if (this.effet.equals("Aucun")) {
 			if (this.symbole.equals("JOKER")) {
 				return this.symbole;
-			} 
-			else {
-	
+			} else {
+
 				return valeur + " de " + symbole;
 			}
-		}
-		
-		else {
+		} else {
 			if (this.symbole.equals("JOKER")) {
-				return this.symbole + " -- effet : "+ this.effet;
-			} 
-			else {
-	
-				return valeur + " de " + symbole+ " -- effet : "+ this.effet;
+				return this.symbole + " -- effet : " + this.effet;
+			} else {
+				return valeur + " de " + symbole + " -- effet : " + this.effet;
 			}
-			
-			
 		}
-
 	}
-
 }

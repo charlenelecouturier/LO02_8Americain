@@ -162,7 +162,6 @@ public class JoueurPhysique extends Joueur {
 			System.out.println("Vous dites 'CARTE'! ");
 
 		}
-
 	}
 
 	@Override

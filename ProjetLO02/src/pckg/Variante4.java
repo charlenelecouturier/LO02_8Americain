@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Variante4 extends Variante {
 
-	public static Carte couleur=new Carte(" "," "); // couleur de l'as qui permet de se defausser de toutes ses cartes de meme couleur
+	public static Carte couleur = new Carte(" ", " "); // couleur de l'as qui permet de se defausser de toutes ses
+														// cartes de meme couleur
 
 	public Variante4(int nbJoueursVirtuels) {
 
@@ -18,7 +19,6 @@ public class Variante4 extends Variante {
 		}
 		this.nbCartes = 53 * nbPaquet;
 		this.jeuDeCartes = this.creerJeuDeCartes(nbPaquet);
-
 	}
 
 	@Override
@@ -37,13 +37,11 @@ public class Variante4 extends Variante {
 					return true; // le joueur peut jouer
 				}
 			}
-		} 
-		else if (joueurActuel.EffetVariante.equals("Bloqué")) {
+		} else if (joueurActuel.EffetVariante.equals("Bloqué")) {
 
 			System.out.println(joueurActuel.getName() + " est bloqué !");
 
-		}
-		else if (joueurActuel.EffetVariante.equals("JouerMêmeCouleur")) {
+		} else if (joueurActuel.EffetVariante.equals("JouerMêmeCouleur")) {
 
 			for (i = 0; i < carte.size(); i++) {
 				if (carte.get(i).getSymbole().equals(Variante4.couleur.getSymbole()))
@@ -54,10 +52,8 @@ public class Variante4 extends Variante {
 				}
 			}
 
-			
 		}
 		return false; // le joueur ne peut pas jouer
-
 	}
 
 	@Override
@@ -83,9 +79,7 @@ public class Variante4 extends Variante {
 
 			if (carteSymbole.equals(Variante4.couleur.getSymbole())) {
 				return true; // la carte choisie par le joueur est compatible
-			}
-
-			else {
+			} else {
 				return false;
 			}
 		}
@@ -106,26 +100,22 @@ public class Variante4 extends Variante {
 			for (i = 0; i < Carte.symboles.length; i++) {
 
 				for (j = 0; j < valeurs.length; j++) {
-					
+
 					Carte carte = new Carte(valeurs[j], Carte.symboles[i]);
 					if (carte.getValeur().equals("8")) {
 						carte.setEffet("ChangerFamille");
 
-					} 
-					else if (carte.getValeur().equals("10")) {
+					} else if (carte.getValeur().equals("10")) {
 						carte.setEffet("ChangerSens");
-					}
-					else if (carte.getValeur().equals("VALET")) {
+					} else if (carte.getValeur().equals("VALET")) {
 						carte.setEffet("BloquerSuivant");
-					} 
-					else if (carte.getValeur().equals("2")) {
+					} else if (carte.getValeur().equals("2")) {
 						carte.setEffet("Piocher2");
 						if (carte.getValeur().equals("2") && carte.getSymbole().equals("PIQUE")) {
 							carte.setEffet("Piocher4");
 						}
 
-					} 
-					else if (carte.getValeur().equals("1")) {
+					} else if (carte.getValeur().equals("1")) {
 						carte.setEffet("JouerToutesCartesMemeSymbole");
 					}
 
@@ -136,8 +126,6 @@ public class Variante4 extends Variante {
 			Carte carte = new Carte("JOKER", "JOKER");
 			carte.setEffet("ChangerFamilleEtPioche5");
 			jeuDeCartes.add(carte);
-
-
 		}
 		return jeuDeCartes;
 	}
