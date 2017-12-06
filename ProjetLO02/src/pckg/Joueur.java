@@ -125,15 +125,15 @@ public abstract class Joueur {
 	}
 
 	
-
 	public void poserCarte() {
 		if (Partie.getPartie().getVariantePartie().estPossibleDeJouer(this.cartes)) {
-			//  Le joueur choisit la carte qu'il desire poser sur le talon.
+			// Le joueur choisit la carte qu'il desire poser sur le talon.
 			int numeroCarte = this.choisirCarte();
 			Carte cartePose = this.cartes.get(numeroCarte);
 			Partie.getPartie().getTalon().getCartes().add(cartePose);
-			System.out.println("Test : il y a " + Partie.getPartie().getTalon().getCartes().size() + " cartes dans le talon");
-			// on change la carte du dessus du Talon qui est un simple attribut de type Carte
+			System.out.println(
+					"Test : il y a " + Partie.getPartie().getTalon().getCartes().size() + " cartes dans le talon");
+			// on change la carte du dessus du Talon 
 			Partie.getPartie().getTalon().getCarteDessus().setSymbole(cartePose.getSymbole());
 			Partie.getPartie().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
 			System.out.println(this.getName() + " pose " + cartePose);
@@ -142,18 +142,15 @@ public abstract class Joueur {
 			// s'il n'a plus qu'une carte il est possible qu'un joueur dise contre carte
 			if (this.cartes.size() == 1) {
 				this.direCarte();
-				}
+			}
 
-			//On regarde si c'est une carte Speciale
+			// On regarde si c'est une carte Speciale
 			String effet = cartePose.getEffet();
 			if (!effet.equals("Aucun")) {
 				cartePose.appliquerEffet();
 			}
 
-		}
-
-		// 2.2. Le joueur ne peut jouer aucune carte, donc il pioche.
-		else {
+		} else {
 			if (this.EffetVariante.equals("Aucun")) {
 				System.out.println(this.getName() + " ne peut pas jouer !");
 				this.piocher(1);

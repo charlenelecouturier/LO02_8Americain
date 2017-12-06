@@ -83,7 +83,7 @@ public class JoueurVirtuel extends Joueur {
 				// si le joueur a la place 0 est le joueur qui n'a plus qu'une carte
 				if (this.equals(Partie.getPartie().getJoueur().get(0))) {
 					// On choisi un numero de joueur au hasard , sauf celui a la place 0 pour dire carte
-					int numJoueurDitContreCarte = 1 + r.nextInt(Partie.getPartie().getJoueur().size() - 2);
+					int numJoueurDitContreCarte =(int)(Math.random() * (Partie.getPartie().getJoueur().size() - 2)) + 1;
 					System.out.println(Partie.getPartie().getJoueur().get(numJoueurDitContreCarte).getName()
 							+ " dit CONTRE-CARTE");
 				}else {// Sinon c'est le joueur à l'emplacement 0 qui dit carte
