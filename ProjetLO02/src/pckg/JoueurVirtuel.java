@@ -44,7 +44,6 @@ public class JoueurVirtuel extends Joueur {
 			System.out.println(j + " : " + this.cartes.get(j - 1));
 		}
 		int numeroCarte;
-		// On créé une liste des cartes jouables par le joueur en fonction du talon
 		ArrayList<Carte> cartesJouables = new ArrayList<Carte>();
 		int i;
 		for (i = 0; i < this.cartes.size(); i++) {
