@@ -15,7 +15,7 @@ public abstract class Joueur {
 	// **********attributs**************
 	protected ArrayList<Carte> cartes = new ArrayList<Carte>(); // on fait une arraylist pour les cartes
 	protected String name;
-	private int classement, numero; // numéro est compris entre 1 et le nombre de joueurs en cours dans la partie
+	private int numero; // numéro est compris entre 1 et le nombre de joueurs en cours dans la partie
 	private static int donneurNum = 1;
 	private int score; // score du joueur
 	private int scoreManche;
@@ -52,15 +52,6 @@ public abstract class Joueur {
 	}
 
 	/**
-	 * Accesseur du classement.
-	 * 
-	 * @return la place à laquelle un joueur a fini
-	 */
-	public int getClassement() {
-		return this.classement;
-	}
-
-	/**
 	 * Accesseur du numéro
 	 * 
 	 * @return le numéro du joueur, utiliséepar la partie pour determiner les tours de jeu.
@@ -85,14 +76,6 @@ public abstract class Joueur {
 		this.name = name;
 	}
 
-	/**
-	 * Mutateur du classement, détermine la place à laquelle un joueur finit.
-	 * 
-	 * @param classe
-	 */
-	public void setClassement(int classe) {
-		this.classement = classe;
-	}
 
 	/**
 	 * @return the effetVariante
@@ -112,13 +95,73 @@ public abstract class Joueur {
 	 * Le corps meme de cette classe, jouerTour permet à un joueur physique ou
 	 * virtuel de choisir une carte dans son jeu et la poser sur le talon.
 	 */
-	public abstract void jouerTour();
-	public abstract void poserCarte();
+	public void jouerTour() {
+		System.out.println("effet : " + this.EffetVariante);
+		int tour;
+		boolean gagne = false;
+		this.poserCarte();
+		this.EffetVariante = "Aucun";
+		gagne = this.gagnePartie();	// on regarde si le fait d'avoir posé une carte permet au joueur de gagner la manche
+		// On cherche le tour du joueur suivant
+		tour = Partie.getPartie().getTourJoueur();
+		// On regarde le sens de la partie
+		if (Partie.getPartie().getSens() == 1) {
 
-	public void setNumero(int numero) {
-		this.numero = numero;
+			if (!gagne) {
+				tour++;
+			}
+
+			if (tour > Partie.getPartie().getNbJoueursEnCours()) {
+				tour = 1;
+			}
+		} else {
+			tour--;
+			if (tour <= 0) {
+				tour = Partie.getPartie().getNbJoueursEnCours();
+			}
+		}
+		Partie.getPartie().setTourJoueur(tour);
+
 	}
 
+	
+
+	public void poserCarte() {
+		if (Partie.getPartie().getVariantePartie().estPossibleDeJouer(this.cartes)) {
+			//  Le joueur choisit la carte qu'il desire poser sur le talon.
+			int numeroCarte = this.choisirCarte();
+			Carte cartePose = this.cartes.get(numeroCarte);
+			Partie.getPartie().getTalon().getCartes().add(cartePose);
+			System.out.println("Test : il y a " + Partie.getPartie().getTalon().getCartes().size() + " cartes dans le talon");
+			// on change la carte du dessus du Talon qui est un simple attribut de type Carte
+			Partie.getPartie().getTalon().getCarteDessus().setSymbole(cartePose.getSymbole());
+			Partie.getPartie().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
+			System.out.println(this.getName() + " pose " + cartePose);
+			// 5.1 Le joueur perd la carte qu'il a posï¿½e de sa main
+			cartes.remove(cartePose);
+			// s'il n'a plus qu'une carte il est possible qu'un joueur dise contre carte
+			if (this.cartes.size() == 1) {
+				this.direCarte();
+				}
+
+			//On regarde si c'est une carte Speciale
+			String effet = cartePose.getEffet();
+			if (!effet.equals("Aucun")) {
+				cartePose.appliquerEffet();
+			}
+
+		}
+
+		// 2.2. Le joueur ne peut jouer aucune carte, donc il pioche.
+		else {
+			if (this.EffetVariante.equals("Aucun")) {
+				System.out.println(this.getName() + " ne peut pas jouer !");
+				this.piocher(1);
+			}
+		}
+	}
+
+	public abstract void direCarte();
 	public abstract void changerFamille();
 
 	public void obligeDeRejouer() {
@@ -139,7 +182,6 @@ public abstract class Joueur {
 	}
 
 	public abstract int choisirCarte();
-	public abstract boolean DireContreCarte();
 
 	public void piocher(int nombrePioche) {
 		System.out.println("\n" + this.name + " pioche " + nombrePioche + " carte(s) !");
