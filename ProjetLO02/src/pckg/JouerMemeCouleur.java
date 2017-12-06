@@ -45,7 +45,7 @@ public class JouerMemeCouleur implements Effet {
 
 				// 6.1 si il n'a plus qu'une carte, le joueur a la possibilité de dire Carte
 				if (joueurActuel.getCartes().size() == 1) {
-					joueurActuel.DireCarte();
+					((JoueurPhysique)joueurActuel).DireCarte();
 				}
 			} else {
 				// 2.1. Le joueur choisit la carte qu'il desire poser sur le talon.

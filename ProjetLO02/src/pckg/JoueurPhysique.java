@@ -146,7 +146,6 @@ public class JoueurPhysique extends Joueur {
 		return numero - 1;
 	}
 
-	@Override
 	public void DireCarte() {
 		// TODO Auto-generated method stub
 

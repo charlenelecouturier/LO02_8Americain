@@ -32,7 +32,6 @@ public class JoueurVirtuel extends Joueur {
 		} else {
 			this.strategie = new StratAvancee(); // par defaut si l'utilisateur se trompe
 		}
-
 	}
 
 	@Override
@@ -103,9 +102,6 @@ public class JoueurVirtuel extends Joueur {
 		}
 
 		// 2.2. Le joueur ne peut jouer aucune carte, donc il pioche.
-		// ( a condition que la variante n'ai pas entrainé un effet comme 3piocher 2
-		// cartes")
-		// Dans ce cas, le fait de piocher 2 cartes est géré par la variante
 		else {
 			if (this.EffetVariante.equals("Aucun")) {
 				System.out.println(this.getName() + " ne peut pas jouer !");
@@ -122,7 +118,7 @@ public class JoueurVirtuel extends Joueur {
 			System.out.println(j + " : " + this.cartes.get(j - 1));
 		}
 		int numeroCarte;
-		// On crÃ©Ã© une liste des cartes jouables par le joueur en fonction du talon
+		// On crée une liste des cartes jouables par le joueur en fonction du talon
 		ArrayList<Carte> cartesJouables = new ArrayList<Carte>();
 		int i;
 		for (i = 0; i < this.cartes.size(); i++) {
@@ -131,45 +127,15 @@ public class JoueurVirtuel extends Joueur {
 		// cartesJouables = this.getCartes();
 		ListIterator<Carte> parcourirCarteJouable = cartesJouables.listIterator();
 		while (parcourirCarteJouable.hasNext()) {
-			// on vÃ©rifie Ã  chaque itÃ©ration que la carte est compatible
+			// on vérifie à chaque iteration que la carte est compatible
 			if (!Partie.getPartie().getVariantePartie().estCompatible(parcourirCarteJouable.next())) {
 				// on retire les cartes pas compatible de la liste.
 				parcourirCarteJouable.remove();
 			}
 		}
 		numeroCarte = this.strategie.choixCarte(cartesJouables);
-		/*
-		 * //1 . Le Joueur virtuel regarde quel est le prochain joueur Ã  jouer son tour
-		 * int tour= Partie.getPartie().getTourJoueur(); //on regarde le sens de la
-		 * partie if (Partie.getPartie().getSens()==1) { // Si on depasse le numï¿½ro du
-		 * dernier joueur, on revient au joueur 1 ( joueur physique) if( tour >
-		 * Partie.getPartie().getNbJoueursEnCours()) { tour=1; } }
-		 * 
-		 * else {// sens =-1 // si on trouve un numï¿½ro nï¿½gatif, on revient au tour
-		 * du dernier joueur ( joueur ayant le dernier numï¿½ro) tour--; if (tour<0) {
-		 * tour=Partie.getPartie().getNbJoueursEnCours(); } }
-		 * 
-		 * //2. on regarde le nombre de cartes du prochain joueur int nbCartesProchain =
-		 * Partie.getPartie().getJoueur().get(tour-1).getCartes().size();
-		 * 
-		 * //3. On compare le nombre de cartes du prochain joueur avec le sien if
-		 * (nbCartesProchain <= this.getCartes().size()) { 
-		 * //3.1 Si le prochain joueur a
-		 * plus de cartes que le Joueur virtuel, on joue la strat dÃ©fensive Strategie
-		 * stratDef = new StratDefensive(); numeroCarte = stratDef.strategie(); } 
-		 * //3.2
-		 * Si le prochain joueur a moins de cartes que le Joueur virtuel, on joue la
-		 * strat offensive else { Strategie stratOff = new StratOffensive(); numeroCarte
-		 * = stratOff.strategie(); }
-		 */
 
 		return numeroCarte;
-	}
-
-	@Override
-	public void DireCarte() {
-		// TODO Auto-generated method stub
-
 	}
 
 	/**
@@ -191,14 +157,13 @@ public class JoueurVirtuel extends Joueur {
 			// si le joueur a la place 0 est le joueur qui n'a plus qu'une carte
 			if (Partie.getPartie().getJoueur().get(Partie.getPartie().getTourJoueur() - 1)
 					.equals(Partie.getPartie().getJoueur().get(0))) {
-				// On choisi un numï¿½ro de joueur au hasard , sauf celui a la place 0 pour dire
-				// carte
+				// On choisi un numéro de joueur au hasard , sauf celui a la place 0 pour dire carte
 				int numJoueurDitContreCarte = 1 + r.nextInt(Partie.getPartie().getJoueur().size() - 2);
 				System.out.println(
 						Partie.getPartie().getJoueur().get(numJoueurDitContreCarte).getName() + " dit CONTRE-CARTE");
 				return true;
 			}
-			// Sinon c'est le joueur ï¿½ l'emplacement 0 qui dit carte
+			// Sinon c'est le joueur à l'emplacement 0 qui dit carte
 			else {
 				System.out.println(this.name + " dit CONTRE-CARTE");
 				return true;

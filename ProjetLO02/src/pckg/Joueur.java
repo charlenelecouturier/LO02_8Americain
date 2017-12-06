@@ -139,7 +139,6 @@ public abstract class Joueur {
 	}
 
 	public abstract int choisirCarte();
-	public abstract void DireCarte();
 	public abstract boolean DireContreCarte();
 
 	public void piocher(int nombrePioche) {

@@ -14,7 +14,7 @@ public class Partie {
 	private int tourJoueur;
 	private int sens;
 	private Talon talon;
-	private LinkedList<Joueur> joueur;// Collection plus adaptée qu'un tableau pour gérer les joueurs
+	private LinkedList<Joueur> joueur;
 	private LinkedList<Joueur> classementJoueurs;
 	private LinkedList<Joueur> classementJoueursPartie;
 	private Variante variantePartie;
@@ -25,7 +25,7 @@ public class Partie {
 
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Saisissez le nombre de joueurs virtuels :"); // le joueur physique choisit le nombre de joueurs virtuels
+		System.out.println("Saisissez le nombre de joueurs virtuels :"); 
 		this.nbJoueursVirtuels = sc.nextInt();
 		this.classementJoueurs = new LinkedList<Joueur>();
 		this.classementJoueursPartie = new LinkedList<Joueur>();
@@ -43,7 +43,6 @@ public class Partie {
 		int nbJoueursEnCours = this.nbJoueursVirtuels + 1;
 		this.nbJoueursEnCours = nbJoueursEnCours;
 		this.etat = "EN COURS";
-		// tourJoueur correspond eu numéro du joueur et est choisit au hasard
 		Random r = new Random();
 		int tourJoueur = 1 + r.nextInt(nbJoueursEnCours - 1); // le joueur qui debute la partie est choisi aleatoirement
 		this.tourJoueur = tourJoueur;
@@ -87,8 +86,7 @@ public class Partie {
 	}
 
 	/**
-	 * Singleton *
-	 * 
+	 * Singleton 
 	 * @return Partie instance unique de la classe Partie
 	 */
 	public static Partie getPartie() {
@@ -102,26 +100,20 @@ public class Partie {
 	public boolean terminerManche() {
 
 		boolean terminer = false;
-		// s'il y a 3 gagnant on arrette la manche ( comptage positif)
 		if (this.modeComptage.equals("POSITIF")) {
 			// s'il y a 3 joueurs qui ont gagné, on s'il ne reste plus qu'un joueur
 			if (this.classementJoueurs.size() == 3 || this.nbJoueursEnCours == 1) {
 				terminer = true;
 				while (!this.joueur.isEmpty()) {
-
-					// on met tous les joueurs restant dans le classement
-					this.classementJoueurs.add(this.joueur.poll());
+					this.classementJoueurs.add(this.joueur.poll());// on met tous les joueurs restant dans le classement
 				}
 				System.out.println("Manche terminée !");
 			}
 		} else { // mode de comptage negatif
-			// si un joueur a gagne, on arrete la manche
 			if (this.classementJoueurs.size() == 1) {
 				terminer = true;
 				while (!this.joueur.isEmpty()) {
-					// on met tous les joueurs restant dans le classement
 					this.classementJoueurs.add(this.joueur.poll());
-					// this.joueur.remove(0);
 				}
 				System.out.println("Manche terminée !");
 			}
@@ -138,14 +130,6 @@ public class Partie {
 		if (this.classementJoueurs.size() > 2) { // s'il y a plus de 2 joueurs
 			this.classementJoueurs.get(2).setScore(this.classementJoueurs.get(2).getScore() + 10);
 		}
-
-		/*
-		 * on ordonne la collection classementJoueurPartie : classement général de la
-		 * partie tri des joueurs par insertion on ajoute le joueur dans l'ordre de
-		 * leurs scores décroissants (le meilleur est celui qui a le PLUS de points)
-		 * this.triInsertionScore(this.classementJoueursPartie,"décroissant"); On donne
-		 * le classsement de la manche
-		 */
 		System.out.println("Classement de la manche :");
 		for (i = 0; i < this.classementJoueurs.size(); i++) {
 			System.out.println((i + 1) + "e : " + this.classementJoueurs.get(i).getName());
@@ -175,22 +159,15 @@ public class Partie {
 			while (parcourirCartesJoueur.hasNext()) {
 				c = parcourirCartesJoueur.next();
 
-				// ROI OU DAME
 				if (c.getValeur().equals("DAME") || c.getValeur().equals("ROI")) {
 					points += 10;
-				}
-				// CARTE A EFFET FORT
-				else if (c.getValeur().equals("1") || c.getValeur().equals("8") || c.getValeur().equals("JOKER")) {
+				} else if (c.getValeur().equals("1") || c.getValeur().equals("8") || c.getValeur().equals("JOKER")) {
 					points += 50;
-				}
-				// CARTE EFFET MOYEN
-				else if (c.getValeur().equals("10") || c.getValeur().equals("7") || c.getValeur().equals("2")
+				} else if (c.getValeur().equals("10") || c.getValeur().equals("7") || c.getValeur().equals("2")
 						|| c.getValeur().equals("VALET")) {
 					points += 20;
 
-				}
-				// AUTRE CARTE : ON AJOUTE LA VALEUR DE LA CARTE
-				else {
+				} else {
 					points += Integer.parseInt(c.getValeur());
 				}
 			}
@@ -201,8 +178,7 @@ public class Partie {
 			System.out.println(joueurSelect.getName() + " prend " + points + " points");
 
 		} while (parcourirJoueurs.hasNext());
-		// on ordonne la collection classementJoueurs : classement de la manche
-		// on ajoute le joueur dans l'ordre de leurs scores croissants
+		
 		// (le meilleur est celui qui a le MOINS de points)
 		this.triInsertionCroisScoreManche(classementJoueurs);
 
@@ -212,9 +188,7 @@ public class Partie {
 			System.out.println(i + "e : " + this.classementJoueurs.get(i - 1).getName() + " -- SCORE : "
 					+ this.classementJoueurs.get(i - 1).getScoreManche());
 		}
-		// on ordonne la collection classementJoueurPartie : classement général de la
-		// partie
-		// on ajoute le joueur dans l'ordre de leurs scores croissants
+
 		// (le meilleur est celui qui a le MOINS de points)
 		this.triInsertionScore(this.classementJoueursPartie, "croissant");
 
@@ -227,17 +201,13 @@ public class Partie {
 	}
 
 	public void changerManche() {
-		// posibilité de changer la variante
-		this.variantePartie = choisirVariante();
-		// On remet les joueurs dans le tableau de joueurs :
+		this.variantePartie = choisirVariante();// posibilité de changer la variante
 		int i, j;
 		while (this.classementJoueurs.size() > 0) {
-			this.joueur.add(this.classementJoueurs.poll());
-			// this.classementJoueurs.remove(0);
+			this.joueur.add(this.classementJoueurs.poll());// On remet les joueurs dans le tableau de joueurs :
 		}
 
-		// tri des joueurs par insertion
-		// on ajoute le joueur dans l'ordre de leurs numéros croissants
+		// tri des joueurs par insertion, on ajoute le joueur dans l'ordre de leurs numéros croissants
 		for (i = 0; i < this.joueur.size(); i++) {
 			Joueur joueurJ = this.joueur.get(i);
 
@@ -280,9 +250,7 @@ public class Partie {
 				System.out.println("Partie terminée! Un joueur a eu au moins 60 point !");
 			}
 
-		} else {
-			// mode de comptage négatif, le premier qui arrive a 100 point a perdu et la
-			// partie se termine
+		} else {// mode de comptage négatif, le premier qui arrive a 100 point a perdu et la partie se termine
 			if (this.classementJoueursPartie.get(this.classementJoueurs.size() - 1).getScore() >= 100) {
 				terminer = true;
 				this.etat = "TERMINEE";
@@ -325,8 +293,6 @@ public class Partie {
 			classementJoueurs.set(j, joueurJ);
 		}
 	}
-
-	//*******Setter et getter*******
 	
 	/**
 	 * @return the pioche
@@ -395,19 +361,9 @@ public class Partie {
 		return classementJoueurs;
 	}
 
-	/**
-	 * @param classementJoueurs the classementJoueurs to set
-	 */
-	public void setClassementJoueurs(LinkedList<Joueur> classementJoueurs) {
-		this.classementJoueurs = classementJoueurs;
-	}
-
-	public static void main(String[] args)
-
-	{
-		// présentation du jeu
+	public static void main(String[] args){
+		
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
-
 		// creation d'une partie
 		Partie p = Partie.getPartie();
 		// creation de la pioche
@@ -419,15 +375,12 @@ public class Partie {
 
 		while (p.etat.equals("EN COURS")) { // tant que la partie n'est pas terminée, on joue des manches
 
-			while (!p.terminerManche()) // tant que la manche n'est pas terminée, on joue des tours
-			{
-				// Temps de délais entre chaque tour
-				try {
+			while (!p.terminerManche()){ // tant que la manche n'est pas terminée, on joue des tours
+				try {// Temps de délais entre chaque tour
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				// P.tourJoueur correspond au numéro du joueur qui doit jouer
 				p.joueur.get(p.tourJoueur - 1).jouerTour();
 				System.out.println("\n");
 			}
