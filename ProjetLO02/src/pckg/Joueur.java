@@ -40,13 +40,6 @@ public abstract class Joueur {
 	}
 
 	/**
-	 * @param cartes the cartes to set
-	 */
-	public void setCartes(ArrayList<Carte> cartes) {
-		this.cartes = cartes;
-	}
-
-	/**
 	 * Accesseur du numéro
 	 * 
 	 * @return le numéro du joueur, utiliséepar la partie pour determiner les tours de jeu.

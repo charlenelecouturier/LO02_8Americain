@@ -4,14 +4,12 @@ import java.util.ArrayList;
 
 public class Variante4 extends Variante {
 
-	public static Carte couleur = new Carte(" ", " "); // couleur de l'as qui permet de se defausser de toutes ses
-														// cartes de meme couleur
+	public static Carte couleur = new Carte(" ", " "); 
+	
 	public Variante4(int nbJoueursVirtuels) {
 
 		int nbPaquet = 1;
-		// si il ya plus de 5 joueurs en tout au départ on rentre dans la boucle if(),
-		// car on utilise 1 paquet pour 5 joueur
-		if (nbJoueursVirtuels > 4) { // boucle infinie ici{
+		if (nbJoueursVirtuels > 4) { 
 			nbPaquet += (nbJoueursVirtuels + 1) / 5;
 		}
 		this.nbCartes = 53 * nbPaquet;

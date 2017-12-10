@@ -7,7 +7,7 @@ public class JoueurPhysique extends Joueur {
 
 	public JoueurPhysique() {
 		super();
-		System.out.println("Entrez votre nom svp : ");
+		System.out.println("Entrez votre nom : ");
 		this.name = sc.nextLine();
 		System.out.println("OK Joueur1  : " + this.name);
 	}

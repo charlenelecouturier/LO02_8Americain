@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 
 /**
- * @author charlene
+ * @author Charlene et Robin
  *
  */
 public abstract class Variante {

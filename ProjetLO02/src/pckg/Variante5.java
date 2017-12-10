@@ -9,9 +9,7 @@ public class Variante5 extends Variante {
 	public Variante5(int nbJoueursVirtuels) {
 
 		int nbPaquet = 1;
-		// si il ya plus de 5 joueurs en tout au départ on rentre dans la boucle if(),
-		// car on utilise 1 paquet pour 5 joueur
-		if (nbJoueursVirtuels > 4) { // boucle infinie ici{
+		if (nbJoueursVirtuels > 4) { 
 			nbPaquet += (nbJoueursVirtuels + 1) / 5;
 		}
 		this.nbCartes = 52 * nbPaquet;
