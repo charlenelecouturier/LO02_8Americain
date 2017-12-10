@@ -1,14 +1,3 @@
-/* pour Strategy : 
- * 
- * faire en sorte que changerFamille() soit coh�rent avec les cartes que le joueurVirtuel a en main
- * ex : il choisit 'coeur' si il a le + de coeur dans son jeu
- * 
- * dans choisirCarte : 
- * faire en sorte de jouer un 10 de pique ,par exemple, ( qui Oblige a rejouer) si il possede au moins 
- * un autre pique dans son jeu ou sil ne peut jouer que ca
- * 
- * */
-
 package pckg;
 
 import java.util.ArrayList;
@@ -20,7 +9,6 @@ import java.util.Scanner;
 
 public class JoueurVirtuel extends Joueur {
 
-	// *********Constructeur**********
 	public JoueurVirtuel() {
 		super();
 		setName("Joueur" + getNumero());
@@ -34,9 +22,6 @@ public class JoueurVirtuel extends Joueur {
 		}
 	}
 
-
-
-	/** choisit la premi�re carte compatible de son jeu */
 	public int choisirCarte() {
 		int j;
 		System.out.println("Cartes de " + this.name + " : ");
@@ -76,9 +61,7 @@ public class JoueurVirtuel extends Joueur {
 			// Un joueur virtuel a une chance sur 4 de dire contre-carte
 			Random r = new Random();
 			int proba1Sur4 = 1 + r.nextInt(3);
-
 			if (proba1Sur4 == 1) {
-
 				// si le joueur a la place 0 est le joueur qui n'a plus qu'une carte
 				if (this.equals(Partie.getPartie().getJoueur().get(0))) {
 					// On choisi un numero de joueur au hasard , sauf celui a la place 0 pour dire carte
@@ -93,7 +76,6 @@ public class JoueurVirtuel extends Joueur {
 				System.out.println("Ce joueur dit 'CARTE'");
 				contreCarte = false;
 			}
-
 		}
 		if (contreCarte) {
 			this.piocher(1);

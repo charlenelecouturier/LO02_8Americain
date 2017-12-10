@@ -51,8 +51,6 @@ public class JoueurPhysique extends Joueur {
 
 	@Override
 	public void direCarte() {
-		// TODO Auto-generated method stub
-
 		Scanner scan = new Scanner(System.in);
 		System.out.println("\nVite vous n'avez plus qu'une carte ! Dites'CARTE' :");
 		long t = System.currentTimeMillis();// date actuelle en millisecondes
@@ -63,7 +61,6 @@ public class JoueurPhysique extends Joueur {
 			this.piocher(1);
 		} else {
 			System.out.println("Vous dites 'CARTE'! ");
-
 		}
 	}
 
@@ -81,9 +78,7 @@ public class JoueurPhysique extends Joueur {
 		} else {
 			System.out.println("Vous dites 'CONTRECARTE'!\n");
 			return true;
-
 		}
-
 	}
 
 	@Override

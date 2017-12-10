@@ -12,6 +12,5 @@ public class ObligeRejouer implements Effet{
 		 vont chacun redefinir  la fonction changerFamille() du joueur, en fonction du type réel du joueur, a 
 		 l'exécution on va appeler l'une ou l'autrre des méthodes*/
 		joueur.obligeDeRejouer();
-		
 	}
 }

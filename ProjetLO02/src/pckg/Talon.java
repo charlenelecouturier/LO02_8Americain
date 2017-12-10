@@ -91,6 +91,4 @@ public class Talon {
 	public void setCartes(ArrayList<Carte> cartes) {
 		this.cartes = cartes;
 	}
-
-
 }
