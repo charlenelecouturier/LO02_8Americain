@@ -19,7 +19,7 @@ public class Partie {
 
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Saisissez le nombre de joueurs virtuels :"); 
+		System.out.println("Saisissez le nombre de joueurs virtuels :");
 		this.nbJoueursVirtuels = sc.nextInt();
 		this.classementJoueursPartie = new LinkedList<Joueur>();
 		// instanciation des joueurs
@@ -33,7 +33,7 @@ public class Partie {
 		for (i = 0; i < this.joueur.size(); i++) {
 			this.classementJoueursPartie.add(this.joueur.get(i));
 		}
-		this.manche=new Manche(this.nbJoueursVirtuels);
+		this.manche = new Manche(this.nbJoueursVirtuels);
 		this.etat = "EN COURS";
 		// mode de comptage des points
 		System.out.println("\nSaisir le mode de comptage des points : 'POSITIF' ou 'NEGATIF'");
@@ -48,9 +48,9 @@ public class Partie {
 		}
 	}
 
-	
 	/**
-	 * Singleton 
+	 * Singleton
+	 * 
 	 * @return Partie instance unique de la classe Partie
 	 */
 	public static Partie getPartie() {
@@ -59,7 +59,7 @@ public class Partie {
 			Partie.instancePartie = new Partie();
 		}
 		return Partie.instancePartie;
-	}	
+	}
 
 	public boolean terminerPartie() {
 		// On initialise terminer a false
@@ -73,7 +73,8 @@ public class Partie {
 				System.out.println("Partie terminée! Un joueur a eu au moins 60 point !");
 			}
 
-		} else {// mode de comptage négatif, le premier qui arrive a 100 point a perdu et la partie se termine
+		} else {// mode de comptage négatif, le premier qui arrive a 100 point a perdu et la
+				// partie se termine
 			if (this.classementJoueursPartie.get(this.manche.getClassementJoueurs().size() - 1).getScore() >= 100) {
 				terminer = true;
 				this.etat = "TERMINEE";
@@ -84,7 +85,6 @@ public class Partie {
 		return terminer;
 	}
 
-		
 	/**
 	 * @return the joueur
 	 */
@@ -92,7 +92,6 @@ public class Partie {
 		return joueur;
 	}
 
-	
 	/**
 	 * @return the classementJoueursPartie
 	 */
@@ -100,14 +99,12 @@ public class Partie {
 		return classementJoueursPartie;
 	}
 
-
 	/**
 	 * @return the nbJoueursVirtuels
 	 */
 	public int getNbJoueursVirtuels() {
 		return nbJoueursVirtuels;
 	}
-	
 
 	/**
 	 * @return the modeComptage
@@ -123,17 +120,16 @@ public class Partie {
 		return manche;
 	}
 
-
 	/**
-	 * @param manche the manche to set
+	 * @param manche
+	 *            the manche to set
 	 */
 	public void setManche(Manche manche) {
 		this.manche = manche;
 	}
 
+	public static void main(String[] args) {
 
-	public static void main(String[] args){
-		
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
 		// creation d'une partie
 		Partie p = Partie.getPartie();
@@ -146,13 +142,13 @@ public class Partie {
 
 		while (p.etat.equals("EN COURS")) { // tant que la partie n'est pas terminée, on joue des manches
 
-			while (!p.manche.terminerManche()){ // tant que la manche n'est pas terminée, on joue des tours
+			while (!p.manche.terminerManche()) { // tant que la manche n'est pas terminée, on joue des tours
 				try {// Temps de délais entre chaque tour
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				p.joueur.get(p.manche.getTourJoueur()- 1).jouerTour();
+				p.joueur.get(p.manche.getTourJoueur() - 1).jouerTour();
 				System.out.println("\n");
 			}
 			if (p.modeComptage.equals("POSITIF")) {
