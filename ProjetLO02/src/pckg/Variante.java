@@ -29,11 +29,11 @@ public abstract class Variante {
 
 	public boolean estPossibleDeJouer(ArrayList<Carte> carte) {
 		int i;
-		Joueur joueurActuel = Partie.getPartie().getJoueur().get(Partie.getPartie().getTourJoueur() - 1);
+		Joueur joueurActuel = Partie.getPartie().getJoueur().get(Partie.getPartie().getManche().getTourJoueur() - 1);
 		if (joueurActuel.EffetVariante.equals("Aucun")) {
 			for (i = 0; i < carte.size(); i++) {
-				if (carte.get(i).getSymbole().equals(Partie.getPartie().getTalon().getCarteDessus().getSymbole())
-						|| carte.get(i).getValeur().equals(Partie.getPartie().getTalon().getCarteDessus().getValeur())
+				if (carte.get(i).getSymbole().equals(Partie.getPartie().getManche().getTalon().getCarteDessus().getSymbole())
+						|| carte.get(i).getValeur().equals(Partie.getPartie().getManche().getTalon().getCarteDessus().getValeur())
 						|| carte.get(i).getValeur().equals("8")|| carte.get(i).getValeur().equals("JOKER"))
 				// Si une des cartes a le meme symbole que le talon ou la meme valeur , ou si
 				// cette carte est un 8
@@ -43,7 +43,7 @@ public abstract class Variante {
 			}
 		} else if (joueurActuel.EffetVariante.equals("Pioche2ouAsou8")) {
 			for (i = 0; i < carte.size(); i++) {
-				if (carte.get(i).getValeur().equals(Partie.getPartie().getTalon().getCarteDessus().getValeur())
+				if (carte.get(i).getValeur().equals(Partie.getPartie().getManche().getTalon().getCarteDessus().getValeur())
 						|| carte.get(i).getValeur().equals("8"))
 				// Si une des cartes a le meme valeur que le talon (1) ou la meme valeur , ou si
 				// cette carte est un 8, on bloque l'effet
@@ -70,9 +70,9 @@ public abstract class Variante {
 	}
 
 	public boolean estCompatible(Carte carte) {
-		Joueur joueurActuel = Partie.getPartie().getJoueur().get(Partie.getPartie().getTourJoueur() - 1);
+		Joueur joueurActuel = Partie.getPartie().getJoueur().get(Partie.getPartie().getManche().getTourJoueur() - 1);
 		Carte carteDessusTalon;
-		Talon talon = Partie.getPartie().getTalon();
+		Talon talon = Partie.getPartie().getManche().getTalon();
 		carteDessusTalon = talon.getCarteDessus();
 		String carteSymbole = carte.getSymbole();
 		String carteDessusTalonSymbole = carteDessusTalon.getSymbole();

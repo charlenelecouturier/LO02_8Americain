@@ -38,7 +38,7 @@ public class JoueurVirtuel extends Joueur {
 		ListIterator<Carte> parcourirCarteJouable = cartesJouables.listIterator();
 		while (parcourirCarteJouable.hasNext()) {
 			// on vrifie à chaque iteration que la carte est compatible
-			if (!Partie.getPartie().getVariantePartie().estCompatible(parcourirCarteJouable.next())) {
+			if (!Partie.getPartie().getManche().getVarianteManche().estCompatible(parcourirCarteJouable.next())) {
 				// on retire les cartes pas compatible de la liste.
 				parcourirCarteJouable.remove();
 			}

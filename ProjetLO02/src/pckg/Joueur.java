@@ -87,33 +87,33 @@ public abstract class Joueur {
 		this.poserCarte();
 		this.EffetVariante = "Aucun";
 		gagne = this.gagnePartie();	// on regarde si le fait d'avoir posé une carte permet au joueur de gagner la manche
-		tour = Partie.getPartie().getTourJoueur();
-		if (Partie.getPartie().getSens() == 1) {
+		tour = Partie.getPartie().getManche().getTourJoueur();
+		if (Partie.getPartie().getManche().getSens() == 1) {
 			if (!gagne) {
 				tour++;
 			}
-			if (tour > Partie.getPartie().getNbJoueursEnCours()) {
+			if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
 				tour = 1;
 			}
 		} else {
 			tour--;
 			if (tour <= 0) {
-				tour = Partie.getPartie().getNbJoueursEnCours();
+				tour = Partie.getPartie().getManche().getNbJoueursEnCours();
 			}
 		}
-		Partie.getPartie().setTourJoueur(tour);
+		Partie.getPartie().getManche().setTourJoueur(tour);
 	}
 
 	
 	public void poserCarte() {
-		if (Partie.getPartie().getVariantePartie().estPossibleDeJouer(this.cartes)) {
+		if (Partie.getPartie().getManche().getVarianteManche().estPossibleDeJouer(this.cartes)) {
 			int numeroCarte = this.choisirCarte();
 			Carte cartePose = this.cartes.get(numeroCarte);
-			Partie.getPartie().getTalon().getCartes().add(cartePose);
+			Partie.getPartie().getManche().getTalon().getCartes().add(cartePose);
 			System.out.println(
-					"Test : il y a " + Partie.getPartie().getTalon().getCartes().size() + " cartes dans le talon");
-			Partie.getPartie().getTalon().getCarteDessus().setSymbole(cartePose.getSymbole());
-			Partie.getPartie().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
+					"Test : il y a " + Partie.getPartie().getManche().getTalon().getCartes().size() + " cartes dans le talon");
+			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole(cartePose.getSymbole());
+			Partie.getPartie().getManche().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
 			System.out.println(this.getName() + " pose " + cartePose);
 			cartes.remove(cartePose);
 			if (this.cartes.size() == 1) {
@@ -155,16 +155,16 @@ public abstract class Joueur {
 	public void piocher(int nombrePioche) {
 		System.out.println("\n" + this.name + " pioche " + nombrePioche + " carte(s) !");
 
-		if (Partie.getPartie().getPioche().getCartes().size() < nombrePioche) {
-			Partie.getPartie().getTalon().devenirPioche();
+		if (Partie.getPartie().getManche().getPioche().getCartes().size() < nombrePioche) {
+			Partie.getPartie().getManche().getTalon().devenirPioche();
 		}
 		for (int i = 1; i <= nombrePioche; i++) {
-			Carte cartePioche = Partie.getPartie().getPioche().cartes
-					.get(Partie.getPartie().getPioche().cartes.size() - 1); // -1 car indice commence à 0
+			Carte cartePioche = Partie.getPartie().getManche().getPioche().cartes
+					.get(Partie.getPartie().getManche().getPioche().cartes.size() - 1); // -1 car indice commence à 0
 			cartes.add(cartePioche);
-			Partie.getPartie().getPioche().cartes.remove(Partie.getPartie().getPioche().cartes.size() - 1);
+			Partie.getPartie().getManche().getPioche().cartes.remove(Partie.getPartie().getManche().getPioche().cartes.size() - 1);
 			System.out.println("\n" + this.name + " a pioché " + cartePioche);
-			System.out.println("\nTest : il reste " + Partie.getPartie().getPioche().getCartes().size()
+			System.out.println("\nTest : il reste " + Partie.getPartie().getManche().getPioche().getCartes().size()
 					+ " cartes dans la pioche\n");
 		}
 	}
@@ -172,9 +172,9 @@ public abstract class Joueur {
 	public boolean gagnePartie() {
 		if (this.cartes.isEmpty()) {
 			System.out.println(this.name + " a gagné.");
-			Partie.getPartie().getClassementJoueurs().add(this);
+			Partie.getPartie().getManche().getClassementJoueurs().add(this);
 			Partie.getPartie().getJoueur().remove(this);
-			Partie.getPartie().setNbJoueursEnCours(Partie.getPartie().getNbJoueursEnCours() - 1);
+			Partie.getPartie().getManche().setNbJoueursEnCours(Partie.getPartie().getManche().getNbJoueursEnCours() - 1);
 			return true;
 		}
 		return false;

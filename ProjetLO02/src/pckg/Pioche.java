@@ -25,11 +25,11 @@ public class Pioche {
 	public Pioche() {
 		// nb cartes definie dans la variante
 		int i;
-		int nbCartes = Partie.getPartie().getVariantePartie().getNbCartes();
+		int nbCartes = Partie.getPartie().getManche().getVarianteManche().getNbCartes();
 		for (i = nbCartes - 1; i >= 0; i--) {
 
-			Carte carte = Partie.getPartie().getVariantePartie().getCartes().get(i);
-			Partie.getPartie().getVariantePartie().getCartes().remove(i);
+			Carte carte = Partie.getPartie().getManche().getVarianteManche().getCartes().get(i);
+			Partie.getPartie().getManche().getVarianteManche().getCartes().remove(i);
 			this.cartes.add(carte); // on place tout le jeu de cartes créé dans la variante dans la pioche
 		}
 	}
@@ -71,9 +71,9 @@ public class Pioche {
 			}
 			tour++;
 		}
-		Partie.getPartie().getTalon().getCartes().add(this.cartes.get(this.cartes.size() - 1));
-		Partie.getPartie().getTalon().getCarteDessus().setSymbole(this.cartes.get(this.cartes.size() - 1).getSymbole());
-		Partie.getPartie().getTalon().getCarteDessus().setValeur(this.cartes.get(this.cartes.size() - 1).getValeur());
+		Partie.getPartie().getManche().getTalon().getCartes().add(this.cartes.get(this.cartes.size() - 1));
+		Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole(this.cartes.get(this.cartes.size() - 1).getSymbole());
+		Partie.getPartie().getManche().getTalon().getCarteDessus().setValeur(this.cartes.get(this.cartes.size() - 1).getValeur());
 		// On la supprime du paquet de carte de la pioche
 		this.cartes.remove(this.cartes.size() - 1);
 		System.out.println("Test : nombre de cartes du joueur 1 : " + Partie.getPartie().getJoueur().get(0).getCartes().size());

@@ -19,7 +19,7 @@ public class JoueurPhysique extends Joueur {
 		System.out.println("Choisissez la carte que vous souhaitez jouer :");
 		do {
 			choix = true;
-			System.out.println("Carte du talon : " + Partie.getPartie().getTalon().getCarteDessus());
+			System.out.println("Carte du talon : " + Partie.getPartie().getManche().getTalon().getCarteDessus());
 			System.out.println("Vos cartes : ");
 			int i;
 			for (i = 1; i <= this.cartes.size(); i++) {
@@ -28,22 +28,22 @@ public class JoueurPhysique extends Joueur {
 			System.out.println("Numéro de la carte choisie ?");
 			numero = sc.nextInt();
 
-			if (numero < 0 || numero > this.cartes.size()||!Partie.getPartie().getVariantePartie().estCompatible(this.cartes.get(numero-1))){ // verification du numéro de carte choisi	
+			if (numero < 0 || numero > this.cartes.size()||!Partie.getPartie().getManche().getVarianteManche().estCompatible(this.cartes.get(numero-1))){ // verification du numéro de carte choisi	
 				choix = false;
 				System.out.println("Impossible, faites un nouveau choix");
 			}
 
 		} while (!choix);
 		if (this.cartes.get(numero - 1).getValeur().equals("1")
-				&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
+				&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante5) {
 			Variante5.nombreAs++;
 		}
 		if (this.cartes.get(numero - 1).getValeur().equals("1")
-				&& Partie.getPartie().getVariantePartie() instanceof Variante4) {
+				&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante4) {
 			Variante4.couleur.setSymbole(this.cartes.get(numero - 1).getSymbole());
 		}
 		if (this.cartes.get(numero - 1).getValeur().equals("8")
-				&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
+				&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante5) {
 			Variante5.nombreAs = 0;
 		}
 		return numero - 1;
@@ -89,19 +89,19 @@ public class JoueurPhysique extends Joueur {
 		int rep = scan.nextInt();
 		switch (rep) {
 		case 1:
-			Partie.getPartie().getTalon().getCarteDessus().setSymbole("TREFLE");
+			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("TREFLE");
 			System.out.println("Vous avez choisi comme symbole : TREFLE ! ");
 			break;
 		case 2:
-			Partie.getPartie().getTalon().getCarteDessus().setSymbole("PIQUE");
+			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("PIQUE");
 			System.out.println("Vous avez choisi comme symbole : PIQUE! ");
 			break;
 		case 3:
-			Partie.getPartie().getTalon().getCarteDessus().setSymbole("COEUR");
+			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("COEUR");
 			System.out.println("Vous avez choisi comme symbole : COEUR ! ");
 			break;
 		case 4:
-			Partie.getPartie().getTalon().getCarteDessus().setSymbole("CARREAU");
+			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("CARREAU");
 			System.out.println("Vous avez choisi comme symbole : CARREAU ! ");
 			break;
 		default:

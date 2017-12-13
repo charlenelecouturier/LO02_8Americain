@@ -8,9 +8,9 @@ import java.util.Iterator;
 public class StratAvancee implements Strategie {
 
 	public int choixCarte(ArrayList<Carte> cartesCompatibles) {
-		System.out.println("Carte du talon : " + Partie.getPartie().getTalon().getCarteDessus());
+		System.out.println("Carte du talon : " + Partie.getPartie().getManche().getTalon().getCarteDessus());
 		System.out.println("Nombre de cartes compatibles : " + cartesCompatibles.size());
-		Joueur joueurEnCours = Partie.getPartie().getJoueur().get(Partie.getPartie().getTourJoueur() - 1);
+		Joueur joueurEnCours = Partie.getPartie().getJoueur().get(Partie.getPartie().getManche().getTourJoueur() - 1);
 		int carteChoisie;
 		ListIterator<Carte> parcourirCartesCompatibles = cartesCompatibles.listIterator();
 		// On regarde si le joueur a une carte "Rejouer" jouable : si oui, on regardera si elle lui permet de rejouer ou si il n'a que celleci de compatible
@@ -36,11 +36,10 @@ public class StratAvancee implements Strategie {
 			if (!carteNext.getEffet().equals("ChangerFamille") && !carteNext.getEffet().equals("ObligeRejouer")) {
 				carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
 				if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")
-						&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
+						&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante5) {
 					Variante5.nombreAs++;
-				}
-				if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")
-						&& Partie.getPartie().getVariantePartie() instanceof Variante4) {
+				} else if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")
+						&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante4) {
 					Variante4.couleur.setSymbole(joueurEnCours.getCartes().get(carteChoisie).getSymbole());
 				}
 				return carteChoisie;
@@ -51,8 +50,11 @@ public class StratAvancee implements Strategie {
 		if (!carteNext.getValeur().equals("ChangerFamille") && !carteNext.getValeur().equals("ObligeRejouer")) {
 			carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
 			if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")
-					&& Partie.getPartie().getVariantePartie() instanceof Variante5) {
+					&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante5) {
 				Variante5.nombreAs++;
+			} else if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")
+					&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante4) {
+				Variante4.couleur.setSymbole(joueurEnCours.getCartes().get(carteChoisie).getSymbole());
 			}
 
 			return carteChoisie;
@@ -60,7 +62,7 @@ public class StratAvancee implements Strategie {
 			System.out.println("Je suis oblige de jouer ma carte 'Changer Famille'...");
 			carteChoisie = this.jouer8(joueurEnCours);
 			// jouer un 8 contre une attaque dans la variante5
-			if (Partie.getPartie().getVariantePartie() instanceof Variante5) {
+			if (Partie.getPartie().getManche().getVarianteManche() instanceof Variante5) {
 				Variante5.nombreAs = 0;
 			}
 			return carteChoisie;
@@ -69,7 +71,7 @@ public class StratAvancee implements Strategie {
 
 	public void changerFamille() {
 
-		int tour = Partie.getPartie().getTourJoueur();
+		int tour = Partie.getPartie().getManche().getTourJoueur();
 		ArrayList<Carte> carteJoueur = Partie.getPartie().getJoueur().get(tour - 1).getCartes();
 		if (!(carteJoueur.isEmpty())) {
 			int i;
@@ -101,19 +103,19 @@ public class StratAvancee implements Strategie {
 
 			case 0:
 				// carreau est majoritaire
-				Partie.getPartie().getTalon().getCarteDessus().setSymbole("CARREAU");
+				Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("CARREAU");
 				System.out.println("Symbole choisi : CARREAU ! ");
 				break;
 			case 1:
-				Partie.getPartie().getTalon().getCarteDessus().setSymbole("PIQUE");
+				Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("PIQUE");
 				System.out.println("Symbole choisi : PIQUE! ");
 				break;
 			case 3:
-				Partie.getPartie().getTalon().getCarteDessus().setSymbole("COEUR");
+				Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("COEUR");
 				System.out.println("Symbole choisi : COEUR ! ");
 				break;
 			case 2:
-				Partie.getPartie().getTalon().getCarteDessus().setSymbole("TREFLE");
+				Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("TREFLE");
 				System.out.println("Symbole choisi : TREFLE! ");
 				break;
 			}
@@ -125,7 +127,7 @@ public class StratAvancee implements Strategie {
 			Random r = new Random();
 			int i = r.nextInt(3);
 			String random = symboles[i];
-			Partie.getPartie().getTalon().getCarteDessus().setSymbole(random);
+			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole(random);
 			System.out.println("Symbole choisi: " + random);
 		}
 	}
