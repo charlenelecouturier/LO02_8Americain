@@ -1,5 +1,6 @@
 package pckg;
 
+import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Scanner;
@@ -19,15 +20,29 @@ public class Partie {
 
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Saisissez le nombre de joueurs virtuels :");
-		this.nbJoueursVirtuels = sc.nextInt();
+		
+		try
+		{
+			System.out.println("Saisissez le nombre de joueurs virtuels :");
+			this.nbJoueursVirtuels = sc.nextInt();
+		}
+		catch(InputMismatchException exception)
+		{
+			//Affiche un message d'erreur si l'utilisateur n'entre pas de chiffre pour les joueurs virtuels 
+			System.out.println("Veuillez entre un nombre entier s'il vous plait.");
+		}
+		
+		
 		this.classementJoueursPartie = new LinkedList<Joueur>();
 		// instanciation des joueurs
 		this.joueur = new LinkedList<Joueur>();
 		this.joueur.add(new JoueurPhysique());
 		int i;
 		for (i = 1; i <= this.nbJoueursVirtuels; i++) {
-			this.joueur.add(new JoueurVirtuel());
+			try {
+				this.joueur.add(new JoueurVirtuel());
+			} catch (NiveauJoueurException e) {
+			}
 		}
 		// on initialise le classement de la partie
 		for (i = 0; i < this.joueur.size(); i++) {
@@ -41,10 +56,10 @@ public class Partie {
 		this.modeComptage = text.nextLine();
 		if (this.modeComptage.equals("POSITIF")) {
 			System.out.println(
-					"\nMode de comptage des points choisi : POSITIF ! Le premier joueur arrivé à 60 points gagne la partie ! \nLorsque 3 joueurs ont fini la manche, celle-ci se termine\n");
+					"\nMode de comptage des points choisi : POSITIF ! Le premier joueur arrivï¿½ ï¿½ 60 points gagne la partie ! \nLorsque 3 joueurs ont fini la manche, celle-ci se termine\n");
 		} else {
 			System.out.println(
-					"\nMode de comptage des points choisi : NEGATIF ! Lorsqu'un joueur atteint 100 point, il perd la partie ! \nUne manche se termine dès qu'un joueur a fini !\n");
+					"\nMode de comptage des points choisi : NEGATIF ! Lorsqu'un joueur atteint 100 point, il perd la partie ! \nUne manche se termine dï¿½s qu'un joueur a fini !\n");
 		}
 	}
 
@@ -70,15 +85,15 @@ public class Partie {
 			if (this.classementJoueursPartie.get(0).getScore() >= 60) {
 				terminer = true;
 				this.etat = "TERMINEE";
-				System.out.println("Partie terminée! Un joueur a eu au moins 60 point !");
+				System.out.println("Partie terminï¿½e! Un joueur a eu au moins 60 point !");
 			}
 
-		} else {// mode de comptage négatif, le premier qui arrive a 100 point a perdu et la
+		} else {// mode de comptage nï¿½gatif, le premier qui arrive a 100 point a perdu et la
 				// partie se termine
 			if (this.classementJoueursPartie.get(this.manche.getClassementJoueurs().size() - 1).getScore() >= 100) {
 				terminer = true;
 				this.etat = "TERMINEE";
-				System.out.println("Partie terminée! Un joueur a eu au moins 100 point !");
+				System.out.println("Partie terminï¿½e! Un joueur a eu au moins 100 point !");
 			}
 		}
 
@@ -140,10 +155,10 @@ public class Partie {
 		// on distribue la pioche
 		p.manche.getPioche().distribuer();
 
-		while (p.etat.equals("EN COURS")) { // tant que la partie n'est pas terminée, on joue des manches
+		while (p.etat.equals("EN COURS")) { // tant que la partie n'est pas terminï¿½e, on joue des manches
 
-			while (!p.manche.terminerManche()) { // tant que la manche n'est pas terminée, on joue des tours
-				try {// Temps de délais entre chaque tour
+			while (!p.manche.terminerManche()) { // tant que la manche n'est pas terminï¿½e, on joue des tours
+				try {// Temps de dï¿½lais entre chaque tour
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -156,7 +171,7 @@ public class Partie {
 			} else {
 				p.manche.compterPointsNegatif();
 			}
-			// Si la partie n'est pas terminée, on debute une nouvelle manche
+			// Si la partie n'est pas terminï¿½e, on debute une nouvelle manche
 			if (!p.terminerPartie()) {
 				System.out.println("\nNOUVELLE MANCHE\n");
 				p.manche.changerManche();

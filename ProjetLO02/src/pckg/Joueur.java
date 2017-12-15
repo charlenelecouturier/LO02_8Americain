@@ -5,9 +5,9 @@ import java.util.ArrayList;
 /**
  * Joueur est la classe qui represente les participants au jeu, qu'ils soient
  * physiques ou virtuels. Il ne sera pas possible de creer un joueur dont le
- * type n'est pas précisé dans le jeu
+ * type n'est pas prï¿½cisï¿½ dans le jeu
  * 
- * @author Robin et Charlène
+ * @author Robin et Charlï¿½ne
  * @see JoueurVirtuel
  * @see JoueurPhysique
  */
@@ -15,7 +15,7 @@ public abstract class Joueur {
 
 	protected ArrayList<Carte> cartes = new ArrayList<Carte>(); // on fait une arraylist pour les cartes
 	protected String name;
-	private int numero; // numéro est compris entre 1 et le nombre de joueurs en cours dans la partie
+	private int numero; // numï¿½ro est compris entre 1 et le nombre de joueurs en cours dans la partie
 	private static int donneurNum = 1;
 	private int score; // score du joueur
 	private int scoreManche;
@@ -23,7 +23,7 @@ public abstract class Joueur {
 	protected String EffetVariante;
 
 	/**
-	 * le Constructeur de Joueur ne doit pas être utilisé directement, il simplifie le code de ses classes filles.
+	 * le Constructeur de Joueur ne doit pas ï¿½tre utilisï¿½ directement, il simplifie le code de ses classes filles.
 	 */
 	public Joueur() {
 		this.EffetVariante = "Aucun";
@@ -40,9 +40,9 @@ public abstract class Joueur {
 	}
 
 	/**
-	 * Accesseur du numéro
+	 * Accesseur du numï¿½ro
 	 * 
-	 * @return le numéro du joueur, utiliséepar la partie pour determiner les tours de jeu.
+	 * @return le numï¿½ro du joueur, utilisï¿½epar la partie pour determiner les tours de jeu.
 	 * @see Partie
 	 */
 	public int getNumero() {
@@ -77,7 +77,7 @@ public abstract class Joueur {
 	}
 
 	/**
-	 * Le corps meme de cette classe, jouerTour permet à un joueur physique ou
+	 * Le corps meme de cette classe, jouerTour permet ï¿½ un joueur physique ou
 	 * virtuel de choisir une carte dans son jeu et la poser sur le talon.
 	 */
 	public void jouerTour() {
@@ -86,7 +86,7 @@ public abstract class Joueur {
 		boolean gagne = false;
 		this.poserCarte();
 		this.EffetVariante = "Aucun";
-		gagne = this.gagnePartie();	// on regarde si le fait d'avoir posé une carte permet au joueur de gagner la manche
+		gagne = this.gagnePartie();	// on regarde si le fait d'avoir posï¿½ une carte permet au joueur de gagner la manche
 		tour = Partie.getPartie().getManche().getTourJoueur();
 		if (Partie.getPartie().getManche().getSens() == 1) {
 			if (!gagne) {
@@ -160,10 +160,10 @@ public abstract class Joueur {
 		}
 		for (int i = 1; i <= nombrePioche; i++) {
 			Carte cartePioche = Partie.getPartie().getManche().getPioche().cartes
-					.get(Partie.getPartie().getManche().getPioche().cartes.size() - 1); // -1 car indice commence à 0
+					.get(Partie.getPartie().getManche().getPioche().cartes.size() - 1); // -1 car indice commence ï¿½ 0
 			cartes.add(cartePioche);
 			Partie.getPartie().getManche().getPioche().cartes.remove(Partie.getPartie().getManche().getPioche().cartes.size() - 1);
-			System.out.println("\n" + this.name + " a pioché " + cartePioche);
+			System.out.println("\n" + this.name + " a piochï¿½ " + cartePioche);
 			System.out.println("\nTest : il reste " + Partie.getPartie().getManche().getPioche().getCartes().size()
 					+ " cartes dans la pioche\n");
 		}
@@ -171,7 +171,7 @@ public abstract class Joueur {
 
 	public boolean gagnePartie() {
 		if (this.cartes.isEmpty()) {
-			System.out.println(this.name + " a gagné.");
+			System.out.println(this.name + " a gagnï¿½.");
 			Partie.getPartie().getManche().getClassementJoueurs().add(this);
 			Partie.getPartie().getJoueur().remove(this);
 			Partie.getPartie().getManche().setNbJoueursEnCours(Partie.getPartie().getManche().getNbJoueursEnCours() - 1);

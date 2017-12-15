@@ -25,10 +25,11 @@ public class JoueurPhysique extends Joueur {
 			for (i = 1; i <= this.cartes.size(); i++) {
 				System.out.println(i + " : " + this.cartes.get(i - 1));
 			}
-			System.out.println("Numéro de la carte choisie ?");
+			
+			System.out.println("Numï¿½ro de la carte choisie ?");
 			numero = sc.nextInt();
-
-			if (numero < 0 || numero > this.cartes.size()||!Partie.getPartie().getManche().getVarianteManche().estCompatible(this.cartes.get(numero-1))){ // verification du numéro de carte choisi	
+			
+			if (numero < 0 || numero > this.cartes.size()||!Partie.getPartie().getManche().getVarianteManche().estCompatible(this.cartes.get(numero-1))){ // verification du numï¿½ro de carte choisi	
 				choix = false;
 				System.out.println("Impossible, faites un nouveau choix");
 			}
@@ -57,7 +58,7 @@ public class JoueurPhysique extends Joueur {
 		String reponse = scan.nextLine();
 		long t2 = System.currentTimeMillis();
 		if (t2 - t > 8000 || (!reponse.equals("carte") && !reponse.equals("Carte") && !reponse.equals("CARTE"))) {
-			System.out.println("Vous n'avez pas dit 'CARTE' à temps ! CONTRE-CARTE !");
+			System.out.println("Vous n'avez pas dit 'CARTE' ï¿½ temps ! CONTRE-CARTE !");
 			this.piocher(1);
 		} else {
 			System.out.println("Vous dites 'CARTE'! ");
@@ -73,7 +74,7 @@ public class JoueurPhysique extends Joueur {
 		long t2 = System.currentTimeMillis();
 		if (t2 - t > 8000 || (!reponse.equals("contrecarte") && !reponse.equals("Contrecarte")
 				&& !reponse.equals("CONTRECARTE"))) {
-			System.out.println("Ce joueur a dit 'CARTE' !\nVous n'avez pas dit 'CONTRECARTE' à temps !\n");
+			System.out.println("Ce joueur a dit 'CARTE' !\nVous n'avez pas dit 'CONTRECARTE' ï¿½ temps !\n");
 			return false;
 		} else {
 			System.out.println("Vous dites 'CONTRECARTE'!\n");

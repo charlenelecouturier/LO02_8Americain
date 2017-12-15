@@ -9,16 +9,25 @@ import java.util.Scanner;
 
 public class JoueurVirtuel extends Joueur {
 
-	public JoueurVirtuel() {
+	public JoueurVirtuel() throws NiveauJoueurException {
 		super();
 		setName("Joueur" + getNumero());
 		System.out.println("\nNiveau du " + this.name + " ? 1 OU 2");
-		Scanner sc = new Scanner(System.in);
-		int strat = sc.nextInt();
+		
+		int strat;
+		// On vient tester si le niveau du jouer entrÃ© est bien 1 ou 2, on capture des erreurs sinon
+		do {
+			Scanner sc = new Scanner(System.in);
+			strat = sc.nextInt();
+			if( strat != 1 || strat != 2) {	
+				throw new NiveauJoueurException();
+			}	
+		}while (strat != 1 || strat != 2);
+		
 		if (strat == 1) {
 			this.strategie = new StrategieDeBase();
 		} else {
-			this.strategie = new StratAvancee(); // par defaut si l'utilisateur se trompe
+			this.strategie = new StratAvancee(); 
 		}
 	}
 
@@ -37,7 +46,7 @@ public class JoueurVirtuel extends Joueur {
 		// cartesJouables = this.getCartes();
 		ListIterator<Carte> parcourirCarteJouable = cartesJouables.listIterator();
 		while (parcourirCarteJouable.hasNext()) {
-			// on vrifie à chaque iteration que la carte est compatible
+			// on vrifie ï¿½ chaque iteration que la carte est compatible
 			if (!Partie.getPartie().getManche().getVarianteManche().estCompatible(parcourirCarteJouable.next())) {
 				// on retire les cartes pas compatible de la liste.
 				parcourirCarteJouable.remove();
@@ -68,7 +77,7 @@ public class JoueurVirtuel extends Joueur {
 					int numJoueurDitContreCarte =(int)(Math.random() * (Partie.getPartie().getJoueur().size() - 2)) + 1;
 					System.out.println(Partie.getPartie().getJoueur().get(numJoueurDitContreCarte).getName()
 							+ " dit CONTRE-CARTE");
-				}else {// Sinon c'est le joueur à l'emplacement 0 qui dit carte
+				}else {// Sinon c'est le joueur ï¿½ l'emplacement 0 qui dit carte
 					System.out.println(Partie.getPartie().getJoueur().get(0).getName() + " dit CONTRE-CARTE");
 				}
 				contreCarte = true;
