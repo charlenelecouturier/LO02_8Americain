@@ -3,10 +3,6 @@ package pckg;
 import java.util.ArrayList;
 
 /**
- * 
- */
-
-/**
  * @author Charlene et Robin
  *
  */

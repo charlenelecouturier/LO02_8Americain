@@ -201,7 +201,6 @@ public class Manche {
 		} else if (variante == 3) {
 			choixVariante = new Variante4(nbJoueursVirtuels);
 			System.out.println("Variante 4 choisie ");
-
 		} else {
 			System.out.println("Erreur : variante inexistante, choisissez à nouveau");
 			choixVariante = choisirVariante(nbJoueursVirtuels);

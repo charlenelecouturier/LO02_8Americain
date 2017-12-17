@@ -5,7 +5,6 @@ import java.util.Iterator;
 public class VarianteMinimale extends Variante {
 
 	public VarianteMinimale(int nbJoueursVirtuels) {
-
 		int nbPaquet = 1;
 		if (nbJoueursVirtuels > 4) {
 			nbPaquet += (nbJoueursVirtuels + 1) / 5;
@@ -25,7 +24,6 @@ public class VarianteMinimale extends Variante {
 			} else if (carteNext.getValeur().equals("10")) {
 				carteNext.setEffet("ObligeRejouer");
 			}
-
 		} while (it.hasNext());
 	}
 }
