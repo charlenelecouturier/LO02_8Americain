@@ -18,8 +18,6 @@ public abstract class Variante {
 	protected int nbCartes;
 	protected ArrayList<Carte> jeuDeCartes;
 
-	public abstract ArrayList<Carte> creerJeuDeCartes(int nbPaquet);
-
 	/**
 	 * @param nbCartes the nbCartes to set
 	 */
@@ -35,8 +33,6 @@ public abstract class Variante {
 				if (carte.get(i).getSymbole().equals(Partie.getPartie().getManche().getTalon().getCarteDessus().getSymbole())
 						|| carte.get(i).getValeur().equals(Partie.getPartie().getManche().getTalon().getCarteDessus().getValeur())
 						|| carte.get(i).getValeur().equals("8")|| carte.get(i).getValeur().equals("JOKER"))
-				// Si une des cartes a le meme symbole que le talon ou la meme valeur , ou si
-				// cette carte est un 8
 				{
 					return true; // le joueur peut jouer
 				}
@@ -45,8 +41,6 @@ public abstract class Variante {
 			for (i = 0; i < carte.size(); i++) {
 				if (carte.get(i).getValeur().equals(Partie.getPartie().getManche().getTalon().getCarteDessus().getValeur())
 						|| carte.get(i).getValeur().equals("8"))
-				// Si une des cartes a le meme valeur que le talon (1) ou la meme valeur , ou si
-				// cette carte est un 8, on bloque l'effet
 				{
 					return true; // le joueur peut jouer
 				}
@@ -100,6 +94,23 @@ public abstract class Variante {
 		}
 		return false;
 	}
+	
+// Méthode permettant de créer un jeu de cartes de base (52 cartes sans JOKER)
+	public ArrayList<Carte> creerJeuDeCartes(int nbPaquet) {
+		ArrayList<Carte> jeuDeCartes = new ArrayList<Carte>();
+		int k;
+		for (k = 1; k <= nbPaquet; k++) {
+			int i, j;
+			String[] valeurs = new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "VALET", "DAME","ROI" };
+			for (i = 0; i < Carte.symboles.length; i++) {
+				for (j = 0; j < valeurs.length; j++) {
+					Carte carte = new Carte(valeurs[j], Carte.symboles[i]);
+					jeuDeCartes.add(carte);
+				}
+			}
+		}
+		return jeuDeCartes;
+	}
 
 	public ArrayList<Carte> getCartes() {
 		return jeuDeCartes;
@@ -108,4 +119,6 @@ public abstract class Variante {
 	public int getNbCartes() {
 		return nbCartes;
 	}
+	
+	public abstract void assignerEffetCarte();
 }
