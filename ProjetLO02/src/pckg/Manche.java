@@ -68,7 +68,7 @@ public class Manche {
 		}
 		System.out.println("\nLe premier gagne 50 points, le deuxième 20 points, et le troisième 10 points");
 		// (le meilleur est celui qui a le PLUS de points)
-			this.triInsertionScore(Partie.getPartie().getClassementJoueursPartie(), "décroissant");
+		this.triInsertionScore(Partie.getPartie().getClassementJoueursPartie(), "décroissant");
 		// on donne le classement général de la partie
 		System.out.println("\nClassement général : ");
 		for (i = 1; i <= Partie.getPartie().getClassementJoueursPartie().size(); i++) {
@@ -80,15 +80,13 @@ public class Manche {
 	public void compterPointsNegatif() {
 
 		int i;
-		// mode de comptage négatif
 		ListIterator<Joueur> parcourirJoueurs = classementJoueurs.listIterator(); // on parcourt les joueurs
 		Joueur joueurSelect;
 		do {
 			joueurSelect = parcourirJoueurs.next(); // On selectionne un joueur
 			joueurSelect.setScoreManche(0);
 			int points = 0;// on initialise les points qu'il va prendre à 0
-			// on parcourt les cartes restantes du joueur selectionné
-			ListIterator<Carte> parcourirCartesJoueur = joueurSelect.getCartes().listIterator();
+			ListIterator<Carte> parcourirCartesJoueur = joueurSelect.getCartes().listIterator();// on parcourt les cartes restantes du joueur selectionné
 			Carte c;
 			while (parcourirCartesJoueur.hasNext()) {
 				c = parcourirCartesJoueur.next();
@@ -105,12 +103,9 @@ public class Manche {
 					points += Integer.parseInt(c.getValeur());
 				}
 			}
-			// modification du score génaral
-			joueurSelect.setScore(joueurSelect.getScore() + points);
-			// pour afficher le score de la manche
-			joueurSelect.setScoreManche(points);
+			joueurSelect.setScore(joueurSelect.getScore() + points);			// modification du score génaral
+			joueurSelect.setScoreManche(points);// pour afficher le score de la manche
 			System.out.println(joueurSelect.getName() + " prend " + points + " points");
-
 		} while (parcourirJoueurs.hasNext());
 		
 		// (le meilleur est celui qui a le MOINS de points)
@@ -122,10 +117,8 @@ public class Manche {
 			System.out.println(i + "e : " + this.classementJoueurs.get(i - 1).getName() + " -- SCORE : "
 					+ this.classementJoueurs.get(i - 1).getScoreManche());
 		}
-
 		// (le meilleur est celui qui a le MOINS de points)
 		this.triInsertionScore(Partie.getPartie().getClassementJoueursPartie(), "croissant");
-
 		// on donne le classemnet général de la partie
 		System.out.println("\nClassement général : ");
 		for (i = 1; i <= Partie.getPartie().getClassementJoueursPartie().size(); i++) {
@@ -140,7 +133,6 @@ public class Manche {
 		while (this.classementJoueurs.size() > 0) {
 			Partie.getPartie().getJoueur().add(this.classementJoueurs.poll());// On remet les joueurs dans le tableau de joueurs :
 		}
-
 		// tri des joueurs par insertion, on ajoute le joueur dans l'ordre de leurs numéros croissants
 		for (i = 0; i < Partie.getPartie().getJoueur().size(); i++) {
 			Joueur joueurJ = Partie.getPartie().getJoueur().get(i);
@@ -152,24 +144,16 @@ public class Manche {
 			}
 			Partie.getPartie().getJoueur().set(j, joueurJ);
 		}
-		// initialisation de la nouvelle partie
-		// on retire les eventuelles cartes restantes des joueurs
-		// Les joueur on pour etat "JOUE"
+		// initialisation de la nouvelle manche
 		for (i = 0; i < Partie.getPartie().getJoueur().size(); i++) {
 			Partie.getPartie().getJoueur().get(i).getCartes().clear();
 		}
-		// on crée un nouveau talon
-		this.talon = new Talon();
-		// sens des aiguilles d'une montre
-		this.sens = 1;
-		// on garde le même nombre de joueurs
-		this.nbJoueursEnCours = Partie.getPartie().getNbJoueursVirtuels() + 1;
-		// on crée une nouvelle pioche
-		this.pioche = new Pioche();
-		// on mélange la pioche
-		this.pioche.melanger();
-		// on distribue la pioche
-		this.pioche.distribuer();
+		this.talon = new Talon();// on crée un nouveau talon
+		this.sens = 1;// sens des aiguilles d'une montre
+		this.nbJoueursEnCours = Partie.getPartie().getNbJoueursVirtuels() + 1;// on garde le même nombre de joueurs
+		this.pioche = new Pioche();		// on crée une nouvelle pioche
+		this.pioche.melanger();// on mélange la pioche
+		this.pioche.distribuer();// on distribue la pioche
 	}
 	
 	public void triInsertionScore(LinkedList<Joueur> classementJoueurs, String ordre) {

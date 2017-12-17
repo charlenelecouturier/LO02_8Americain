@@ -20,21 +20,15 @@ public class Partie {
 
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
-		
-		try
-		{
+
+		try {
 			System.out.println("Saisissez le nombre de joueurs virtuels :");
 			this.nbJoueursVirtuels = sc.nextInt();
-		}
-		catch(InputMismatchException exception)
-		{
-			//Affiche un message d'erreur si l'utilisateur n'entre pas de chiffre pour les joueurs virtuels 
+		} catch (InputMismatchException exception) {
+			// Affiche un message d'erreur si l'utilisateur n'entre pas de chiffre pour les joueurs virtuels
 			System.out.println("Veuillez entre un nombre entier s'il vous plait.");
 		}
-		
-		
 		this.classementJoueursPartie = new LinkedList<Joueur>();
-		// instanciation des joueurs
 		this.joueur = new LinkedList<Joueur>();
 		this.joueur.add(new JoueurPhysique());
 		int i;
@@ -44,8 +38,7 @@ public class Partie {
 			} catch (NiveauJoueurException e) {
 			}
 		}
-		// on initialise le classement de la partie
-		for (i = 0; i < this.joueur.size(); i++) {
+		for (i = 0; i < this.joueur.size(); i++) {// on initialise le classement de la partie
 			this.classementJoueursPartie.add(this.joueur.get(i));
 		}
 		this.manche = new Manche(this.nbJoueursVirtuels);
@@ -77,9 +70,7 @@ public class Partie {
 	}
 
 	public boolean terminerPartie() {
-		// On initialise terminer a false
 		boolean terminer = false;
-		// mode de comptage positif
 		if (this.modeComptage.equals("POSITIF")) {
 			// la partie se joue en 200 points mais on test avec 60
 			if (this.classementJoueursPartie.get(0).getScore() >= 60) {
@@ -88,7 +79,7 @@ public class Partie {
 				System.out.println("Partie termin�e! Un joueur a eu au moins 60 point !");
 			}
 
-		} else {// mode de comptage n�gatif, le premier qui arrive a 100 point a perdu et la
+		} else {// mode de comptage negatif, le premier qui arrive a 100 point a perdu et la
 				// partie se termine
 			if (this.classementJoueursPartie.get(this.manche.getClassementJoueurs().size() - 1).getScore() >= 100) {
 				terminer = true;
@@ -146,19 +137,14 @@ public class Partie {
 	public static void main(String[] args) {
 
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
-		// creation d'une partie
-		Partie p = Partie.getPartie();
-		// creation de la pioche
-		p.manche.setPioche(new Pioche());
-		// on melange la pioche
-		p.manche.getPioche().melanger();
-		// on distribue la pioche
-		p.manche.getPioche().distribuer();
+		Partie p = Partie.getPartie();// creation d'une partie
+		p.manche.setPioche(new Pioche());// creation de la pioche
+		p.manche.getPioche().melanger();// on melange la pioche
+		p.manche.getPioche().distribuer();// on distribue la pioche
+		while (p.etat.equals("EN COURS")) { // tant que la partie n'est pas terminee, on joue des manches
 
-		while (p.etat.equals("EN COURS")) { // tant que la partie n'est pas termin�e, on joue des manches
-
-			while (!p.manche.terminerManche()) { // tant que la manche n'est pas termin�e, on joue des tours
-				try {// Temps de d�lais entre chaque tour
+			while (!p.manche.terminerManche()) { // tant que la manche n'est pas terminee, on joue des tours
+				try {// Temps de delais entre chaque tour
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -170,8 +156,7 @@ public class Partie {
 				p.manche.compterPointsPositif();
 			} else {
 				p.manche.compterPointsNegatif();
-			}
-			// Si la partie n'est pas termin�e, on debute une nouvelle manche
+			} // Si la partie n'est pas terminee, on debute une nouvelle manche
 			if (!p.terminerPartie()) {
 				System.out.println("\nNOUVELLE MANCHE\n");
 				p.manche.changerManche();

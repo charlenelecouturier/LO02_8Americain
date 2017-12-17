@@ -48,9 +48,9 @@ public class Variante4 extends Variante {
 		ArrayList<Carte> jeuDeCartes = new ArrayList<Carte>();
 		jeuDeCartes = super.creerJeuDeCartes(nbPaquet);
 		int i;
-		for(i=0;i<nbPaquet;i++) {
-		Carte carte = new Carte("JOKER", "JOKER");
-		jeuDeCartes.add(carte);
+		for (i = 0; i < nbPaquet; i++) {
+			Carte carte = new Carte("JOKER", "JOKER");
+			jeuDeCartes.add(carte);
 		}
 		return jeuDeCartes;
 	}
