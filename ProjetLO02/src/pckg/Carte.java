@@ -1,10 +1,6 @@
 package pckg;
 
 /**
- * 
- */
-
-/**
  * @author Charlene et Robin
  *
  */

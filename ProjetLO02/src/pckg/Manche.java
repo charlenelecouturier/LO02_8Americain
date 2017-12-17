@@ -69,8 +69,7 @@ public class Manche {
 		System.out.println("\nLe premier gagne 50 points, le deuxième 20 points, et le troisième 10 points");
 		// (le meilleur est celui qui a le PLUS de points)
 		this.triInsertionScore(Partie.getPartie().getClassementJoueursPartie(), "décroissant");
-		// on donne le classement général de la partie
-		System.out.println("\nClassement général : ");
+		System.out.println("\nClassement général : ");// on donne le classement général de la partie
 		for (i = 1; i <= Partie.getPartie().getClassementJoueursPartie().size(); i++) {
 			System.out.println(i + "e : " + Partie.getPartie().getClassementJoueursPartie().get(i - 1).getName() + " -- SCORE : "
 					+ Partie.getPartie().getClassementJoueursPartie().get(i - 1).getScore());
@@ -119,8 +118,7 @@ public class Manche {
 		}
 		// (le meilleur est celui qui a le MOINS de points)
 		this.triInsertionScore(Partie.getPartie().getClassementJoueursPartie(), "croissant");
-		// on donne le classemnet général de la partie
-		System.out.println("\nClassement général : ");
+		System.out.println("\nClassement général : ");// on donne le classemnet général de la partie
 		for (i = 1; i <= Partie.getPartie().getClassementJoueursPartie().size(); i++) {
 			System.out.println(i + "e : " + Partie.getPartie().getClassementJoueursPartie().get(i - 1).getName() + " -- SCORE : "
 					+ Partie.getPartie().getClassementJoueursPartie().get(i - 1).getScore());
