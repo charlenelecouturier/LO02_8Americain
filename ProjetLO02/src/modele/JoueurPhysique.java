@@ -1,4 +1,4 @@
-package pckg;
+package modele;
 
 import java.util.Scanner;
 

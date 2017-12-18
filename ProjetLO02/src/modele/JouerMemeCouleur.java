@@ -1,4 +1,4 @@
-package pckg;
+package modele;
 
 import java.util.ArrayList;
 
@@ -7,15 +7,15 @@ public class JouerMemeCouleur implements Effet {
 	public void effet() {
 
 		Joueur joueurActuel = Partie.getPartie().getJoueur().get(Partie.getPartie().getManche().getTourJoueur() - 1);
-		System.out.println("\n" + joueurActuel.getName() + " peut se defausser de toutes ses cartes du même symbole\n");
+		System.out.println("\n" + joueurActuel.getName() + " peut se defausser de toutes ses cartes du mï¿½me symbole\n");
 		Carte cartePose = new Carte(" ", " ");
-		joueurActuel.setEffetVariante("JouerMêmeCouleur");
+		joueurActuel.setEffetVariante("JouerMï¿½meCouleur");
 		ArrayList<Carte> mainJoueurActuel = joueurActuel.getCartes();
-		// lejoueur actuel rejoue jusqu'a ce qu'il se soit debarrassé de toutes ses cartes de la meme couleur que l'AS
-		// La derniere carte défaussée peut avoir un effet
+		// lejoueur actuel rejoue jusqu'a ce qu'il se soit debarrassï¿½ de toutes ses cartes de la meme couleur que l'AS
+		// La derniere carte dï¿½faussï¿½e peut avoir un effet
 		while (Partie.getPartie().getManche().getVarianteManche().estPossibleDeJouer(mainJoueurActuel)) {
 
-			// Temps de délais entre chaque carte posée
+			// Temps de dï¿½lais entre chaque carte posï¿½e
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
@@ -37,7 +37,7 @@ public class JouerMemeCouleur implements Effet {
 						}
 
 		}
-		// 6.2 On regarde si la derniere carte posée est une carte Speciale, on ne prend pas en compte les effets des autres cartes
+		// 6.2 On regarde si la derniere carte posï¿½e est une carte Speciale, on ne prend pas en compte les effets des autres cartes
 		String effet = cartePose.getEffet();
 		if (!effet.equals("Aucun")) {
 			cartePose.appliquerEffet();

@@ -1,4 +1,4 @@
-package pckg;
+package modele;
 
 import java.util.ListIterator;
 import java.util.LinkedList;
@@ -33,13 +33,13 @@ public class Manche {
 
 		boolean terminer = false;
 		if (Partie.getPartie().getModeComptage().equals("POSITIF")) {
-			// s'il y a 3 joueurs qui ont gagné, on s'il ne reste plus qu'un joueur
+			// s'il y a 3 joueurs qui ont gagnï¿½, on s'il ne reste plus qu'un joueur
 			if (this.classementJoueurs.size() == 3 || this.nbJoueursEnCours == 1) {
 				terminer = true;
 				while (!Partie.getPartie().getJoueur().isEmpty()) {
 					this.classementJoueurs.add(Partie.getPartie().getJoueur().poll());// on met tous les joueurs restant dans le classement
 				}
-				System.out.println("Manche terminée !");
+				System.out.println("Manche terminï¿½e !");
 			}
 		} else { // mode de comptage negatif
 			if (this.classementJoueurs.size() == 1) {
@@ -47,7 +47,7 @@ public class Manche {
 				while (!Partie.getPartie().getJoueur().isEmpty()) {
 					this.classementJoueurs.add(Partie.getPartie().getJoueur().poll());
 				}
-				System.out.println("Manche terminée !");
+				System.out.println("Manche terminï¿½e !");
 			}
 		}
 		return terminer;
@@ -66,11 +66,11 @@ public class Manche {
 		for (i = 0; i < this.classementJoueurs.size(); i++) {
 			System.out.println((i + 1) + "e : " + this.classementJoueurs.get(i).getName());
 		}
-		System.out.println("\nLe premier gagne 50 points, le deuxième 20 points, et le troisième 10 points");
+		System.out.println("\nLe premier gagne 50 points, le deuxiï¿½me 20 points, et le troisiï¿½me 10 points");
 		// (le meilleur est celui qui a le PLUS de points)
-			this.triInsertionScore(Partie.getPartie().getClassementJoueursPartie(), "décroissant");
-		// on donne le classement général de la partie
-		System.out.println("\nClassement général : ");
+			this.triInsertionScore(Partie.getPartie().getClassementJoueursPartie(), "dï¿½croissant");
+		// on donne le classement gï¿½nï¿½ral de la partie
+		System.out.println("\nClassement gï¿½nï¿½ral : ");
 		for (i = 1; i <= Partie.getPartie().getClassementJoueursPartie().size(); i++) {
 			System.out.println(i + "e : " + Partie.getPartie().getClassementJoueursPartie().get(i - 1).getName() + " -- SCORE : "
 					+ Partie.getPartie().getClassementJoueursPartie().get(i - 1).getScore());
@@ -80,14 +80,14 @@ public class Manche {
 	public void compterPointsNegatif() {
 
 		int i;
-		// mode de comptage négatif
+		// mode de comptage nï¿½gatif
 		ListIterator<Joueur> parcourirJoueurs = classementJoueurs.listIterator(); // on parcourt les joueurs
 		Joueur joueurSelect;
 		do {
 			joueurSelect = parcourirJoueurs.next(); // On selectionne un joueur
 			joueurSelect.setScoreManche(0);
-			int points = 0;// on initialise les points qu'il va prendre à 0
-			// on parcourt les cartes restantes du joueur selectionné
+			int points = 0;// on initialise les points qu'il va prendre ï¿½ 0
+			// on parcourt les cartes restantes du joueur selectionnï¿½
 			ListIterator<Carte> parcourirCartesJoueur = joueurSelect.getCartes().listIterator();
 			Carte c;
 			while (parcourirCartesJoueur.hasNext()) {
@@ -105,7 +105,7 @@ public class Manche {
 					points += Integer.parseInt(c.getValeur());
 				}
 			}
-			// modification du score génaral
+			// modification du score gï¿½naral
 			joueurSelect.setScore(joueurSelect.getScore() + points);
 			// pour afficher le score de la manche
 			joueurSelect.setScoreManche(points);
@@ -126,8 +126,8 @@ public class Manche {
 		// (le meilleur est celui qui a le MOINS de points)
 		this.triInsertionScore(Partie.getPartie().getClassementJoueursPartie(), "croissant");
 
-		// on donne le classemnet général de la partie
-		System.out.println("\nClassement général : ");
+		// on donne le classemnet gï¿½nï¿½ral de la partie
+		System.out.println("\nClassement gï¿½nï¿½ral : ");
 		for (i = 1; i <= Partie.getPartie().getClassementJoueursPartie().size(); i++) {
 			System.out.println(i + "e : " + Partie.getPartie().getClassementJoueursPartie().get(i - 1).getName() + " -- SCORE : "
 					+ Partie.getPartie().getClassementJoueursPartie().get(i - 1).getScore());
@@ -135,13 +135,13 @@ public class Manche {
 	}
 
 	public void changerManche() {
-		this.varianteManche = choisirVariante(Partie.getPartie().getNbJoueursVirtuels());// posibilité de changer la variante
+		this.varianteManche = choisirVariante(Partie.getPartie().getNbJoueursVirtuels());// posibilitï¿½ de changer la variante
 		int i, j;
 		while (this.classementJoueurs.size() > 0) {
 			Partie.getPartie().getJoueur().add(this.classementJoueurs.poll());// On remet les joueurs dans le tableau de joueurs :
 		}
 
-		// tri des joueurs par insertion, on ajoute le joueur dans l'ordre de leurs numéros croissants
+		// tri des joueurs par insertion, on ajoute le joueur dans l'ordre de leurs numï¿½ros croissants
 		for (i = 0; i < Partie.getPartie().getJoueur().size(); i++) {
 			Joueur joueurJ = Partie.getPartie().getJoueur().get(i);
 
@@ -158,15 +158,15 @@ public class Manche {
 		for (i = 0; i < Partie.getPartie().getJoueur().size(); i++) {
 			Partie.getPartie().getJoueur().get(i).getCartes().clear();
 		}
-		// on crée un nouveau talon
+		// on crï¿½e un nouveau talon
 		this.talon = new Talon();
 		// sens des aiguilles d'une montre
 		this.sens = 1;
-		// on garde le même nombre de joueurs
+		// on garde le mï¿½me nombre de joueurs
 		this.nbJoueursEnCours = Partie.getPartie().getNbJoueursVirtuels() + 1;
-		// on crée une nouvelle pioche
+		// on crï¿½e une nouvelle pioche
 		this.pioche = new Pioche();
-		// on mélange la pioche
+		// on mï¿½lange la pioche
 		this.pioche.melanger();
 		// on distribue la pioche
 		this.pioche.distribuer();
@@ -221,7 +221,7 @@ public class Manche {
 			System.out.println("Variante 4 choisie ");
 
 		} else {
-			System.out.println("Erreur : variante inexistante, choisissez à nouveau");
+			System.out.println("Erreur : variante inexistante, choisissez ï¿½ nouveau");
 			choixVariante = choisirVariante(nbJoueursVirtuels);
 		}
 		return choixVariante;

@@ -1,4 +1,4 @@
-package pckg;
+package modele;
 
 public class ChangerSens implements Effet {
 
@@ -8,7 +8,7 @@ public class ChangerSens implements Effet {
 			Effet obligerRejouer = new ObligeRejouer();
 			obligerRejouer.effet();
 		} else {
-			System.out.println("\nLa carte jouée change de sens !\n");
+			System.out.println("\nLa carte jouï¿½e change de sens !\n");
 			Partie.getPartie().getManche().setSens();
 		}
 	}

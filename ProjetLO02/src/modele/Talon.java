@@ -1,4 +1,4 @@
-package pckg;
+package modele;
 
 import java.util.ArrayList;
 
@@ -17,15 +17,15 @@ public class Talon {
 	
 	
 	/** Constructeur de la classe Talon
-	 * il permet de créer un reférence vers une carteDuDessus du talon inconnue, qui ne correspondra pas a la référence 
-	 * de la carte réellement placé au dessus du talon dans la collection cartes ( à la place talon.cartes.size()-1 ).
-	 * Ainsi, lorsque qu'une carte ayant pour effet de changer le symbole de la carte du dessus est posée, on pourra 
-	 * changer le symbole de l'attribut carte du dessus, sans transformer réellement la carte du Talon
-	 * ( à la place Talon.carte.size()-1 ).
-	 * Quand on ajoute une carte au talon, on va faire un cartes.add() pour ajouter une carte à la collection carte
-	 *  correspondant au paquet, puis on va changer à part la carte à la ref carteDessus en faisant : 
-	 * carteDessus.setSymbole(carteAjoutée.getSymbole()) 
-	 * et carteDessus.setValeur(carteAjoutée.getValeur())
+	 * il permet de crï¿½er un refï¿½rence vers une carteDuDessus du talon inconnue, qui ne correspondra pas a la rï¿½fï¿½rence 
+	 * de la carte rï¿½ellement placï¿½ au dessus du talon dans la collection cartes ( ï¿½ la place talon.cartes.size()-1 ).
+	 * Ainsi, lorsque qu'une carte ayant pour effet de changer le symbole de la carte du dessus est posï¿½e, on pourra 
+	 * changer le symbole de l'attribut carte du dessus, sans transformer rï¿½ellement la carte du Talon
+	 * ( ï¿½ la place Talon.carte.size()-1 ).
+	 * Quand on ajoute une carte au talon, on va faire un cartes.add() pour ajouter une carte ï¿½ la collection carte
+	 *  correspondant au paquet, puis on va changer ï¿½ part la carte ï¿½ la ref carteDessus en faisant : 
+	 * carteDessus.setSymbole(carteAjoutï¿½e.getSymbole()) 
+	 * et carteDessus.setValeur(carteAjoutï¿½e.getValeur())
 	 * */
 	
 	public Talon() {
@@ -34,7 +34,7 @@ public class Talon {
 	
 	/**
 	 * methode qui permet de mettre toutes les cartes du talon dans la pioche
-	 * (lorsque cette dernière ne permet pas au joueur de piocher le bon nombre de
+	 * (lorsque cette derniï¿½re ne permet pas au joueur de piocher le bon nombre de
 	 * cartes), sauf la carte du dessus du talon qui reste, et on conserve les
 	 * dernieres cartes de la pioche au dessus de celle-ci La methode ne renvoie
 	 * rien en retour
@@ -43,7 +43,7 @@ public class Talon {
 	public void devenirPioche() {
 		
 		int nombreCartesPioche = Partie.getPartie().getManche().getPioche().getCartes().size();
-		System.out.println("\nIl reste " + nombreCartesPioche + " cartes dans la pioche, on tranfère le talon dans la pioche !\n");
+		System.out.println("\nIl reste " + nombreCartesPioche + " cartes dans la pioche, on tranfï¿½re le talon dans la pioche !\n");
 		ArrayList<Carte> cartesRestantes = new ArrayList<Carte>(); // les dernieres cartes qui restaient de la pioche
 
 		// on stocke les dernieres cartes de la pioche dans une collection, dans l'ordre
@@ -58,7 +58,7 @@ public class Talon {
 		}
 		// On melange la pioche
 		Partie.getPartie().getManche().getPioche().melanger();
-		// On rajoute les dernieres cartes a piocher (qui n'étaient pas suffisantes pour
+		// On rajoute les dernieres cartes a piocher (qui n'ï¿½taient pas suffisantes pour
 		// que le joueur puisse piocher correctement), dans la pioche
 		while (cartesRestantes.size()>0) {
 			Partie.getPartie().getManche().getPioche().getCartes().add(cartesRestantes.get(0));

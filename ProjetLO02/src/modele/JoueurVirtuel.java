@@ -1,4 +1,4 @@
-package pckg;
+package modele;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
@@ -8,27 +8,35 @@ import java.util.Scanner;
 //package pckg;
 
 public class JoueurVirtuel extends Joueur {
-
+	private int strat;
+	
 	public JoueurVirtuel() throws NiveauJoueurException {
 		super();
-		setName("Joueur" + getNumero());
-		System.out.println("\nNiveau du " + this.name + " ? 1 OU 2");
+		setName("Joueur " + getNumero());
 		
-		int strat;
-		// On vient tester si le niveau du jouer entré est bien 1 ou 2, on capture des erreurs sinon
+		// =======Gestion des Exceptions sur les entrées clavier========
+		//Initialisation des variables servant à la découverte d'une exception
+		strat = 0;
+		int userInput;
+		
+		//Boucle qui vérifie que l'entrée de l'utilisateur est bien conforme. Renvoie une erreur sinon
 		do {
+			System.out.println("\nNiveau du " + this.name + " ? 1 OU 2");
 			Scanner sc = new Scanner(System.in);
-			strat = sc.nextInt();
-			if( strat != 1 || strat != 2) {	
-				throw new NiveauJoueurException();
-			}	
-		}while (strat != 1 || strat != 2);
+			userInput = sc.nextInt();
+			try {
+			setStrategy(userInput);
+			} catch(NiveauJoueurException e) {
+	
+			}
+		}while (strat == 0);
 		
 		if (strat == 1) {
 			this.strategie = new StrategieDeBase();
 		} else {
 			this.strategie = new StratAvancee(); 
 		}
+		
 	}
 
 	public int choisirCarte() {
@@ -91,6 +99,21 @@ public class JoueurVirtuel extends Joueur {
 		}
 	}
 
+	
+	/**
+	 * Fonction associée à la détection d'exception sur l'entrée du niveau du joueur
+	 * @param userInput l'entrée du joueur
+	 * @throws NiveauJoueurException Renvoie le message d'erreur associé à une mauvaise entrée.
+	 */
+	public void setStrategy(int userInput) throws NiveauJoueurException{
+		if( userInput == 1 || userInput == 2) {
+			strat = userInput;
+			System.out.println(strat);
+		}else{
+			throw new NiveauJoueurException();			
+		}
+	}
+	
 	@Override
 	public void changerFamille() {
 		this.strategie.changerFamille();

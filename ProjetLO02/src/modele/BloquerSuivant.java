@@ -1,4 +1,4 @@
-package pckg;
+package modele;
 
 public class BloquerSuivant implements Effet {
 
@@ -14,21 +14,21 @@ public class BloquerSuivant implements Effet {
 			// On regarde le sens de la partie
 			if (Partie.getPartie().getManche().getSens() == 1) {
 				tour++;
-				// Si on depasse le numéro du dernier joueur, on revient au joueur 1 ( joueur
+				// Si on depasse le numï¿½ro du dernier joueur, on revient au joueur 1 ( joueur
 				// physique)
 				if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
 					tour = 1;
 				}
 			} else {// sens =-1
-					// si on trouve un numéro négatif, on revient au tour du dernier joueur ( joueur
-					// ayant le dernier numéro)
+					// si on trouve un numï¿½ro nï¿½gatif, on revient au tour du dernier joueur ( joueur
+					// ayant le dernier numï¿½ro)
 				tour--;
 				if (tour <= 0) {
 					tour = Partie.getPartie().getManche().getNbJoueursEnCours();
 				}
 			}
 			Joueur joueurSuivant = Partie.getPartie().getJoueur().get(tour - 1);
-			joueurSuivant.setEffetVariante("Bloqué");
+			joueurSuivant.setEffetVariante("Bloquï¿½");
 		}
 	}
 }

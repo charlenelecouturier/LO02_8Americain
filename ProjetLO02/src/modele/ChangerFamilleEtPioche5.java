@@ -1,15 +1,15 @@
-package pckg;
+package modele;
 
 public class ChangerFamilleEtPioche5 implements Effet {
 	public void effet() {
-		// On selectionne le joueur à qui c'est le tour (celui qui vient de poser une carte)
+		// On selectionne le joueur ï¿½ qui c'est le tour (celui qui vient de poser une carte)
 		Joueur joueur = Partie.getPartie().getJoueur().get(Partie.getPartie().getManche().getTourJoueur() - 1);
-		System.out.println("\nLa carte jouée permet de changer de symbole. et fait piocher 5 cartes au suivant\n");
+		System.out.println("\nLa carte jouï¿½e permet de changer de symbole. et fait piocher 5 cartes au suivant\n");
 		/*
 		 * on appelle la fonction changerFamille() du joueur, mais le joueur physique et
 		 * le joueur virtuel vont chacun redefinir la fonction changerFamille() du
-		 * joueur, en fonction du type réel du joueur, a l'exécution on va appeller
-		 * l'une ou l'autrre des méthodes
+		 * joueur, en fonction du type rï¿½el du joueur, a l'exï¿½cution on va appeller
+		 * l'une ou l'autrre des mï¿½thodes
 		 */
 		joueur.changerFamille();
 		int tour;
@@ -17,12 +17,12 @@ public class ChangerFamilleEtPioche5 implements Effet {
 		// On regarde le sens de la partie
 		if (Partie.getPartie().getManche().getSens() == 1) {
 			tour++;
-			// Si on depasse le numéro du dernier joueur, on revient au joueur 1 ( joueur physique)
+			// Si on depasse le numï¿½ro du dernier joueur, on revient au joueur 1 ( joueur physique)
 			if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
 				tour = 1;
 			}
 		} else {// sens =-1
-				// si on trouve un numéro négatif, on revient au tour du dernier joueur ( joueur ayant le dernier numéro)
+				// si on trouve un numï¿½ro nï¿½gatif, on revient au tour du dernier joueur ( joueur ayant le dernier numï¿½ro)
 			tour--;
 			if (tour <= 0) {
 				tour = Partie.getPartie().getManche().getNbJoueursEnCours();

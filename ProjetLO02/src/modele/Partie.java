@@ -1,4 +1,4 @@
-package pckg;
+package modele;
 
 import java.util.InputMismatchException;
 import java.util.LinkedList;
@@ -29,7 +29,7 @@ public class Partie {
 		catch(InputMismatchException exception)
 		{
 			//Affiche un message d'erreur si l'utilisateur n'entre pas de chiffre pour les joueurs virtuels 
-			System.out.println("Veuillez entre un nombre entier s'il vous plait.");
+			System.out.println("Veuillez recommencer en entrant un nombre entier s'il vous plait.");
 		}
 		
 		
@@ -144,7 +144,8 @@ public class Partie {
 	}
 
 	public static void main(String[] args) {
-
+		
+		
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
 		// creation d'une partie
 		Partie p = Partie.getPartie();

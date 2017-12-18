@@ -1,14 +1,14 @@
-package pckg;
+package modele;
 import java.util.LinkedList;
 import java.util.Random;
 
 /**
- * Pioche est la classe qui représente la pioche. Elle permet de mélanger le
- * paquet de cartes, de distribuer des cartes aléatoirement aux joueurs, et aux
- * joueurs de piocher. Elle hérite de PorteurCarte qui définit les collections
+ * Pioche est la classe qui reprï¿½sente la pioche. Elle permet de mï¿½langer le
+ * paquet de cartes, de distribuer des cartes alï¿½atoirement aux joueurs, et aux
+ * joueurs de piocher. Elle hï¿½rite de PorteurCarte qui dï¿½finit les collections
  * de cartes.
  * 
- * @author Robin & Charlène
+ * @author Robin & Charlï¿½ne
  * @see PorteurCarte
  * 
  */
@@ -16,8 +16,8 @@ public class Pioche {
 	protected LinkedList<Carte> cartes = new LinkedList<Carte>();
 
 	/**
-	 * Constructeur de la classe Pioche, il permet placer le paquet de cartes créé
-	 * dans la variante dans la pioche. Chaque carte appartient à une famille et a
+	 * Constructeur de la classe Pioche, il permet placer le paquet de cartes crï¿½ï¿½
+	 * dans la variante dans la pioche. Chaque carte appartient ï¿½ une famille et a
 	 * une valeur, et chaque carte est unique.
 	 * 
 	 * @see Variante
@@ -30,12 +30,12 @@ public class Pioche {
 
 			Carte carte = Partie.getPartie().getManche().getVarianteManche().getCartes().get(i);
 			Partie.getPartie().getManche().getVarianteManche().getCartes().remove(i);
-			this.cartes.add(carte); // on place tout le jeu de cartes créé dans la variante dans la pioche
+			this.cartes.add(carte); // on place tout le jeu de cartes crï¿½ï¿½ dans la variante dans la pioche
 		}
 	}
 
 	/**
-	 * Méthode permettant à un joueur de piocher une carte dans la pioche.
+	 * Mï¿½thode permettant ï¿½ un joueur de piocher une carte dans la pioche.
 	 * @param cartes donne la main du joueur, pour y ajouter une carte
 	 * @param nombrePioche indique combien de cartes le joueur doit piocher
 	 * @see Joueur
@@ -51,10 +51,10 @@ public class Pioche {
 			Random r = new Random();
 			place = 0 + r.nextInt(this.cartes.size() - 1);// on choisit une place aleatoirement dans le paquet (nombre
 															// choisi entre 0 et nbCartes-1)
-			// on échange les cartes
-			Carte c = this.cartes.get(place); // on met dans la référence c la carte qui est la place "place"
-			this.cartes.set(place, this.cartes.get(i)); // on met à la position "place" la carte qui est à la position i
-			this.cartes.set(i, c);// on met à la position "i" la carte qui est reférencée par c
+			// on ï¿½change les cartes
+			Carte c = this.cartes.get(place); // on met dans la rï¿½fï¿½rence c la carte qui est la place "place"
+			this.cartes.set(place, this.cartes.get(i)); // on met ï¿½ la position "place" la carte qui est ï¿½ la position i
+			this.cartes.set(i, c);// on met ï¿½ la position "i" la carte qui est refï¿½rencï¿½e par c
 
 		}
 	}

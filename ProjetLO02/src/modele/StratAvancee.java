@@ -1,4 +1,4 @@
-package pckg;
+package modele;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -46,7 +46,7 @@ public class StratAvancee implements Strategie {
 			}
 			carteNext = parcourirCartesCompatibles.previous();
 		}
-		// la premiere carte na pas ete etudiee dans la precedente boucle, on s'est arreté a celle d'avant
+		// la premiere carte na pas ete etudiee dans la precedente boucle, on s'est arretï¿½ a celle d'avant
 		if (!carteNext.getValeur().equals("ChangerFamille") && !carteNext.getValeur().equals("ObligeRejouer")) {
 			carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
 			if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")
@@ -78,7 +78,7 @@ public class StratAvancee implements Strategie {
 			int[] nombreSymbole = { 0, 0, 0, 0 };
 			// 0 : Carreau, 1 : Pique, 2 : Trefle, 3: Coeur
 
-			// on lequel des symboles est en majorité dans les cartes du joueur
+			// on lequel des symboles est en majoritï¿½ dans les cartes du joueur
 			for (i = 0; i < carteJoueur.size(); i++) {
 
 				if (carteJoueur.get(i).getSymbole().equals("CARREAU")) {
@@ -155,8 +155,8 @@ public class StratAvancee implements Strategie {
 		boolean trouveAutreCarteCompatible = false;
 		/*
 		 * On parcourt les cartes du joueur, tant qu'il reste des cartes, et quon a
-		 * pastrouve de compatibilité on return true ( jouer un 10 ) si la prochaine
-		 * carte est de la même famille que le 10 ( et que ce n'est pas la 10) ou alors
+		 * pastrouve de compatibilitï¿½ on return true ( jouer un 10 ) si la prochaine
+		 * carte est de la mï¿½me famille que le 10 ( et que ce n'est pas la 10) ou alors
 		 * si c'est un autre 10
 		 */
 		Carte carteNext = it.next();
@@ -189,7 +189,7 @@ public class StratAvancee implements Strategie {
 		}
 		if (cartesCompatibles.size() == 1) {
 			// le joueur n'a plus qu'un 10 il doit le jouer
-			System.out.println("Mince, je dois jouer mon ma carte 'Rejouer'... Elle va me forcer à piocher");
+			System.out.println("Mince, je dois jouer mon ma carte 'Rejouer'... Elle va me forcer ï¿½ piocher");
 			return true;
 		}
 		return trouveAutreCarteCompatible;

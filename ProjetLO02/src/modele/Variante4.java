@@ -1,24 +1,23 @@
-package pckg;
+package modele;
 
 import java.util.ArrayList;
 
-public class Variante5 extends Variante {
+public class Variante4 extends Variante {
 
-	public static int nombreAs = 0;
-
-	public Variante5(int nbJoueursVirtuels) {
+	public static Carte couleur = new Carte(" ", " "); 
+	
+	public Variante4(int nbJoueursVirtuels) {
 
 		int nbPaquet = 1;
 		if (nbJoueursVirtuels > 4) { 
 			nbPaquet += (nbJoueursVirtuels + 1) / 5;
 		}
-		this.nbCartes = 52 * nbPaquet;
+		this.nbCartes = 53 * nbPaquet;
 		this.jeuDeCartes = this.creerJeuDeCartes(nbPaquet);
 	}
-
+	
 	@Override
 	public ArrayList<Carte> creerJeuDeCartes(int nbPaquet) {
-
 		ArrayList<Carte> jeuDeCartes = new ArrayList<Carte>();
 		int k;
 		for (k = 1; k <= nbPaquet; k++) {
@@ -30,15 +29,23 @@ public class Variante5 extends Variante {
 					if (carte.getValeur().equals("8")) {
 						carte.setEffet("ChangerFamille");
 					} else if (carte.getValeur().equals("10")) {
-						carte.setEffet("ObligeRejouer");
-					} else if (carte.getValeur().equals("1")) {
-						carte.setEffet("Pioche2OuAsOu8");
-					} else if (carte.getValeur().equals("7")) {
 						carte.setEffet("ChangerSens");
+					} else if (carte.getValeur().equals("VALET")) {
+						carte.setEffet("BloquerSuivant");
+					} else if (carte.getValeur().equals("2")) {
+						carte.setEffet("Piocher2");
+						if (carte.getValeur().equals("2") && carte.getSymbole().equals("PIQUE")) {
+							carte.setEffet("Piocher4");
+						}
+					} else if (carte.getValeur().equals("1")) {
+						carte.setEffet("JouerToutesCartesMemeSymbole");
 					}
 					jeuDeCartes.add(carte);
 				}
 			}
+			Carte carte = new Carte("JOKER", "JOKER");
+			carte.setEffet("ChangerFamilleEtPioche5");
+			jeuDeCartes.add(carte);
 		}
 		return jeuDeCartes;
 	}

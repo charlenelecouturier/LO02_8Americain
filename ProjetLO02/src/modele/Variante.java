@@ -1,4 +1,4 @@
-package pckg;
+package modele;
 
 import java.util.ArrayList;
 
@@ -54,11 +54,11 @@ public abstract class Variante {
 			System.out.println(joueurActuel.getName() + " n'a ni d'As ni de 8 ...");
 			joueurActuel.piocher(2 * Variante5.nombreAs);
 			Variante5.nombreAs = 0;
-		} else if (joueurActuel.EffetVariante.equals("Bloqué")) {
+		} else if (joueurActuel.EffetVariante.equals("Bloquï¿½")) {
 
-			System.out.println(joueurActuel.getName() + " est bloqué !");
+			System.out.println(joueurActuel.getName() + " est bloquï¿½ !");
 
-		} else if (joueurActuel.EffetVariante.equals("JouerMêmeCouleur")) {
+		} else if (joueurActuel.EffetVariante.equals("JouerMï¿½meCouleur")) {
 
 			for (i = 0; i < carte.size(); i++) {
 				if (carte.get(i).getSymbole().equals(Variante4.couleur.getSymbole())) {
@@ -85,7 +85,7 @@ public abstract class Variante {
 			} else {
 				return false;
 			}
-		} else if (joueurActuel.EffetVariante.equals("JouerMêmeCouleur")) {
+		} else if (joueurActuel.EffetVariante.equals("JouerMï¿½meCouleur")) {
 			if (carteSymbole.equals(Variante4.couleur.getSymbole())) {
 				return true; // la carte choisie par le joueur est compatible
 			} else {
