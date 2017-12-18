@@ -1,50 +1,55 @@
 package modele;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Variante4 extends Variante {
 
-	public static Carte couleur = new Carte(" ", " "); 
-	
+	public static Carte couleur = new Carte(" ", " ");
+
 	public Variante4(int nbJoueursVirtuels) {
 
 		int nbPaquet = 1;
-		if (nbJoueursVirtuels > 4) { 
+		if (nbJoueursVirtuels > 4) {
 			nbPaquet += (nbJoueursVirtuels + 1) / 5;
 		}
 		this.nbCartes = 53 * nbPaquet;
 		this.jeuDeCartes = this.creerJeuDeCartes(nbPaquet);
+		this.assignerEffetCarte();
 	}
-	
-	@Override
+
+	public void assignerEffetCarte() {
+		Iterator<Carte> it = this.jeuDeCartes.iterator();
+		Carte carteNext;
+		do {
+			carteNext = it.next();
+			if (carteNext.getValeur().equals("8")) {
+				carteNext.setEffet("ChangerFamille");
+			} else if (carteNext.getValeur().equals("10")) {
+				carteNext.setEffet("ChangerSens");
+			} else if (carteNext.getValeur().equals("VALET")) {
+				carteNext.setEffet("BloquerSuivant");
+			} else if (carteNext.getValeur().equals("2")) {
+				carteNext.setEffet("Piocher2");
+				if (carteNext.getValeur().equals("2") && carteNext.getSymbole().equals("PIQUE")) {
+					carteNext.setEffet("Piocher4");
+				}
+			} else if (carteNext.getValeur().equals("1")) {
+				carteNext.setEffet("JouerToutesCartesMemeSymbole");
+			} else if (carteNext.getValeur().equals("JOKER")) {
+				carteNext.setEffet("ChangerFamilleEtPioche5");
+			}
+
+		} while (it.hasNext());
+	}
+
+	@Override // on doit rajouter les JOKERS
 	public ArrayList<Carte> creerJeuDeCartes(int nbPaquet) {
 		ArrayList<Carte> jeuDeCartes = new ArrayList<Carte>();
-		int k;
-		for (k = 1; k <= nbPaquet; k++) {
-			int i, j;
-			String[] valeurs = new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "VALET", "DAME","ROI" };
-			for (i = 0; i < Carte.symboles.length; i++) {
-				for (j = 0; j < valeurs.length; j++) {
-					Carte carte = new Carte(valeurs[j], Carte.symboles[i]);
-					if (carte.getValeur().equals("8")) {
-						carte.setEffet("ChangerFamille");
-					} else if (carte.getValeur().equals("10")) {
-						carte.setEffet("ChangerSens");
-					} else if (carte.getValeur().equals("VALET")) {
-						carte.setEffet("BloquerSuivant");
-					} else if (carte.getValeur().equals("2")) {
-						carte.setEffet("Piocher2");
-						if (carte.getValeur().equals("2") && carte.getSymbole().equals("PIQUE")) {
-							carte.setEffet("Piocher4");
-						}
-					} else if (carte.getValeur().equals("1")) {
-						carte.setEffet("JouerToutesCartesMemeSymbole");
-					}
-					jeuDeCartes.add(carte);
-				}
-			}
+		jeuDeCartes = super.creerJeuDeCartes(nbPaquet);
+		int i;
+		for (i = 0; i < nbPaquet; i++) {
 			Carte carte = new Carte("JOKER", "JOKER");
-			carte.setEffet("ChangerFamilleEtPioche5");
 			jeuDeCartes.add(carte);
 		}
 		return jeuDeCartes;

@@ -19,7 +19,7 @@ public class JoueurVirtuel extends Joueur {
 		strat = 0;
 		int userInput;
 		
-		//Boucle qui vérifie que l'entrée de l'utilisateur est bien conforme. Renvoie une erreur sinon
+		// On vient tester si le niveau du joueur entre est bien 1 ou 2, on capture des erreurs sinon
 		do {
 			System.out.println("\nNiveau du " + this.name + " ? 1 OU 2");
 			Scanner sc = new Scanner(System.in);
@@ -54,7 +54,7 @@ public class JoueurVirtuel extends Joueur {
 		// cartesJouables = this.getCartes();
 		ListIterator<Carte> parcourirCarteJouable = cartesJouables.listIterator();
 		while (parcourirCarteJouable.hasNext()) {
-			// on vrifie � chaque iteration que la carte est compatible
+			// on vrifie a chaque iteration que la carte est compatible
 			if (!Partie.getPartie().getManche().getVarianteManche().estCompatible(parcourirCarteJouable.next())) {
 				// on retire les cartes pas compatible de la liste.
 				parcourirCarteJouable.remove();

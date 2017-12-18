@@ -1,10 +1,6 @@
 package modele;
 
 /**
- * 
- */
-
-/**
  * @author Charlene et Robin
  *
  */
