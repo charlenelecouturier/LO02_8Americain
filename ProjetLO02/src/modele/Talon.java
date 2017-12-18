@@ -1,12 +1,13 @@
 package modele;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  * @author Robin et Charlene
  *
  */
-public class Talon {
+public class Talon extends Observable {
 
 	/**
 	 * @param args
@@ -30,6 +31,7 @@ public class Talon {
 	
 	public Talon() {
 		this.carteDessus= new Carte("?","?"); // initialisation carte du dessus pour pas renvoyer un pointeur null
+		
 	}
 	
 	/**
@@ -76,6 +78,8 @@ public class Talon {
 
 	public void setCarteDessus(Carte carteDessus) {
 		this.carteDessus = carteDessus;
+		setChanged();
+		notifyObservers();
 	}
 
 	

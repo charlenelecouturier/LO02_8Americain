@@ -1,6 +1,7 @@
 package modele;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  * Joueur est la classe qui represente les participants au jeu, qu'ils soient
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  * @see JoueurVirtuel
  * @see JoueurPhysique
  */
-public abstract class Joueur {
+public abstract class Joueur extends Observable{
 
 	protected ArrayList<Carte> cartes = new ArrayList<Carte>(); // on fait une arraylist pour les cartes
 	protected String name;
@@ -59,6 +60,8 @@ public abstract class Joueur {
 
 	public void setName(String name) {
 		this.name = name;
+		hasChanged();
+		notifyObservers();
 	}
 
 
@@ -116,6 +119,10 @@ public abstract class Joueur {
 			Partie.getPartie().getManche().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
 			System.out.println(this.getName() + " pose " + cartePose);
 			cartes.remove(cartePose);
+			//On notifie à l'interface que la carte a été retirée de la main du joueur
+			hasChanged();
+			notifyObservers();
+			
 			if (this.cartes.size() == 1) {
 				this.direCarte();
 			}

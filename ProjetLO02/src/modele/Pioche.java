@@ -1,5 +1,6 @@
 package modele;
 import java.util.LinkedList;
+import java.util.Observable;
 import java.util.Random;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Random;
  * @see PorteurCarte
  * 
  */
-public class Pioche {
+public class Pioche extends Observable {
 	protected LinkedList<Carte> cartes = new LinkedList<Carte>();
 
 	/**
@@ -32,6 +33,7 @@ public class Pioche {
 			Partie.getPartie().getManche().getVarianteManche().getCartes().remove(i);
 			this.cartes.add(carte); // on place tout le jeu de cartes cr�� dans la variante dans la pioche
 		}
+		
 	}
 
 	/**
