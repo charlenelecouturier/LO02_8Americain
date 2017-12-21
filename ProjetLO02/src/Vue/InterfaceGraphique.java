@@ -1,4 +1,4 @@
-package Vue;
+package vue;
 
 import java.awt.EventQueue;
 
@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 
 public class InterfaceGraphique {
 
-	private JFrame frame;
+	JFrame frame;
 
 	/**
 	 * Launch the application.
