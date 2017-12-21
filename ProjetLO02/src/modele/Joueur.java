@@ -6,9 +6,9 @@ import java.util.Observable;
 /**
  * Joueur est la classe qui represente les participants au jeu, qu'ils soient
  * physiques ou virtuels. Il ne sera pas possible de creer un joueur dont le
- * type n'est pas pr�cis� dans le jeu
+ * type n'est pas precise dans le jeu
  * 
- * @author Robin et Charl�ne
+ * @author Robin et Charlene
  * @see JoueurVirtuel
  * @see JoueurPhysique
  */
@@ -16,7 +16,7 @@ public abstract class Joueur extends Observable{
 
 	protected ArrayList<Carte> cartes = new ArrayList<Carte>(); // on fait une arraylist pour les cartes
 	protected String name;
-	private int numero; // num�ro est compris entre 1 et le nombre de joueurs en cours dans la partie
+	private int numero; // numero est compris entre 1 et le nombre de joueurs en cours dans la partie
 	private static int donneurNum = 1;
 	private int score; // score du joueur
 	private int scoreManche;
@@ -24,7 +24,7 @@ public abstract class Joueur extends Observable{
 	protected String EffetVariante;
 
 	/**
-	 * le Constructeur de Joueur ne doit pas �tre utilis� directement, il simplifie le code de ses classes filles.
+	 * le Constructeur de Joueur ne doit pas etre utilise directement, il simplifie le code de ses classes filles.
 	 */
 	public Joueur() {
 		this.EffetVariante = "Aucun";
@@ -41,9 +41,9 @@ public abstract class Joueur extends Observable{
 	}
 
 	/**
-	 * Accesseur du num�ro
+	 * Accesseur du numero
 	 * 
-	 * @return le num�ro du joueur, utilis�epar la partie pour determiner les tours de jeu.
+	 * @return le numero du joueur, utilise par la partie pour determiner les tours de jeu.
 	 * @see Partie
 	 */
 	public int getNumero() {
@@ -80,7 +80,7 @@ public abstract class Joueur extends Observable{
 	}
 
 	/**
-	 * Le corps meme de cette classe, jouerTour permet � un joueur physique ou
+	 * Le corps meme de cette classe, jouerTour permet a un joueur physique ou
 	 * virtuel de choisir une carte dans son jeu et la poser sur le talon.
 	 */
 	public void jouerTour() {
@@ -89,7 +89,7 @@ public abstract class Joueur extends Observable{
 		boolean gagne = false;
 		this.poserCarte();
 		this.EffetVariante = "Aucun";
-		gagne = this.gagnePartie();	// on regarde si le fait d'avoir pos� une carte permet au joueur de gagner la manche
+		gagne = this.gagnePartie();	// on regarde si le fait d'avoir pose une carte permet au joueur de gagner la manche
 		tour = Partie.getPartie().getManche().getTourJoueur();
 		if (Partie.getPartie().getManche().getSens() == 1) {
 			if (!gagne) {
@@ -170,7 +170,7 @@ public abstract class Joueur extends Observable{
 					.get(Partie.getPartie().getManche().getPioche().cartes.size() - 1); // -1 car indice commence � 0
 			cartes.add(cartePioche);
 			Partie.getPartie().getManche().getPioche().cartes.remove(Partie.getPartie().getManche().getPioche().cartes.size() - 1);
-			System.out.println("\n" + this.name + " a pioch� " + cartePioche);
+			System.out.println("\n" + this.name + " a pioche " + cartePioche);
 			System.out.println("\nTest : il reste " + Partie.getPartie().getManche().getPioche().getCartes().size()
 					+ " cartes dans la pioche\n");
 		}
@@ -178,9 +178,9 @@ public abstract class Joueur extends Observable{
 
 	public boolean gagnePartie() {
 		if (this.cartes.isEmpty()) {
-			System.out.println(this.name + " a gagn�.");
+			System.out.println(this.name + " a gagne.");
 			Partie.getPartie().getManche().getClassementJoueurs().add(this);
-			Partie.getPartie().getJoueur().remove(this);
+			Partie.getPartie().getManche().getJoueur().remove(this);
 			Partie.getPartie().getManche().setNbJoueursEnCours(Partie.getPartie().getManche().getNbJoueursEnCours() - 1);
 			return true;
 		}

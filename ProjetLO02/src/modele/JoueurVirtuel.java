@@ -68,8 +68,8 @@ public class JoueurVirtuel extends Joueur {
 	@Override
 	public void direCarte() {
 		boolean contreCarte;
-		if (Partie.getPartie().getJoueur().get(0) instanceof JoueurPhysique) {
-			contreCarte = ((JoueurPhysique) Partie.getPartie().getJoueur().get(0)).direContreCarte();
+		if (Partie.getPartie().getManche().getJoueur().get(0) instanceof JoueurPhysique) {
+			contreCarte = ((JoueurPhysique) Partie.getPartie().getManche().getJoueur().get(0)).direContreCarte();
 		}
 
 		else {
@@ -80,13 +80,13 @@ public class JoueurVirtuel extends Joueur {
 			int proba1Sur4 = 1 + r.nextInt(3);
 			if (proba1Sur4 == 1) {
 				// si le joueur a la place 0 est le joueur qui n'a plus qu'une carte
-				if (this.equals(Partie.getPartie().getJoueur().get(0))) {
+				if (this.equals(Partie.getPartie().getManche().getJoueur().get(0))) {
 					// On choisi un numero de joueur au hasard , sauf celui a la place 0 pour dire carte
-					int numJoueurDitContreCarte =(int)(Math.random() * (Partie.getPartie().getJoueur().size() - 2)) + 1;
-					System.out.println(Partie.getPartie().getJoueur().get(numJoueurDitContreCarte).getName()
+					int numJoueurDitContreCarte =(int)(Math.random() * (Partie.getPartie().getManche().getJoueur().size() - 2)) + 1;
+					System.out.println(Partie.getPartie().getManche().getJoueur().get(numJoueurDitContreCarte).getName()
 							+ " dit CONTRE-CARTE");
 				}else {// Sinon c'est le joueur � l'emplacement 0 qui dit carte
-					System.out.println(Partie.getPartie().getJoueur().get(0).getName() + " dit CONTRE-CARTE");
+					System.out.println(Partie.getPartie().getManche().getJoueur().get(0).getName() + " dit CONTRE-CARTE");
 				}
 				contreCarte = true;
 			} else { // le joueur a 3 chance sur 4 de dire assez rapidemment 'CARTE'
@@ -101,9 +101,9 @@ public class JoueurVirtuel extends Joueur {
 
 	
 	/**
-	 * Fonction associée à la détection d'exception sur l'entrée du niveau du joueur
-	 * @param userInput l'entrée du joueur
-	 * @throws NiveauJoueurException Renvoie le message d'erreur associé à une mauvaise entrée.
+	 * Fonction assocee a� la detection d'exception sur l'entree du niveau du joueur
+	 * @param userInput l'entree du joueur
+	 * @throws NiveauJoueurException Renvoie le message d'erreur associe à une mauvaise entree.
 	 */
 	public void setStrategy(int userInput) throws NiveauJoueurException{
 		if( userInput == 1 || userInput == 2) {

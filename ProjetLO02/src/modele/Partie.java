@@ -43,7 +43,7 @@ public class Partie {
 		for (i = 0; i < this.joueur.size(); i++) {// on initialise le classement de la partie
 			this.classementJoueursPartie.add(this.joueur.get(i));
 		}
-		this.manche = new Manche(this.nbJoueursVirtuels);
+		this.manche = new Manche(this.nbJoueursVirtuels,joueur);
 		this.etat = "EN COURS";
 		// mode de comptage des points
 		System.out.println("\nSaisir le mode de comptage des points : 'POSITIF' ou 'NEGATIF'");
@@ -51,10 +51,10 @@ public class Partie {
 		this.modeComptage = text.nextLine();
 		if (this.modeComptage.equals("POSITIF")) {
 			System.out.println(
-					"\nMode de comptage des points choisi : POSITIF ! Le premier joueur arriv� � 60 points gagne la partie ! \nLorsque 3 joueurs ont fini la manche, celle-ci se termine\n");
+					"\nMode de comptage des points choisi : POSITIF ! Le premier joueur qui arrive 60 points gagne la partie ! \nLorsque 3 joueurs ont fini la manche, celle-ci se termine\n");
 		} else {
 			System.out.println(
-					"\nMode de comptage des points choisi : NEGATIF ! Lorsqu'un joueur atteint 100 point, il perd la partie ! \nUne manche se termine d�s qu'un joueur a fini !\n");
+					"\nMode de comptage des points choisi : NEGATIF ! Lorsqu'un joueur atteint 100 point, il perd la partie ! \nUne manche se termine lorsqu'un joueur a fini !\n");
 		}
 	}
 
@@ -86,7 +86,7 @@ public class Partie {
 			if (this.classementJoueursPartie.get(this.manche.getClassementJoueurs().size() - 1).getScore() >= 100) {
 				terminer = true;
 				this.etat = "TERMINEE";
-				System.out.println("Partie termin�e! Un joueur a eu au moins 100 point !");
+				System.out.println("Partie terminee! Un joueur a eu au moins 100 point !");
 			}
 		}
 
@@ -137,22 +137,20 @@ public class Partie {
 	}
 
 	public static void main(String[] args) {
-		
-		
+
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
 		Partie p = Partie.getPartie();// creation d'une partie
-		p.manche.setPioche(new Pioche());// creation de la pioche
-		p.manche.getPioche().melanger();// on melange la pioche
-		p.manche.getPioche().distribuer();// on distribue la pioche
 		while (p.etat.equals("EN COURS")) { // tant que la partie n'est pas terminee, on joue des manches
-
+			p.manche.setPioche(new Pioche());// creation de la pioche
+			p.manche.getPioche().melanger();// on melange la pioche
+			p.manche.getPioche().distribuer();// on distribue la pioche
 			while (!p.manche.terminerManche()) { // tant que la manche n'est pas terminee, on joue des tours
 				try {// Temps de delais entre chaque tour
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				p.joueur.get(p.manche.getTourJoueur() - 1).jouerTour();
+				p.manche.getJoueur().get(p.manche.getTourJoueur() - 1).jouerTour();
 				System.out.println("\n");
 			}
 			if (p.modeComptage.equals("POSITIF")) {
@@ -162,7 +160,7 @@ public class Partie {
 			} // Si la partie n'est pas terminee, on debute une nouvelle manche
 			if (!p.terminerPartie()) {
 				System.out.println("\nNOUVELLE MANCHE\n");
-				p.manche.changerManche();
+				p.manche= new Manche(p.nbJoueursVirtuels,p.joueur);
 			}
 		}
 	}

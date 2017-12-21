@@ -13,7 +13,7 @@ public abstract class Variante {
 	 */
 	protected int nbCartes;
 	protected ArrayList<Carte> jeuDeCartes;
-
+	public static int nombreAs = 0;
 	/**
 	 * @param nbCartes the nbCartes to set
 	 */
@@ -23,7 +23,7 @@ public abstract class Variante {
 
 	public boolean estPossibleDeJouer(ArrayList<Carte> carte) {
 		int i;
-		Joueur joueurActuel = Partie.getPartie().getJoueur().get(Partie.getPartie().getManche().getTourJoueur() - 1);
+		Joueur joueurActuel = Partie.getPartie().getManche().getJoueur().get(Partie.getPartie().getManche().getTourJoueur() - 1);
 		if (joueurActuel.EffetVariante.equals("Aucun")) {
 			for (i = 0; i < carte.size(); i++) {
 				if (carte.get(i).getSymbole().equals(Partie.getPartie().getManche().getTalon().getCarteDessus().getSymbole())
@@ -41,13 +41,24 @@ public abstract class Variante {
 				}
 			}
 			System.out.println(joueurActuel.getName() + " n'a ni d'As ni de 8 ...");
-			joueurActuel.piocher(2 * Variante5.nombreAs);
-			Variante5.nombreAs = 0;
-		} else if (joueurActuel.EffetVariante.equals("Bloqu�")) {
+			joueurActuel.piocher(2 * Variante.nombreAs);
+			Variante.nombreAs = 0;
+		} else if (joueurActuel.EffetVariante.equals("Pioche3ouAsou8")) {
+			for (i = 0; i < carte.size(); i++) {
+				if (carte.get(i).getValeur().equals(Partie.getPartie().getManche().getTalon().getCarteDessus().getValeur())
+						|| carte.get(i).getValeur().equals("8"))
+				{
+					return true; // le joueur peut jouer
+				}
+			}
+			System.out.println(joueurActuel.getName() + " n'a ni d'As ni de 8 ...");
+			joueurActuel.piocher(3 * Variante.nombreAs);
+			Variante.nombreAs = 0;
+		}else if (joueurActuel.EffetVariante.equals("Bloquer")) {
 
-			System.out.println(joueurActuel.getName() + " est bloqu� !");
+			System.out.println(joueurActuel.getName() + " est bloque !");
 
-		} else if (joueurActuel.EffetVariante.equals("JouerM�meCouleur")) {
+		} else if (joueurActuel.EffetVariante.equals("JouerMemeCouleur")) {
 
 			for (i = 0; i < carte.size(); i++) {
 				if (carte.get(i).getSymbole().equals(Variante4.couleur.getSymbole())) {
@@ -59,7 +70,7 @@ public abstract class Variante {
 	}
 
 	public boolean estCompatible(Carte carte) {
-		Joueur joueurActuel = Partie.getPartie().getJoueur().get(Partie.getPartie().getManche().getTourJoueur() - 1);
+		Joueur joueurActuel = Partie.getPartie().getManche().getJoueur().get(Partie.getPartie().getManche().getTourJoueur() - 1);
 		Carte carteDessusTalon;
 		Talon talon = Partie.getPartie().getManche().getTalon();
 		carteDessusTalon = talon.getCarteDessus();
@@ -74,13 +85,13 @@ public abstract class Variante {
 			} else {
 				return false;
 			}
-		} else if (joueurActuel.EffetVariante.equals("JouerM�meCouleur")) {
+		} else if (joueurActuel.EffetVariante.equals("JouerMemeCouleur")) {
 			if (carteSymbole.equals(Variante4.couleur.getSymbole())) {
 				return true; // la carte choisie par le joueur est compatible
 			} else {
 				return false;
 			}
-		} else if (joueurActuel.EffetVariante.equals("Pioche2ouAsou8")) {
+		} else if (joueurActuel.EffetVariante.equals("Pioche2ouAsou8")||joueurActuel.EffetVariante.equals("Pioche3ouAsou8")) {
 			if (carteValeur.equals(carteDessusTalonValeur) || carteValeur.equals("8")) {
 				return true; // la carte choisie par le joueur est compatible
 			} else {

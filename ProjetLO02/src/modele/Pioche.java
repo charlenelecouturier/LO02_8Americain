@@ -67,7 +67,7 @@ public class Pioche extends Observable {
 		while (tour < 8) // on distribue 8 cartes chacuns
 		{
 			for (i = 0; i < nbJoueurs; i++) {
-				Partie.getPartie().getJoueur().get(i).getCartes().add(this.cartes.get(this.cartes.size() - 1));
+				Partie.getPartie().getManche().getJoueur().get(i).getCartes().add(this.cartes.get(this.cartes.size() - 1));
 				this.cartes.remove(this.cartes.size() - 1); // on supprime cette carte de la pioche
 				// la carte du dessus de la pioche va dans le jeu de carte du joueur "i" au tour
 			}
@@ -78,7 +78,7 @@ public class Pioche extends Observable {
 		Partie.getPartie().getManche().getTalon().getCarteDessus().setValeur(this.cartes.get(this.cartes.size() - 1).getValeur());
 		// On la supprime du paquet de carte de la pioche
 		this.cartes.remove(this.cartes.size() - 1);
-		System.out.println("Test : nombre de cartes du joueur 1 : " + Partie.getPartie().getJoueur().get(0).getCartes().size());
+		System.out.println("Test : nombre de cartes du joueur 1 : " + Partie.getPartie().getManche().getJoueur().get(0).getCartes().size());
 		System.out.println("Test : nombre de cartes de la pioche : " + this.cartes.size() + "\n");
 	}
 	/**

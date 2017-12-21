@@ -6,10 +6,10 @@ public class JouerMemeCouleur implements Effet {
 
 	public void effet() {
 
-		Joueur joueurActuel = Partie.getPartie().getJoueur().get(Partie.getPartie().getManche().getTourJoueur() - 1);
+		Joueur joueurActuel = Partie.getPartie().getManche().getJoueur().get(Partie.getPartie().getManche().getTourJoueur() - 1);
 		System.out.println("\n" + joueurActuel.getName() + " peut se defausser de toutes ses cartes du m�me symbole\n");
 		Carte cartePose = new Carte(" ", " ");
-		joueurActuel.setEffetVariante("JouerM�meCouleur");
+		joueurActuel.setEffetVariante("JouerMemeCouleur");
 		ArrayList<Carte> mainJoueurActuel = joueurActuel.getCartes();
 		// lejoueur actuel rejoue jusqu'a ce qu'il se soit debarrass� de toutes ses cartes de la meme couleur que l'AS
 		// La derniere carte d�fauss�e peut avoir un effet

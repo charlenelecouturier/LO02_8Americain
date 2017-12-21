@@ -85,7 +85,13 @@ public class Carte {
 		} else if (this.effet.equals("ChangerFamilleEtPioche5")) {
 			Effet changerFamilleEtPioche5 = new ChangerFamilleEtPioche5();
 			changerFamilleEtPioche5.effet();
-		}
+		}else if (this.effet.equals("Piocher1Carte")) {
+			Effet piocher1 = new Piocher1();
+			piocher1.effet();
+		}else if (this.effet.equals("Pioche 3 cartes ou joue un AS ou un 8")) {
+			Effet pioche3OuASOu8 = new Pioche3OuAsOu8();
+			pioche3OuASOu8.effet();
+		} 
 	}
 
 	public Carte(String valeur, String symbole) {

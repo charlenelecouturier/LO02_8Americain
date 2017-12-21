@@ -13,7 +13,7 @@ public class Variante4 extends Variante {
 		if (nbJoueursVirtuels > 4) {
 			nbPaquet += (nbJoueursVirtuels + 1) / 5;
 		}
-		this.nbCartes = 53 * nbPaquet;
+		this.nbCartes = 54 * nbPaquet;
 		this.jeuDeCartes = this.creerJeuDeCartes(nbPaquet);
 		this.assignerEffetCarte();
 	}
@@ -49,8 +49,10 @@ public class Variante4 extends Variante {
 		jeuDeCartes = super.creerJeuDeCartes(nbPaquet);
 		int i;
 		for (i = 0; i < nbPaquet; i++) {
-			Carte carte = new Carte("JOKER", "JOKER");
-			jeuDeCartes.add(carte);
+			Carte carteJok1 = new Carte("JOKER", "JOKER");
+			jeuDeCartes.add(carteJok1);
+			Carte carteJok2 = new Carte("JOKER", "JOKER");
+			jeuDeCartes.add(carteJok2);
 		}
 		return jeuDeCartes;
 	}
