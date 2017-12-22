@@ -8,7 +8,7 @@ public class ChangerSens implements Effet {
 			Effet obligerRejouer = new ObligeRejouer();
 			obligerRejouer.effet();
 		} else {
-			System.out.println("\nLa carte jou�e change de sens !\n");
+			System.out.println("\nLa carte jouee change de sens !\n");
 			Partie.getPartie().getManche().setSens();
 		}
 	}

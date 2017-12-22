@@ -14,7 +14,7 @@ public class BloquerSuivant implements Effet {
 			// On regarde le sens de la partie
 			if (Partie.getPartie().getManche().getSens() == 1) {
 				tour++;
-				// Si on depasse le num�ro du dernier joueur, on revient au joueur 1 ( joueur
+				// Si on depasse le numero du dernier joueur, on revient au joueur 1 ( joueur
 				// physique)
 				if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
 					tour = 1;
@@ -27,8 +27,8 @@ public class BloquerSuivant implements Effet {
 					tour = Partie.getPartie().getManche().getNbJoueursEnCours();
 				}
 			}
-			Joueur joueurSuivant = Partie.getPartie().getJoueur().get(tour - 1);
-			joueurSuivant.setEffetVariante("Bloqu�");
+			Joueur joueurSuivant = Partie.getPartie().getManche().getJoueur().get(tour - 1);
+			joueurSuivant.setEffetVariante("Bloquer");
 		}
 	}
 }

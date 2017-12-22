@@ -26,7 +26,7 @@ public class JoueurPhysique extends Joueur {
 				System.out.println(i + " : " + this.cartes.get(i - 1));
 			}
 			
-			System.out.println("Num�ro de la carte choisie ?");
+			System.out.println("Numero de la carte choisie ?");
 			numero = sc.nextInt();
 			
 			if (numero < 0 || numero > this.cartes.size()||!Partie.getPartie().getManche().getVarianteManche().estCompatible(this.cartes.get(numero-1))){ // verification du num�ro de carte choisi	
@@ -35,17 +35,14 @@ public class JoueurPhysique extends Joueur {
 			}
 
 		} while (!choix);
-		if (this.cartes.get(numero - 1).getValeur().equals("1")
-				&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante5) {
-			Variante5.nombreAs++;
+		if (this.cartes.get(numero - 1).getValeur().equals("1")) {
+			Variante.nombreAs++;			
+		} else if (this.cartes.get(numero - 1).getValeur().equals("8")) {
+			Variante.nombreAs = 0;
 		}
 		if (this.cartes.get(numero - 1).getValeur().equals("1")
 				&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante4) {
 			Variante4.couleur.setSymbole(this.cartes.get(numero - 1).getSymbole());
-		}
-		if (this.cartes.get(numero - 1).getValeur().equals("8")
-				&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante5) {
-			Variante5.nombreAs = 0;
 		}
 		return numero - 1;
 	}
@@ -58,7 +55,7 @@ public class JoueurPhysique extends Joueur {
 		String reponse = scan.nextLine();
 		long t2 = System.currentTimeMillis();
 		if (t2 - t > 8000 || (!reponse.equals("carte") && !reponse.equals("Carte") && !reponse.equals("CARTE"))) {
-			System.out.println("Vous n'avez pas dit 'CARTE' � temps ! CONTRE-CARTE !");
+			System.out.println("Vous n'avez pas dit 'CARTE' a temps ! CONTRE-CARTE !");
 			this.piocher(1);
 		} else {
 			System.out.println("Vous dites 'CARTE'! ");
@@ -74,7 +71,7 @@ public class JoueurPhysique extends Joueur {
 		long t2 = System.currentTimeMillis();
 		if (t2 - t > 8000 || (!reponse.equals("contrecarte") && !reponse.equals("Contrecarte")
 				&& !reponse.equals("CONTRECARTE"))) {
-			System.out.println("Ce joueur a dit 'CARTE' !\nVous n'avez pas dit 'CONTRECARTE' � temps !\n");
+			System.out.println("Ce joueur a dit 'CARTE' !\nVous n'avez pas dit 'CONTRECARTE' a temps !\n");
 			return false;
 		} else {
 			System.out.println("Vous dites 'CONTRECARTE'!\n");

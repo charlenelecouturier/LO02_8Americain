@@ -10,7 +10,7 @@ public class StratAvancee implements Strategie {
 	public int choixCarte(ArrayList<Carte> cartesCompatibles) {
 		System.out.println("Carte du talon : " + Partie.getPartie().getManche().getTalon().getCarteDessus());
 		System.out.println("Nombre de cartes compatibles : " + cartesCompatibles.size());
-		Joueur joueurEnCours = Partie.getPartie().getJoueur().get(Partie.getPartie().getManche().getTourJoueur() - 1);
+		Joueur joueurEnCours = Partie.getPartie().getManche().getJoueur().get(Partie.getPartie().getManche().getTourJoueur() - 1);
 		int carteChoisie;
 		ListIterator<Carte> parcourirCartesCompatibles = cartesCompatibles.listIterator();
 		// On regarde si le joueur a une carte "Rejouer" jouable : si oui, on regardera si elle lui permet de rejouer ou si il n'a que celleci de compatible
@@ -35,10 +35,10 @@ public class StratAvancee implements Strategie {
 			// famille, il la pose
 			if (!carteNext.getEffet().equals("ChangerFamille") && !carteNext.getEffet().equals("ObligeRejouer")) {
 				carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
+				if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")) {
+					Variante.nombreAs++;
+				}
 				if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")
-						&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante5) {
-					Variante5.nombreAs++;
-				} else if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")
 						&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante4) {
 					Variante4.couleur.setSymbole(joueurEnCours.getCartes().get(carteChoisie).getSymbole());
 				}
@@ -46,13 +46,13 @@ public class StratAvancee implements Strategie {
 			}
 			carteNext = parcourirCartesCompatibles.previous();
 		}
-		// la premiere carte na pas ete etudiee dans la precedente boucle, on s'est arret� a celle d'avant
+		// la premiere carte na pas ete etudiee dans la precedente boucle, on s'est arrete a celle d'avant
 		if (!carteNext.getValeur().equals("ChangerFamille") && !carteNext.getValeur().equals("ObligeRejouer")) {
 			carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
-			if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")
-					&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante5) {
-				Variante5.nombreAs++;
-			} else if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")
+			if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")) {
+				Variante.nombreAs++;
+			}
+			 if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")
 					&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante4) {
 				Variante4.couleur.setSymbole(joueurEnCours.getCartes().get(carteChoisie).getSymbole());
 			}
@@ -62,9 +62,9 @@ public class StratAvancee implements Strategie {
 			System.out.println("Je suis oblige de jouer ma carte 'Changer Famille'...");
 			carteChoisie = this.jouer8(joueurEnCours);
 			// jouer un 8 contre une attaque dans la variante5
-			if (Partie.getPartie().getManche().getVarianteManche() instanceof Variante5) {
-				Variante5.nombreAs = 0;
-			}
+		
+				Variante.nombreAs = 0;
+			
 			return carteChoisie;
 		}
 	}
@@ -72,7 +72,7 @@ public class StratAvancee implements Strategie {
 	public void changerFamille() {
 
 		int tour = Partie.getPartie().getManche().getTourJoueur();
-		ArrayList<Carte> carteJoueur = Partie.getPartie().getJoueur().get(tour - 1).getCartes();
+		ArrayList<Carte> carteJoueur = Partie.getPartie().getManche().getJoueur().get(tour - 1).getCartes();
 		if (!(carteJoueur.isEmpty())) {
 			int i;
 			int[] nombreSymbole = { 0, 0, 0, 0 };

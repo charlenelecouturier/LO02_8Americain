@@ -13,10 +13,10 @@ public class Manche {
 	private int sens;
 	private Talon talon;
 	private Pioche pioche;
+	private LinkedList<Joueur> joueur;
 
+	public Manche(int nbJoueursVirtuels, LinkedList<Joueur> joueur) {
 
-	public Manche(int nbJoueursVirtuels) {		
-		
 		int nbJoueursEnCours = nbJoueursVirtuels + 1;
 		this.nbJoueursEnCours = nbJoueursEnCours;
 		this.classementJoueurs = new LinkedList<Joueur>();
@@ -27,27 +27,36 @@ public class Manche {
 		this.talon = new Talon();
 		// choix de la variante
 		this.varianteManche = choisirVariante(nbJoueursVirtuels);
+		ListIterator<Joueur> it = joueur.listIterator();
+		this.joueur = new LinkedList<Joueur>();
+		while (it.hasNext()) {
+			Joueur joueurNext = it.next();
+			joueurNext.getCartes().clear();
+			this.joueur.add(joueurNext);
 		}
+
+		Variante.nombreAs = 0;
+	}
 
 	public boolean terminerManche() {
 
 		boolean terminer = false;
 		if (Partie.getPartie().getModeComptage().equals("POSITIF")) {
-			// s'il y a 3 joueurs qui ont gagn�, on s'il ne reste plus qu'un joueur
+			// s'il y a 3 joueurs qui ont gagne, on s'il ne reste plus qu'un joueur
 			if (this.classementJoueurs.size() == 3 || this.nbJoueursEnCours == 1) {
 				terminer = true;
-				while (!Partie.getPartie().getJoueur().isEmpty()) {
-					this.classementJoueurs.add(Partie.getPartie().getJoueur().poll());// on met tous les joueurs restant dans le classement
+				while (!this.joueur.isEmpty()) {
+					this.classementJoueurs.add(this.joueur.poll());// on met tous les joueurs restant dans le classement
 				}
-				System.out.println("Manche termin�e !");
+				System.out.println("Manche terminee !");
 			}
 		} else { // mode de comptage negatif
 			if (this.classementJoueurs.size() == 1) {
 				terminer = true;
-				while (!Partie.getPartie().getJoueur().isEmpty()) {
-					this.classementJoueurs.add(Partie.getPartie().getJoueur().poll());
+				while (!this.joueur.isEmpty()) {
+					this.classementJoueurs.add(this.joueur.poll());
 				}
-				System.out.println("Manche termin�e !");
+				System.out.println("Manche terminee !");
 			}
 		}
 		return terminer;
@@ -66,33 +75,28 @@ public class Manche {
 		for (i = 0; i < this.classementJoueurs.size(); i++) {
 			System.out.println((i + 1) + "e : " + this.classementJoueurs.get(i).getName());
 		}
-		System.out.println("\nLe premier gagne 50 points, le deuxi�me 20 points, et le troisi�me 10 points");
+		System.out.println("\nLe premier gagne 50 points, le deuxieme 20 points, et le troisieme 10 points");
 		// (le meilleur est celui qui a le PLUS de points)
 
-		this.triInsertionScore(Partie.getPartie().getClassementJoueursPartie(), "d�croissant");
-		System.out.println("\nClassement g�n�ral : ");// on donne le classement g�n�ral de la partie
+		this.triInsertionScore(Partie.getPartie().getClassementJoueursPartie(), "decroissant");
+		System.out.println("\nClassement general : ");// on donne le classement general de la partie
 
 		for (i = 1; i <= Partie.getPartie().getClassementJoueursPartie().size(); i++) {
-			System.out.println(i + "e : " + Partie.getPartie().getClassementJoueursPartie().get(i - 1).getName() + " -- SCORE : "
-					+ Partie.getPartie().getClassementJoueursPartie().get(i - 1).getScore());
+			System.out.println(i + "e : " + Partie.getPartie().getClassementJoueursPartie().get(i - 1).getName()
+					+ " -- SCORE : " + Partie.getPartie().getClassementJoueursPartie().get(i - 1).getScore());
 		}
 	}
 
 	public void compterPointsNegatif() {
 
 		int i;
-
-		// mode de comptage n�gatif
-
 		ListIterator<Joueur> parcourirJoueurs = classementJoueurs.listIterator(); // on parcourt les joueurs
 		Joueur joueurSelect;
 		do {
 			joueurSelect = parcourirJoueurs.next(); // On selectionne un joueur
 			joueurSelect.setScoreManche(0);
-
-			int points = 0;// on initialise les points qu'il va prendre � 0
-			ListIterator<Carte> parcourirCartesJoueur = joueurSelect.getCartes().listIterator();// on parcourt les cartes restantes du joueur selectionn�
-
+			int points = 0;// on initialise les points qu'il va prendre a 0
+			ListIterator<Carte> parcourirCartesJoueur = joueurSelect.getCartes().listIterator();																																						
 			Carte c;
 			while (parcourirCartesJoueur.hasNext()) {
 				c = parcourirCartesJoueur.next();
@@ -110,12 +114,12 @@ public class Manche {
 				}
 			}
 
-			joueurSelect.setScore(joueurSelect.getScore() + points);			// modification du score g�naral
+			joueurSelect.setScore(joueurSelect.getScore() + points); // modification du score g�naral
 			joueurSelect.setScoreManche(points);// pour afficher le score de la manche
 
 			System.out.println(joueurSelect.getName() + " prend " + points + " points");
 		} while (parcourirJoueurs.hasNext());
-		
+
 		// (le meilleur est celui qui a le MOINS de points)
 		this.triInsertionCroisScoreManche(classementJoueurs);
 
@@ -128,47 +132,14 @@ public class Manche {
 		// (le meilleur est celui qui a le MOINS de points)
 		this.triInsertionScore(Partie.getPartie().getClassementJoueursPartie(), "croissant");
 
-		System.out.println("\nClassement g�n�ral : ");// on donne le classemnet g�n�ral de la partie
+		System.out.println("\nClassement general : ");// on donne le classemnet general de la partie
 
 		for (i = 1; i <= Partie.getPartie().getClassementJoueursPartie().size(); i++) {
-			System.out.println(i + "e : " + Partie.getPartie().getClassementJoueursPartie().get(i - 1).getName() + " -- SCORE : "
-					+ Partie.getPartie().getClassementJoueursPartie().get(i - 1).getScore());
+			System.out.println(i + "e : " + Partie.getPartie().getClassementJoueursPartie().get(i - 1).getName()
+					+ " -- SCORE : " + Partie.getPartie().getClassementJoueursPartie().get(i - 1).getScore());
 		}
 	}
 
-	public void changerManche() {
-		this.varianteManche = choisirVariante(Partie.getPartie().getNbJoueursVirtuels());// posibilit� de changer la variante
-		int i, j;
-		while (this.classementJoueurs.size() > 0) {
-			Partie.getPartie().getJoueur().add(this.classementJoueurs.poll());// On remet les joueurs dans le tableau de joueurs :
-		}
-
-		// tri des joueurs par insertion, on ajoute le joueur dans l'ordre de leurs num�ros croissants
-
-		for (i = 0; i < Partie.getPartie().getJoueur().size(); i++) {
-			Joueur joueurJ = Partie.getPartie().getJoueur().get(i);
-
-			j = i;
-			while (j > 0 && Partie.getPartie().getJoueur().get(j - 1).getNumero() > joueurJ.getNumero()) {
-				Partie.getPartie().getJoueur().set(j, Partie.getPartie().getJoueur().get(j - 1));
-				j = j - 1;
-			}
-			Partie.getPartie().getJoueur().set(j, joueurJ);
-		}
-		// initialisation de la nouvelle manche
-		for (i = 0; i < Partie.getPartie().getJoueur().size(); i++) {
-			Partie.getPartie().getJoueur().get(i).getCartes().clear();
-		}
-
-		this.talon = new Talon();// on cr�e un nouveau talon
-		this.sens = 1;// sens des aiguilles d'une montre
-		this.nbJoueursEnCours = Partie.getPartie().getNbJoueursVirtuels() + 1;// on garde le m�me nombre de joueurs
-		this.pioche = new Pioche();		// on cr�e une nouvelle pioche
-		this.pioche.melanger();// on m�lange la pioche
-		this.pioche.distribuer();// on distribue la pioche
-
-	}
-	
 	public void triInsertionScore(LinkedList<Joueur> classementJoueurs, String ordre) {
 		int j;
 		for (int i = 0; i < classementJoueurs.size(); i++) {
@@ -201,23 +172,27 @@ public class Manche {
 			classementJoueurs.set(j, joueurJ);
 		}
 	}
-	
+
 	public Variante choisirVariante(int nbJoueursVirtuels) {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Saisissez la variante :\n1=Variante minimale\n2=Variante 5\n3=Variante 4 ");
+		System.out.println(
+				"Saisissez la variante :\n1=Variante minimale\n2=Variante de Monclar\n3=Variante 4\n4=Variante 5 ");
 		int variante = sc.nextInt();
 		Variante choixVariante;
 		if (variante == 1) {
 			choixVariante = new VarianteMinimale(nbJoueursVirtuels);
 			System.out.println("Variante minimale choisie");
 		} else if (variante == 2) {
-			choixVariante = new Variante5(nbJoueursVirtuels);
-			System.out.println("Variante 5 choisie ");
+			choixVariante = new VarianteMonclar(nbJoueursVirtuels);
+			System.out.println("Variante de Monclar choisie ");
 		} else if (variante == 3) {
 			choixVariante = new Variante4(nbJoueursVirtuels);
 			System.out.println("Variante 4 choisie ");
+		} else if (variante == 4) {
+			choixVariante = new Variante5(nbJoueursVirtuels);
+			System.out.println("Variante 5 choisie ");
 		} else {
-			System.out.println("Erreur : variante inexistante, choisissez � nouveau");
+			System.out.println("Erreur : variante inexistante, choisissez a nouveau");
 			choixVariante = choisirVariante(nbJoueursVirtuels);
 		}
 		return choixVariante;
@@ -229,6 +204,7 @@ public class Manche {
 	public LinkedList<Joueur> getClassementJoueurs() {
 		return classementJoueurs;
 	}
+
 	/**
 	 * @return the talon
 	 */
@@ -273,6 +249,13 @@ public class Manche {
 	 */
 	public Pioche getPioche() {
 		return pioche;
+	}
+
+	/**
+	 * @return the joueur
+	 */
+	public LinkedList<Joueur> getJoueur() {
+		return joueur;
 	}
 
 	/**

@@ -1,9 +1,9 @@
 package modele;
 
-public class Pioche2OuASOu8 implements Effet {
+public class Pioche3OuAsOu8 implements Effet {
 
 	public void effet() {
-		System.out.println("Si le joueur suivant n'a pas de 8 ou d'AS alors : + "+ 2* Variante.nombreAs+" cartes");
+		System.out.println("Si le joueur suivant n'a pas de 8 ou d'AS alors : + "+ 3* Variante.nombreAs+" cartes");
 		// on cherche la joueur suivant
 		int tour;
 		tour = Partie.getPartie().getManche().getTourJoueur();
@@ -24,6 +24,6 @@ public class Pioche2OuASOu8 implements Effet {
 			}
 		}
 		Joueur joueurSuivant = Partie.getPartie().getManche().getJoueur().get(tour - 1);
-		joueurSuivant.setEffetVariante("Pioche2ouAsou8");
+		joueurSuivant.setEffetVariante("Pioche3ouAsou8");
 	}
 }
