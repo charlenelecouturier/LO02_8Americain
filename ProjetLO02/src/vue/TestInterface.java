@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 
 import javax.swing.*;
 
+import modele.Carte;
+
 
 public class TestInterface {
 	private JFrame frame;
@@ -62,6 +64,9 @@ public class TestInterface {
 		
 		JPanel panel_Main = new JPanel();
 		frame.getContentPane().add(panel_Main, BorderLayout.SOUTH);
+		Carte carte10Pique = new Carte("10", "PIQUE");
+		VueCarte vueCarte =new VueCarte(carte10Pique);
+		panel_Main.add(vueCarte);
 		
 		JLabel lblMain = new JLabel("Main");
 		panel_Main.add(lblMain);

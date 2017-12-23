@@ -11,6 +11,12 @@ public class Carte {
 	private String valeur;
 	private String effet;
 
+	public Carte(String valeur, String symbole) {
+		this.symbole = symbole;
+		this.valeur = valeur;
+		this.effet = "Aucun";
+	}
+	
 	/**
 	 * @return the symbole
 	 */
@@ -94,11 +100,7 @@ public class Carte {
 		} 
 	}
 
-	public Carte(String valeur, String symbole) {
-		this.symbole = symbole;
-		this.valeur = valeur;
-		this.effet = "Aucun";
-	}
+	
 
 	public String toString() {
 		if (this.effet.equals("Aucun")) {
