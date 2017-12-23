@@ -37,7 +37,7 @@ public class VueJoueurVirtuel extends JPanel {
 		if(!joueurEnCours.getBorder().isBorderOpaque()) {
 			joueurEnCours.setBorder(BorderFactory.createLineBorder( Color.BLACK));
 		}
-		//S'il ne joue 
+		//S'il ne joue plus, on applique une bordure invisible autour
 		else {
 			joueurEnCours.setBorder(BorderFactory.createEmptyBorder());
 		}
@@ -45,15 +45,7 @@ public class VueJoueurVirtuel extends JPanel {
 	
    
   
-    //1.1.3 Nombre de cartes restantes
-
-	//1.1.4 Nom du Joueur    
+  
 	}
 	
 
-// 2. Réserver aux Joueurs Virtuels une place en haut de la fenêtre
-
-// Le FlowLayout semble une bonne solution pour l'intérieur de la partie JoueurVirtuel!
-
-
-// 3. Ajouter dans l'Interface graphique un élément VueJoueurVirtuel pour chaque Joueur Virtuel ajouté à la partie
