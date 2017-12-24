@@ -1,10 +1,12 @@
 package modele;
 
+import java.awt.EventQueue;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.Scanner;
-import java.util.Random;
+
+import vue.TestInterface;
+
 
 public class Partie {
 
@@ -18,7 +20,6 @@ public class Partie {
 
 	private Partie() {
 
-		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 
 		try {
@@ -144,6 +145,18 @@ public class Partie {
 			p.manche.setPioche(new Pioche());// creation de la pioche
 			p.manche.getPioche().melanger();// on melange la pioche
 			p.manche.getPioche().distribuer();// on distribue la pioche
+			
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						TestInterface window = new TestInterface(p);
+						window.getFrame().setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			
 			while (!p.manche.terminerManche()) { // tant que la manche n'est pas terminee, on joue des tours
 				try {// Temps de delais entre chaque tour
 					Thread.sleep(2000);

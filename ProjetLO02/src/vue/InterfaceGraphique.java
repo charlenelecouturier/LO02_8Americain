@@ -7,9 +7,12 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.JLabel;
 
-public class InterfaceGraphique {
+public class InterfaceGraphique implements Observer{
 
 	JFrame frame;
 
@@ -77,6 +80,12 @@ public class InterfaceGraphique {
 		
 		JLabel lblTalon = new JLabel("Talon");
 		panel_4.add(lblTalon);
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

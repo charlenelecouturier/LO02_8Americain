@@ -60,8 +60,6 @@ public abstract class Joueur extends Observable{
 
 	public void setName(String name) {
 		this.name = name;
-		hasChanged();
-		notifyObservers();
 	}
 
 
@@ -135,6 +133,9 @@ public abstract class Joueur extends Observable{
 			if (this.EffetVariante.equals("Aucun")) {
 				System.out.println(this.getName() + " ne peut pas jouer !");
 				this.piocher(1);
+				//On notifie à l'interface que le nombre de cartes dans la main du joueur a changé
+				hasChanged();
+				notifyObservers();
 			}
 		}
 	}

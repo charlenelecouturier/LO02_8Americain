@@ -1,84 +1,151 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.util.LinkedList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.*;
 
-import modele.Carte;
+import modele.*;
 
 
-public class TestInterface {
+
+public class TestInterface implements Observer {
+	// Fenêtre principale et conteneurs de l'interface
 	private JFrame frame;
-
+	private JPanel panelActionCarte; 
+	private JPanel panel_JoueurVirtuel; 
+	private JPanel panel_Main;
+	private JPanel panel_Score;
+	private JPanel panel_Pioche; 
+	// Labels et autres présents dans l'Interface
+	private JButton btnCarte;
+	private JButton btnContreCarte;
+	private JLabel lblScore;
+	// Objets du modèle à observer
+	private LinkedList<Joueur> joueur;
+	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					TestInterface window = new TestInterface();
-					window.frame.setVisible(true);
+					window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the application.
 	 */
-	public TestInterface() {
+	public TestInterface(Partie p) {
 		initialize();
+		
+		joueur = p.getJoueur();
+		/**
+		 * Mise en place des Observers sur les objets de la partie
+		 */
+		p.getManche().getTalon().addObserver(this);
+		p.getManche().getPioche().addObserver(this);
+		
+		
+		for(int iterator = 0; iterator < joueur.size()-1; iterator++) {
+			panel_JoueurVirtuel.add(new VueJoueurVirtuel());
+		}
+		
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setFrame(new JFrame());
+		getFrame().setBounds(100, 100, 1000, 700);
+		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panelActionCarte = new JPanel();
-		frame.getContentPane().add(panelActionCarte, BorderLayout.WEST);
+		/**
+		 * Gestion du conteneur des boutons Carte et Contre-carte. On définit sa position et les composants qu'il contient.
+		 */
+		panelActionCarte = new JPanel();
+		getFrame().getContentPane().add(panelActionCarte, BorderLayout.WEST);
 		panelActionCarte.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panelActionCarte.setBackground(new Color(8, 81, 36));
 		
-		JButton btnCarte = new JButton("Carte");
+		btnCarte = new JButton("Carte");
 		panelActionCarte.add(btnCarte);
 		
-		JButton btnContreCarte = new JButton("Contre Carte");
+		btnContreCarte = new JButton("Contre Carte");
 		panelActionCarte.add(btnContreCarte);
 		
-		JPanel panel_JoueurVirtuel = new JPanel();
-		frame.getContentPane().add(panel_JoueurVirtuel, BorderLayout.NORTH);
+		/**
+		 * Gestion du conteneur des Joueurs Virtuels. On définit sa position et les composants qu'il contient.
+		 */
+		panel_JoueurVirtuel = new JPanel();
+		getFrame().getContentPane().add(panel_JoueurVirtuel, BorderLayout.NORTH);
+		panel_JoueurVirtuel.setBackground(new Color(8, 81, 36));
 		
-		JPanel panel_Score = new JPanel();
-		frame.getContentPane().add(panel_Score, BorderLayout.EAST);
+		/**
+		 * Gestion du conteneur du Score. On définit sa position et les composants qu'il contient.
+		 */
+		panel_Score = new JPanel();
+		getFrame().getContentPane().add(panel_Score, BorderLayout.EAST);
+		panel_Score.setBackground(new Color(8, 81, 36));
 		
-		JLabel lblScore = new JLabel("Score :");
+		lblScore = new JLabel("Score :");
 		panel_Score.add(lblScore);
 		
-		JPanel panel_Main = new JPanel();
-		frame.getContentPane().add(panel_Main, BorderLayout.SOUTH);
+		
+		/**
+		 * Gestion du conteneur de la main du joueur virtuel. On définit sa position et les composants qu'il contient.
+		 */
+		panel_Main = new JPanel();
+		getFrame().getContentPane().add(panel_Main, BorderLayout.SOUTH);
+		panel_Main.setBackground(new Color(8, 81, 36));
+		//Partie permettant de tester la main
 		Carte carte10Pique = new Carte("10", "PIQUE");
 		VueCarte vueCarte =new VueCarte(carte10Pique);
 		panel_Main.add(vueCarte);
 		
-		JLabel lblMain = new JLabel("Main");
-		panel_Main.add(lblMain);
 		
-		JPanel panel_Pioche = new JPanel();
-		frame.getContentPane().add(panel_Pioche, BorderLayout.CENTER);
+		
+		/**
+		 * Gestion du conteneur de la Pioche et du Talon. On définit sa position et les composants qu'il contient.
+		 */
+		panel_Pioche = new JPanel();
+		getFrame().getContentPane().add(panel_Pioche, BorderLayout.CENTER);
+		panel_Pioche.setBackground(new Color(8, 81, 36));
 		
 		JLabel lblPioche = new JLabel("Pioche");
 		panel_Pioche.add(lblPioche);
 		
 		JLabel lblTalon = new JLabel("Talon");
 		panel_Pioche.add(lblTalon);
+	}
+
+	
+	public void update(Observable instanceObservable, Object arg1) {
+		if (instanceObservable instanceof JoueurVirtuel) {
+			//VueJoueurVirtuel
+		}
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+
+	public JFrame getFrame() {
+		// TODO Auto-generated method stub
+		return this.frame;
 	}
 
 }
