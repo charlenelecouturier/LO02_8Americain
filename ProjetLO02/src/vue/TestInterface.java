@@ -58,9 +58,13 @@ public class TestInterface implements Observer {
 		/**
 		 * Mise en place des Observers sur les objets de la partie
 		 */
-		p.getManche().getTalon().addObserver(this);
-		p.getManche().getPioche().addObserver(this);
-		
+		p.getManche().getTalon().addObserver(this);//observeur Talon
+		p.getManche().getPioche().addObserver(this);//observeur Pioche
+		ListIterator parcourirJoueurs =  p.getJoueur().listIterator();
+		while(parcourirJoueurs.hasNext()) {
+			Joueur prochainJoueur = (Joueur) parcourirJoueurs.next();
+			prochainJoueur.addObserver(this);//observeur Joueur
+		}
 		
 		for(int iterator = 1; iterator < joueur.size(); iterator++) {
 			panel_JoueurVirtuel.add(new VueJoueurVirtuel(p.getJoueur().get(iterator).getName()));
@@ -155,6 +159,22 @@ public class TestInterface implements Observer {
 		if (instanceObservable instanceof JoueurVirtuel) {
 			//VueJoueurVirtuel
 		}
+		else if (instanceObservable instanceof JoueurPhysique) {
+			//Main
+			/**
+			 * Redéfinir les cartes visibles en main en fonction du tour qu'a joué le joueur.
+			 */
+			panel_Main.removeAll();
+			ArrayList<Carte> cartesJoueurPhysique = Partie.getPartie().getJoueur().get(0).getCartes() ; 
+			ListIterator parcourirCarteJoueur = cartesJoueurPhysique.listIterator(); 
+			
+			while(parcourirCarteJoueur.hasNext()) {
+				Carte prochaineCarte = (Carte) parcourirCarteJoueur.next();
+				VueCarte vueProchaineCarte = new VueCarte(prochaineCarte);
+				ControleurCarte controleurProchaineCarte = new ControleurCarte(Partie.getPartie(), prochaineCarte, vueProchaineCarte);
+				panel_Main.add(vueProchaineCarte);
+			}
+		}
 	}
 
 	public void setFrame(JFrame frame) {
@@ -162,7 +182,6 @@ public class TestInterface implements Observer {
 	}
 
 	public JFrame getFrame() {
-		// TODO Auto-generated method stub
 		return this.frame;
 	}
 
