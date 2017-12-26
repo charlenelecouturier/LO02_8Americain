@@ -1,6 +1,7 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -25,12 +26,12 @@ public class TestInterface implements Observer {
 	private JPanel panelActionCarte; 
 	private JPanel panel_JoueurVirtuel; 
 	private JPanel panel_Main;
-	private JPanel panel_Score;
+	private JPanel panel_Classement;
 	private VuePiocheTalon panel_Pioche; 
 	// Labels et autres présents dans l'Interface
 	private JButton btnCarte;
 	private JButton btnContreCarte;
-	private JLabel lblScore;
+	private JLabel lblClassement;
 	// Objets du modèle à observer
 	private LinkedList<Joueur> joueur;
 	
@@ -54,9 +55,10 @@ public class TestInterface implements Observer {
 	 * Create the application.
 	 */
 	public TestInterface(Partie p) {
+		joueur = p.getJoueur();
 		initialize();
 		
-		joueur = p.getJoueur();
+		
 		/**
 		 * Mise en place des Observers sur les objets de la partie
 		 */
@@ -122,12 +124,23 @@ public class TestInterface implements Observer {
 		/**
 		 * Gestion du conteneur du Score. On définit sa position et les composants qu'il contient.
 		 */
-		panel_Score = new JPanel();
-		getFrame().getContentPane().add(panel_Score, BorderLayout.EAST);
-		panel_Score.setBackground(new Color(8, 81, 36));
+		panel_Classement = new JPanel();
+	    GridLayout grid = new GridLayout(this.joueur.size()+1, 1);
+		panel_Classement.setLayout(grid);
+		getFrame().getContentPane().add(panel_Classement, BorderLayout.EAST);
+		panel_Classement.setBackground(new Color(8, 81, 36));	
+		lblClassement= new JLabel("Classement général de la partie");
+		lblClassement.setSize(50, 50);
+		panel_Classement.add(lblClassement);
+		ListIterator<Joueur> it = joueur.listIterator();
+		while(it.hasNext()) {
+			Joueur jNext = it.next();
+			JLabel lbl = new JLabel(jNext.getName()+" : "+ jNext.getScore());
+			
+			panel_Classement.add(lbl);
+		}
+		//panel_Classement.getLayout().minimumLayoutSize(panel_Classement);
 		
-		lblScore = new JLabel("Score :");
-		panel_Score.add(lblScore);
 		
 		
 		/**
@@ -159,6 +172,9 @@ public class TestInterface implements Observer {
 		if (instanceObservable instanceof JoueurVirtuel) {
 			int num =((Joueur) instanceObservable).getNumero();
 			this.vueJVirtuel.get(num-2).update(instanceObservable, arg1);
+		}
+		if (instanceObservable instanceof Joueur) {
+			this.panel_Pioche.update(instanceObservable, arg1);
 		}
 
 		
