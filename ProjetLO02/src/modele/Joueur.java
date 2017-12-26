@@ -209,4 +209,6 @@ public abstract class Joueur extends Observable{
 	public void setScoreManche(int scoreManche) {
 		this.scoreManche = scoreManche;
 	}
+
+	public abstract int choisirCarte(Carte carteAControler);
 }

@@ -1,5 +1,7 @@
 package vue;
 
+import java.awt.Dimension;
+
 import javax.swing.*;
 import modele.Carte;
 
@@ -15,6 +17,9 @@ public class VueCarte extends JButton {
 		this.imageCarte = new ImageIcon("Images/" + carte.getSymbole() + "/" + carte.getValeur() + ".png");
 		this.setIcon(imageCarte);
 		System.out.println("Path : " + ("Images/" + carte.getSymbole() + "/" + carte.getValeur()) + ".png");
+		this.setMaximumSize(new Dimension(110, 270) );
+		/*System.out.println(this.getHeight());
+		System.out.println(this.getWidth());*/
 	}
 	
 	

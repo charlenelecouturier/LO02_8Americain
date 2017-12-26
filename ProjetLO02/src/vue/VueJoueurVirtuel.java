@@ -13,22 +13,33 @@ import javax.swing.BorderFactory;
 // 1. Créer une classe à part qu'on instanciera dans l'interface : VueJoueurVirtuel
 public class VueJoueurVirtuel extends JPanel {
 	//1.1 À l'Intérieur, mettre une icone de joueur, une carte de dos, le nombre de cartes restantes et le nom du joueur
+	protected static Color FOND_JOUEURS = new Color(112, 181, 134);
 	
-	public void paintComponent(Graphics g){
-		 Image imgJoueur = null;
-		 Image imgDosCarte = null;
-		try { 
-			imgDosCarte = ImageIO.read(new File("Images/dosCarte.jpg"));
-			imgJoueur = ImageIO.read(new File("Images/joueur.png"));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}  
-		//1.1.2 Icône de joueur
-		g.drawImage(imgJoueur, 10, 10, 50, 65,  this);
-		//1.1.2 Dos de la carte
-		g.drawImage(imgDosCarte, 80, 25, 50, 72, this);
-		g.drawString("Adversaire", 80, 20);
-		g.drawString("Cartes Restantes : ", 5, 105);
+	JLabel iconeJoueur;
+	JLabel dosCarte;
+	JLabel nbCartes;
+	JLabel lblNomJoueur;
+	
+	
+	public VueJoueurVirtuel(String nomJoueur) {
+		this.setMaximumSize(new Dimension(160, 140));
+		initialize();
+		
+		lblNomJoueur = new JLabel(nomJoueur);
+		nbCartes = new JLabel("Cartes restantes:");
+		this.add(iconeJoueur);
+		this.add(dosCarte);
+		this.add(nbCartes);
+		this.add(lblNomJoueur);
+		this.setBackground(FOND_JOUEURS);
+		
+	}
+	
+	public void initialize() {
+		iconeJoueur = new JLabel();
+		dosCarte = new JLabel();
+		iconeJoueur.setIcon(new ImageIcon("Images/joueur.png"));
+		dosCarte.setIcon(new ImageIcon("Images/dosCarte.jpg"));
 	}
 	
 	

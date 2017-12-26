@@ -1,5 +1,6 @@
 package modele;
 
+import java.util.ListIterator;
 import java.util.Scanner;
 
 public class JoueurPhysique extends Joueur {
@@ -13,6 +14,19 @@ public class JoueurPhysique extends Joueur {
 	}
 
 
+	public int choisirCarte(Carte carteChoisie) {
+		int indexCarteChoisie = 0;
+		ListIterator parcourirCarteJoueur = this.getCartes().listIterator();
+		while(parcourirCarteJoueur.hasNext()) {
+			if(parcourirCarteJoueur.next() == carteChoisie &&
+			   Partie.getPartie().getManche().getVarianteManche().estCompatible(carteChoisie)
+				) {
+				indexCarteChoisie = parcourirCarteJoueur.previousIndex();
+			}
+		}
+		return indexCarteChoisie;
+	}
+	
 	public int choisirCarte() { 
 		boolean choix;
 		int numero;

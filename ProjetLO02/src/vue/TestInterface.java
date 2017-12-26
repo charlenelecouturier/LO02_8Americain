@@ -12,6 +12,7 @@ import java.util.Observer;
 
 import javax.swing.*;
 
+import controleur.ControleurCarte;
 import modele.*;
 
 
@@ -61,8 +62,8 @@ public class TestInterface implements Observer {
 		p.getManche().getPioche().addObserver(this);
 		
 		
-		for(int iterator = 0; iterator < joueur.size()-1; iterator++) {
-			panel_JoueurVirtuel.add(new VueJoueurVirtuel());
+		for(int iterator = 1; iterator < joueur.size(); iterator++) {
+			panel_JoueurVirtuel.add(new VueJoueurVirtuel(p.getJoueur().get(iterator).getName()));
 		}
 		/**
 		 * Itération qui permet d'afficher les cartes du joueur à l'écran dans sa main.
@@ -74,6 +75,7 @@ public class TestInterface implements Observer {
 		while(parcourirCarteJoueur.hasNext()) {
 			Carte prochaineCarte = (Carte) parcourirCarteJoueur.next();
 			VueCarte vueProchaineCarte = new VueCarte(prochaineCarte);
+			ControleurCarte controleurProchaineCarte = new ControleurCarte(p, prochaineCarte, vueProchaineCarte);
 			panel_Main.add(vueProchaineCarte);
 		}
 		

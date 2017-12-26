@@ -101,7 +101,7 @@ public class JoueurVirtuel extends Joueur {
 
 	
 	/**
-	 * Fonction assocee a  la detection d'exception sur l'entree du niveau du joueur
+	 * Fonction assocee aï¿½ la detection d'exception sur l'entree du niveau du joueur
 	 * @param userInput l'entree du joueur
 	 * @throws NiveauJoueurException Renvoie le message d'erreur associe Ã  une mauvaise entree.
 	 */
@@ -117,5 +117,9 @@ public class JoueurVirtuel extends Joueur {
 	@Override
 	public void changerFamille() {
 		this.strategie.changerFamille();
+	}
+	
+	public int choisirCarte(Carte carte) {
+		return 0;
 	}
 }
