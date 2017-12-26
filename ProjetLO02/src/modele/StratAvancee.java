@@ -78,7 +78,7 @@ public class StratAvancee implements Strategie {
 			int[] nombreSymbole = { 0, 0, 0, 0 };
 			// 0 : Carreau, 1 : Pique, 2 : Trefle, 3: Coeur
 
-			// on lequel des symboles est en majorit� dans les cartes du joueur
+			// on cherche lequel des symboles est en majorite dans les cartes du joueur
 			for (i = 0; i < carteJoueur.size(); i++) {
 
 				if (carteJoueur.get(i).getSymbole().equals("CARREAU")) {
@@ -189,7 +189,7 @@ public class StratAvancee implements Strategie {
 		}
 		if (cartesCompatibles.size() == 1) {
 			// le joueur n'a plus qu'un 10 il doit le jouer
-			System.out.println("Mince, je dois jouer mon ma carte 'Rejouer'... Elle va me forcer � piocher");
+			System.out.println("Mince, je dois jouer mon ma carte 'Rejouer'... Elle va me forcer a piocher");
 			return true;
 		}
 		return trouveAutreCarteCompatible;

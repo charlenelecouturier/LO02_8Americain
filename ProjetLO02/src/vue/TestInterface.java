@@ -26,7 +26,7 @@ public class TestInterface implements Observer {
 	private JPanel panel_JoueurVirtuel; 
 	private JPanel panel_Main;
 	private JPanel panel_Score;
-	private JPanel panel_Pioche; 
+	private VuePiocheTalon panel_Pioche; 
 	// Labels et autres présents dans l'Interface
 	private JButton btnCarte;
 	private JButton btnContreCarte;
@@ -62,6 +62,10 @@ public class TestInterface implements Observer {
 		 */
 		p.getManche().getTalon().addObserver(this);
 		p.getManche().getPioche().addObserver(this);
+		ListIterator<Joueur> it = joueur.listIterator();
+		while(it.hasNext()) {
+			it.next().addObserver(this);
+		}
 		
 		this.vueJVirtuel=new ArrayList();
 		for(int iterator = 1; iterator < joueur.size(); iterator++) {
@@ -82,9 +86,7 @@ public class TestInterface implements Observer {
 			panel_Main.add(vueProchaineCarte);
 		}
 		
-		JLabel carteTalon= new JLabel();
-		VueCarte vueCarteDessusTalon = new VueCarte(Partie.getPartie().getManche().getTalon().getCarteDessus());
-		panel_Pioche.add(vueCarteDessusTalon);
+
 		
 	}
 
@@ -145,26 +147,21 @@ public class TestInterface implements Observer {
 		/**
 		 * Gestion du conteneur de la Pioche et du Talon. On définit sa position et les composants qu'il contient.
 		 */
-		panel_Pioche = new JPanel();
-		getFrame().getContentPane().add(panel_Pioche, BorderLayout.CENTER);
-		panel_Pioche.setBackground(new Color(8, 81, 36));
-		
-		JLabel lblPioche = new JLabel("Pioche");
-		JLabel dosPioche= new JLabel();
-		dosPioche.setIcon(new ImageIcon("Images/dosPioche.jpg"));
-		panel_Pioche.add(lblPioche);
-		panel_Pioche.add(dosPioche);
-		
-		JLabel lblTalon = new JLabel("Talon");
-		panel_Pioche.add(lblTalon);
+		panel_Pioche = new VuePiocheTalon();
+		getFrame().getContentPane().add(panel_Pioche, BorderLayout.CENTER);	
 	}
 
 	
 	public void update(Observable instanceObservable, Object arg1) {
+		if (instanceObservable instanceof Joueur) {
+			this.panel_Pioche.update(instanceObservable, arg1);
+		}
 		if (instanceObservable instanceof JoueurVirtuel) {
-			int num =((JoueurVirtuel) instanceObservable).getNumero();
+			int num =((Joueur) instanceObservable).getNumero();
 			this.vueJVirtuel.get(num-2).update(instanceObservable, arg1);
 		}
+
+		
 	}
 
 	public void setFrame(JFrame frame) {
