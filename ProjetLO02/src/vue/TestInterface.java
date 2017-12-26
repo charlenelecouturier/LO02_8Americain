@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -62,6 +64,19 @@ public class TestInterface implements Observer {
 		for(int iterator = 0; iterator < joueur.size()-1; iterator++) {
 			panel_JoueurVirtuel.add(new VueJoueurVirtuel());
 		}
+		/**
+		 * Itération qui permet d'afficher les cartes du joueur à l'écran dans sa main.
+		 */
+		//On créé un itérateur qui va parcourir les cartes de notre jeu
+		ArrayList<Carte> cartesJoueurPhysique = p.getJoueur().get(0).getCartes() ; 
+		ListIterator parcourirCarteJoueur = cartesJoueurPhysique.listIterator(); 
+		
+		while(parcourirCarteJoueur.hasNext()) {
+			Carte prochaineCarte = (Carte) parcourirCarteJoueur.next();
+			VueCarte vueProchaineCarte = new VueCarte(prochaineCarte);
+			panel_Main.add(vueProchaineCarte);
+		}
+		
 		
 	}
 
@@ -110,11 +125,12 @@ public class TestInterface implements Observer {
 		 */
 		panel_Main = new JPanel();
 		getFrame().getContentPane().add(panel_Main, BorderLayout.SOUTH);
+		panel_Main.setLayout(new FlowLayout());
 		panel_Main.setBackground(new Color(8, 81, 36));
 		//Partie permettant de tester la main
-		Carte carte10Pique = new Carte("10", "PIQUE");
+		/*Carte carte10Pique = new Carte("10", "PIQUE");
 		VueCarte vueCarte =new VueCarte(carte10Pique);
-		panel_Main.add(vueCarte);
+		panel_Main.add(vueCarte);*/
 		
 		
 		
