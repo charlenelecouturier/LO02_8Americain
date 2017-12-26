@@ -18,18 +18,20 @@ import modele.*;
 
 
 public class TestInterface implements Observer {
-	// FenÃªtre principale et conteneurs de l'interface
+	
+	private ArrayList<VueJoueurVirtuel> vueJVirtuel;
+	// Fenêtre principale et conteneurs de l'interface
 	private JFrame frame;
 	private JPanel panelActionCarte; 
 	private JPanel panel_JoueurVirtuel; 
 	private JPanel panel_Main;
 	private JPanel panel_Score;
 	private JPanel panel_Pioche; 
-	// Labels et autres prÃ©sents dans l'Interface
+	// Labels et autres présents dans l'Interface
 	private JButton btnCarte;
 	private JButton btnContreCarte;
 	private JLabel lblScore;
-	// Objets du modÃ¨le Ã  observer
+	// Objets du modèle à observer
 	private LinkedList<Joueur> joueur;
 	
 	/**
@@ -61,14 +63,15 @@ public class TestInterface implements Observer {
 		p.getManche().getTalon().addObserver(this);
 		p.getManche().getPioche().addObserver(this);
 		
-		
+		this.vueJVirtuel=new ArrayList();
 		for(int iterator = 1; iterator < joueur.size(); iterator++) {
-			panel_JoueurVirtuel.add(new VueJoueurVirtuel(p.getJoueur().get(iterator).getName()));
+			this.vueJVirtuel.add(new VueJoueurVirtuel(p.getJoueur().get(iterator).getNumero()));
+			panel_JoueurVirtuel.add(vueJVirtuel.get(iterator-1));
 		}
 		/**
-		 * ItÃ©ration qui permet d'afficher les cartes du joueur Ã  l'Ã©cran dans sa main.
+		 * Itération qui permet d'afficher les cartes du joueur à l'écran dans sa main.
 		 */
-		//On crÃ©Ã© un itÃ©rateur qui va parcourir les cartes de notre jeu
+		//On créé un itérateur qui va parcourir les cartes de notre jeu
 		ArrayList<Carte> cartesJoueurPhysique = p.getJoueur().get(0).getCartes() ; 
 		ListIterator parcourirCarteJoueur = cartesJoueurPhysique.listIterator(); 
 		
@@ -79,6 +82,9 @@ public class TestInterface implements Observer {
 			panel_Main.add(vueProchaineCarte);
 		}
 		
+		JLabel carteTalon= new JLabel();
+		VueCarte vueCarteDessusTalon = new VueCarte(Partie.getPartie().getManche().getTalon().getCarteDessus());
+		panel_Pioche.add(vueCarteDessusTalon);
 		
 	}
 
@@ -91,7 +97,7 @@ public class TestInterface implements Observer {
 		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		/**
-		 * Gestion du conteneur des boutons Carte et Contre-carte. On dÃ©finit sa position et les composants qu'il contient.
+		 * Gestion du conteneur des boutons Carte et Contre-carte. On définit sa position et les composants qu'il contient.
 		 */
 		panelActionCarte = new JPanel();
 		getFrame().getContentPane().add(panelActionCarte, BorderLayout.WEST);
@@ -105,14 +111,14 @@ public class TestInterface implements Observer {
 		panelActionCarte.add(btnContreCarte);
 		
 		/**
-		 * Gestion du conteneur des Joueurs Virtuels. On dÃ©finit sa position et les composants qu'il contient.
+		 * Gestion du conteneur des Joueurs Virtuels. On définit sa position et les composants qu'il contient.
 		 */
 		panel_JoueurVirtuel = new JPanel();
 		getFrame().getContentPane().add(panel_JoueurVirtuel, BorderLayout.NORTH);
 		panel_JoueurVirtuel.setBackground(new Color(8, 81, 36));
 		
 		/**
-		 * Gestion du conteneur du Score. On dÃ©finit sa position et les composants qu'il contient.
+		 * Gestion du conteneur du Score. On définit sa position et les composants qu'il contient.
 		 */
 		panel_Score = new JPanel();
 		getFrame().getContentPane().add(panel_Score, BorderLayout.EAST);
@@ -123,7 +129,7 @@ public class TestInterface implements Observer {
 		
 		
 		/**
-		 * Gestion du conteneur de la main du joueur virtuel. On dÃ©finit sa position et les composants qu'il contient.
+		 * Gestion du conteneur de la main du joueur physique. On définit sa position et les composants qu'il contient.
 		 */
 		panel_Main = new JPanel();
 		getFrame().getContentPane().add(panel_Main, BorderLayout.SOUTH);
@@ -137,14 +143,17 @@ public class TestInterface implements Observer {
 		
 		
 		/**
-		 * Gestion du conteneur de la Pioche et du Talon. On dÃ©finit sa position et les composants qu'il contient.
+		 * Gestion du conteneur de la Pioche et du Talon. On définit sa position et les composants qu'il contient.
 		 */
 		panel_Pioche = new JPanel();
 		getFrame().getContentPane().add(panel_Pioche, BorderLayout.CENTER);
 		panel_Pioche.setBackground(new Color(8, 81, 36));
 		
 		JLabel lblPioche = new JLabel("Pioche");
+		JLabel dosPioche= new JLabel();
+		dosPioche.setIcon(new ImageIcon("Images/dosPioche.jpg"));
 		panel_Pioche.add(lblPioche);
+		panel_Pioche.add(dosPioche);
 		
 		JLabel lblTalon = new JLabel("Talon");
 		panel_Pioche.add(lblTalon);
@@ -153,7 +162,8 @@ public class TestInterface implements Observer {
 	
 	public void update(Observable instanceObservable, Object arg1) {
 		if (instanceObservable instanceof JoueurVirtuel) {
-			//VueJoueurVirtuel
+			int num =((JoueurVirtuel) instanceObservable).getNumero();
+			this.vueJVirtuel.get(num-2).update(instanceObservable, arg1);
 		}
 	}
 

@@ -2,6 +2,9 @@ package modele;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
+import java.util.Iterator;
+import java.util.HashSet;
 
 /**
  * Joueur est la classe qui represente les participants au jeu, qu'ils soient
@@ -22,6 +25,8 @@ public abstract class Joueur extends Observable{
 	private int scoreManche;
 	protected Strategie strategie;
 	protected String EffetVariante;
+	protected HashSet<Observer> observer;
+	
 
 	/**
 	 * le Constructeur de Joueur ne doit pas etre utilise directement, il simplifie le code de ses classes filles.
@@ -133,7 +138,7 @@ public abstract class Joueur extends Observable{
 			if (this.EffetVariante.equals("Aucun")) {
 				System.out.println(this.getName() + " ne peut pas jouer !");
 				this.piocher(1);
-				//On notifie à l'interface que le nombre de cartes dans la main du joueur a changé
+				//On notifie l'interface que le nombre de cartes dans la main du joueur a change
 				hasChanged();
 				notifyObservers();
 			}
@@ -211,4 +216,5 @@ public abstract class Joueur extends Observable{
 	}
 
 	public abstract int choisirCarte(Carte carteAControler);
+
 }
