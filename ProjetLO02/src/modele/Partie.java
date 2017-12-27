@@ -1,6 +1,7 @@
 package modele;
 
 import java.awt.EventQueue;
+import vue.*;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -21,6 +22,7 @@ public class Partie extends Observable{
 	private String modeComptage;
 
 	private Partie() {
+		
 
 		Scanner sc = new Scanner(System.in);
 
@@ -139,44 +141,50 @@ public class Partie extends Observable{
 		this.manche = manche;
 	}
 
-	public static void main(String[] args) {
-
-		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
-		Partie p = Partie.getPartie();// creation d'une partie
-		while (p.etat.equals("EN COURS")) { // tant que la partie n'est pas terminee, on joue des manches
-			p.manche.setPioche(new Pioche());// creation de la pioche
-			p.manche.getPioche().melanger();// on melange la pioche
-			p.manche.getPioche().distribuer();// on distribue la pioche
+	public void lancerPartie() {
+		
+		while (Partie.getPartie().etat.equals("EN COURS")) { // tant que la partie n'est pas terminee, on joue des manches
+			Partie.getPartie().manche.setPioche(new Pioche());// creation de la pioche
+			Partie.getPartie().manche.getPioche().melanger();// on melange la pioche
+			Partie.getPartie().manche.getPioche().distribuer();// on distribue la pioche
 			
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						TestInterface window = new TestInterface(p);
+						TestInterface window = new TestInterface(Partie.getPartie());
 						window.getFrame().setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
 			});
-			
-			while (!p.manche.terminerManche()) { // tant que la manche n'est pas terminee, on joue des tours
+			//vue concurente : ligne de commande et interface
+			System.out.println(Thread.currentThread());
+
+			while (!Partie.getPartie().manche.terminerManche()) { // tant que la manche n'est pas terminee, on joue des tours
 				try {// Temps de delais entre chaque tour
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				p.manche.getJoueur().get(p.manche.getTourJoueur() - 1).jouerTour();
+				Partie.getPartie().manche.getJoueur().get(Partie.getPartie().manche.getTourJoueur() - 1).jouerTour();
 				System.out.println("\n");
 			}
-			if (p.modeComptage.equals("POSITIF")) {
-				p.manche.compterPointsPositif();
+			if (Partie.getPartie().modeComptage.equals("POSITIF")) {
+				Partie.getPartie().manche.compterPointsPositif();
 			} else {
-				p.manche.compterPointsNegatif();
+				Partie.getPartie().manche.compterPointsNegatif();
 			} // Si la partie n'est pas terminee, on debute une nouvelle manche
-			if (!p.terminerPartie()) {
+			if (!Partie.getPartie().terminerPartie()) {
 				System.out.println("\nNOUVELLE MANCHE\n");
-				p.manche= new Manche(p.nbJoueursVirtuels,p.joueur);
+				Partie.getPartie().manche= new Manche(Partie.getPartie().nbJoueursVirtuels,Partie.getPartie().joueur);
 			}
 		}
+	}
+	public static void main(String[] args) {
+		
+		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
+		Partie p = Partie.getPartie();// creation d'une partie
+		VueLigneCommande vLC =new VueLigneCommande();
 	}
 }
