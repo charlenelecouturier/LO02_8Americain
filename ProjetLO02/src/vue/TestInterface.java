@@ -12,16 +12,16 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.*;
-
-import controleur.ControleurCarte;
 import modele.*;
+import controleur.*;
 
 
-
-public class TestInterface implements Observer {
+public class TestInterface implements Observer, Runnable {
 	
 	private ArrayList<VueJoueurVirtuel> vueJVirtuel;
-	// Fenï¿½tre principale et conteneurs de l'interface
+
+	// Fenêtre principale et conteneurs de l'interface
+	
 	private JFrame frame;
 	private JPanel panelActionCarte; 
 	private JPanel panel_JoueurVirtuel; 
@@ -32,6 +32,11 @@ public class TestInterface implements Observer {
 	private JButton btnCarte;
 	private JButton btnContreCarte;
 	private JLabel lblClassement;
+	private JComboBox comboBoxNbJoueursVirtuels;
+	private JTextField txtNombreDeJoueurs;
+	private JTextField txtVotreNom;
+	private JTextField textField;
+
 	// Objets du modï¿½le ï¿½ observer
 	private LinkedList<Joueur> joueur;
 	
@@ -54,58 +59,111 @@ public class TestInterface implements Observer {
 	/**
 	 * Create the application.
 	 */
-	public TestInterface(Partie p) {
-		joueur = p.getJoueur();
-		initialize();
+	public TestInterface() {
+		//Thread t = new Thread(this);
+		//t.start();
+		// on initialise la partie ( nb joueurs et niveaux joueurs  etc)
+		joueur = Partie.getPartie().getJoueur();
+		//initialize();
+		//new ControleurNbJVirtuel(comboBoxNbJoueursVirtuels);
+		// on initialise le jeu
+		initializeGame();
 		
 		
 		/**
 		 * Mise en place des Observers sur les objets de la partie
 		 */
 
-		p.getManche().getTalon().addObserver(this); //observateur Talon
-		p.getManche().getPioche().addObserver(this); //observateur Pioche
+		Partie.getPartie().getManche().getTalon().addObserver(this);
+		Partie.getPartie().getManche().getPioche().addObserver(this);
 		ListIterator<Joueur> it = joueur.listIterator();
 		while(it.hasNext()) {
 			it.next().addObserver(this); //observateur Joueur
 		}
-		p.addObserver(this);
+		Partie.getPartie().addObserver(this);
 		
 		this.vueJVirtuel=new ArrayList<VueJoueurVirtuel>();
 
 		for(int iterator = 1; iterator < joueur.size(); iterator++) {
-			this.vueJVirtuel.add(new VueJoueurVirtuel(p.getJoueur().get(iterator).getNumero()));
+			this.vueJVirtuel.add(new VueJoueurVirtuel(Partie.getPartie().getJoueur().get(iterator).getNumero()));
 			panel_JoueurVirtuel.add(vueJVirtuel.get(iterator-1));
 		}
 		/**
 		 * Itï¿½ration qui permet d'afficher les cartes du joueur ï¿½ l'ï¿½cran dans sa main.
 		 */
-		//On crï¿½ï¿½ un itï¿½rateur qui va parcourir les cartes de notre jeu
-		ArrayList<Carte> cartesJoueurPhysique = p.getJoueur().get(0).getCartes() ; 
+
+		//On créé un itérateur qui va parcourir les cartes de notre jeu
+		ArrayList<Carte> cartesJoueurPhysique = Partie.getPartie().getJoueur().get(0).getCartes() ; 
+
 		ListIterator parcourirCarteJoueur = cartesJoueurPhysique.listIterator(); 
 		
 		while(parcourirCarteJoueur.hasNext()) {
 			Carte prochaineCarte = (Carte) parcourirCarteJoueur.next();
 			VueCarte vueProchaineCarte = new VueCarte(prochaineCarte);
-			ControleurCarte controleurProchaineCarte = new ControleurCarte(p, prochaineCarte, vueProchaineCarte);
+			ControleurCarte controleurProchaineCarte = new ControleurCarte(Partie.getPartie(), prochaineCarte, vueProchaineCarte);
 			panel_Main.add(vueProchaineCarte);
 		}
 		
 
 		
 	}
+	
+
+
+	public void run() {
+
+	Partie.getPartie().lancerPartie();
+	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	// Pas encore opérationnelle
 	private void initialize() {
-		setFrame(new JFrame());
-		getFrame().setBounds(100, 100, 1000, 700);
-		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setFrame(new JFrame());
+		//getFrame().setBounds(100, 100, 1000, 700);
+		//getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		txtNombreDeJoueurs = new JTextField();
+		txtNombreDeJoueurs.setEditable(false);
+		txtNombreDeJoueurs.setText("Nombre de joueurs virtuels ?");
+		txtNombreDeJoueurs.setBounds(57, 101, 215, 46);
+		frame.getContentPane().add(txtNombreDeJoueurs);
+		txtNombreDeJoueurs.setColumns(10);
+		
+		txtVotreNom = new JTextField();
+		txtVotreNom.setEditable(false);
+		txtVotreNom.setText("Votre Nom ?");
+		txtVotreNom.setBounds(57, 410, 215, 46);
+		frame.getContentPane().add(txtVotreNom);
+		txtVotreNom.setColumns(10);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(607, 426, -114, 22);
+		frame.getContentPane().add(textArea);
+		
+		textField = new JTextField();
+		textField.setBounds(333, 413, 174, 40);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		comboBoxNbJoueursVirtuels= new JComboBox();
+		comboBoxNbJoueursVirtuels.setMaximumRowCount(5);
+		comboBoxNbJoueursVirtuels.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5"}));
+		comboBoxNbJoueursVirtuels.setBounds(337, 113, 170, 34);
+		frame.getContentPane().add(comboBoxNbJoueursVirtuels);
+	}
+	
+	private void initializeGame() {
+
 		
 		/**
 		 * Gestion du conteneur des boutons Carte et Contre-carte. On dï¿½finit sa position et les composants qu'il contient.
 		 */
+		setFrame(new JFrame());
+		getFrame().setBounds(100, 100, 1000, 700);
+		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panelActionCarte = new JPanel();
 		getFrame().getContentPane().add(panelActionCarte, BorderLayout.WEST);
 		panelActionCarte.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));

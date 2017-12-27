@@ -61,6 +61,7 @@ public class Partie extends Observable{
 			System.out.println(
 					"\nMode de comptage des points choisi : NEGATIF ! Lorsqu'un joueur atteint 100 point, il perd la partie ! \nUne manche se termine lorsqu'un joueur a fini !\n");
 		}
+		Partie.instancePartie=this;
 	}
 
 	/**
@@ -83,7 +84,7 @@ public class Partie extends Observable{
 			if (this.classementJoueursPartie.get(0).getScore() >= 60) {
 				terminer = true;
 				this.etat = "TERMINEE";
-				System.out.println("Partie termin�e! Un joueur a eu au moins 60 point !");
+				System.out.println("Partie termininee! Un joueur a eu au moins 60 point !");
 			}
 
 		} else {// mode de comptage negatif, le premier qui arrive a 100 point a perdu et la
@@ -118,6 +119,14 @@ public class Partie extends Observable{
 	public int getNbJoueursVirtuels() {
 		return nbJoueursVirtuels;
 	}
+	
+
+	/**
+	 * @param nbJoueursVirtuels the nbJoueursVirtuels to set
+	 */
+	public void setNbJoueursVirtuels(int nbJoueursVirtuels) {
+		this.nbJoueursVirtuels = nbJoueursVirtuels;
+	}
 
 	/**
 	 * @return the modeComptage
@@ -151,7 +160,7 @@ public class Partie extends Observable{
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						TestInterface window = new TestInterface(Partie.getPartie());
+						TestInterface window = new TestInterface();
 						window.getFrame().setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -184,7 +193,7 @@ public class Partie extends Observable{
 	public static void main(String[] args) {
 		
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
-		Partie p = Partie.getPartie();// creation d'une partie
-		VueLigneCommande vLC =new VueLigneCommande();
+		Partie p =new Partie();
+		new VueLigneCommande();
 	}
 }
