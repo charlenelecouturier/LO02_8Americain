@@ -11,10 +11,20 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JLabel;
+import java.awt.GridLayout;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.BoxLayout;
+import javax.swing.JTextArea;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class InterfaceGraphique implements Observer{
 
 	JFrame frame;
+	private JTextField txtNombreDeJoueurs;
+	private JTextField txtVotreNom;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -46,40 +56,36 @@ public class InterfaceGraphique implements Observer{
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1000, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.WEST);
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		txtNombreDeJoueurs = new JTextField();
+		txtNombreDeJoueurs.setEditable(false);
+		txtNombreDeJoueurs.setText("Nombre de joueurs virtuels ?");
+		txtNombreDeJoueurs.setBounds(57, 101, 215, 46);
+		frame.getContentPane().add(txtNombreDeJoueurs);
+		txtNombreDeJoueurs.setColumns(10);
 		
-		JButton btnCarte = new JButton("Carte");
-		panel.add(btnCarte);
+		txtVotreNom = new JTextField();
+		txtVotreNom.setEditable(false);
+		txtVotreNom.setText("Votre Nom ?");
+		txtVotreNom.setBounds(57, 410, 215, 46);
+		frame.getContentPane().add(txtVotreNom);
+		txtVotreNom.setColumns(10);
 		
-		JButton btnContreCarte = new JButton("Contre Carte");
-		panel.add(btnContreCarte);
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(607, 426, -114, 22);
+		frame.getContentPane().add(textArea);
 		
-		JPanel panel_1 = new JPanel();
-		frame.getContentPane().add(panel_1, BorderLayout.NORTH);
+		textField = new JTextField();
+		textField.setBounds(333, 413, 174, 40);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
 		
-		JPanel panel_2 = new JPanel();
-		frame.getContentPane().add(panel_2, BorderLayout.EAST);
-		
-		JLabel lblScore = new JLabel("Score :");
-		panel_2.add(lblScore);
-		
-		JPanel panel_3 = new JPanel();
-		frame.getContentPane().add(panel_3, BorderLayout.SOUTH);
-		
-		JLabel lblMain = new JLabel("Main");
-		panel_3.add(lblMain);
-		
-		JPanel panel_4 = new JPanel();
-		frame.getContentPane().add(panel_4, BorderLayout.CENTER);
-		
-		JLabel lblPioche = new JLabel("Pioche");
-		panel_4.add(lblPioche);
-		
-		JLabel lblTalon = new JLabel("Talon");
-		panel_4.add(lblTalon);
+		JComboBox comboBox = new JComboBox();
+		comboBox.setMaximumRowCount(5);
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5"}));
+		comboBox.setBounds(337, 113, 170, 34);
+		frame.getContentPane().add(comboBox);
 	}
 
 	@Override
@@ -87,5 +93,4 @@ public class InterfaceGraphique implements Observer{
 		// TODO Auto-generated method stub
 		
 	}
-
 }

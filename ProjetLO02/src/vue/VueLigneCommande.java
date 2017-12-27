@@ -9,7 +9,6 @@ public class VueLigneCommande implements Observer ,Runnable{
 public VueLigneCommande() {
 Partie.getPartie().addObserver(this);
 Partie.getPartie().getManche().getTalon().addObserver(this);
-Partie.getPartie().getManche().getPioche().addObserver(this);
 ListIterator<Joueur> it = Partie.getPartie().getJoueur().listIterator();
 while(it.hasNext()) {
 	it.next().addObserver(this);
