@@ -68,6 +68,7 @@ public class TestInterface implements Observer {
 		while(it.hasNext()) {
 			it.next().addObserver(this);
 		}
+		p.addObserver(this);
 		
 		this.vueJVirtuel=new ArrayList();
 		for(int iterator = 1; iterator < joueur.size(); iterator++) {
@@ -149,7 +150,6 @@ public class TestInterface implements Observer {
 		panel_Main = new JPanel();
 		getFrame().getContentPane().add(panel_Main, BorderLayout.SOUTH);
 	    GridLayout grid1 = new GridLayout();
-
 		panel_Main.setLayout(grid1);
 		panel_Main.setBackground(new Color(8, 81, 36));
 		//Partie permettant de tester la main
