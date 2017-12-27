@@ -2,6 +2,8 @@ package modele;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
+import java.util.Iterator;
 
 /**
  * Joueur est la classe qui represente les participants au jeu, qu'ils soient
@@ -22,11 +24,13 @@ public abstract class Joueur extends Observable{
 	private int scoreManche;
 	protected Strategie strategie;
 	protected String EffetVariante;
+	
 
 	/**
 	 * le Constructeur de Joueur ne doit pas etre utilise directement, il simplifie le code de ses classes filles.
 	 */
 	public Joueur() {
+		
 		this.EffetVariante = "Aucun";
 		this.numero = donneurNum;
 		donneurNum++;
@@ -117,9 +121,9 @@ public abstract class Joueur extends Observable{
 			Partie.getPartie().getManche().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
 			System.out.println(this.getName() + " pose " + cartePose);
 			cartes.remove(cartePose);
-			//On notifie à l'interface que la carte a été retirée de la main du joueur
-			hasChanged();
-			notifyObservers();
+			//On notifie l'interface que la carte a ete retiree de la main du joueur
+			this.setChanged();
+			this.notifyObservers();
 			
 			if (this.cartes.size() == 1) {
 				this.direCarte();
@@ -133,9 +137,9 @@ public abstract class Joueur extends Observable{
 			if (this.EffetVariante.equals("Aucun")) {
 				System.out.println(this.getName() + " ne peut pas jouer !");
 				this.piocher(1);
-				//On notifie à l'interface que le nombre de cartes dans la main du joueur a changé
-				hasChanged();
-				notifyObservers();
+				//On notifie l'interface que le nombre de cartes dans la main du joueur a change
+				this.setChanged();
+				this.notifyObservers();
 			}
 		}
 	}
@@ -211,4 +215,5 @@ public abstract class Joueur extends Observable{
 	}
 
 	public abstract int choisirCarte(Carte carteAControler);
+
 }

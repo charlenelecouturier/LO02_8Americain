@@ -4,11 +4,13 @@ import java.awt.EventQueue;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Observable;
+
 
 import vue.TestInterface;
 
 
-public class Partie {
+public class Partie extends Observable{
 
 	private static Partie instancePartie;
 	private int nbJoueursVirtuels;
