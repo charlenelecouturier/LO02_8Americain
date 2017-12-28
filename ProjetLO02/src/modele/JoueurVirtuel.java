@@ -131,6 +131,20 @@ public class JoueurVirtuel extends Joueur {
 		this.strategie.changerFamille();
 	}
 	
+	/**
+	 * @return the strat
+	 */
+	public int getStrat() {
+		return strat;
+	}
+
+	/**
+	 * @param strat the strat to set
+	 */
+	public void setStrat(int strat) {
+		this.strat = strat;
+	}
+
 	public int choisirCarte(Carte carte) {
 		return 0;
 	}

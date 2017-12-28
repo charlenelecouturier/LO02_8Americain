@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 import modele.Partie;
-
+import java.awt.FlowLayout;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.BorderFactory;
+import modele.*;
+
 
 // ===========Concernant les joueurs virtuels ============
 
@@ -19,6 +21,7 @@ public class VueJoueurVirtuel extends JPanel implements Observer{
 	protected static Color FOND_JOUEURS = new Color(112, 181, 134);
 	
 	protected JLabel iconeJoueur;
+	protected JLabel niveauJoueur;
 	protected JLabel dosCarte;
 	protected JLabel nbCartes;
 	protected JLabel lblNomJoueur;
@@ -26,16 +29,26 @@ public class VueJoueurVirtuel extends JPanel implements Observer{
 	
 	
 	public VueJoueurVirtuel(int numero) {
+		this.setLayout(new GridLayout(0,2));
 		this.setMaximumSize(new Dimension(160, 140));
 		initialize();
-		
 		this.numJoueur=numero;
-		lblNomJoueur = new JLabel(Partie.getPartie().getJoueur().get(numJoueur -1).getName());
-		nbCartes = new JLabel("Cartes restantes: 8");
+		Joueur j = Partie.getPartie().getJoueur().get(numJoueur -1);
+		if(((JoueurVirtuel)j).getStrat()==1) {
+			this.niveauJoueur= new JLabel("Niveau : Faible");
+		}
+		else {
+			this.niveauJoueur= new JLabel("Niveau : Eleve");
+
+		}
+		
+		lblNomJoueur = new JLabel(j.getName()+ " ");
+		nbCartes = new JLabel("Cartes restantes: 8  ");
 		this.add(iconeJoueur);
 		this.add(dosCarte);
-		this.add(nbCartes);
 		this.add(lblNomJoueur);
+		this.add(nbCartes);
+		this.add(this.niveauJoueur);
 		this.setBackground(FOND_JOUEURS);
 		
 	}

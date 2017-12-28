@@ -36,8 +36,6 @@ public class ControleurBoutonDemarrer {
 					Partie p =new Partie(niveauxJoueursVirtuels, select, nom, variante);
 					ti.initializeGame(p);
 					//p.lancerPartie();
-				
-
 				//ti.initializeGame();
 				//if(cNbJoueurs.nbJoueursVirtuels!=0 &&)
 
