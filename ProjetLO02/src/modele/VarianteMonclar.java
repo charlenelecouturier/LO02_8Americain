@@ -10,8 +10,6 @@ import java.util.Iterator;
  *
  */
 
-
-
 public class VarianteMonclar extends Variante {
 	
 	public VarianteMonclar(int nbJoueursVirtuels) {

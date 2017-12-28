@@ -18,6 +18,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JList;
+import javax.swing.JTable;
 
 public class InterfaceGraphique implements Observer{
 
@@ -25,6 +27,16 @@ public class InterfaceGraphique implements Observer{
 	private JTextField txtNombreDeJoueurs;
 	private JTextField txtVotreNom;
 	private JTextField textField;
+	private JPanel panel;
+	private JPanel panel_1;
+	private JPanel panel_2;
+	private JPanel panel_3;
+	private JButton btnDmarrer;
+	private JTextField txtModeDeComptage;
+	private JComboBox comboBox_2;
+	private JTextField txtVariante;
+	private JComboBox comboBox_3;
+	private JPanel panel_4;
 
 	/**
 	 * Launch the application.
@@ -61,7 +73,7 @@ public class InterfaceGraphique implements Observer{
 		txtNombreDeJoueurs = new JTextField();
 		txtNombreDeJoueurs.setEditable(false);
 		txtNombreDeJoueurs.setText("Nombre de joueurs virtuels ?");
-		txtNombreDeJoueurs.setBounds(57, 101, 215, 46);
+		txtNombreDeJoueurs.setBounds(57, 35, 215, 46);
 		frame.getContentPane().add(txtNombreDeJoueurs);
 		txtNombreDeJoueurs.setColumns(10);
 		
@@ -84,8 +96,58 @@ public class InterfaceGraphique implements Observer{
 		JComboBox comboBox = new JComboBox();
 		comboBox.setMaximumRowCount(5);
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5"}));
-		comboBox.setBounds(337, 113, 170, 34);
+		comboBox.setBounds(333, 40, 170, 36);
 		frame.getContentPane().add(comboBox);
+		
+		panel = new JPanel();
+		panel.setBounds(57, 96, 454, 51);
+		frame.getContentPane().add(panel);
+		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		panel_1 = new JPanel();
+		panel_1.setBounds(53, 150, 454, 46);
+		frame.getContentPane().add(panel_1);
+		
+		panel_2 = new JPanel();
+		panel_2.setBounds(57, 199, 440, 46);
+		frame.getContentPane().add(panel_2);
+		
+		panel_3 = new JPanel();
+		panel_3.setBounds(53, 247, 454, 46);
+		frame.getContentPane().add(panel_3);
+		
+		btnDmarrer = new JButton("D\u00E9marrer");
+		btnDmarrer.setBounds(837, 599, 115, 29);
+		frame.getContentPane().add(btnDmarrer);
+		
+		txtModeDeComptage = new JTextField();
+		txtModeDeComptage.setEditable(false);
+		txtModeDeComptage.setText("Mode de comptage des points ?");
+		txtModeDeComptage.setBounds(57, 472, 243, 46);
+		frame.getContentPane().add(txtModeDeComptage);
+		txtModeDeComptage.setColumns(10);
+		
+		comboBox_2 = new JComboBox();
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"POSITIF", "NEGATIF"}));
+		comboBox_2.setBounds(333, 475, 174, 40);
+		frame.getContentPane().add(comboBox_2);
+		
+		txtVariante = new JTextField();
+		txtVariante.setEditable(false);
+		txtVariante.setText("Variante ?");
+		txtVariante.setBounds(57, 534, 243, 40);
+		frame.getContentPane().add(txtVariante);
+		txtVariante.setColumns(10);
+		
+		comboBox_3 = new JComboBox();
+		comboBox_3.setMaximumRowCount(4);
+		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"Minimale", "Monclar", "Variante 4", "Variante 5"}));
+		comboBox_3.setBounds(333, 531, 174, 40);
+		frame.getContentPane().add(comboBox_3);
+		
+		panel_4 = new JPanel();
+		panel_4.setBounds(57, 295, 450, 46);
+		frame.getContentPane().add(panel_4);
 	}
 
 	@Override

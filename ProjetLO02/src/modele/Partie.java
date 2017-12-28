@@ -21,6 +21,33 @@ public class Partie extends Observable{
 	private LinkedList<Joueur> classementJoueursPartie;
 	private String modeComptage;
 
+	
+	
+	
+	
+	
+	
+	public Partie(int nbJoueursVirtuels[], String modeComptage, String nom, String variante) {
+		this.nbJoueursVirtuels = nbJoueursVirtuels.length;
+		int i;		
+		this.classementJoueursPartie = new LinkedList<Joueur>();
+		this.joueur = new LinkedList<Joueur>();
+		this.joueur.add(new JoueurPhysique(nom));
+
+		for (i = 0; i < this.nbJoueursVirtuels; i++) {
+
+				this.joueur.add(new JoueurVirtuel(nbJoueursVirtuels[i]));
+			}
+		
+		for (i = 0; i < this.joueur.size(); i++) {// on initialise le classement de la partie
+			this.classementJoueursPartie.add(this.joueur.get(i));
+		}
+		this.manche = new Manche(this.nbJoueursVirtuels,joueur,variante );
+		this.etat = "EN COURS";
+		this.modeComptage = modeComptage;
+		Partie.instancePartie=this;
+	}
+
 	private Partie() {
 		
 
@@ -69,13 +96,17 @@ public class Partie extends Observable{
 	 * 
 	 * @return Partie instance unique de la classe Partie
 	 */
-	public static Partie getPartie() {
+	/*public static Partie getPartie() {
 
 		if (Partie.instancePartie == null) {
 			Partie.instancePartie = new Partie();
 		}
 		return Partie.instancePartie;
-	}
+	}*/
+	
+	public static Partie getPartie() {
+		return Partie.instancePartie;
+}
 
 	public boolean terminerPartie() {
 		boolean terminer = false;
@@ -152,32 +183,28 @@ public class Partie extends Observable{
 
 	public void lancerPartie() {
 		
-		while (Partie.getPartie().etat.equals("EN COURS")) { // tant que la partie n'est pas terminee, on joue des manches
-			Partie.getPartie().manche.setPioche(new Pioche());// creation de la pioche
-			Partie.getPartie().manche.getPioche().melanger();// on melange la pioche
-			Partie.getPartie().manche.getPioche().distribuer();// on distribue la pioche
+
+		
+		while (Partie.getPartie().etat.equals("EN COURS")) { 
 			
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						TestInterface window = new TestInterface();
-						window.getFrame().setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
+			// tant que la partie n'est pas terminee, on joue des manches
+			/*Partie.getPartie().manche.setPioche(new Pioche());// creation de la pioche
+			Partie.getPartie().manche.getPioche().melanger();// on melange la pioche
+			Partie.getPartie().manche.getPioche().distribuer();// on distribue la pioche*/
+			
+			
 			//vue concurente : ligne de commande et interface
 			System.out.println(Thread.currentThread());
 
 			while (!Partie.getPartie().manche.terminerManche()) { // tant que la manche n'est pas terminee, on joue des tours
+
+				Partie.getPartie().manche.getJoueur().get(Partie.getPartie().manche.getTourJoueur() - 1).jouerTour();
+				System.out.println("\n");
 				try {// Temps de delais entre chaque tour
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				Partie.getPartie().manche.getJoueur().get(Partie.getPartie().manche.getTourJoueur() - 1).jouerTour();
-				System.out.println("\n");
 			}
 			if (Partie.getPartie().modeComptage.equals("POSITIF")) {
 				Partie.getPartie().manche.compterPointsPositif();
@@ -193,7 +220,17 @@ public class Partie extends Observable{
 	public static void main(String[] args) {
 		
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
-		Partie p =new Partie();
-		new VueLigneCommande();
+		//Partie p =new Partie();
+		//new VueLigneCommande();
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					TestInterface window = new TestInterface();
+					window.getFrame().setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }

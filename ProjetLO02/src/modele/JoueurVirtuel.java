@@ -38,6 +38,18 @@ public class JoueurVirtuel extends Joueur {
 		}
 		
 	}
+	
+	public JoueurVirtuel(int niveau){
+		super();
+		setName("Joueur " + getNumero());
+		this.strat=niveau;
+		if (strat == 1) {
+			this.strategie = new StrategieDeBase();
+		} else {
+			this.strategie = new StratAvancee(); 
+		}
+		}
+		
 
 	public int choisirCarte() {
 		int j;

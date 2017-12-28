@@ -12,8 +12,12 @@ public class JoueurPhysique extends Joueur {
 		this.name = sc.nextLine();
 		System.out.println("OK Joueur1  : " + this.name);
 	}
-
-
+	
+	public JoueurPhysique(String nom) {
+		super();
+		this.name=nom;
+	}
+	
 	public int choisirCarte(Carte carteChoisie) {
 		int indexCarteChoisie = 0;
 		ListIterator parcourirCarteJoueur = this.getCartes().listIterator();

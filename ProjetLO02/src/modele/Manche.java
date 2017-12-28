@@ -36,6 +36,44 @@ public class Manche {
 		}
 
 		Variante.nombreAs = 0;
+		
+	}
+	
+	public Manche(int nbJoueursVirtuels, LinkedList<Joueur> joueur,String variante) {
+
+		int nbJoueursEnCours = nbJoueursVirtuels + 1;
+		this.nbJoueursEnCours = nbJoueursEnCours;
+		this.classementJoueurs = new LinkedList<Joueur>();
+		Random r = new Random();
+		int tourJoueur = 1 + r.nextInt(nbJoueursEnCours - 1); // le joueur qui debute la partie est choisi aleatoirement
+		this.tourJoueur = tourJoueur;
+		this.sens = 1; // sens des aiguilles d'une montre
+		this.talon = new Talon();
+		// choix de la variante
+		switch(variante) {
+		case "Minimale" :
+			this.varianteManche= new VarianteMinimale(nbJoueursVirtuels);
+		
+		break;
+		case "Monclar" :
+			this.varianteManche= new VarianteMonclar(nbJoueursVirtuels);
+		break;
+		case "Variante 4" :
+			this.varianteManche=new Variante4(nbJoueursVirtuels); 
+		break;
+		case "Variante 5" :
+			this.varianteManche=new Variante5(nbJoueursVirtuels); 
+		break;
+		}	
+		ListIterator<Joueur> it = joueur.listIterator();
+		this.joueur = new LinkedList<Joueur>();
+		while (it.hasNext()) {
+			Joueur joueurNext = it.next();
+			joueurNext.getCartes().clear();
+			this.joueur.add(joueurNext);
+		}
+
+		Variante.nombreAs = 0;
 	}
 
 	public boolean terminerManche() {
