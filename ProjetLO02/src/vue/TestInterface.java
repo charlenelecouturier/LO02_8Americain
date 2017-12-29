@@ -284,8 +284,10 @@ public class TestInterface implements Observer, Runnable {
 		getFrame().getContentPane().add(panel_Classement, BorderLayout.EAST);
 		panel_Classement.setBackground(new Color(39, 135, 75));
 		lblClassement = new JLabel("Classement general de la partie : ");
-		Font f = new Font("Serif", Font.PLAIN, 24);
-		Font f1 = new Font("Serif", Font.PLAIN, 14);
+		lblClassement.setHorizontalTextPosition(SwingConstants.CENTER );
+
+		Font f = new Font("Serif", Font.BOLD, 24);
+		Font f1 = new Font("Serif", Font.BOLD, 20);
 
 		Color c = new Color(0, 0, 0);
 		lblClassement.setFont(f);
@@ -296,6 +298,8 @@ public class TestInterface implements Observer, Runnable {
 		/**
 		 * Mise en place des Observers sur les objets de la partie
 		 */
+		Partie.getPartie().getManche().getTalon().addObserver(this);
+		Partie.getPartie().getManche().getPioche().addObserver(this);
 		ListIterator<Joueur> it = joueur.listIterator();
 		while (it.hasNext()) {
 			Joueur jNext = it.next();
@@ -303,42 +307,38 @@ public class TestInterface implements Observer, Runnable {
 			JLabel lbl = new JLabel(jNext.getName() + " : " + jNext.getScore());
 			lbl.setFont(f1);
 			lbl.setForeground(c);
+			lbl.setHorizontalAlignment(SwingConstants.CENTER);
 			panel_Classement.add(lbl);
+		}
+		/**
+		 * Gestion du conteneur de la main du joueur physique. On dï¿½finit sa position
+		 * et les composants qu'il contient.
+		 */
+		panel_Main = new JPanel();
+		getFrame().getContentPane().add(panel_Main, BorderLayout.SOUTH);
+		GridLayout grid1 = new GridLayout();
+		panel_Main.setLayout(grid1);
+		panel_Main.setBackground(new Color(8, 81, 36));
+		// Partie permettant de tester la main
+		/*
+		 * Carte carte10Pique = new Carte("10", "PIQUE"); VueCarte vueCarte =new
+		 * VueCarte(carte10Pique); panel_Main.add(vueCarte);
+		 */
+		/**
+		 * Itï¿½ration qui permet d'afficher les cartes du joueur ï¿½ l'ï¿½cran dans sa
+		 * main.
+		 */
 
-			Partie.getPartie().getManche().getTalon().addObserver(this);
-			Partie.getPartie().getManche().getPioche().addObserver(this);
-			ListIterator<Joueur> ite = joueur.listIterator();
+		// On créé un itérateur qui va parcourir les cartes de notre jeu
+		ArrayList<Carte> cartesJoueurPhysique = Partie.getPartie().getJoueur().get(0).getCartes();
 
-			/**
-			 * Gestion du conteneur de la main du joueur physique. On dï¿½finit sa position
-			 * et les composants qu'il contient.
-			 */
-			panel_Main = new JPanel();
-			getFrame().getContentPane().add(panel_Main, BorderLayout.SOUTH);
-			GridLayout grid1 = new GridLayout();
-			panel_Main.setLayout(grid1);
-			panel_Main.setBackground(new Color(8, 81, 36));
-			// Partie permettant de tester la main
-			/*
-			 * Carte carte10Pique = new Carte("10", "PIQUE"); VueCarte vueCarte =new
-			 * VueCarte(carte10Pique); panel_Main.add(vueCarte);
-			 */
-			/**
-			 * Itï¿½ration qui permet d'afficher les cartes du joueur ï¿½ l'ï¿½cran dans sa
-			 * main.
-			 */
+		ListIterator<Carte> parcourirCarteJoueur = cartesJoueurPhysique.listIterator();
 
-			// On créé un itérateur qui va parcourir les cartes de notre jeu
-			ArrayList<Carte> cartesJoueurPhysique = Partie.getPartie().getJoueur().get(0).getCartes();
-
-			ListIterator parcourirCarteJoueur = cartesJoueurPhysique.listIterator();
-
-			while (parcourirCarteJoueur.hasNext()) {
-				Carte prochaineCarte = (Carte) parcourirCarteJoueur.next();
-				VueCarte vueProchaineCarte = new VueCarte(prochaineCarte);
-				new ControleurCarte(Partie.getPartie(), prochaineCarte, vueProchaineCarte);
-				panel_Main.add(vueProchaineCarte);
-			}
+		while (parcourirCarteJoueur.hasNext()) {
+			Carte prochaineCarte = (Carte) parcourirCarteJoueur.next();
+			VueCarte vueProchaineCarte = new VueCarte(prochaineCarte);
+			new ControleurCarte(Partie.getPartie(), prochaineCarte, vueProchaineCarte);
+			panel_Main.add(vueProchaineCarte);
 		}
 		/**
 		 * Gestion du conteneur de la Pioche et du Talon. On dï¿½finit sa position et
@@ -356,7 +356,6 @@ public class TestInterface implements Observer, Runnable {
 		getFrame().validate();
 		Thread t = new Thread(this);
 		t.start();
-
 	}
 
 	public void update(Observable instanceObservable, Object arg1) {
@@ -376,7 +375,7 @@ public class TestInterface implements Observer, Runnable {
 				 */
 				panel_Main.removeAll();
 				ArrayList<Carte> cartesJoueurPhysique = Partie.getPartie().getJoueur().get(0).getCartes();
-				ListIterator parcourirCarteJoueur = cartesJoueurPhysique.listIterator();
+				ListIterator<Carte> parcourirCarteJoueur = cartesJoueurPhysique.listIterator();
 
 				while (parcourirCarteJoueur.hasNext()) {
 					Carte prochaineCarte = (Carte) parcourirCarteJoueur.next();
