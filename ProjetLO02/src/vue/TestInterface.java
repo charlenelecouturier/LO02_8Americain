@@ -12,24 +12,22 @@ import java.util.Observable;
 import java.util.Observer;
 import java.awt.Font;
 
-
 import javax.swing.*;
 import modele.*;
 import controleur.*;
 
-
 public class TestInterface implements Observer, Runnable {
-	
+
 	private ArrayList<VueJoueurVirtuel> vueJVirtuel;
 
 	// Fen�tre principale et conteneurs de l'interface
-	
+
 	private JFrame frame;
-	private JPanel panelActionCarte; 
-	private JPanel panel_JoueurVirtuel; 
+	private JPanel panelActionCarte;
+	private JPanel panel_JoueurVirtuel;
 	private JPanel panel_Main;
 	private JPanel panel_Classement;
-	private VuePiocheTalon panel_Pioche; 
+	private VuePiocheTalon panel_Pioche;
 	// Labels et autres pr�sents dans l'Interface
 	private JButton btnCarte;
 	private JButton btnContreCarte;
@@ -47,46 +45,37 @@ public class TestInterface implements Observer, Runnable {
 	private JButton btnDmarrer;
 	private JTextField txtModeDeComptage;
 	private JComboBox comboBoxComptage;
-	private JComboBox comboBoxVariante ;
+	private JComboBox comboBoxVariante;
 	// Objets du mod�le � observer
 	private LinkedList<Joueur> joueur;
-	
+
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TestInterface window = new TestInterface();
-					window.getFrame().setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-*/
+	/*
+	 * public static void main(String[] args) { EventQueue.invokeLater(new
+	 * Runnable() { public void run() { try { TestInterface window = new
+	 * TestInterface(); window.getFrame().setVisible(true); } catch (Exception e) {
+	 * e.printStackTrace(); } } }); }
+	 */
 	/**
 	 * Create the application.
 	 */
 	public TestInterface() {
-		
-		// on initialise la partie ( nb joueurs et niveaux joueurs  etc)
-		this.niveauJVirtuel= new JComboBox[5];
-		initialize();
-		new ControleurNbJVirtuel(comboBoxNbJoueursVirtuels, this.panelJ2, this.panelJ3, this.panelJ4,this.panelJ5,this.panelJ6, this.comboBoxNbJoueursVirtuels);
-		new ControleurBoutonDemarrer(this.btnDmarrer,  this.niveauJVirtuel,this.comboBoxNbJoueursVirtuels,comboBoxComptage, this.textField, comboBoxVariante, this);	
-		/**
-		 * Mise en place des Observers sur les objets de la partie
-		 */	
-	}
-	
 
+		// on initialise la partie ( nb joueurs et niveaux joueurs etc)
+		this.niveauJVirtuel = new JComboBox[5];
+		initialize();
+		new ControleurNbJVirtuel(comboBoxNbJoueursVirtuels, this.panelJ2, this.panelJ3, this.panelJ4, this.panelJ5,
+				this.panelJ6, this.comboBoxNbJoueursVirtuels);
+		new ControleurBoutonDemarrer(this.btnDmarrer, this.niveauJVirtuel, this.comboBoxNbJoueursVirtuels,
+				comboBoxComptage, this.textField, comboBoxVariante, this);
+
+	}
 
 	public void run() {
 
-	Partie.getPartie().lancerPartie();
+		Partie.getPartie().lancerPartieGraphique();
 	}
 
 	/**
@@ -98,71 +87,71 @@ public class TestInterface implements Observer, Runnable {
 		getFrame().setBounds(100, 100, 1000, 700);
 		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		txtNombreDeJoueurs = new JTextField();
 		txtNombreDeJoueurs.setEditable(false);
 		txtNombreDeJoueurs.setText("Nombre de joueurs virtuels ?");
 		txtNombreDeJoueurs.setBounds(57, 35, 215, 46);
 		frame.getContentPane().add(txtNombreDeJoueurs);
 		txtNombreDeJoueurs.setColumns(10);
-		
+
 		txtVotreNom = new JTextField();
 		txtVotreNom.setEditable(false);
 		txtVotreNom.setText("Votre Nom ?");
 		txtVotreNom.setBounds(57, 410, 215, 46);
 		frame.getContentPane().add(txtVotreNom);
 		txtVotreNom.setColumns(10);
-		
+
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(607, 426, -114, 22);
 		frame.getContentPane().add(textArea);
-		
+
 		textField = new JTextField();
 		textField.setBounds(333, 413, 174, 40);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
-		
-		comboBoxNbJoueursVirtuels= new JComboBox();
+
+		comboBoxNbJoueursVirtuels = new JComboBox();
 		comboBoxNbJoueursVirtuels.setMaximumRowCount(5);
-		comboBoxNbJoueursVirtuels.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5"}));
+		comboBoxNbJoueursVirtuels.setModel(new DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
 		comboBoxNbJoueursVirtuels.setBounds(337, 40, 170, 34);
 		frame.getContentPane().add(comboBoxNbJoueursVirtuels);
 		panelJ2 = new JPanel();
 		panelJ2.setBounds(57, 96, 454, 46);
 		frame.getContentPane().add(panelJ2);
 		panelJ2.setLayout(new GridLayout(0, 1, 0, 0));
-		
+
 		JTextField txtNiveauJoueur2 = new JTextField();
 		txtNiveauJoueur2.setEditable(false);
 		txtNiveauJoueur2.setText("Niveau joueur 2 ?");
 		panelJ2.add(txtNiveauJoueur2);
 		txtNiveauJoueur2.setColumns(10);
-		
+
 		JComboBox comboBox_j2 = new JComboBox();
-		comboBox_j2.setModel(new DefaultComboBoxModel(new String[] {"1", "2"}));
+		comboBox_j2.setModel(new DefaultComboBoxModel(new String[] { "1", "2" }));
 		comboBox_j2.setMaximumRowCount(2);
-		this.niveauJVirtuel[0]=comboBox_j2;
+		this.niveauJVirtuel[0] = comboBox_j2;
 		panelJ2.add(comboBox_j2);
-		//panelJ2.setVisible(false);
-		
+		// panelJ2.setVisible(false);
+
 		panelJ3 = new JPanel();
 		panelJ3.setBounds(57, 150, 454, 46);
 		frame.getContentPane().add(panelJ3);
 		panelJ3.setLayout(new GridLayout(0, 1, 0, 0));
-		
+
 		JTextField txtNiveauJoueur3 = new JTextField();
 		txtNiveauJoueur3.setEditable(false);
 		txtNiveauJoueur3.setText("Niveau joueur 3 ?");
 		panelJ3.add(txtNiveauJoueur3);
 		txtNiveauJoueur3.setColumns(10);
-		
+
 		JComboBox comboBox_j3 = new JComboBox();
-		comboBox_j3.setModel(new DefaultComboBoxModel(new String[] {"1", "2"}));
+		comboBox_j3.setModel(new DefaultComboBoxModel(new String[] { "1", "2" }));
 		comboBox_j3.setMaximumRowCount(2);
-		this.niveauJVirtuel[1]=comboBox_j3;
+		this.niveauJVirtuel[1] = comboBox_j3;
 		panelJ3.add(comboBox_j3);
 		panelJ3.setVisible(false);
-		
+
 		panelJ4 = new JPanel();
 		panelJ4.setBounds(57, 199, 454, 46);
 		frame.getContentPane().add(panelJ4);
@@ -173,12 +162,12 @@ public class TestInterface implements Observer, Runnable {
 		panelJ4.add(txtNiveauJoueur4);
 		txtNiveauJoueur4.setColumns(10);
 		JComboBox comboBox_j4 = new JComboBox();
-		comboBox_j4.setModel(new DefaultComboBoxModel(new String[] {"1", "2"}));
+		comboBox_j4.setModel(new DefaultComboBoxModel(new String[] { "1", "2" }));
 		comboBox_j4.setMaximumRowCount(2);
-		this.niveauJVirtuel[2]=comboBox_j4;
+		this.niveauJVirtuel[2] = comboBox_j4;
 		panelJ4.add(comboBox_j4);
 		panelJ4.setVisible(false);
-		
+
 		panelJ5 = new JPanel();
 		panelJ5.setBounds(57, 247, 454, 46);
 		frame.getContentPane().add(panelJ5);
@@ -189,12 +178,12 @@ public class TestInterface implements Observer, Runnable {
 		panelJ5.add(txtNiveauJoueur5);
 		txtNiveauJoueur3.setColumns(10);
 		JComboBox comboBox_j5 = new JComboBox();
-		comboBox_j5.setModel(new DefaultComboBoxModel(new String[] {"1", "2"}));
+		comboBox_j5.setModel(new DefaultComboBoxModel(new String[] { "1", "2" }));
 		comboBox_j5.setMaximumRowCount(2);
-		this.niveauJVirtuel[4]=comboBox_j5;
+		this.niveauJVirtuel[4] = comboBox_j5;
 		panelJ5.add(comboBox_j5);
 		panelJ5.setVisible(false);
-		
+
 		panelJ6 = new JPanel();
 		panelJ6.setBounds(57, 295, 454, 46);
 		frame.getContentPane().add(panelJ6);
@@ -204,51 +193,49 @@ public class TestInterface implements Observer, Runnable {
 		txtNiveauJoueur6.setText("Niveau joueur 6 ?");
 		panelJ6.add(txtNiveauJoueur6);
 		txtNiveauJoueur3.setColumns(10);
-		
+
 		JComboBox comboBox_j6 = new JComboBox();
-		comboBox_j6.setModel(new DefaultComboBoxModel(new String[] {"1", "2"}));
+		comboBox_j6.setModel(new DefaultComboBoxModel(new String[] { "1", "2" }));
 		comboBox_j6.setMaximumRowCount(2);
-		this.niveauJVirtuel[3]=comboBox_j5;
+		this.niveauJVirtuel[3] = comboBox_j5;
 		panelJ6.add(comboBox_j6);
 		panelJ6.setVisible(false);
-		
+
 		btnDmarrer = new JButton("D\u00E9marrer");
 		btnDmarrer.setBounds(837, 599, 115, 29);
 		frame.getContentPane().add(btnDmarrer);
-		
+
 		txtModeDeComptage = new JTextField();
 		txtModeDeComptage.setEditable(false);
 		txtModeDeComptage.setText("Mode de comptage des points ?");
 		txtModeDeComptage.setBounds(57, 472, 215, 46);
 		frame.getContentPane().add(txtModeDeComptage);
 		txtModeDeComptage.setColumns(10);
-		
+
 		comboBoxComptage = new JComboBox();
-		comboBoxComptage.setModel(new DefaultComboBoxModel(new String[] {"POSITIF", "NEGATIF"}));
+		comboBoxComptage.setModel(new DefaultComboBoxModel(new String[] { "POSITIF", "NEGATIF" }));
 		comboBoxComptage.setMaximumRowCount(2);
 
 		comboBoxComptage.setBounds(333, 475, 174, 40);
 		frame.getContentPane().add(comboBoxComptage);
-		
+
 		JTextField txtVariante = new JTextField();
 		txtVariante.setEditable(false);
 		txtVariante.setText("Variante ?");
 		txtVariante.setBounds(57, 534, 215, 46);
 		frame.getContentPane().add(txtVariante);
 		txtVariante.setColumns(10);
-		
+
 		comboBoxVariante = new JComboBox();
-		comboBoxVariante .setMaximumRowCount(4);
-		comboBoxVariante .setModel(new DefaultComboBoxModel(new String[] {"Minimale", "Monclar", "Variante 4", "Variante 5"}));
-		comboBoxVariante .setBounds(333, 531, 174, 40);
+		comboBoxVariante.setMaximumRowCount(4);
+		comboBoxVariante
+				.setModel(new DefaultComboBoxModel(new String[] { "Minimale", "Monclar", "Variante 4", "Variante 5" }));
+		comboBoxVariante.setBounds(333, 531, 174, 40);
 		frame.getContentPane().add(comboBoxVariante);
 	}
 
 	public void initializeGame(Partie p) {
-		/**
-		 * Gestion du conteneur des boutons Carte et Contre-carte. On definit sa
-		 * position et les composants qu'il contient.
-		 */
+
 		getFrame().setVisible(false);
 		setFrame(new JFrame());
 		getFrame().getContentPane().setVisible(false);
@@ -258,10 +245,10 @@ public class TestInterface implements Observer, Runnable {
 		frame.getContentPane().setLayout(new BorderLayout());
 
 		joueur = Partie.getPartie().getJoueur();
-		Partie.getPartie().getManche().setPioche(new Pioche());// creation de la pioche
-		Partie.getPartie().getManche().getPioche().melanger();// on melange la pioche
-		Partie.getPartie().getManche().getPioche().distribuer();// on distribue la pioche
-
+		/**
+		 * Gestion du conteneur des boutons Carte et Contre-carte. On definit sa
+		 * position et les composants qu'il contient.
+		 */
 		panelActionCarte = new JPanel();
 		getFrame().getContentPane().add(panelActionCarte, BorderLayout.WEST);
 		panelActionCarte.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -284,9 +271,8 @@ public class TestInterface implements Observer, Runnable {
 
 		for (int i = 1; i < joueur.size(); i++) {
 			this.vueJVirtuel.add(new VueJoueurVirtuel(Partie.getPartie().getJoueur().get(i).getNumero()));
-			panel_JoueurVirtuel.add(vueJVirtuel.get(i- 1));
+			panel_JoueurVirtuel.add(vueJVirtuel.get(i - 1));
 		}
-
 
 		/**
 		 * Gestion du conteneur du Score. On d�finit sa position et les composants
@@ -298,17 +284,22 @@ public class TestInterface implements Observer, Runnable {
 		getFrame().getContentPane().add(panel_Classement, BorderLayout.EAST);
 		panel_Classement.setBackground(new Color(39, 135, 75));
 		lblClassement = new JLabel("Classement general de la partie : ");
-		Font f = new Font("Serif", Font.PLAIN, 24); 
-		Font f1 = new Font("Serif", Font.PLAIN, 14); 
+		Font f = new Font("Serif", Font.PLAIN, 24);
+		Font f1 = new Font("Serif", Font.PLAIN, 14);
 
-		Color c= new Color(0,0,0);
+		Color c = new Color(0, 0, 0);
 		lblClassement.setFont(f);
 		lblClassement.setForeground(c);
 		lblClassement.setSize(50, 50);
 		panel_Classement.add(lblClassement);
+
+		/**
+		 * Mise en place des Observers sur les objets de la partie
+		 */
 		ListIterator<Joueur> it = joueur.listIterator();
 		while (it.hasNext()) {
 			Joueur jNext = it.next();
+			jNext.addObserver(this);
 			JLabel lbl = new JLabel(jNext.getName() + " : " + jNext.getScore());
 			lbl.setFont(f1);
 			lbl.setForeground(c);
@@ -317,12 +308,7 @@ public class TestInterface implements Observer, Runnable {
 			Partie.getPartie().getManche().getTalon().addObserver(this);
 			Partie.getPartie().getManche().getPioche().addObserver(this);
 			ListIterator<Joueur> ite = joueur.listIterator();
-			while (ite.hasNext()) {
-				ite.next().addObserver(this); // observateur Joueur
-			}
-			Partie.getPartie().addObserver(this);
 
-			
 			/**
 			 * Gestion du conteneur de la main du joueur physique. On d�finit sa position
 			 * et les composants qu'il contient.
@@ -350,8 +336,7 @@ public class TestInterface implements Observer, Runnable {
 			while (parcourirCarteJoueur.hasNext()) {
 				Carte prochaineCarte = (Carte) parcourirCarteJoueur.next();
 				VueCarte vueProchaineCarte = new VueCarte(prochaineCarte);
-				ControleurCarte controleurProchaineCarte = new ControleurCarte(Partie.getPartie(), prochaineCarte,
-						vueProchaineCarte);
+				new ControleurCarte(Partie.getPartie(), prochaineCarte, vueProchaineCarte);
 				panel_Main.add(vueProchaineCarte);
 			}
 		}
@@ -361,11 +346,10 @@ public class TestInterface implements Observer, Runnable {
 		 */
 		panel_Pioche = new VuePiocheTalon();
 		getFrame().getContentPane().add(panel_Pioche, BorderLayout.CENTER);
-		
-		
+
 		getFrame().setVisible(true);
 		getFrame().getContentPane().setVisible(true);
-		
+
 		getFrame().getContentPane().revalidate();
 		getFrame().pack();
 		getFrame().repaint();
@@ -374,29 +358,35 @@ public class TestInterface implements Observer, Runnable {
 		t.start();
 
 	}
-	
+
 	public void update(Observable instanceObservable, Object arg1) {
 		if (instanceObservable instanceof Joueur) {
 			this.panel_Pioche.update(instanceObservable, arg1);
-		}
-		if (instanceObservable instanceof JoueurVirtuel) {
-			int num =((Joueur) instanceObservable).getNumero();
-			this.vueJVirtuel.get(num-2).update(instanceObservable, arg1);
-		}
-		else if (instanceObservable instanceof JoueurPhysique) {
-			//Main
-			/**
-			 * Redefinir les cartes visibles en main en fonction du tour qu'a joué le joueur.
-			 */
-			panel_Main.removeAll();
-			ArrayList<Carte> cartesJoueurPhysique = Partie.getPartie().getJoueur().get(0).getCartes() ; 
-			ListIterator parcourirCarteJoueur = cartesJoueurPhysique.listIterator(); 
-			
-			while(parcourirCarteJoueur.hasNext()) {
-				Carte prochaineCarte = (Carte) parcourirCarteJoueur.next();
-				VueCarte vueProchaineCarte = new VueCarte(prochaineCarte);
-				ControleurCarte controleurProchaineCarte = new ControleurCarte(Partie.getPartie(), prochaineCarte, vueProchaineCarte);
-				panel_Main.add(vueProchaineCarte);
+
+			if (instanceObservable instanceof JoueurVirtuel) {
+				int num = ((Joueur) instanceObservable).getNumero();
+				this.vueJVirtuel.get(num - 2).update(instanceObservable, arg1);
+				frame.repaint();
+				frame.revalidate();
+			} else if (instanceObservable instanceof JoueurPhysique) {
+
+				/**
+				 * Redefinir les cartes visibles en main en fonction du tour qu'a joué le
+				 * joueur.
+				 */
+				panel_Main.removeAll();
+				ArrayList<Carte> cartesJoueurPhysique = Partie.getPartie().getJoueur().get(0).getCartes();
+				ListIterator parcourirCarteJoueur = cartesJoueurPhysique.listIterator();
+
+				while (parcourirCarteJoueur.hasNext()) {
+					Carte prochaineCarte = (Carte) parcourirCarteJoueur.next();
+					VueCarte vueProchaineCarte = new VueCarte(prochaineCarte);
+					ControleurCarte controleurProchaineCarte = new ControleurCarte(Partie.getPartie(), prochaineCarte,
+							vueProchaineCarte);
+					panel_Main.add(vueProchaineCarte);
+					frame.repaint();
+					frame.revalidate();
+				}
 			}
 		}
 	}
@@ -408,5 +398,4 @@ public class TestInterface implements Observer, Runnable {
 	public JFrame getFrame() {
 		return this.frame;
 	}
-
 }

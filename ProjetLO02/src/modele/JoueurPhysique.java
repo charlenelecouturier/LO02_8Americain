@@ -19,18 +19,74 @@ public class JoueurPhysique extends Joueur {
 	}
 	
 	public int choisirCarte(Carte carteChoisie) {
-		int indexCarteChoisie = 0;
-		ListIterator parcourirCarteJoueur = this.getCartes().listIterator();
+		int indexCarteChoisie = -1;
+		ListIterator<Carte> parcourirCarteJoueur = this.getCartes().listIterator();
 		while(parcourirCarteJoueur.hasNext()) {
+			int index = parcourirCarteJoueur.nextIndex();
 			if(parcourirCarteJoueur.next() == carteChoisie &&
 			   Partie.getPartie().getManche().getVarianteManche().estCompatible(carteChoisie)
 				) {
-				indexCarteChoisie = parcourirCarteJoueur.previousIndex();
+				indexCarteChoisie =index;
 			}
 		}
 		return indexCarteChoisie;
 	}
 	
+	public void jouerTourGraphique(int indexCarteChoisie) {
+		int tour;
+		boolean gagne = false;
+		this.poserCarteGraphique(indexCarteChoisie);
+		this.EffetVariante = "Aucun";
+		gagne = this.gagnePartie();	// on regarde si le fait d'avoir pose une carte permet au joueur de gagner la manche
+		tour = Partie.getPartie().getManche().getTourJoueur();
+		if (Partie.getPartie().getManche().getSens() == 1) {
+			if (!gagne) {
+				tour++;
+			}
+			if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
+				tour = 1;
+			}
+		} else {
+			tour--;
+			if (tour <= 0) {
+				tour = Partie.getPartie().getManche().getNbJoueursEnCours();
+			}
+		}
+		Partie.getPartie().getManche().setTourJoueur(tour);
+	}
+	public void poserCarteGraphique(int numeroCarte){
+		if (Partie.getPartie().getManche().getVarianteManche().estPossibleDeJouer(this.cartes)) {
+
+			Carte cartePose = this.cartes.get(numeroCarte);
+			Partie.getPartie().getManche().getTalon().getCartes().add(cartePose);
+			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole(cartePose.getSymbole());
+			Partie.getPartie().getManche().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
+System.out.println("vous jouezz "+cartePose);
+			cartes.remove(cartePose);
+			//On notifie l'interface que la carte a ete retiree de la main du joueur
+			this.setChanged();
+			this.notifyObservers();
+			
+			if (this.cartes.size() == 1) {
+				this.direCarte();
+			}
+			String effet = cartePose.getEffet();
+			if (!effet.equals("Aucun")) {
+				cartePose.appliquerEffet();
+			}
+
+		} else {
+			if (this.EffetVariante.equals("Aucun")) {
+				System.out.println(this.getName() + " ne peut pas jouer !");
+				this.piocher(1);
+				// On notifie l'interface que le nombre de cartes dans la main du joueur a
+				// change
+				this.setChanged();
+				this.notifyObservers();
+			}
+		}
+	}
+
 	public int choisirCarte() { 
 		boolean choix;
 		int numero;

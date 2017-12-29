@@ -181,18 +181,41 @@ public class Partie extends Observable{
 		this.manche = manche;
 	}
 
-	public void lancerPartie() {
-		
+	public void lancerPartieGraphique() {
 
-		
+		while (Partie.getPartie().etat.equals("EN COURS")) {
+			while (!Partie.getPartie().manche.terminerManche()) {
+
+				int tour = Partie.getPartie().manche.getTourJoueur() - 1;
+				if (tour != 0) {
+					Partie.getPartie().manche.getJoueur().get(tour).jouerTour();
+				}
+				try {// Temps de delais entre chaque tour
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			if (Partie.getPartie().modeComptage.equals("POSITIF")) {
+				Partie.getPartie().manche.compterPointsPositif();
+			} else {
+				Partie.getPartie().manche.compterPointsNegatif();
+			} // Si la partie n'est pas terminee, on debute une nouvelle manche
+			if (!Partie.getPartie().terminerPartie()) {
+				System.out.println("\nNOUVELLE MANCHE\n");
+				Partie.getPartie().manche= new Manche(Partie.getPartie().nbJoueursVirtuels,Partie.getPartie().joueur);
+			}
+		}
+	}
+	public void lancerPartie() {
+	
 		while (Partie.getPartie().etat.equals("EN COURS")) { 
 			
 			// tant que la partie n'est pas terminee, on joue des manches
 			/*Partie.getPartie().manche.setPioche(new Pioche());// creation de la pioche
 			Partie.getPartie().manche.getPioche().melanger();// on melange la pioche
 			Partie.getPartie().manche.getPioche().distribuer();// on distribue la pioche*/
-			
-			
+
 			//vue concurente : ligne de commande et interface
 			System.out.println(Thread.currentThread());
 

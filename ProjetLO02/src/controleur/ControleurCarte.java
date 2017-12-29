@@ -1,5 +1,6 @@
 package controleur;
-
+import modele.Joueur;
+import modele.JoueurPhysique;
 import java.awt.event.*;
 
 import modele.Carte;
@@ -12,8 +13,10 @@ public class ControleurCarte {
 	public ControleurCarte(Partie p, Carte carteAControler, VueCarte vueCarteAControler) {
 		vueCarteAControler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(p.getManche().getTourJoueur() == 0) {
-					int indexCarte = p.getJoueur().get(0).choisirCarte(carteAControler);
+				if(p.getManche().getTourJoueur() == 1 && Partie.getPartie().getManche().getVarianteManche().estCompatible(carteAControler)) {
+					int indexCarteChoisie =p.getJoueur().get(0).choisirCarte(carteAControler);
+
+					((JoueurPhysique)p.getJoueur().get(0)).jouerTourGraphique(indexCarteChoisie);
 				}
 			}
 		});

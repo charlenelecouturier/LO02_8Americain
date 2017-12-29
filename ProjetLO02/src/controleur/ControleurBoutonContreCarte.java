@@ -2,7 +2,7 @@ package controleur;
 
 import java.awt.event.*;
 
-public class controleurBoutonContreCarte {
+public class ControleurBoutonContreCarte {
 	
 /*	public controleurBoutonContreCarte() {
 		btnContreCarte.addActionListener(new ActionListener()){
