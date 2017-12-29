@@ -24,13 +24,14 @@ public abstract class Joueur extends Observable{
 	private int scoreManche;
 	protected Strategie strategie;
 	protected String EffetVariante;
+	protected String typeInterface;
 	
 
 	/**
 	 * le Constructeur de Joueur ne doit pas etre utilise directement, il simplifie le code de ses classes filles.
 	 */
 	public Joueur() {
-		
+		this.typeInterface="LDC";
 		this.EffetVariante = "Aucun";
 		this.numero = donneurNum;
 		donneurNum++;

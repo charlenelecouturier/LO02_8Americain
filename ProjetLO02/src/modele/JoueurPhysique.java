@@ -15,6 +15,7 @@ public class JoueurPhysique extends Joueur {
 	
 	public JoueurPhysique(String nom) {
 		super();
+		this.typeInterface="graphique";
 		this.name=nom;
 	}
 	
@@ -56,6 +57,7 @@ public class JoueurPhysique extends Joueur {
 	}
 
 	public void poserCarteGraphique(int numeroCarte) {
+		
 		if (numeroCarte ==-2) { // le joueur pioche 1 carte
 			this.piocher(1);
 		} else if (Partie.getPartie().getManche().getVarianteManche().estPossibleDeJouer(this.cartes)) {
@@ -68,9 +70,9 @@ public class JoueurPhysique extends Joueur {
 			cartes.remove(cartePose);
 			// On notifie l'interface que la carte a ete retiree de la main du joueur
 
-			//if (this.cartes.size() == 1) {
-			//	this.direCarte();
-			//}
+			if (this.cartes.size() == 1) {
+				this.direCarteGraphique();
+			}
 			String effet = cartePose.getEffet();
 			if (!effet.equals("Aucun")) {
 				cartePose.appliquerEffet();
@@ -114,7 +116,13 @@ public class JoueurPhysique extends Joueur {
 		}
 		return numero - 1;
 	}
-
+	public void direCarteGraphique() {
+		
+	}
+	
+	public boolean direContreCarteGraphique() {
+		return false;
+	}
 	@Override
 	public void direCarte() {
 		Scanner scan = new Scanner(System.in);

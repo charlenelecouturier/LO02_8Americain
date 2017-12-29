@@ -183,8 +183,8 @@ public class Partie extends Observable {
 				// au tour d'un joueur virtuel
 				if (tour != 0 || !(Partie.getPartie().getManche().getJoueur().get(0) instanceof JoueurPhysique)) {
 					Partie.getPartie().manche.getJoueur().get(tour).jouerTour();
-				} else { // Au tour du joueur physique : on attend qu'il fasse une action
-					// mais sil ne peut pas jouer et qu'il a reçu un effet, on applique cet effet
+				} else { // Au tour du joueur physique : on attend qu'il fasse une action(poser carte ou piocher)
+					// mais sil ne peut pas jouer ET qu'il a reçu un effet, on applique cet effet
 					// avec l'appel a estPossibleDeJouer() puis on passe au joueur suivant
 					if (!this.manche.getVarianteManche().estPossibleDeJouer(this.manche.getJoueur().get(0).getCartes())
 							&& !this.manche.getJoueur().get(0).getEffetVariante().equals("Aucun")) {
@@ -220,6 +220,7 @@ public class Partie extends Observable {
 			}
 		}
 	}
+
 	public void lancerPartie() {
 
 		while (Partie.getPartie().etat.equals("EN COURS")) {

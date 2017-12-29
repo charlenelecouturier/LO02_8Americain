@@ -36,10 +36,10 @@ public class Manche {
 		}
 
 		Variante.nombreAs = 0;
-		
+
 	}
-	
-	public Manche(int nbJoueursVirtuels, LinkedList<Joueur> joueur,String variante) {
+
+	public Manche(int nbJoueursVirtuels, LinkedList<Joueur> joueur, String variante) {
 
 		int nbJoueursEnCours = nbJoueursVirtuels + 1;
 		this.nbJoueursEnCours = nbJoueursEnCours;
@@ -50,21 +50,21 @@ public class Manche {
 		this.sens = 1; // sens des aiguilles d'une montre
 		this.talon = new Talon();
 		// choix de la variante
-		switch(variante) {
-		case "Minimale" :
-			this.varianteManche= new VarianteMinimale(nbJoueursVirtuels);
-		
-		break;
-		case "Monclar" :
-			this.varianteManche= new VarianteMonclar(nbJoueursVirtuels);
-		break;
-		case "Variante 4" :
-			this.varianteManche=new Variante4(nbJoueursVirtuels); 
-		break;
-		case "Variante 5" :
-			this.varianteManche=new Variante5(nbJoueursVirtuels); 
-		break;
-		}	
+		switch (variante) {
+		case "Minimale":
+			this.varianteManche = new VarianteMinimale(nbJoueursVirtuels);
+
+			break;
+		case "Monclar":
+			this.varianteManche = new VarianteMonclar(nbJoueursVirtuels);
+			break;
+		case "Variante 4":
+			this.varianteManche = new Variante4(nbJoueursVirtuels);
+			break;
+		case "Variante 5":
+			this.varianteManche = new Variante5(nbJoueursVirtuels);
+			break;
+		}
 		ListIterator<Joueur> it = joueur.listIterator();
 		this.joueur = new LinkedList<Joueur>();
 		while (it.hasNext()) {
@@ -134,7 +134,7 @@ public class Manche {
 			joueurSelect = parcourirJoueurs.next(); // On selectionne un joueur
 			joueurSelect.setScoreManche(0);
 			int points = 0;// on initialise les points qu'il va prendre a 0
-			ListIterator<Carte> parcourirCartesJoueur = joueurSelect.getCartes().listIterator();																																						
+			ListIterator<Carte> parcourirCartesJoueur = joueurSelect.getCartes().listIterator();
 			Carte c;
 			while (parcourirCartesJoueur.hasNext()) {
 				c = parcourirCartesJoueur.next();

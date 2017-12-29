@@ -41,6 +41,7 @@ public class JoueurVirtuel extends Joueur {
 	
 	public JoueurVirtuel(int niveau){
 		super();
+		this.typeInterface="graphique";
 		setName("Joueur " + getNumero());
 		this.strat=niveau;
 		if (strat == 1) {
@@ -81,7 +82,11 @@ public class JoueurVirtuel extends Joueur {
 	public void direCarte() {
 		boolean contreCarte;
 		if (Partie.getPartie().getManche().getJoueur().get(0) instanceof JoueurPhysique) {
-			contreCarte = ((JoueurPhysique) Partie.getPartie().getManche().getJoueur().get(0)).direContreCarte();
+			if(Partie.getPartie().getManche().getJoueur().get(0).typeInterface.equals("LDC")) {
+							contreCarte = ((JoueurPhysique) Partie.getPartie().getManche().getJoueur().get(0)).direContreCarte();
+			} else {
+				contreCarte =((JoueurPhysique)Partie.getPartie().getManche().getJoueur().get(0)).direContreCarteGraphique();
+			}
 		}
 
 		else {
