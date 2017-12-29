@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
+import java.awt.Font;
 
 
 import javax.swing.*;
@@ -218,7 +219,7 @@ public class TestInterface implements Observer, Runnable {
 		txtModeDeComptage = new JTextField();
 		txtModeDeComptage.setEditable(false);
 		txtModeDeComptage.setText("Mode de comptage des points ?");
-		txtModeDeComptage.setBounds(57, 472, 243, 46);
+		txtModeDeComptage.setBounds(57, 472, 215, 46);
 		frame.getContentPane().add(txtModeDeComptage);
 		txtModeDeComptage.setColumns(10);
 		
@@ -232,7 +233,7 @@ public class TestInterface implements Observer, Runnable {
 		JTextField txtVariante = new JTextField();
 		txtVariante.setEditable(false);
 		txtVariante.setText("Variante ?");
-		txtVariante.setBounds(57, 534, 243, 40);
+		txtVariante.setBounds(57, 534, 215, 46);
 		frame.getContentPane().add(txtVariante);
 		txtVariante.setColumns(10);
 		
@@ -295,15 +296,22 @@ public class TestInterface implements Observer, Runnable {
 		GridLayout grid = new GridLayout(this.joueur.size() + 1, 1);
 		panel_Classement.setLayout(grid);
 		getFrame().getContentPane().add(panel_Classement, BorderLayout.EAST);
-		panel_Classement.setBackground(new Color(8, 81, 36));
+		panel_Classement.setBackground(new Color(39, 135, 75));
 		lblClassement = new JLabel("Classement general de la partie : ");
+		Font f = new Font("Serif", Font.PLAIN, 24); 
+		Font f1 = new Font("Serif", Font.PLAIN, 14); 
+
+		Color c= new Color(0,0,0);
+		lblClassement.setFont(f);
+		lblClassement.setForeground(c);
 		lblClassement.setSize(50, 50);
 		panel_Classement.add(lblClassement);
 		ListIterator<Joueur> it = joueur.listIterator();
 		while (it.hasNext()) {
 			Joueur jNext = it.next();
 			JLabel lbl = new JLabel(jNext.getName() + " : " + jNext.getScore());
-
+			lbl.setFont(f1);
+			lbl.setForeground(c);
 			panel_Classement.add(lbl);
 
 			Partie.getPartie().getManche().getTalon().addObserver(this);
