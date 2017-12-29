@@ -15,7 +15,6 @@ public class ControleurCarte {
 			public void actionPerformed(ActionEvent e) {
 				if(p.getManche().getTourJoueur() == 1 && Partie.getPartie().getManche().getVarianteManche().estCompatible(carteAControler)) {
 					int indexCarteChoisie =p.getJoueur().get(0).choisirCarte(carteAControler);
-
 					((JoueurPhysique)p.getJoueur().get(0)).jouerTourGraphique(indexCarteChoisie);
 				}
 			}

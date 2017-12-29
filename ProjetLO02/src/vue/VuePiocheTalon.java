@@ -1,6 +1,7 @@
 package vue;
 
 import java.awt.*;
+import controleur.ControleurBoutonPiocher;
 import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
@@ -12,12 +13,12 @@ import modele.Carte;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+
 // 1. Creer une classe a part qu'on instanciera dans l'interface 
 public class VuePiocheTalon extends JPanel implements Observer{
 	
 	protected JLabel carteDessusTalon;
-	protected JLabel dosPioche;
-	
+	protected JButton lblPioche;
 	
 	public VuePiocheTalon() {
 		/**
@@ -28,20 +29,22 @@ public class VuePiocheTalon extends JPanel implements Observer{
 		Carte carteDessus =Partie.getPartie().getManche().getTalon().getCarteDessus();
 		ImageIcon imageCarte;
 		imageCarte = new ImageIcon("Images/" + carteDessus.getSymbole() + "/" + carteDessus.getValeur() + ".png");
+		this.carteDessusTalon = new JLabel();
 		this.carteDessusTalon.setIcon(imageCarte);
 		this.add(carteDessusTalon);
+		new ControleurBoutonPiocher(Partie.getPartie(),lblPioche);
 
 	}
 	
 	public void initialize() {
-		JLabel lblPioche = new JLabel("Pioche");
-		dosPioche= new JLabel();
-		dosPioche.setIcon(new ImageIcon("Images/dosPioche.jpg"));
+		lblPioche = new JButton("Piocher",new ImageIcon("Images/dosPioche.jpg"));
 		this.add(lblPioche);
-		this.add(dosPioche);
-		JLabel lblTalon = new JLabel("Talon");
+		Font f = new Font("Arial", Font.BOLD|Font.ITALIC, 26);
+		lblPioche.setFont(f);
+		lblPioche.setForeground(new Color(0, 0, 0));
+		lblPioche.setHorizontalTextPosition(SwingConstants.CENTER );
+		JLabel lblTalon = new JLabel();
 		this.add(lblTalon);
-		carteDessusTalon = new JLabel();
 	}
 	
 	
@@ -54,9 +57,7 @@ public class VuePiocheTalon extends JPanel implements Observer{
 		this.carteDessusTalon.setIcon(imageCarte);
 		this.add(carteDessusTalon);
 		this.carteDessusTalon.setIcon(imageCarte);
-		if(Partie.getPartie().getManche().getPioche().getCartes().isEmpty()) {
-			this.dosPioche.removeAll();
-		}
+
 	}
 	
    

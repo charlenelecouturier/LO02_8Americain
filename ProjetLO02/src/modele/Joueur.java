@@ -179,6 +179,8 @@ public abstract class Joueur extends Observable{
 			System.out.println("\nTest : il reste " + Partie.getPartie().getManche().getPioche().getCartes().size()
 					+ " cartes dans la pioche\n");
 		}
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	public boolean gagnePartie() {
@@ -212,6 +214,11 @@ public abstract class Joueur extends Observable{
 	 */
 	public void setScoreManche(int scoreManche) {
 		this.scoreManche = scoreManche;
+	}
+	
+	public void changed()
+	{
+		this.setChanged();
 	}
 	
 
