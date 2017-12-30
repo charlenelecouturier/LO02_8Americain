@@ -175,7 +175,7 @@ public class Partie extends Observable {
 		while (Partie.getPartie().etat.equals("EN COURS")) {
 			while (!Partie.getPartie().manche.terminerManche()) {
 				try {// Temps de delais entre chaque tour
-					Thread.sleep(2000);
+					Thread.sleep(900);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

@@ -86,7 +86,7 @@ public class VueJoueurVirtuel extends JPanel implements Observer{
 				}
 			} else if(arg.equals("a fini")) {
 				try {// Temps de delais entre chaque tour
-					Thread.sleep(1000);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
