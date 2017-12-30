@@ -4,14 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JTextField;
+import javax.swing.JTextArea;
 
 import modele.Joueur;
 import modele.JoueurPhysique;
 import modele.Partie;
 
 public class ControleurBoutonCarte {
-	public ControleurBoutonCarte(Partie p, JButton carte,JTextField effetjeu) {
+	public ControleurBoutonCarte(Partie p, JButton carte,JTextArea effetjeu) {
 		carte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int tour = p.getManche().getTourJoueur() - 1;

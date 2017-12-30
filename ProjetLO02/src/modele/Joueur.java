@@ -89,6 +89,8 @@ public abstract class Joueur extends Observable{
 	 * virtuel de choisir une carte dans son jeu et la poser sur le talon.
 	 */
 	public void jouerTour() {
+		this.setChanged();
+		this.notifyObservers("tour");
 		System.out.println("effet : " + this.EffetVariante);
 		int tour;
 		boolean gagne = false;
@@ -110,6 +112,8 @@ public abstract class Joueur extends Observable{
 			}
 		}
 		Partie.getPartie().getManche().setTourJoueur(tour);
+		this.setChanged();
+		this.notifyObservers("a fini");
 	}
 
 	
@@ -183,7 +187,7 @@ public abstract class Joueur extends Observable{
 					+ " cartes dans la pioche\n");
 		}
 		this.setChanged();
-		this.notifyObservers();
+		this.notifyObservers("a pioche");
 	}
 
 	public boolean gagnePartie() {
@@ -249,8 +253,10 @@ public abstract class Joueur extends Observable{
 	 */
 	public void setContreCarte() {
 		this.contreCarte = true;
+		this.piocher(1);
 		this.setChanged();
 		this.notifyObservers("CONTRE-CARTE ! ");
+		
 	}
 
 	public void changed()

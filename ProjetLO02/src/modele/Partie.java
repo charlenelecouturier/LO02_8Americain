@@ -180,8 +180,9 @@ public class Partie extends Observable {
 					e.printStackTrace();
 				}
 				int tour = Partie.getPartie().manche.getTourJoueur() - 1;
+				Joueur jTour =this.manche.getJoueur().get(tour);
 				// au tour d'un joueur virtuel
-				if (tour != 0 || !(Partie.getPartie().getManche().getJoueur().get(0) instanceof JoueurPhysique)) {
+				if (!(jTour instanceof JoueurPhysique)) {
 					Partie.getPartie().manche.getJoueur().get(tour).jouerTour();
 				} else { // Au tour du joueur physique : on attend qu'il fasse une action(poser carte ou piocher)
 					// mais sil ne peut pas jouer ET qu'il a reçu un effet, on applique cet effet
@@ -207,6 +208,7 @@ public class Partie extends Observable {
 						Partie.getPartie().getManche().setTourJoueur(tour);
 					}
 				}
+
 			}
 
 			if (Partie.getPartie().modeComptage.equals("POSITIF")) {

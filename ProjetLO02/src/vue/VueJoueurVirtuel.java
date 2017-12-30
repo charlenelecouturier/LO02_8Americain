@@ -29,6 +29,7 @@ public class VueJoueurVirtuel extends JPanel implements Observer{
 	
 	
 	public VueJoueurVirtuel(int numero) {
+		this.setBorder(BorderFactory.createEmptyBorder());
 		this.setLayout(new GridLayout(0,2));
 		this.setMaximumSize(new Dimension(160, 140));
 		initialize();
@@ -61,21 +62,38 @@ public class VueJoueurVirtuel extends JPanel implements Observer{
 	}
 	
 	
-	public void changerCouleurBordure(VueJoueurVirtuel joueurEnCours) {
-		//Si le joueur est en train de jouer , on applique une bordure simple autour de son personnage
-		if(!joueurEnCours.getBorder().isBorderOpaque()) {
-			joueurEnCours.setBorder(BorderFactory.createLineBorder( Color.BLACK));
+	public void changerCouleurBordure(String type) {
+		//Si le joueur est en train de jouer , on applique une bordure rouge autour de son personnage
+		if(type.equals("RED")) {
+			this.setBorder(BorderFactory.createLineBorder( Color.RED));	
 		}
 		//S'il ne joue plus, on applique une bordure invisible autour
 		else {
-			joueurEnCours.setBorder(BorderFactory.createEmptyBorder());
+			this.setBorder(BorderFactory.createEmptyBorder());
 		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
 		this.nbCartes.setText("Cartes restantes: "+ Partie.getPartie().getJoueur().get(this.numJoueur-1).getCartes().size());
+		if(arg!=null) {
+			if(arg.equals("tour")) {
+				this.changerCouleurBordure("RED");
+				try {// Temps de delais entre chaque tour
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			} else if(arg.equals("a fini")) {
+				try {// Temps de delais entre chaque tour
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				this.changerCouleurBordure("NORMAL");
+				
+			}
+		}
 	}
 	
    

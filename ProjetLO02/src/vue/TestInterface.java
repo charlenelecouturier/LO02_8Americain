@@ -276,6 +276,10 @@ public class TestInterface implements Observer, Runnable {
 		panelWEST.add(panelActionCarte,BorderLayout.NORTH);
 		this.effetsJeu= new VueEffetJeu();		
 		panelWEST.add(this.effetsJeu, BorderLayout.CENTER);
+        JScrollPane jp = new JScrollPane(this.effetsJeu);
+		panelWEST.add(jp, BorderLayout.CENTER);
+
+
 
 		/**
 		 * Gestion du conteneur des Joueurs Virtuels. On d�finit sa position et les
@@ -290,7 +294,6 @@ public class TestInterface implements Observer, Runnable {
 			this.vueJVirtuel.add(new VueJoueurVirtuel(Partie.getPartie().getJoueur().get(i).getNumero()));
 			panel_JoueurVirtuel.add(vueJVirtuel.get(i - 1));
 		}
-
 		/**
 		 * Gestion du conteneur du Score. On d�finit sa position et les composants
 		 * qu'il contient.
@@ -315,6 +318,7 @@ public class TestInterface implements Observer, Runnable {
 		/**
 		 * Mise en place des Observers sur les objets de la partie
 		 */
+		Partie.getPartie().addObserver(this);
 		Partie.getPartie().getManche().getTalon().addObserver(this);
 		Partie.getPartie().getManche().getPioche().addObserver(this);
 		ListIterator<Joueur> it = joueur.listIterator();
@@ -327,6 +331,7 @@ public class TestInterface implements Observer, Runnable {
 			lbl.setHorizontalAlignment(SwingConstants.CENTER);
 			panel_Classement.add(lbl);
 		}
+		//VueTourJoueur = new VueTourJoueur;
 		/**
 		 * Gestion du conteneur de la main du joueur physique. On d�finit sa position
 		 * et les composants qu'il contient.
@@ -370,10 +375,8 @@ public class TestInterface implements Observer, Runnable {
 		getFrame().setVisible(true);
 		getFrame().getContentPane().setVisible(true);
 
-		getFrame().getContentPane().revalidate();
 		getFrame().pack();
-		getFrame().repaint();
-		getFrame().validate();
+
 		Thread t = new Thread(this);
 		t.start();
 	}
@@ -382,6 +385,11 @@ public class TestInterface implements Observer, Runnable {
 		if (instanceObservable instanceof Joueur) {
 			this.panel_Pioche.update(instanceObservable, arg1);
 
+			if (arg1 != null) {
+				if (arg1.equals("CARTE ! ") || arg1.equals("CONTRE-CARTE ! ") || arg1.equals("a pioche")) {
+					this.effetsJeu.update(instanceObservable, arg1);
+				} 
+			}
 			if (instanceObservable instanceof JoueurVirtuel) {
 				int num = ((Joueur) instanceObservable).getNumero();
 				this.vueJVirtuel.get(num - 2).update(instanceObservable, arg1);
@@ -389,11 +397,6 @@ public class TestInterface implements Observer, Runnable {
 				frame.revalidate();
 			} else if (instanceObservable instanceof JoueurPhysique) {
 
-				if (arg1 != null) {
-					if (arg1.equals("CARTE ! ") || arg1.equals("CONTRE-CARTE ! ")) {
-						this.effetsJeu.update(instanceObservable, arg1);
-					}
-				}
 				/**
 				 * Redefinir les cartes visibles en main en fonction du tour qu'a joué le
 				 * joueur.
@@ -412,6 +415,7 @@ public class TestInterface implements Observer, Runnable {
 					frame.revalidate();
 				}
 			}
+
 		}
 	}
 

@@ -56,6 +56,7 @@ public class JoueurPhysique extends Joueur {
 			}
 		}
 		Partie.getPartie().getManche().setTourJoueur(tour);
+
 	}
 
 	public void poserCarteGraphique(int numeroCarte) {
