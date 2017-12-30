@@ -65,7 +65,7 @@ public class VueJoueurVirtuel extends JPanel implements Observer{
 	public void changerCouleurBordure(String type) {
 		//Si le joueur est en train de jouer , on applique une bordure rouge autour de son personnage
 		if(type.equals("RED")) {
-			this.setBorder(BorderFactory.createLineBorder( Color.RED));	
+			this.setBorder(BorderFactory.createLineBorder( Color.RED,3));	
 		}
 		//S'il ne joue plus, on applique une bordure invisible autour
 		else {
