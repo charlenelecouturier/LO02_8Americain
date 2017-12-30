@@ -35,6 +35,8 @@ public class JoueurPhysique extends Joueur {
 	
 	public void jouerTourGraphique(int indexCarteChoisie) {
 		int tour;
+		this.aDitcarte=false;
+		this.contreCarte=false;
 		boolean gagne = false;
 		this.poserCarteGraphique(indexCarteChoisie);
 		this.EffetVariante = "Aucun";
@@ -75,7 +77,7 @@ public class JoueurPhysique extends Joueur {
 			}
 			String effet = cartePose.getEffet();
 			if (!effet.equals("Aucun")) {
-				cartePose.appliquerEffet();
+				//cartePose.appliquerEffet();
 			}
 
 		}
@@ -117,7 +119,7 @@ public class JoueurPhysique extends Joueur {
 		return numero - 1;
 	}
 	public void direCarteGraphique() {
-		
+		new DireCarte(Partie.getPartie().getManche());		
 	}
 	
 	public boolean direContreCarteGraphique() {

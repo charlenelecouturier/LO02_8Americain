@@ -25,6 +25,8 @@ public abstract class Joueur extends Observable{
 	protected Strategie strategie;
 	protected String EffetVariante;
 	protected String typeInterface;
+	protected boolean aDitcarte;
+	protected boolean contreCarte;
 	
 
 	/**
@@ -217,6 +219,40 @@ public abstract class Joueur extends Observable{
 		this.scoreManche = scoreManche;
 	}
 	
+	
+	
+	/**
+	 * @return the aDitcarte
+	 */
+	public boolean isaDitcarte() {
+		return aDitcarte;
+	}
+
+	/**
+	 * @param aDitcarte the aDitcarte to set
+	 */
+	public void setaDitcarte() {
+		this.aDitcarte = true;
+		this.setChanged();
+		this.notifyObservers("CARTE ! ");
+	}
+
+	/**
+	 * @return the contreCarte
+	 */
+	public boolean isContreCarte() {
+		return contreCarte;
+	}
+
+	/**
+	 * @param contreCarte the contreCarte to set
+	 */
+	public void setContreCarte() {
+		this.contreCarte = true;
+		this.setChanged();
+		this.notifyObservers("CONTRE-CARTE ! ");
+	}
+
 	public void changed()
 	{
 		this.setChanged();

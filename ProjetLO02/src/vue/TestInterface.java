@@ -28,7 +28,7 @@ public class TestInterface implements Observer, Runnable {
 	private JPanel panel_Main;
 	private JPanel panel_Classement;
 	private VuePiocheTalon panel_Pioche;
-	// Labels et autres pr�sents dans l'Interface
+	// Labels et autres presents dans l'Interface
 	private JButton btnCarte;
 	private JButton btnContreCarte;
 	private JLabel lblClassement;
@@ -46,8 +46,10 @@ public class TestInterface implements Observer, Runnable {
 	private JTextField txtModeDeComptage;
 	private JComboBox comboBoxComptage;
 	private JComboBox comboBoxVariante;
-	// Objets du mod�le � observer
+	private VueEffetJeu effetsJeu;
+	// Objets du modele a observer
 	private LinkedList<Joueur> joueur;
+	
 
 	/**
 	 * Launch the application.
@@ -236,29 +238,44 @@ public class TestInterface implements Observer, Runnable {
 
 	public void initializeGame(Partie p) {
 
-		getFrame().setVisible(false);
+		frame.setVisible(false);
 		setFrame(new JFrame());
-		getFrame().getContentPane().setVisible(false);
-		getFrame().getContentPane().removeAll();
-		getFrame().setBounds(100, 100, 1000, 700);
-		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout());
+		Color background = new Color(8, 81, 36);
 
+		frame.getContentPane().setVisible(false);
+		frame.getContentPane().removeAll();
+		frame.setBounds(100, 100, 1000, 700);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new BorderLayout());
+		((BorderLayout)frame.getContentPane().getLayout()).setHgap(30);
+		((BorderLayout)frame.getContentPane().getLayout()).setVgap(60);
+		frame.getContentPane().setBackground(background);
 		joueur = Partie.getPartie().getJoueur();
+		
 		/**
 		 * Gestion du conteneur des boutons Carte et Contre-carte. On definit sa
 		 * position et les composants qu'il contient.
 		 */
+		
+		JPanel panelWEST = new JPanel();
+		panelWEST.setBackground(new Color(8, 81, 36));
+		getFrame().getContentPane().add(panelWEST, BorderLayout.WEST);
+		panelWEST.setLayout(new BorderLayout());
 		panelActionCarte = new JPanel();
-		getFrame().getContentPane().add(panelActionCarte, BorderLayout.WEST);
-		panelActionCarte.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		panelActionCarte.setBackground(new Color(8, 81, 36));
-
+		panelActionCarte.setBackground(background);
+		panelActionCarte.setLayout(new FlowLayout());
+		((FlowLayout)panelActionCarte.getLayout()).setVgap(30);
+		((FlowLayout)panelActionCarte.getLayout()).setHgap(30);
 		btnCarte = new JButton("Carte");
 		panelActionCarte.add(btnCarte);
-
 		btnContreCarte = new JButton("Contre Carte");
 		panelActionCarte.add(btnContreCarte);
+		new ControleurBoutonContreCarte(Partie.getPartie(), btnContreCarte,this.effetsJeu);
+		new ControleurBoutonCarte(Partie.getPartie(), btnCarte,this.effetsJeu);
+
+		panelWEST.add(panelActionCarte,BorderLayout.NORTH);
+		this.effetsJeu= new VueEffetJeu();		
+		panelWEST.add(this.effetsJeu, BorderLayout.CENTER);
 
 		/**
 		 * Gestion du conteneur des Joueurs Virtuels. On d�finit sa position et les
@@ -266,7 +283,7 @@ public class TestInterface implements Observer, Runnable {
 		 */
 		panel_JoueurVirtuel = new JPanel();
 		getFrame().getContentPane().add(panel_JoueurVirtuel, BorderLayout.NORTH);
-		panel_JoueurVirtuel.setBackground(new Color(8, 81, 36));
+		panel_JoueurVirtuel.setBackground(background);
 		this.vueJVirtuel = new ArrayList<VueJoueurVirtuel>();
 
 		for (int i = 1; i < joueur.size(); i++) {
@@ -318,7 +335,7 @@ public class TestInterface implements Observer, Runnable {
 		getFrame().getContentPane().add(panel_Main, BorderLayout.SOUTH);
 		GridLayout grid1 = new GridLayout();
 		panel_Main.setLayout(grid1);
-		panel_Main.setBackground(new Color(8, 81, 36));
+		panel_Main.setBackground(background);
 		// Partie permettant de tester la main
 		/*
 		 * Carte carte10Pique = new Carte("10", "PIQUE"); VueCarte vueCarte =new
@@ -340,6 +357,9 @@ public class TestInterface implements Observer, Runnable {
 			new ControleurCarte(Partie.getPartie(), prochaineCarte, vueProchaineCarte);
 			panel_Main.add(vueProchaineCarte);
 		}
+
+
+
 		/**
 		 * Gestion du conteneur de la Pioche et du Talon. On d�finit sa position et
 		 * les composants qu'il contient.
@@ -369,6 +389,11 @@ public class TestInterface implements Observer, Runnable {
 				frame.revalidate();
 			} else if (instanceObservable instanceof JoueurPhysique) {
 
+				if (arg1 != null) {
+					if (arg1.equals("CARTE ! ") || arg1.equals("CONTRE-CARTE ! ")) {
+						this.effetsJeu.update(instanceObservable, arg1);
+					}
+				}
 				/**
 				 * Redefinir les cartes visibles en main en fonction du tour qu'a joué le
 				 * joueur.

@@ -114,6 +114,10 @@ public class JoueurVirtuel extends Joueur {
 		if (contreCarte) {
 			this.piocher(1);
 		}
+		else {
+			this.setChanged();
+			this.notifyObservers("CARTE ! ");
+		}
 	}
 
 	
