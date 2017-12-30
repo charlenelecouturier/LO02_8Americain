@@ -89,6 +89,7 @@ public class TestInterface implements Observer, Runnable {
 		getFrame().setBounds(100, 100, 1000, 700);
 		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setTitle("8 Americain_Robin LALLIER_Charlene LECOUTURIER");
 
 		txtNombreDeJoueurs = new JTextField();
 		txtNombreDeJoueurs.setEditable(false);
@@ -241,7 +242,7 @@ public class TestInterface implements Observer, Runnable {
 		frame.setVisible(false);
 		setFrame(new JFrame());
 		Color background = new Color(8, 81, 36);
-
+		frame.setTitle("8 Americain_Robin LALLIER_Charlene LECOUTURIER");
 		frame.getContentPane().setVisible(false);
 		frame.getContentPane().removeAll();
 		frame.setBounds(100, 100, 1000, 700);

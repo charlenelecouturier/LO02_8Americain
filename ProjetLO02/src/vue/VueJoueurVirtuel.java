@@ -80,13 +80,13 @@ public class VueJoueurVirtuel extends JPanel implements Observer{
 			if(arg.equals("tour")) {
 				this.changerCouleurBordure("RED");
 				try {// Temps de delais entre chaque tour
-					Thread.sleep(1500);
+					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			} else if(arg.equals("a fini")) {
 				try {// Temps de delais entre chaque tour
-					Thread.sleep(500);
+					Thread.sleep(900);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
