@@ -252,10 +252,11 @@ public abstract class Joueur extends Observable{
 	 * @param contreCarte the contreCarte to set
 	 */
 	public void setContreCarte() {
-		this.contreCarte = true;
-		this.piocher(1);
+		this.contreCarte = true;	
 		this.setChanged();
 		this.notifyObservers("CONTRE-CARTE ! ");
+		this.piocher(1);
+
 		
 	}
 

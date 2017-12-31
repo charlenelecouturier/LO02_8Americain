@@ -123,8 +123,8 @@ public class JoueurPhysique extends Joueur {
 		new DireCarte(Partie.getPartie().getManche());		
 	}
 	
-	public boolean direContreCarteGraphique() {
-		return false;
+	public void direContreCarteGraphique(Joueur j) {
+		new DireContreCarte(Partie.getPartie().getManche(),j);
 	}
 	@Override
 	public void direCarte() {
