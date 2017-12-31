@@ -33,6 +33,8 @@ public abstract class Joueur extends Observable{
 	 * le Constructeur de Joueur ne doit pas etre utilise directement, il simplifie le code de ses classes filles.
 	 */
 	public Joueur() {
+		this.aDitcarte=false;
+		this.contreCarte=false;
 		this.typeInterface="LDC";
 		this.EffetVariante = "Aucun";
 		this.numero = donneurNum;
@@ -91,6 +93,8 @@ public abstract class Joueur extends Observable{
 	public void jouerTour() {
 		this.setChanged();
 		this.notifyObservers("tour");
+		this.contreCarte=false;
+		this.aDitcarte=false;
 		System.out.println("effet : " + this.EffetVariante);
 		int tour;
 		boolean gagne = false;

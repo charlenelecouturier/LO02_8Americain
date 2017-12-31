@@ -120,7 +120,7 @@ public class JoueurPhysique extends Joueur {
 		return numero - 1;
 	}
 	public void direCarteGraphique() {
-		new DireCarte(Partie.getPartie().getManche());		
+		new DireCarte(Partie.getPartie().getManche(),this);		
 	}
 	
 	public void direContreCarteGraphique(Joueur j) {

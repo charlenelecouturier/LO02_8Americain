@@ -23,7 +23,7 @@ public class ControleurBoutonContreCarte {
 					if (jNext.getCartes().size()==1) {
 						trouve = true;
 					}
-					if (trouve) {
+					if (trouve&& !jNext.isaDitcarte()) {
 						jNext.setContreCarte();
 					}
 				}

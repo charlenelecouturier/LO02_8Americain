@@ -11,10 +11,12 @@ import java.util.*;
 public class DireCarte extends Observable  implements Runnable{
 
 	private Manche m;
+	private Joueur jDoitDireCarte;
 	/**
 	 * 
 	 */
-	public DireCarte(Manche m) {
+	public DireCarte(Manche m, Joueur j) {
+		this.jDoitDireCarte=j;
 		this.m = m;
 		Thread t = new Thread(this);
 		t.start();
@@ -27,10 +29,8 @@ public class DireCarte extends Observable  implements Runnable{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		int tour = m.getTourJoueur() - 1;
-		Joueur jEnCours = m.getJoueur().get(tour);
-		if (!jEnCours.isaDitcarte() && jEnCours.getCartes().size()==1) {
-			jEnCours.setContreCarte();
+		if (!this.jDoitDireCarte.isaDitcarte() &&this.jDoitDireCarte.getCartes().size()==1) {
+			this.jDoitDireCarte.setContreCarte();
 			
 		}
 		
