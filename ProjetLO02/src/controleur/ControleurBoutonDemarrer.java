@@ -12,7 +12,7 @@ public class ControleurBoutonDemarrer {
 	public int nbJoueursVirtuels;
 	ControleurNbJVirtuel cNbJoueurs;
 	
-	public ControleurBoutonDemarrer(JButton demarrer, JComboBox[] niveaux, JComboBox nbJoueurs,JComboBox comboBoxComptage, JTextField txtVotreNom, JComboBox comboBoxVariante, TestInterface ti) {
+	public ControleurBoutonDemarrer(JButton demarrer, JComboBox[] niveaux, JComboBox nbJoueurs,JComboBox comboBoxComptage, JTextField txtVotreNom, JComboBox comboBoxVariante, JFrame frame) {
 
 		// public ControleurInterrupteur(Interrupteur itr, JButton jbt){
 		this.choix = demarrer;
@@ -37,7 +37,7 @@ public class ControleurBoutonDemarrer {
 					Partie.getPartie().getManche().setPioche(new Pioche());// creation de la pioche
 					Partie.getPartie().getManche().getPioche().melanger();// on melange la pioche
 					Partie.getPartie().getManche().getPioche().distribuer();// on distribue la pioche
-					ti.initializeGame(p);
+					new InterfaceManche(frame).initializeGame(p);
 					//p.lancerPartie();
 				//ti.initializeGame();
 				//if(cNbJoueurs.nbJoueursVirtuels!=0 &&)

@@ -27,6 +27,9 @@ private static int num=1;
 
 		} else if (arg1.equals("a pioche")) {
 			this.insert(num + " : " + ((Joueur) arg0).getName() + " " + arg1 + "\n", 0);
+		}	else if (arg1.equals("gagne")) {
+			this.insert(num + " : " + ((Joueur) arg0).getName() + " a " + arg1 + " !\n", 0);
+
 		}
 		num++;
 

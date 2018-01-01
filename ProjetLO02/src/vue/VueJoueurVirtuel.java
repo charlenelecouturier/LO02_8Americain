@@ -92,6 +92,8 @@ public class VueJoueurVirtuel extends JPanel implements Observer{
 				}
 				this.changerCouleurBordure("NORMAL");
 				
+			} else if(arg.equals("gagne")) {
+				this.setBackground(new Color(149,172,157));
 			}
 		}
 	}

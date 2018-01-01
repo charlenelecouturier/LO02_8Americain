@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Observable;
 
-import vue.TestInterface;
+import vue.InterfaceDebutPartie;
 
 public class Partie extends Observable {
 
@@ -195,7 +195,6 @@ public class Partie extends Observable {
 
 						if (Partie.getPartie().getManche().getSens() == 1) {
 							tour++;
-
 							if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
 								tour = 1;
 							}
@@ -215,11 +214,17 @@ public class Partie extends Observable {
 				Partie.getPartie().manche.compterPointsPositif();
 			} else {
 				Partie.getPartie().manche.compterPointsNegatif();
-			} // Si la partie n'est pas terminee, on debute une nouvelle manche
+			} 
+			this.setChanged();
+			this.notifyObservers("manche terminee");// Si la partie n'est pas terminee, on debute une nouvelle manche
 			if (!Partie.getPartie().terminerPartie()) {
-				System.out.println("\nNOUVELLE MANCHE\n");
+				this.setChanged();
+				this.notifyObservers("nouvelle manche");
 				Partie.getPartie().manche = new Manche(Partie.getPartie().nbJoueursVirtuels, Partie.getPartie().joueur);
+				
 			}
+			this.setChanged();
+			this.notifyObservers("partie terminee");
 		}
 	}
 
@@ -268,7 +273,7 @@ public class Partie extends Observable {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TestInterface window = new TestInterface();
+					InterfaceDebutPartie window = new InterfaceDebutPartie();
 					window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -200,6 +200,8 @@ public abstract class Joueur extends Observable{
 			Partie.getPartie().getManche().getClassementJoueurs().add(this);
 			Partie.getPartie().getManche().getJoueur().remove(this);
 			Partie.getPartie().getManche().setNbJoueursEnCours(Partie.getPartie().getManche().getNbJoueursEnCours() - 1);
+			this.setChanged();
+			this.notifyObservers("gagne");
 			return true;
 		}
 		return false;

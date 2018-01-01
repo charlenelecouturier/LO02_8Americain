@@ -126,7 +126,7 @@ public class InterfaceGraphique implements Observer{
 		
 		textField_1 = new JTextField();
 		textField_1.setEditable(false);
-		textField_1.setBounds(45, 160, 462, 178);
+		textField_1.setBounds(193, 52, 670, 521);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 	}

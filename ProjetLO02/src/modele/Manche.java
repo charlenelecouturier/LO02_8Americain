@@ -32,6 +32,7 @@ public class Manche {
 		while (it.hasNext()) {
 			Joueur joueurNext = it.next();
 			joueurNext.getCartes().clear();
+			joueurNext.setScoreManche(0);
 			this.joueur.add(joueurNext);
 		}
 
@@ -104,10 +105,13 @@ public class Manche {
 		int i;
 		// on ajoute les points correspondant aux 3 premiers
 		this.classementJoueurs.get(0).setScore(this.classementJoueurs.get(0).getScore() + 50);
+		this.classementJoueurs.get(0).setScoreManche(50);
+		this.classementJoueurs.get(1).setScoreManche(20);
 		this.classementJoueurs.get(1).setScore(this.classementJoueurs.get(1).getScore() + 20);
 
 		if (this.classementJoueurs.size() > 2) { // s'il y a plus de 2 joueurs
 			this.classementJoueurs.get(2).setScore(this.classementJoueurs.get(2).getScore() + 10);
+			this.classementJoueurs.get(2).setScoreManche(10);
 		}
 		System.out.println("Classement de la manche :");
 		for (i = 0; i < this.classementJoueurs.size(); i++) {
