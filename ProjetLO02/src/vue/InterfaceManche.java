@@ -23,11 +23,7 @@ import javax.swing.SwingConstants;
 import controleur.ControleurBoutonCarte;
 import controleur.ControleurBoutonContreCarte;
 import controleur.ControleurCarte;
-import modele.Carte;
-import modele.Joueur;
-import modele.JoueurPhysique;
-import modele.JoueurVirtuel;
-import modele.Partie;
+
 import java.util.*;
 
 public class InterfaceManche implements Observer, Runnable {
@@ -49,17 +45,22 @@ public class InterfaceManche implements Observer, Runnable {
 	private VueEffetJeu effetsJeu;
 	// Objets du modele a observer
 	private LinkedList<Joueur> joueur;
+	private Partie p;
 
-	public InterfaceManche(JFrame frame) {
+	public InterfaceManche(JFrame frame, Partie p) {
 		this.frame = frame;
+		this.p = p;
+		this.initializeGame(p);
 	}
 
 	public void initializeGame(Partie p) {
 
-		frame.getContentPane().removeAll();
-		Color background = new Color(8, 81, 36);
-		frame.setTitle("8 Americain_Robin LALLIER_Charlene LECOUTURIER");
 		frame.getContentPane().setVisible(false);
+		frame.getContentPane().removeAll();
+
+		Color background = new Color(8, 81, 36);
+		// frame.setTitle("8 Americain_Robin LALLIER_Charlene LECOUTURIER");
+
 		frame.getContentPane().removeAll();
 		frame.setBounds(100, 100, 1000, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -133,9 +134,12 @@ public class InterfaceManche implements Observer, Runnable {
 		/**
 		 * Mise en place des Observers sur les objets de la partie
 		 */
-		Partie.getPartie().addObserver(this);
-		Partie.getPartie().getManche().getTalon().addObserver(this);
-		Partie.getPartie().getManche().getPioche().addObserver(this);
+		p.addObserver(this);
+		p.getManche().getTalon().addObserver(this);
+		p.getManche().setPioche(new Pioche());// creation de la pioche
+		p.getManche().getPioche().melanger();// on melange la pioche
+		p.getManche().getPioche().distribuer();// on distribue la pioche
+		p.getManche().getPioche().addObserver(this);
 		ListIterator<Joueur> it = joueur.listIterator();
 		while (it.hasNext()) {
 			Joueur jNext = it.next();
@@ -162,7 +166,7 @@ public class InterfaceManche implements Observer, Runnable {
 		 * VueCarte(carte10Pique); panel_Main.add(vueCarte);
 		 */
 		/**
-		 * It�ration qui permet d'afficher les cartes du joueur � l'�cran dans sa
+		 * Iteration qui permet d'afficher les cartes du joueur � l'�cran dans sa
 		 * main.
 		 */
 
@@ -185,12 +189,16 @@ public class InterfaceManche implements Observer, Runnable {
 		panel_Pioche = new VuePiocheTalon();
 		getFrame().getContentPane().add(panel_Pioche, BorderLayout.CENTER);
 
+		frame.repaint();
+		frame.getContentPane().repaint();
+		frame.getContentPane().revalidate();
+		frame.revalidate();
+		getFrame().pack();
 		getFrame().setVisible(true);
 		getFrame().getContentPane().setVisible(true);
-
-		getFrame().pack();
 		Thread t = new Thread(this);
 		t.start();
+
 	}
 
 	public void update(Observable instanceObservable, Object arg1) {
@@ -240,7 +248,11 @@ public class InterfaceManche implements Observer, Runnable {
 
 	public void run() {
 
-		Partie.getPartie().lancerPartieGraphique();
+		if (p.getEtat().equals("PAS COMMENCEE")) {
+			p.lancerPartieGraphique();
+		} else {
+			p.lancerManche();
+		}
 	}
 
 	public void setFrame(JFrame frame) {

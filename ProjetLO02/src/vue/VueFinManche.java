@@ -8,6 +8,7 @@ import java.util.ListIterator;
 import java.util.Observable;
 import javax.swing.*;
 
+import controleur.ControleurBontonSuivant;
 import modele.Joueur;
 import modele.Partie;
 
@@ -24,6 +25,7 @@ public class VueFinManche implements Observer {
 		this.frame=im.getFrame();
 		this.im=im;
 		this.initialize();
+		new ControleurBontonSuivant(this.btnSuivant, Partie.getPartie(), frame);
 	}
 	
 	private void initialize() {

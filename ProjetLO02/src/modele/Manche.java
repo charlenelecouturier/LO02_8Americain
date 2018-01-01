@@ -301,7 +301,8 @@ public class Manche {
 	}
 
 	/**
-	 * @param pioche the pioche to set
+	 * @param pioche
+	 *            the pioche to set
 	 */
 	public void setPioche(Pioche pioche) {
 		this.pioche = pioche;

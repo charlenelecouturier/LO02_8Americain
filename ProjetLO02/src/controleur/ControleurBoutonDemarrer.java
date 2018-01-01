@@ -34,10 +34,7 @@ public class ControleurBoutonDemarrer {
 				String variante = (String)comboBoxVariante.getSelectedItem();
 				select = (String)comboBoxComptage.getSelectedItem();
 					Partie p =new Partie(niveauxJoueursVirtuels, select, nom, variante);
-					Partie.getPartie().getManche().setPioche(new Pioche());// creation de la pioche
-					Partie.getPartie().getManche().getPioche().melanger();// on melange la pioche
-					Partie.getPartie().getManche().getPioche().distribuer();// on distribue la pioche
-					new InterfaceManche(frame).initializeGame(p);
+					new InterfaceManche(frame,p);
 					//p.lancerPartie();
 				//ti.initializeGame();
 				//if(cNbJoueurs.nbJoueursVirtuels!=0 &&)

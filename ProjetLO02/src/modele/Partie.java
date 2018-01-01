@@ -35,7 +35,7 @@ public class Partie extends Observable {
 			this.classementJoueursPartie.add(this.joueur.get(i));
 		}
 		this.manche = new Manche(this.nbJoueursVirtuels, joueur, variante);
-		this.etat = "EN COURS";
+		this.etat = "PAS COMMENCEE";
 		this.modeComptage = modeComptage;
 		Partie.instancePartie = this;
 	}
@@ -170,61 +170,60 @@ public class Partie extends Observable {
 		this.manche = manche;
 	}
 
-	public void lancerPartieGraphique() {
+	public void lancerManche() {
+		while (!Partie.getPartie().manche.terminerManche()) {
+			try {// Temps de delais entre chaque tour
+				Thread.sleep(950);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			int tour = Partie.getPartie().manche.getTourJoueur() - 1;
+			Joueur jTour = this.manche.getJoueur().get(tour);
+			// au tour d'un joueur virtuel
+			if (!(jTour instanceof JoueurPhysique)) {
+				Partie.getPartie().manche.getJoueur().get(tour).jouerTour();
+			} else { // Au tour du joueur physique : on attend qu'il fasse une action(poser carte ou
+						// piocher)
+				// mais sil ne peut pas jouer ET qu'il a reçu un effet, on applique cet effet
+				// avec l'appel a estPossibleDeJouer() puis on passe au joueur suivant
+				if (!this.manche.getVarianteManche().estPossibleDeJouer(this.manche.getJoueur().get(0).getCartes())
+						&& !this.manche.getJoueur().get(0).getEffetVariante().equals("Aucun")) {
+					this.manche.getJoueur().get(0).changed();
+					this.manche.getJoueur().get(0).notifyObservers();
+					tour = Partie.getPartie().getManche().getTourJoueur();
 
-		while (Partie.getPartie().etat.equals("EN COURS")) {
-			while (!Partie.getPartie().manche.terminerManche()) {
-				try {// Temps de delais entre chaque tour
-					Thread.sleep(950);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				int tour = Partie.getPartie().manche.getTourJoueur() - 1;
-				Joueur jTour =this.manche.getJoueur().get(tour);
-				// au tour d'un joueur virtuel
-				if (!(jTour instanceof JoueurPhysique)) {
-					Partie.getPartie().manche.getJoueur().get(tour).jouerTour();
-				} else { // Au tour du joueur physique : on attend qu'il fasse une action(poser carte ou piocher)
-					// mais sil ne peut pas jouer ET qu'il a reçu un effet, on applique cet effet
-					// avec l'appel a estPossibleDeJouer() puis on passe au joueur suivant
-					if (!this.manche.getVarianteManche().estPossibleDeJouer(this.manche.getJoueur().get(0).getCartes())
-							&& !this.manche.getJoueur().get(0).getEffetVariante().equals("Aucun")) {
-						this.manche.getJoueur().get(0).changed();
-						this.manche.getJoueur().get(0).notifyObservers();
-						tour = Partie.getPartie().getManche().getTourJoueur();
-
-						if (Partie.getPartie().getManche().getSens() == 1) {
-							tour++;
-							if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
-								tour = 1;
-							}
-						} else {
-							tour--;
-							if (tour <= 0) {
-								tour = Partie.getPartie().getManche().getNbJoueursEnCours();
-							}
+					if (Partie.getPartie().getManche().getSens() == 1) {
+						tour++;
+						if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
+							tour = 1;
 						}
-						Partie.getPartie().getManche().setTourJoueur(tour);
+					} else {
+						tour--;
+						if (tour <= 0) {
+							tour = Partie.getPartie().getManche().getNbJoueursEnCours();
+						}
 					}
+					Partie.getPartie().getManche().setTourJoueur(tour);
 				}
-
 			}
+		}
+		if (Partie.getPartie().modeComptage.equals("POSITIF")) {
+			Partie.getPartie().manche.compterPointsPositif();
+		} else {
+			Partie.getPartie().manche.compterPointsNegatif();
+		}
+		this.setChanged();
+		this.notifyObservers("manche terminee");// Si la partie n'est pas terminee, on debute une nouvelle manche
+		// pour se faire on entre dans un nouveau Thread qui appelle lancerManche()
 
-			if (Partie.getPartie().modeComptage.equals("POSITIF")) {
-				Partie.getPartie().manche.compterPointsPositif();
-			} else {
-				Partie.getPartie().manche.compterPointsNegatif();
-			} 
-			this.setChanged();
-			this.notifyObservers("manche terminee");// Si la partie n'est pas terminee, on debute une nouvelle manche
-			if (!Partie.getPartie().terminerPartie()) {
-				this.setChanged();
-				this.notifyObservers("nouvelle manche");
-				Partie.getPartie().manche = new Manche(Partie.getPartie().nbJoueursVirtuels, Partie.getPartie().joueur);
-				
-			}
-			this.setChanged();
-			this.notifyObservers("partie terminee");
+	}
+
+	public void lancerPartieGraphique() {
+		
+		// on lance la premiere manche
+		this.etat = "EN COURS";
+		while (Partie.getPartie().etat.equals("EN COURS")&&!this.manche.terminerManche()) {
+			this.lancerManche();
 		}
 	}
 
@@ -265,6 +264,14 @@ public class Partie extends Observable {
 		}
 	}
 
+	/**
+	 * @return the etat
+	 */
+	public String getEtat() {
+		return etat;
+	}
+
+	
 	public static void main(String[] args) {
 
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
