@@ -18,7 +18,7 @@ public class ControleurBoutonSuivant2 {
 				variante = (String) choixVariante.getSelectedItem();
 				p.setManche(new Manche(p.getNbJoueursVirtuels(), p.getJoueur(), variante));
 				new InterfaceManche(frame,p);
-
+				p.lancerPartieGraphique();
 			}
 		});
 	}

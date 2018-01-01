@@ -9,15 +9,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Observable;
-import vue.*;
 import modele.*;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import controleur.ControleurBoutonCarte;
@@ -26,7 +23,7 @@ import controleur.ControleurCarte;
 
 import java.util.*;
 
-public class InterfaceManche implements Observer, Runnable {
+public class InterfaceManche implements Observer {
 
 	private ArrayList<VueJoueurVirtuel> vueJVirtuel;
 
@@ -130,6 +127,15 @@ public class InterfaceManche implements Observer, Runnable {
 		lblClassement.setForeground(c);
 		lblClassement.setSize(50, 50);
 		panel_Classement.add(lblClassement);
+		ListIterator<Joueur> iteratorClassement = p.getClassementJoueursPartie().listIterator();
+		while (iteratorClassement.hasNext()) {
+			Joueur jNext = iteratorClassement.next();
+			JLabel lbl = new JLabel(jNext.getName() + " : " + jNext.getScore());
+			lbl.setFont(f1);
+			lbl.setForeground(c);
+			lbl.setHorizontalAlignment(SwingConstants.CENTER);
+			panel_Classement.add(lbl);
+		}
 
 		/**
 		 * Mise en place des Observers sur les objets de la partie
@@ -144,11 +150,6 @@ public class InterfaceManche implements Observer, Runnable {
 		while (it.hasNext()) {
 			Joueur jNext = it.next();
 			jNext.addObserver(this);
-			JLabel lbl = new JLabel(jNext.getName() + " : " + jNext.getScore());
-			lbl.setFont(f1);
-			lbl.setForeground(c);
-			lbl.setHorizontalAlignment(SwingConstants.CENTER);
-			panel_Classement.add(lbl);
 		}
 		// VueTourJoueur = new VueTourJoueur;
 		/**
@@ -196,9 +197,6 @@ public class InterfaceManche implements Observer, Runnable {
 		getFrame().pack();
 		getFrame().setVisible(true);
 		getFrame().getContentPane().setVisible(true);
-		Thread t = new Thread(this);
-		t.start();
-
 	}
 
 	public void update(Observable instanceObservable, Object arg1) {
@@ -243,15 +241,6 @@ public class InterfaceManche implements Observer, Runnable {
 					new VueFinManche(this);
 				}
 			}
-		}
-	}
-
-	public void run() {
-
-		if (p.getEtat().equals("PAS COMMENCEE")) {
-			p.lancerPartieGraphique();
-		} else {
-			p.lancerManche();
 		}
 	}
 

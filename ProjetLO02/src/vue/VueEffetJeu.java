@@ -2,7 +2,6 @@ package vue;
 import java.util.*;
 import java.awt.Font;
 import javax.swing.*;
-
 import java.awt.Color;
 import modele.Joueur;
 
@@ -32,6 +31,5 @@ private static int num=1;
 
 		}
 		num++;
-
 	}
 }

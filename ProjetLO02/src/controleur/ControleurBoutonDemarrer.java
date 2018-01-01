@@ -35,10 +35,7 @@ public class ControleurBoutonDemarrer {
 				select = (String)comboBoxComptage.getSelectedItem();
 					Partie p =new Partie(niveauxJoueursVirtuels, select, nom, variante);
 					new InterfaceManche(frame,p);
-					//p.lancerPartie();
-				//ti.initializeGame();
-				//if(cNbJoueurs.nbJoueursVirtuels!=0 &&)
-
+					p.lancerPartieGraphique();
 			}
 		});
 	}

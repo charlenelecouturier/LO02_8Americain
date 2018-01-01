@@ -1,15 +1,13 @@
 package modele;
 
 import java.awt.EventQueue;
-import vue.*;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Observable;
-
 import vue.InterfaceDebutPartie;
 
-public class Partie extends Observable {
+public class Partie extends Observable implements Runnable {
 
 	private static Partie instancePartie;
 	private int nbJoueursVirtuels;
@@ -35,7 +33,7 @@ public class Partie extends Observable {
 			this.classementJoueursPartie.add(this.joueur.get(i));
 		}
 		this.manche = new Manche(this.nbJoueursVirtuels, joueur, variante);
-		this.etat = "PAS COMMENCEE";
+		this.etat = "EN COURS";
 		this.modeComptage = modeComptage;
 		Partie.instancePartie = this;
 	}
@@ -219,12 +217,14 @@ public class Partie extends Observable {
 	}
 
 	public void lancerPartieGraphique() {
-		
-		// on lance la premiere manche
-		this.etat = "EN COURS";
-		while (Partie.getPartie().etat.equals("EN COURS")&&!this.manche.terminerManche()) {
-			this.lancerManche();
-		}
+
+		Thread t = new Thread(this);
+		t.start();
+	}
+
+	public void run() {
+
+		this.lancerManche();
 	}
 
 	public void lancerPartie() {
@@ -271,7 +271,6 @@ public class Partie extends Observable {
 		return etat;
 	}
 
-	
 	public static void main(String[] args) {
 
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
