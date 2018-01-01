@@ -13,16 +13,14 @@ import modele.Partie;
 
 import java.util.Observer;
 
-public class VueFinManche implements Observer {
+public class VueFinManche {
 
 	private JFrame frame;
 	private JButton btnSuivant;
 	private JPanel classement;
-	private InterfaceManche im;
 	
 	public VueFinManche(InterfaceManche im){
 		this.frame=im.getFrame();
-		this.im=im;
 		this.initialize();
 		new ControleurBontonSuivant(this.btnSuivant, Partie.getPartie(), frame);
 	}
@@ -69,10 +67,4 @@ public class VueFinManche implements Observer {
 		frame.setVisible(true);
 		frame.getContentPane().setVisible(true);
 	}
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

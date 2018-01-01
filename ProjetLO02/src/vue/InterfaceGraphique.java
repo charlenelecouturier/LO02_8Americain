@@ -27,9 +27,7 @@ public class InterfaceGraphique implements Observer{
 
 	JFrame frame;
 	private JButton btnDmarrer;
-	private JTextField txtVariante;
-	private JComboBox comboBox_3;
-	private JTextField txtNouvelleManche;
+	private JTextField txtFinPartie;
 
 	/**
 	 * Launch the application.
@@ -71,30 +69,18 @@ public class InterfaceGraphique implements Observer{
 		btnDmarrer.setBounds(837, 599, 115, 29);
 		frame.getContentPane().add(btnDmarrer);
 		
-		txtVariante = new JTextField();
-		txtVariante.setHorizontalAlignment(SwingConstants.CENTER);
-		txtVariante.setFont(new Font("SansSerif", Font.BOLD, 26));
-		txtVariante.setEditable(false);
-		txtVariante.setText("Variante ?");
-		txtVariante.setBounds(106, 299, 451, 84);
-		frame.getContentPane().add(txtVariante);
-		txtVariante.setColumns(10);
+		txtFinPartie = new JTextField();
+		txtFinPartie.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 36));
+		txtFinPartie.setHorizontalAlignment(SwingConstants.CENTER);
+		txtFinPartie.setEditable(false);
+		txtFinPartie.setText("Fin de la partie !");
+		txtFinPartie.setBounds(200, 76, 508, 100);
+		frame.getContentPane().add(txtFinPartie);
+		txtFinPartie.setColumns(10);
 		
-		comboBox_3 = new JComboBox();
-		comboBox_3.setFont(new Font("SansSerif", Font.BOLD, 26));
-		comboBox_3.setMaximumRowCount(4);
-		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"Minimale", "Monclar", "Variante 4", "Variante 5"}));
-		comboBox_3.setBounds(607, 299, 220, 81);
-		frame.getContentPane().add(comboBox_3);
-		
-		txtNouvelleManche = new JTextField();
-		txtNouvelleManche.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 36));
-		txtNouvelleManche.setHorizontalAlignment(SwingConstants.CENTER);
-		txtNouvelleManche.setEditable(false);
-		txtNouvelleManche.setText("Nouvelle manche !");
-		txtNouvelleManche.setBounds(200, 76, 508, 100);
-		frame.getContentPane().add(txtNouvelleManche);
-		txtNouvelleManche.setColumns(10);
+		JPanel panel = new JPanel();
+		panel.setBounds(200, 209, 508, 279);
+		frame.getContentPane().add(panel);
 	}
 
 	@Override

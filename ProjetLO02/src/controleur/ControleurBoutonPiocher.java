@@ -23,7 +23,6 @@ public class ControleurBoutonPiocher {
 					((JoueurPhysique) p.getManche().getJoueur().get(0)).jouerTourGraphique(-2);
 					// on envoie -2 en paramètre : le joueur pioche
 				}
-
 			}
 		});
 	}

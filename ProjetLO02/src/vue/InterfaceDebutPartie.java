@@ -40,7 +40,6 @@ public class InterfaceDebutPartie {
 	private JTextField txtModeDeComptage;
 	private JComboBox comboBoxComptage;
 	private JComboBox comboBoxVariante;
-	private VueEffetJeu effetsJeu;
 
 	/**
 	 * Launch the application.
@@ -233,5 +232,4 @@ public class InterfaceDebutPartie {
 	public JFrame getFrame() {
 		return frame;
 	}
-	
 }

@@ -30,8 +30,7 @@ public class DireCarte extends Observable  implements Runnable{
 			e.printStackTrace();
 		}
 		if (!this.jDoitDireCarte.isaDitcarte() &&this.jDoitDireCarte.getCartes().size()==1) {
-			this.jDoitDireCarte.setContreCarte();
-			
+			this.jDoitDireCarte.setContreCarte();		
 		}
 		
 	}

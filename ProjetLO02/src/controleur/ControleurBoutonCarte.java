@@ -11,13 +11,14 @@ import modele.JoueurPhysique;
 import modele.Partie;
 
 public class ControleurBoutonCarte {
-	public ControleurBoutonCarte(Partie p, JButton carte,JTextArea effetjeu) {
+	public ControleurBoutonCarte(Partie p, JButton carte, JTextArea effetjeu) {
 		carte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Joueur jPhysique = p.getManche().getJoueur().get(0);
-				if(jPhysique.getCartes().size()==1 && jPhysique instanceof JoueurPhysique && !jPhysique.isContreCarte() &&!jPhysique.isaDitcarte()) {
+				if (jPhysique.getCartes().size() == 1 && jPhysique instanceof JoueurPhysique
+						&& !jPhysique.isContreCarte() && !jPhysique.isaDitcarte()) {
 					jPhysique.setaDitcarte();
-					
+
 				}
 			}
 		});

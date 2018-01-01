@@ -117,7 +117,7 @@ public class InterfaceManche implements Observer {
 		getFrame().getContentPane().add(panel_Classement, BorderLayout.EAST);
 		panel_Classement.setBackground(new Color(39, 135, 75));
 		lblClassement = new JLabel("Classement general de la partie : ");
-		lblClassement.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblClassement.setHorizontalAlignment(SwingConstants.CENTER);
 
 		Font f = new Font("Serif", Font.BOLD, 24);
 		Font f1 = new Font("Serif", Font.BOLD, 20);

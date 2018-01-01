@@ -11,31 +11,29 @@ public class ControleurBoutonDemarrer {
 	private JButton choix;
 	public int nbJoueursVirtuels;
 	ControleurNbJVirtuel cNbJoueurs;
-	
-	public ControleurBoutonDemarrer(JButton demarrer, JComboBox[] niveaux, JComboBox nbJoueurs,JComboBox comboBoxComptage, JTextField txtVotreNom, JComboBox comboBoxVariante, JFrame frame) {
 
-		// public ControleurInterrupteur(Interrupteur itr, JButton jbt){
+	public ControleurBoutonDemarrer(JButton demarrer, JComboBox[] niveaux, JComboBox nbJoueurs,
+			JComboBox comboBoxComptage, JTextField txtVotreNom, JComboBox comboBoxVariante, JFrame frame) {
 		this.choix = demarrer;
-		
-		
+
 		choix.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent event) {
 				String select = (String) nbJoueurs.getSelectedItem();
-				int nbSelect =Integer.parseInt(select);
-				int[] niveauxJoueursVirtuels= new int[nbSelect];
+				int nbSelect = Integer.parseInt(select);
+				int[] niveauxJoueursVirtuels = new int[nbSelect];
 				int i;
-				for(i=0;i<nbSelect;i++) {
-					select = (String)niveaux[i].getSelectedItem();
+				for (i = 0; i < nbSelect; i++) {
+					select = (String) niveaux[i].getSelectedItem();
 					int niveauJ = Integer.parseInt(select);
-					niveauxJoueursVirtuels[i]=niveauJ;
-					}
-				String nom =txtVotreNom.getText();
-				String variante = (String)comboBoxVariante.getSelectedItem();
-				select = (String)comboBoxComptage.getSelectedItem();
-					Partie p =new Partie(niveauxJoueursVirtuels, select, nom, variante);
-					new InterfaceManche(frame,p);
-					p.lancerPartieGraphique();
+					niveauxJoueursVirtuels[i] = niveauJ;
+				}
+				String nom = txtVotreNom.getText();
+				String variante = (String) comboBoxVariante.getSelectedItem();
+				select = (String) comboBoxComptage.getSelectedItem();
+				Partie p = new Partie(niveauxJoueursVirtuels, select, nom, variante);
+				new InterfaceManche(frame, p);
+				p.lancerPartieGraphique();
 			}
 		});
 	}
