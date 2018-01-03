@@ -217,7 +217,7 @@ public class InterfaceDebutPartie {
 		comboBoxVariante = new JComboBox();
 		comboBoxVariante.setMaximumRowCount(4);
 		comboBoxVariante
-				.setModel(new DefaultComboBoxModel(new String[] { "Minimale", "Monclar", "Variante 4", "Variante 5" }));
+				.setModel(new DefaultComboBoxModel(new String[] { "Minimale", "Monclar", "Variante 4", "Variante 5","Variante 7" }));
 		comboBoxVariante.setBounds(333, 531, 174, 40);
 		frame.getContentPane().add(comboBoxVariante);
 	}

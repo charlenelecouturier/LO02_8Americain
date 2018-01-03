@@ -55,7 +55,7 @@ public class InterfaceChoixVarianteNouvelleManche {
 		choixVariante.setFont(new Font("SansSerif", Font.BOLD, 26));
 		choixVariante.setMaximumRowCount(4);
 		choixVariante
-				.setModel(new DefaultComboBoxModel(new String[] { "Minimale", "Monclar", "Variante 4", "Variante 5" }));
+				.setModel(new DefaultComboBoxModel(new String[] { "Minimale", "Monclar", "Variante 4", "Variante 5","Variante 7" }));
 		choixVariante.setBounds(607, 253, 220, 81);
 		frame.getContentPane().add(choixVariante);
 
