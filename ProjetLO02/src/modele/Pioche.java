@@ -2,6 +2,7 @@ package modele;
 import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Random;
+import modele.*;
 
 /**
  * Pioche est la classe qui repr�sente la pioche. Elle permet de m�langer le

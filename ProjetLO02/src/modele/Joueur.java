@@ -1,10 +1,11 @@
 package modele;
+import modele.*;
 
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Iterator;
-
+import modele.variantes.*;
 /**
  * Joueur est la classe qui represente les participants au jeu, qu'ils soient
  * physiques ou virtuels. Il ne sera pas possible de creer un joueur dont le

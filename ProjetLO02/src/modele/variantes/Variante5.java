@@ -1,10 +1,13 @@
-package modele;
+package modele.variantes;
+import modele.*;
 
 import java.util.Iterator;
 
-public class VarianteMinimale extends Variante {
+public class Variante5 extends Variante {
 
-	public VarianteMinimale(int nbJoueursVirtuels) {
+
+	public Variante5(int nbJoueursVirtuels) {
+
 		int nbPaquet = 1;
 		if (nbJoueursVirtuels > 4) {
 			nbPaquet += (nbJoueursVirtuels + 1) / 5;
@@ -14,6 +17,7 @@ public class VarianteMinimale extends Variante {
 		this.assignerEffetCarte();
 	}
 
+	@Override
 	public void assignerEffetCarte() {
 		Iterator<Carte> it = this.jeuDeCartes.iterator();
 		Carte carteNext;
@@ -23,7 +27,12 @@ public class VarianteMinimale extends Variante {
 				carteNext.setEffet("ChangerFamille");
 			} else if (carteNext.getValeur().equals("10")) {
 				carteNext.setEffet("ObligeRejouer");
+			} else if (carteNext.getValeur().equals("1")) {
+				carteNext.setEffet("Pioche2OuAsOu8");
+			} else if (carteNext.getValeur().equals("7")) {
+				carteNext.setEffet("ChangerSens");
 			}
+
 		} while (it.hasNext());
 	}
 }

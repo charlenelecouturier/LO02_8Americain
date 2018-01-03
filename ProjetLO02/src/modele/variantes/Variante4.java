@@ -1,4 +1,5 @@
-package modele;
+package modele.variantes;
+import modele.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;

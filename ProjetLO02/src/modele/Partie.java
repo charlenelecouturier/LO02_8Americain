@@ -1,4 +1,6 @@
 package modele;
+import modele.*;
+import vue.VueLigneCommande;
 
 import java.awt.EventQueue;
 import java.util.InputMismatchException;
@@ -232,11 +234,11 @@ public class Partie extends Observable implements Runnable {
 		while (Partie.getPartie().etat.equals("EN COURS")) {
 
 			// tant que la partie n'est pas terminee, on joue des manches
-			/*
-			 * Partie.getPartie().manche.setPioche(new Pioche());// creation de la pioche
-			 * Partie.getPartie().manche.getPioche().melanger();// on melange la pioche
-			 * Partie.getPartie().manche.getPioche().distribuer();// on distribue la pioche
-			 */
+		
+			 Partie.getPartie().manche.setPioche(new Pioche());// creation de la pioche
+			 Partie.getPartie().manche.getPioche().melanger();// on melange la pioche
+			 Partie.getPartie().manche.getPioche().distribuer();// on distribue la pioche
+			 
 
 			// vue concurente : ligne de commande et interface
 			System.out.println(Thread.currentThread());
@@ -274,8 +276,8 @@ public class Partie extends Observable implements Runnable {
 	public static void main(String[] args) {
 
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
-		// Partie p =new Partie();
-		// new VueLigneCommande();
+		//Partie p =new Partie();
+		//new VueLigneCommande();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

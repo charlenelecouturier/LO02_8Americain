@@ -1,4 +1,5 @@
-package modele;
+package modele.effets;
+import modele.*;
 
 public class BloquerSuivant implements Effet {
 

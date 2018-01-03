@@ -1,8 +1,6 @@
-/**
- * 
- */
 package modele;
 import java.util.*;
+import modele.*;
 
 /**
  * @author charl

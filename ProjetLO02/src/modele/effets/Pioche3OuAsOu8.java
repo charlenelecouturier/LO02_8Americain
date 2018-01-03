@@ -1,4 +1,6 @@
-package modele;
+package modele.effets;
+import modele.*;
+import modele.variantes.*;
 
 public class Pioche3OuAsOu8 implements Effet {
 

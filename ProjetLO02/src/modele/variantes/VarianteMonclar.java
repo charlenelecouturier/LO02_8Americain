@@ -1,11 +1,16 @@
-package modele;
+package modele.variantes;
+import modele.*;
 
 import java.util.Iterator;
 
-public class Variante5 extends Variante {
+/**
+ * @author Robin et Charlène
+ *
+ */
 
-
-	public Variante5(int nbJoueursVirtuels) {
+public class VarianteMonclar extends Variante {
+	
+	public VarianteMonclar(int nbJoueursVirtuels) {
 
 		int nbPaquet = 1;
 		if (nbJoueursVirtuels > 4) {
@@ -15,7 +20,7 @@ public class Variante5 extends Variante {
 		this.jeuDeCartes = this.creerJeuDeCartes(nbPaquet);
 		this.assignerEffetCarte();
 	}
-
+	
 	@Override
 	public void assignerEffetCarte() {
 		Iterator<Carte> it = this.jeuDeCartes.iterator();
@@ -24,12 +29,17 @@ public class Variante5 extends Variante {
 			carteNext = it.next();
 			if (carteNext.getValeur().equals("8")) {
 				carteNext.setEffet("ChangerFamille");
+			} else if (carteNext.getValeur().equals("VALET")) {
+				carteNext.setEffet("ChangerSens");
+			} else if (carteNext.getValeur().equals("7")) {
+				carteNext.setEffet("BloquerSuivant");
 			} else if (carteNext.getValeur().equals("10")) {
 				carteNext.setEffet("ObligeRejouer");
+			} else if (carteNext.getValeur().equals("9")) {
+				carteNext.setEffet("Piocher1Carte");
+
 			} else if (carteNext.getValeur().equals("1")) {
-				carteNext.setEffet("Pioche2OuAsOu8");
-			} else if (carteNext.getValeur().equals("7")) {
-				carteNext.setEffet("ChangerSens");
+				carteNext.setEffet("Pioche 3 cartes ou joue un AS ou un 8");
 			}
 
 		} while (it.hasNext());

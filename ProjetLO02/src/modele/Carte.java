@@ -1,5 +1,7 @@
 package modele;
-
+import modele.*;
+import modele.effets.Effet;
+import modele.effets.*;
 /**
  * @author Charlene et Robin
  *
@@ -97,6 +99,12 @@ public class Carte {
 		}else if (this.effet.equals("Pioche 3 cartes ou joue un AS ou un 8")) {
 			Effet pioche3OuASOu8 = new Pioche3OuAsOu8();
 			pioche3OuASOu8.effet();
+		} else if (this.effet.equals("Pioche 2 cartes ou joue AS")) {
+			Effet pioche2OuAS = new Pioche2OuJoueAs();
+			pioche2OuAS.effet();
+		} else if (this.effet.equals("Pioche 3 cartes")) {
+			Effet pioche3 = new Piocher3();
+			pioche3.effet();
 		} 
 	}
 

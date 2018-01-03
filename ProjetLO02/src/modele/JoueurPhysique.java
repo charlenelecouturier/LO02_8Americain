@@ -1,5 +1,6 @@
 package modele;
-
+import modele.*;
+import modele.variantes.*;
 import java.util.ListIterator;
 import java.util.Scanner;
 

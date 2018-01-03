@@ -1,10 +1,11 @@
 package modele;
+import modele.*;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ListIterator;
 import java.util.Iterator;
-
+import modele.variantes.*;
 public class StratAvancee implements Strategie {
 
 	public int choixCarte(ArrayList<Carte> cartesCompatibles) {

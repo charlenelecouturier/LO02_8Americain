@@ -1,8 +1,8 @@
 package modele;
-
+import modele.*;
 import java.util.ArrayList;
 import java.util.Random;
-
+import modele.variantes.*;
 public class StrategieDeBase implements Strategie
 {
 	public int choixCarte(ArrayList<Carte> cartesCompatibles) {

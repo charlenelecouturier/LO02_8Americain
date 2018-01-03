@@ -1,10 +1,11 @@
 package modele;
+import modele.*;
 
 import java.util.ListIterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Random;
-
+import modele.variantes.*;
 public class Manche {
 	private Variante varianteManche;
 	private LinkedList<Joueur> classementJoueurs;
@@ -54,7 +55,6 @@ public class Manche {
 		switch (variante) {
 		case "Minimale":
 			this.varianteManche = new VarianteMinimale(nbJoueursVirtuels);
-
 			break;
 		case "Monclar":
 			this.varianteManche = new VarianteMonclar(nbJoueursVirtuels);
@@ -64,6 +64,9 @@ public class Manche {
 			break;
 		case "Variante 5":
 			this.varianteManche = new Variante5(nbJoueursVirtuels);
+			break;
+		case "Variante 7":
+			this.varianteManche = new Variante7(nbJoueursVirtuels);
 			break;
 		}
 		ListIterator<Joueur> it = joueur.listIterator();
@@ -218,7 +221,7 @@ public class Manche {
 	public Variante choisirVariante(int nbJoueursVirtuels) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println(
-				"Saisissez la variante :\n1=Variante minimale\n2=Variante de Monclar\n3=Variante 4\n4=Variante 5 ");
+				"Saisissez la variante :\n1=Variante minimale\n2=Variante de Monclar\n3=Variante 7\n4=Variante 4\n5=Variante 5 ");
 		int variante = sc.nextInt();
 		Variante choixVariante;
 		if (variante == 1) {
@@ -228,9 +231,12 @@ public class Manche {
 			choixVariante = new VarianteMonclar(nbJoueursVirtuels);
 			System.out.println("Variante de Monclar choisie ");
 		} else if (variante == 3) {
+			choixVariante = new Variante7(nbJoueursVirtuels);
+			System.out.println("Variante 7 choisie ");
+		}else if (variante == 4) {
 			choixVariante = new Variante4(nbJoueursVirtuels);
 			System.out.println("Variante 4 choisie ");
-		} else if (variante == 4) {
+		} else if (variante == 5) {
 			choixVariante = new Variante5(nbJoueursVirtuels);
 			System.out.println("Variante 5 choisie ");
 		} else {

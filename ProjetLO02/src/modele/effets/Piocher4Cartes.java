@@ -1,4 +1,6 @@
-package modele;
+package modele.effets;
+import modele.*;
+
 
 public class Piocher4Cartes implements Effet {
 

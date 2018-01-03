@@ -1,6 +1,7 @@
 
 package modele;
 import java.util.ArrayList;
+import modele.*;
 
 
 public interface Strategie {
