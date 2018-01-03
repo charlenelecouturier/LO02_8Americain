@@ -99,8 +99,8 @@ public class Partie extends Observable implements Runnable {
 	public boolean terminerPartie() {
 		boolean terminer = false;
 		if (this.modeComptage.equals("POSITIF")) {
-			// la partie se joue en 200 points mais on test avec 60
-			if (this.classementJoueursPartie.get(0).getScore() >= 60) {
+			// la partie se joue en 100 points
+			if (this.classementJoueursPartie.get(0).getScore() >= 100) {
 				terminer = true;
 				this.etat = "TERMINEE";
 				System.out.println("Partie termininee! Un joueur a eu au moins 60 point !");
@@ -170,7 +170,7 @@ public class Partie extends Observable implements Runnable {
 	}
 
 	public void lancerManche() {
-		while (!Partie.getPartie().manche.terminerManche()) {
+		while (!this.manche.terminerManche()) {
 			try {// Temps de delais entre chaque tour
 				Thread.sleep(950);
 			} catch (InterruptedException e) {
@@ -190,7 +190,7 @@ public class Partie extends Observable implements Runnable {
 					this.manche.getJoueur().get(0).changed();
 					this.manche.getJoueur().get(0).notifyObservers();
 					tour = Partie.getPartie().getManche().getTourJoueur();
-
+					jTour.setEffetVariante("Aucun");
 					if (Partie.getPartie().getManche().getSens() == 1) {
 						tour++;
 						if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
@@ -206,14 +206,6 @@ public class Partie extends Observable implements Runnable {
 				}
 			}
 		}
-		if (Partie.getPartie().modeComptage.equals("POSITIF")) {
-			Partie.getPartie().manche.compterPointsPositif();
-		} else {
-			Partie.getPartie().manche.compterPointsNegatif();
-		}
-		this.setChanged();
-		this.notifyObservers("manche terminee");// Si la partie n'est pas terminee, on debute une nouvelle manche
-		// pour se faire on entre dans un nouveau Thread qui appelle lancerManche()
 
 	}
 
@@ -233,18 +225,14 @@ public class Partie extends Observable implements Runnable {
 		while (Partie.getPartie().etat.equals("EN COURS")) {
 
 			// tant que la partie n'est pas terminee, on joue des manches
-		
 			 Partie.getPartie().manche.setPioche(new Pioche());// creation de la pioche
 			 Partie.getPartie().manche.getPioche().melanger();// on melange la pioche
 			 Partie.getPartie().manche.getPioche().distribuer();// on distribue la pioche
-			 
-
 			// vue concurente : ligne de commande et interface
 			System.out.println(Thread.currentThread());
 
 			while (!Partie.getPartie().manche.terminerManche()) { // tant que la manche n'est pas terminee, on joue des
 																	// tours
-
 				Partie.getPartie().manche.getJoueur().get(Partie.getPartie().manche.getTourJoueur() - 1).jouerTour();
 				System.out.println("\n");
 				try {// Temps de delais entre chaque tour
@@ -253,11 +241,6 @@ public class Partie extends Observable implements Runnable {
 					e.printStackTrace();
 				}
 			}
-			if (Partie.getPartie().modeComptage.equals("POSITIF")) {
-				Partie.getPartie().manche.compterPointsPositif();
-			} else {
-				Partie.getPartie().manche.compterPointsNegatif();
-			} // Si la partie n'est pas terminee, on debute une nouvelle manche
 			if (!Partie.getPartie().terminerPartie()) {
 				System.out.println("\nNOUVELLE MANCHE\n");
 				Partie.getPartie().manche = new Manche(Partie.getPartie().nbJoueursVirtuels, Partie.getPartie().joueur);
@@ -273,7 +256,6 @@ public class Partie extends Observable implements Runnable {
 	}
 
 	public static void main(String[] args) {
-
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
 		//Partie p =new Partie();
 		//new VueLigneCommande();

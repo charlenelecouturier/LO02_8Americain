@@ -1,13 +1,14 @@
 package modele;
 
 import java.util.ListIterator;
+import java.util.Observable;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Random;
 import modele.variantes.*;
 
-public class Manche {
+public class Manche extends Observable{
 	private Variante varianteManche;
 	private LinkedList<Joueur> classementJoueurs;
 	private int nbJoueursEnCours;
@@ -111,6 +112,16 @@ public class Manche {
 				}
 				System.out.println("Manche terminee !");
 			}
+		}
+		if (terminer) {
+			if (Partie.getPartie().getModeComptage().equals("POSITIF")) {
+				this.compterPointsPositif();
+			} else {
+				this.compterPointsNegatif();
+			}
+			this.setChanged();
+			this.notifyObservers("manche terminee");// Si la partie n'est pas terminee, on debute une nouvelle manche
+			// pour se faire on entre dans un nouveau Thread qui appelle lancerManche()
 		}
 		return terminer;
 	}

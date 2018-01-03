@@ -46,7 +46,6 @@ public class Variante7 extends Variante {
 			} else if (carteNext.getValeur().equals("DAME") && carteNext.getSymbole().equals("TREFLE")) {
 				carteNext.setEffet("Pioche 3 cartes");
 			}
-
 		} while (it.hasNext());
 	}
 

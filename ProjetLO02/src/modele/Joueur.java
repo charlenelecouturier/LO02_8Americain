@@ -187,10 +187,11 @@ public abstract class Joueur extends Observable{
 			Partie.getPartie().getManche().getPioche().cartes.remove(Partie.getPartie().getManche().getPioche().cartes.size() - 1);
 			System.out.println("\n" + this.name + " a pioche " + cartePioche);
 			System.out.println("\nTest : il reste " + Partie.getPartie().getManche().getPioche().getCartes().size()
-					+ " cartes dans la pioche\n");
-		}
+					+ " cartes dans la pioche\n");	
 		this.setChanged();
 		this.notifyObservers("a pioche");
+		}
+	
 	}
 
 	public boolean gagnePartie() {

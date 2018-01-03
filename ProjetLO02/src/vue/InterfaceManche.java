@@ -141,6 +141,7 @@ public class InterfaceManche implements Observer {
 		 * Mise en place des Observers sur les objets de la partie
 		 */
 		p.addObserver(this);
+		p.getManche().addObserver(this);
 		p.getManche().getTalon().addObserver(this);
 		p.getManche().setPioche(new Pioche());// creation de la pioche
 		p.getManche().getPioche().melanger();// on melange la pioche
@@ -235,7 +236,7 @@ public class InterfaceManche implements Observer {
 				}
 			}
 
-		} else if (instanceObservable instanceof Partie) {
+		} else if (instanceObservable instanceof Manche) {
 			if (arg1 != null) {
 				if (arg1.equals("manche terminee")) {
 					new VueFinManche(this);
