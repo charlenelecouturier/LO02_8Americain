@@ -1,10 +1,9 @@
 package modele;
-import modele.*;
-
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Random;
 import java.util.Scanner;
+import modele.strategies.*;
 
 //package pckg;
 

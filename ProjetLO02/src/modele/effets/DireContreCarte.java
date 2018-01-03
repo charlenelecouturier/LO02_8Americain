@@ -1,17 +1,16 @@
-package modele;
+package modele.effets;
+import modele.Joueur;
 
 import java.util.Observable;
 
-public class DireContreCarte extends Observable implements Runnable {
+import modele.effets.Effet;
 
-	private Manche m;
+public class DireContreCarte extends Observable implements Runnable, Effet {
+
 	private Joueur jAContrer;
 
-	public DireContreCarte(Manche m, Joueur jAContrer) {
-		this.m = m;
+	public DireContreCarte(Joueur jAContrer) {
 		this.jAContrer = jAContrer;
-		Thread t = new Thread(this);
-		t.start();
 	}
 
 	@Override
@@ -27,6 +26,12 @@ public class DireContreCarte extends Observable implements Runnable {
 
 		}
 
+	}
+	
+	@Override
+	public void effet() {
+		Thread t = new Thread(this);
+		t.start();
 	}
 
 }

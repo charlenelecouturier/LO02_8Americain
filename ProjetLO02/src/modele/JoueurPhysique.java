@@ -1,5 +1,7 @@
 package modele;
-import modele.*;
+import modele.effets.DireCarte;
+import modele.effets.DireContreCarte;
+import modele.effets.Effet;
 import modele.variantes.*;
 import java.util.ListIterator;
 import java.util.Scanner;
@@ -121,11 +123,13 @@ public class JoueurPhysique extends Joueur {
 		return numero - 1;
 	}
 	public void direCarteGraphique() {
-		new DireCarte(Partie.getPartie().getManche(),this);		
+		Effet ditCarte =new DireCarte(this);
+		ditCarte.effet();
 	}
 	
 	public void direContreCarteGraphique(Joueur j) {
-		new DireContreCarte(Partie.getPartie().getManche(),j);
+		Effet ditContrecarte =new DireContreCarte(j);
+		ditContrecarte.effet();
 	}
 	@Override
 	public void direCarte() {

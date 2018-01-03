@@ -1,23 +1,21 @@
-package modele;
+package modele.effets;
 import java.util.*;
 import modele.*;
+import modele.effets.Effet;
 
 /**
  * @author charl
  *
  */
-public class DireCarte extends Observable  implements Runnable{
+public class DireCarte extends Observable  implements Runnable,Effet{
 
-	private Manche m;
 	private Joueur jDoitDireCarte;
 	/**
 	 * 
 	 */
-	public DireCarte(Manche m, Joueur j) {
+	public DireCarte( Joueur j) {
 		this.jDoitDireCarte=j;
-		this.m = m;
-		Thread t = new Thread(this);
-		t.start();
+		
 	}
 
 	@Override
@@ -31,6 +29,12 @@ public class DireCarte extends Observable  implements Runnable{
 			this.jDoitDireCarte.setContreCarte();		
 		}
 		
+	}
+
+	@Override
+	public void effet() {
+		Thread t = new Thread(this);
+		t.start();
 	}
 
 }

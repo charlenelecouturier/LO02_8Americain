@@ -1,5 +1,6 @@
 
-package modele;
+package modele.strategies;
+import modele.*;
 import java.util.ArrayList;
 import modele.*;
 

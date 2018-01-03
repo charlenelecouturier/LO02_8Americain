@@ -1,11 +1,12 @@
 package modele;
-import modele.*;
 
 import java.util.ListIterator;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.HashMap;
 import java.util.Random;
 import modele.variantes.*;
+
 public class Manche {
 	private Variante varianteManche;
 	private LinkedList<Joueur> classementJoueurs;
@@ -13,6 +14,7 @@ public class Manche {
 	private int tourJoueur;
 	private int sens;
 	private Talon talon;
+	private HashMap<String, Variante> variantes;
 	private Pioche pioche;
 	private LinkedList<Joueur> joueur;
 
@@ -27,7 +29,14 @@ public class Manche {
 		this.sens = 1; // sens des aiguilles d'une montre
 		this.talon = new Talon();
 		// choix de la variante
-		this.varianteManche = choisirVariante(nbJoueursVirtuels);
+		// initialisation de la HashMap de variantes
+		this.variantes = new HashMap<String, Variante>();
+		this.variantes.put("Minimale", new VarianteMinimale(nbJoueursVirtuels));
+		this.variantes.put("Monclar", new VarianteMonclar(nbJoueursVirtuels));
+		this.variantes.put("Variante 7", new Variante7(nbJoueursVirtuels));
+		this.variantes.put("Variante 4", new Variante4(nbJoueursVirtuels));
+		this.variantes.put("Variante 5", new Variante5(nbJoueursVirtuels));
+		choisirVariante(nbJoueursVirtuels);
 		ListIterator<Joueur> it = joueur.listIterator();
 		this.joueur = new LinkedList<Joueur>();
 		while (it.hasNext()) {
@@ -36,9 +45,20 @@ public class Manche {
 			joueurNext.setScoreManche(0);
 			this.joueur.add(joueurNext);
 		}
-
 		Variante.nombreAs = 0;
+	}
 
+	public void choisirVariante(int nbJoueursVirtuels) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println(
+				"Saisissez le nom exact de la variante que vous souhaitez :\nMinimale\nMonclar\nVariante 7\nVariante 4\nVariante 5 ");
+		String variante = sc.nextLine();
+		if (this.variantes.containsKey(variante)) {
+			this.setVarianteManche(variante);
+		} else {
+			System.out.println("Mauvaise saisie.");
+			this.choisirVariante(nbJoueursVirtuels);
+		}
 	}
 
 	public Manche(int nbJoueursVirtuels, LinkedList<Joueur> joueur, String variante) {
@@ -51,24 +71,15 @@ public class Manche {
 		this.tourJoueur = tourJoueur;
 		this.sens = 1; // sens des aiguilles d'une montre
 		this.talon = new Talon();
-		// choix de la variante
-		switch (variante) {
-		case "Minimale":
-			this.varianteManche = new VarianteMinimale(nbJoueursVirtuels);
-			break;
-		case "Monclar":
-			this.varianteManche = new VarianteMonclar(nbJoueursVirtuels);
-			break;
-		case "Variante 4":
-			this.varianteManche = new Variante4(nbJoueursVirtuels);
-			break;
-		case "Variante 5":
-			this.varianteManche = new Variante5(nbJoueursVirtuels);
-			break;
-		case "Variante 7":
-			this.varianteManche = new Variante7(nbJoueursVirtuels);
-			break;
-		}
+		// On remplie la HashMap , le paramètre en entré "variante" sera la clé
+		// qui va permettre d'instancier la nouvelle variante
+		this.variantes = new HashMap<String, Variante>();
+		this.variantes.put("Minimale", new VarianteMinimale(nbJoueursVirtuels));
+		this.variantes.put("Monclar", new VarianteMonclar(nbJoueursVirtuels));
+		this.variantes.put("Variante 7", new Variante7(nbJoueursVirtuels));
+		this.variantes.put("Variante 4", new Variante4(nbJoueursVirtuels));
+		this.variantes.put("Variante 5", new Variante5(nbJoueursVirtuels));
+		this.setVarianteManche(variante);// variante est la clé
 		ListIterator<Joueur> it = joueur.listIterator();
 		this.joueur = new LinkedList<Joueur>();
 		while (it.hasNext()) {
@@ -218,34 +229,6 @@ public class Manche {
 		}
 	}
 
-	public Variante choisirVariante(int nbJoueursVirtuels) {
-		Scanner sc = new Scanner(System.in);
-		System.out.println(
-				"Saisissez la variante :\n1=Variante minimale\n2=Variante de Monclar\n3=Variante 7\n4=Variante 4\n5=Variante 5 ");
-		int variante = sc.nextInt();
-		Variante choixVariante;
-		if (variante == 1) {
-			choixVariante = new VarianteMinimale(nbJoueursVirtuels);
-			System.out.println("Variante minimale choisie");
-		} else if (variante == 2) {
-			choixVariante = new VarianteMonclar(nbJoueursVirtuels);
-			System.out.println("Variante de Monclar choisie ");
-		} else if (variante == 3) {
-			choixVariante = new Variante7(nbJoueursVirtuels);
-			System.out.println("Variante 7 choisie ");
-		}else if (variante == 4) {
-			choixVariante = new Variante4(nbJoueursVirtuels);
-			System.out.println("Variante 4 choisie ");
-		} else if (variante == 5) {
-			choixVariante = new Variante5(nbJoueursVirtuels);
-			System.out.println("Variante 5 choisie ");
-		} else {
-			System.out.println("Erreur : variante inexistante, choisissez a nouveau");
-			choixVariante = choisirVariante(nbJoueursVirtuels);
-		}
-		return choixVariante;
-	}
-
 	/**
 	 * @return the classementJoueurs
 	 */
@@ -265,6 +248,11 @@ public class Manche {
 	 */
 	public Variante getVarianteManche() {
 		return varianteManche;
+	}
+
+	public void setVarianteManche(String variante) {
+		this.varianteManche = this.variantes.get(variante);
+		System.out.println("La variante : " + variante + " a ete choisie.");
 	}
 
 	public int getNbJoueursEnCours() {
