@@ -21,32 +21,38 @@ public class VuePiocheTalon extends JPanel implements Observer {
 		 */
 		this.setBackground(new Color(8, 81, 36));
 		initialize();
-		Carte carteDessus = Partie.getPartie().getManche().getTalon().getCarteDessus();
-		ImageIcon imageCarte;
-		imageCarte = new ImageIcon("Images/" + carteDessus.getSymbole() + "/" + carteDessus.getValeur() + ".png");
-		this.carteDessusTalon = new JLabel();
-		this.carteDessusTalon.setIcon(imageCarte);
-		this.add(carteDessusTalon);
 		new ControleurBoutonPiocher(Partie.getPartie(), lblPioche);
-
 	}
 
 	public void initialize() {
+
 		lblPioche = new JButton("Piocher", new ImageIcon("Images/dosPioche.jpg"));
 		this.add(lblPioche);
 		Font f = new Font("Arial", Font.BOLD | Font.ITALIC, 26);
 		lblPioche.setFont(f);
 		lblPioche.setForeground(new Color(0, 0, 0));
 		lblPioche.setHorizontalTextPosition(SwingConstants.CENTER);
-		JLabel lblTalon = new JLabel();
-		this.add(lblTalon);
+		Carte carteDessus = Partie.getPartie().getManche().getTalon().getCarteDessus();
+		ImageIcon imageCarte;
+		if (carteDessus.getValeur().equals("JOKER")) {
+			imageCarte = new ImageIcon("Images/JOKER/JOKER.png");
+		} else {
+			imageCarte = new ImageIcon("Images/" + carteDessus.getSymbole() + "/" + carteDessus.getValeur() + ".png");
+		}
+		this.carteDessusTalon = new JLabel();
+		this.carteDessusTalon.setIcon(imageCarte);
+		this.add(carteDessusTalon);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		Carte carteDessus = Partie.getPartie().getManche().getTalon().getCarteDessus();
 		ImageIcon imageCarte;
-		imageCarte = new ImageIcon("Images/" + carteDessus.getSymbole() + "/" + carteDessus.getValeur() + ".png");
+		if (carteDessus.getValeur().equals("JOKER")) {
+			imageCarte = new ImageIcon("Images/JOKER/JOKER.png");
+		} else {
+			imageCarte = new ImageIcon("Images/" + carteDessus.getSymbole() + "/" + carteDessus.getValeur() + ".png");
+		}
 		this.carteDessusTalon.setIcon(imageCarte);
 		this.add(carteDessusTalon);
 		this.carteDessusTalon.setIcon(imageCarte);

@@ -275,9 +275,9 @@ public class Partie extends Observable implements Runnable {
 	public static void main(String[] args) {
 
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
-		Partie p =new Partie();
-		new VueLigneCommande();
-		/*EventQueue.invokeLater(new Runnable() {
+		//Partie p =new Partie();
+		//new VueLigneCommande();
+		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					InterfaceDebutPartie window = new InterfaceDebutPartie();
@@ -286,6 +286,6 @@ public class Partie extends Observable implements Runnable {
 					e.printStackTrace();
 				}
 			}
-		});*/
+		});
 	}
 }
