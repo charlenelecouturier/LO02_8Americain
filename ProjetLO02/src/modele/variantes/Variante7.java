@@ -26,22 +26,22 @@ public class Variante7 extends Variante {
 		do {
 			carteNext = it.next();
 			if (carteNext.getValeur().equals("8")) {
-				carteNext.setEffet("ChangerFamille");
+				carteNext.setEffet("Changer Famille");
 			} else if (carteNext.getValeur().equals("10")) {
-				carteNext.setEffet("ObligeRejouer");
+				carteNext.setEffet("Oblige a rejouer");
 			} else if (carteNext.getValeur().equals("1")) {
 				carteNext.setEffet("Pioche 2 cartes ou joue AS");
 			} else if (carteNext.getValeur().equals("VALET")) {
 				if (this.nbJoueursVirtuels == 1) {
-					carteNext.setEffet("ObligeRejouer");
+					carteNext.setEffet("Oblige a rejouer");
 				} else {
-					carteNext.setEffet("ChangerSens");
+					carteNext.setEffet("Changer Sens");
 				}
 			} else if (carteNext.getValeur().equals("7")) {
 				if (this.nbJoueursVirtuels == 1) {
-					carteNext.setEffet("ObligeRejouer");
+					carteNext.setEffet("Oblige a rejouer");
 				} else {
-					carteNext.setEffet("BloquerSuivant");
+					carteNext.setEffet("Bloquer Suivant");
 				}
 			} else if (carteNext.getValeur().equals("DAME") && carteNext.getSymbole().equals("TREFLE")) {
 				carteNext.setEffet("Pioche 3 cartes");

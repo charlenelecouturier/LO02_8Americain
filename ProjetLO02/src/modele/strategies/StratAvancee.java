@@ -18,7 +18,7 @@ public class StratAvancee implements Strategie {
 		Carte carteNext;
 		do {
 			carteNext = parcourirCartesCompatibles.next();
-			if (carteNext.getEffet().equals("ObligeRejouer")
+			if (carteNext.getEffet().equals("Oblige a rejouer")
 					&& this.jouer10(carteNext, joueurEnCours, cartesCompatibles)) {
 				carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
 				return carteChoisie;
@@ -34,7 +34,7 @@ public class StratAvancee implements Strategie {
 
 			// Si la carte sur laquelle la boucle s'arrette n'est pas une carte changer de
 			// famille, il la pose
-			if (!carteNext.getEffet().equals("ChangerFamille") && !carteNext.getEffet().equals("ObligeRejouer")) {
+			if (!carteNext.getEffet().equals("Changer Famille") && !carteNext.getEffet().equals("Oblige a rejouer")) {
 				carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
 				if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")) {
 					Variante.nombreAs++;
@@ -48,7 +48,7 @@ public class StratAvancee implements Strategie {
 			carteNext = parcourirCartesCompatibles.previous();
 		}
 		// la premiere carte na pas ete etudiee dans la precedente boucle, on s'est arrete a celle d'avant
-		if (!carteNext.getValeur().equals("ChangerFamille") && !carteNext.getValeur().equals("ObligeRejouer")) {
+		if (!carteNext.getValeur().equals("Changer Famille") && !carteNext.getValeur().equals("Oblige a rejouer")) {
 			carteChoisie = joueurEnCours.getCartes().indexOf(carteNext);
 			if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")) {
 				Variante.nombreAs++;
@@ -139,7 +139,7 @@ public class StratAvancee implements Strategie {
 		boolean trouve8 = false;
 		while (!trouve8) {
 
-			if (joueurEnCours.getCartes().get(i).getEffet().equals("ChangerFamille")) {
+			if (joueurEnCours.getCartes().get(i).getEffet().equals("Changer Famille")) {
 				trouve8 = true;
 			} else {
 				i++;
@@ -156,12 +156,13 @@ public class StratAvancee implements Strategie {
 		boolean trouveAutreCarteCompatible = false;
 		/*
 		 * On parcourt les cartes du joueur, tant qu'il reste des cartes, et quon a
-		 * pastrouve de compatibilit� on return true ( jouer un 10 ) si la prochaine
-		 * carte est de la m�me famille que le 10 ( et que ce n'est pas la 10) ou alors
+		 * pas trouve de compatibilite. On return true ( jouer un 10 ) si la prochaine
+		 * carte est de la meme famille que le 10 (et que ce n'est pas la 10) ou alors
 		 * si c'est un autre 10
 		 */
-		Carte carteNext = it.next();
-		while (it.hasNext()) {
+		Carte carteNext;
+		while (it.hasNext()) {	
+			carteNext = it.next();
 			if (((carteNext.getSymbole().equals(symboleCarteRejouer)
 					&& !(carteNext.getValeur().equals(valeurCarteRejouer)))
 
@@ -174,20 +175,8 @@ public class StratAvancee implements Strategie {
 				trouveAutreCarteCompatible = true;
 				return trouveAutreCarteCompatible;
 			}
-			carteNext = it.next();
 		}
-		// on regarde aussi la derniere carte de la main
-		if (((carteNext.getSymbole().equals(symboleCarteRejouer) && !(carteNext.getValeur().equals(valeurCarteRejouer)))
 
-				|| (!(carteNext.getSymbole().equals(symboleCarteRejouer))
-						&& (carteNext.getValeur().equals(valeurCarteRejouer)))
-				|| (carteNext.getValeur().equals("8")))
-
-		) {
-			System.out.println("HAHA! JE PEUX POSER DEUX CARTES D'AFFILLEE!");
-			trouveAutreCarteCompatible = true;
-			return trouveAutreCarteCompatible;
-		}
 		if (cartesCompatibles.size() == 1) {
 			// le joueur n'a plus qu'un 10 il doit le jouer
 			System.out.println("Mince, je dois jouer mon ma carte 'Rejouer'... Elle va me forcer a piocher");

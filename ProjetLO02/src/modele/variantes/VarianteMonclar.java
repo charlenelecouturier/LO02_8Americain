@@ -28,15 +28,15 @@ public class VarianteMonclar extends Variante {
 		do {
 			carteNext = it.next();
 			if (carteNext.getValeur().equals("8")) {
-				carteNext.setEffet("ChangerFamille");
+				carteNext.setEffet("Changer Famille");
 			} else if (carteNext.getValeur().equals("VALET")) {
-				carteNext.setEffet("ChangerSens");
+				carteNext.setEffet("Changer Sens");
 			} else if (carteNext.getValeur().equals("7")) {
-				carteNext.setEffet("BloquerSuivant");
+				carteNext.setEffet("Bloquer Suivant");
 			} else if (carteNext.getValeur().equals("10")) {
-				carteNext.setEffet("ObligeRejouer");
+				carteNext.setEffet("Oblige a rejouer");
 			} else if (carteNext.getValeur().equals("9")) {
-				carteNext.setEffet("Piocher1Carte");
+				carteNext.setEffet("Fait piocher 1 carte");
 
 			} else if (carteNext.getValeur().equals("1")) {
 				carteNext.setEffet("Pioche 3 cartes ou joue un AS ou un 8");

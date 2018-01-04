@@ -29,7 +29,7 @@ public abstract class Variante {
 			for (i = 0; i < carte.size(); i++) {
 				if (carte.get(i).getSymbole().equals(Partie.getPartie().getManche().getTalon().getCarteDessus().getSymbole())
 						|| carte.get(i).getValeur().equals(Partie.getPartie().getManche().getTalon().getCarteDessus().getValeur())
-						|| carte.get(i).getValeur().equals("8")|| carte.get(i).getValeur().equals("JOKER")){
+						|| carte.get(i).getValeur().equals("8")|| carte.get(i).getValeur().equals("JOKER")|| Partie.getPartie().getManche().getTalon().getCarteDessus().getSymbole().equals("JOKER")){
 					return true; // le joueur peut jouer
 				}
 			}
@@ -91,7 +91,7 @@ public abstract class Variante {
 		String carteDessusTalonValeur = carteDessusTalon.getValeur();
 		if (joueurActuel.getEffetVariante().equals("Aucun")) {
 			if (carteSymbole.equals(carteDessusTalonSymbole) || carteValeur.equals(carteDessusTalonValeur)
-					|| carteValeur.equals("8") || carteValeur.equals("JOKER")) {
+					|| carteValeur.equals("8") || carteValeur.equals("JOKER")||carteDessusTalonSymbole.equals("JOKER")) {
 				return true; // la carte choisie par le joueur est compatible
 			} else {
 				return false;

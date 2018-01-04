@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Random;
 import modele.variantes.*;
 
-public class Manche extends Observable{
+public class Manche extends Observable {
 	private Variante varianteManche;
 	private LinkedList<Joueur> classementJoueurs;
 	private int nbJoueursEnCours;

@@ -24,13 +24,13 @@ public class Variante5 extends Variante {
 		do {
 			carteNext = it.next();
 			if (carteNext.getValeur().equals("8")) {
-				carteNext.setEffet("ChangerFamille");
+				carteNext.setEffet("Changer Famille");
 			} else if (carteNext.getValeur().equals("10")) {
-				carteNext.setEffet("ObligeRejouer");
+				carteNext.setEffet("Oblige a rejouer");
 			} else if (carteNext.getValeur().equals("1")) {
-				carteNext.setEffet("Pioche2OuAsOu8");
+				carteNext.setEffet("+ 2 ou joue AS ou 8");
 			} else if (carteNext.getValeur().equals("7")) {
-				carteNext.setEffet("ChangerSens");
+				carteNext.setEffet("Changer Sens");
 			}
 
 		} while (it.hasNext());

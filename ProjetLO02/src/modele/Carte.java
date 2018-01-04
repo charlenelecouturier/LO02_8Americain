@@ -65,35 +65,35 @@ public class Carte {
 	}
 
 	public void appliquerEffet() {
-		if (this.effet.equals("ObligeRejouer")) {
+		if (this.effet.equals("Oblige a rejouer")) {
 			Effet obligerRejouer = new ObligeRejouer();
 			obligerRejouer.effet();
 
-		} else if (this.effet.equals("ChangerFamille")) {
+		} else if (this.effet.equals("Changer Famille")) {
 			Effet changerFamille = new ChangerFamille();
 			changerFamille.effet();
-		} else if (this.effet.equals("ChangerSens")) {
+		} else if (this.effet.equals("Changer Sens")) {
 			Effet changerSens = new ChangerSens();
 			changerSens.effet();
-		} else if (this.effet.equals("Pioche2OuAsOu8")) {
+		} else if (this.effet.equals("+ 2 ou joue AS ou 8")) {
 			Effet pioche2cartesOuAsOu8 = new Pioche2OuASOu8();
 			pioche2cartesOuAsOu8.effet();
-		} else if (this.effet.equals("BloquerSuivant")) {
+		} else if (this.effet.equals("Bloquer Suivant")) {
 			Effet bloqueSuivant = new BloquerSuivant();
 			bloqueSuivant.effet();
-		} else if (this.effet.equals("Piocher2")) {
+		} else if (this.effet.equals("Fait piocher 2 cartes")) {
 			Effet pioche2 = new Piocher2Cartes();
 			pioche2.effet();
-		} else if (this.effet.equals("Piocher4")) {
+		} else if (this.effet.equals("Fait piocher 4 cartes")) {
 			Effet pioche4 = new Piocher4Cartes();
 			pioche4.effet();
-		} else if (this.effet.equals("JouerToutesCartesMemeSymbole")) {
+		} else if (this.effet.equals("Defausser tous les mêmes symboles")) {
 			Effet JouerToutesCartesMemeSymbole = new JouerMemeCouleur();
 			JouerToutesCartesMemeSymbole.effet();
-		} else if (this.effet.equals("ChangerFamilleEtPioche5")) {
+		} else if (this.effet.equals("Changer Famille + Piocher 5 cartes")) {
 			Effet changerFamilleEtPioche5 = new ChangerFamilleEtPioche5();
 			changerFamilleEtPioche5.effet();
-		}else if (this.effet.equals("Piocher1Carte")) {
+		}else if (this.effet.equals("Fait piocher 1 carte")) {
 			Effet piocher1 = new Piocher1();
 			piocher1.effet();
 		}else if (this.effet.equals("Pioche 3 cartes ou joue un AS ou un 8")) {

@@ -25,20 +25,20 @@ public class Variante4 extends Variante {
 		do {
 			carteNext = it.next();
 			if (carteNext.getValeur().equals("8")) {
-				carteNext.setEffet("ChangerFamille");
+				carteNext.setEffet("Changer Famille");
 			} else if (carteNext.getValeur().equals("10")) {
-				carteNext.setEffet("ChangerSens");
+				carteNext.setEffet("Changer Sens");
 			} else if (carteNext.getValeur().equals("VALET")) {
-				carteNext.setEffet("BloquerSuivant");
+				carteNext.setEffet("Bloquer Suivant");
 			} else if (carteNext.getValeur().equals("2")) {
-				carteNext.setEffet("Piocher2");
+				carteNext.setEffet("Fait piocher 2 cartes");
 				if (carteNext.getValeur().equals("2") && carteNext.getSymbole().equals("PIQUE")) {
-					carteNext.setEffet("Piocher4");
+					carteNext.setEffet("Fait piocher 4 cartes");
 				}
 			} else if (carteNext.getValeur().equals("1")) {
-				carteNext.setEffet("JouerToutesCartesMemeSymbole");
+				carteNext.setEffet("Defausser tous les mêmes symboles");
 			} else if (carteNext.getValeur().equals("JOKER")) {
-				carteNext.setEffet("ChangerFamilleEtPioche5");
+				carteNext.setEffet("Changer Famille + Piocher 5 cartes");
 			}
 
 		} while (it.hasNext());

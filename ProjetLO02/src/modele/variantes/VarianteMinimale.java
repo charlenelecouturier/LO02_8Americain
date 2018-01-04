@@ -21,9 +21,9 @@ public class VarianteMinimale extends Variante {
 		do {
 			carteNext = it.next();
 			if (carteNext.getValeur().equals("8")) {
-				carteNext.setEffet("ChangerFamille");
+				carteNext.setEffet("Changer Famille");
 			} else if (carteNext.getValeur().equals("10")) {
-				carteNext.setEffet("ObligeRejouer");
+				carteNext.setEffet("Oblige a rejouer");
 			}
 		} while (it.hasNext());
 	}
