@@ -28,7 +28,7 @@ public class VueFinManche {
 	private void initialize() {
 		this.frame.getContentPane().removeAll();
 
-		frame.setBounds(100, 100, 1000, 700);
+		frame.setBounds(100, 100, 1000, 720);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().setBackground(new Color(255,255,255));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

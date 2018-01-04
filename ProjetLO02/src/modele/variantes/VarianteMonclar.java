@@ -10,8 +10,10 @@ import java.util.Iterator;
 
 public class VarianteMonclar extends Variante {
 	
-	public VarianteMonclar(int nbJoueursVirtuels) {
+	private int nbJoueursVirtuels;
 
+	public VarianteMonclar(int nbJoueursVirtuels) {
+		this.nbJoueursVirtuels = nbJoueursVirtuels;
 		int nbPaquet = 1;
 		if (nbJoueursVirtuels > 4) {
 			nbPaquet += (nbJoueursVirtuels + 1) / 5;
@@ -32,9 +34,17 @@ public class VarianteMonclar extends Variante {
 			} else if (carteNext.getValeur().equals("VALET")) {
 				carteNext.setEffet("Changer Sens");
 			} else if (carteNext.getValeur().equals("7")) {
-				carteNext.setEffet("Bloquer Suivant");
+				if (this.nbJoueursVirtuels == 1) {
+					carteNext.setEffet("Oblige a rejouer");
+				} else {
+					carteNext.setEffet("Bloquer Suivant");
+				}
 			} else if (carteNext.getValeur().equals("10")) {
-				carteNext.setEffet("Oblige a rejouer");
+				if (this.nbJoueursVirtuels == 1) {
+					carteNext.setEffet("Oblige a rejouer");
+				} else {
+					carteNext.setEffet("Changer Sens");
+				}
 			} else if (carteNext.getValeur().equals("9")) {
 				carteNext.setEffet("Fait piocher 1 carte");
 
