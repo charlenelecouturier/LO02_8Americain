@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -14,6 +16,7 @@ import modele.*;
 import javax.swing.*;
 
 import controleur.ControleurBoutonCarte;
+import controleur.ControleurBoutonChoixCouleur;
 import controleur.ControleurBoutonContreCarte;
 import controleur.ControleurCarte;
 
@@ -34,6 +37,11 @@ public class InterfaceManche implements Observer {
 	// Labels et autres presents dans l'Interface
 	private JButton btnCarte;
 	private JButton btnContreCarte;
+	private JButton btnCoeur;
+	private JButton btnCarreau;
+	private JButton btnTrefle;
+	private JButton btnPique;
+	private JPanel panelChoixFamille;
 	private JLabel lblClassement;
 	private VueEffetJeu effetsJeu;
 	// Objets du modele a observer
@@ -86,6 +94,21 @@ public class InterfaceManche implements Observer {
 		panelWEST.add(this.effetsJeu, BorderLayout.CENTER);
 		JScrollPane jp = new JScrollPane(this.effetsJeu);
 		panelWEST.add(jp, BorderLayout.CENTER);
+		this.panelChoixFamille=new JPanel();
+		this.panelChoixFamille.setLayout(new GridLayout(0,1));
+		JTextField choixFamille =new JTextField("Quelle famille voulez vous ?");
+		choixFamille.setEditable(false);
+		this.panelChoixFamille.add(choixFamille);
+		this.panelChoixFamille.add(this.btnCarreau= new JButton("Carreau"));
+		this.panelChoixFamille.add(this.btnCoeur= new JButton("Coeur"));
+		this.panelChoixFamille.add(this.btnPique= new JButton("Pique"));
+		this.panelChoixFamille.add(this.btnTrefle= new JButton("Trefle"));
+		this.panelChoixFamille.setVisible(false);
+		new ControleurBoutonChoixCouleur(btnCarreau, "CARREAU", this.panelChoixFamille, p);
+		new ControleurBoutonChoixCouleur(btnCoeur, "COEUR", this.panelChoixFamille, p);
+		new ControleurBoutonChoixCouleur(btnPique, "PIQUE", this.panelChoixFamille, p);
+		new ControleurBoutonChoixCouleur(btnTrefle, "TREFLE", this.panelChoixFamille, p);
+		panelWEST.add(this.panelChoixFamille, BorderLayout.SOUTH);
 
 		/**
 		 * Gestion du conteneur des Joueurs Virtuels. On d�finit sa position et les
@@ -194,6 +217,7 @@ public class InterfaceManche implements Observer {
 	}
 
 	public void update(Observable instanceObservable, Object arg1) {
+		
 		if (instanceObservable instanceof Joueur) {
 			this.panel_Pioche.update(instanceObservable, arg1);
 
@@ -210,6 +234,7 @@ public class InterfaceManche implements Observer {
 				frame.revalidate();
 			} else if (instanceObservable instanceof JoueurPhysique) {
 
+				
 				/**
 				 * Redefinir les cartes visibles en main en fonction du tour qu'a joué le
 				 * joueur.
@@ -228,7 +253,6 @@ public class InterfaceManche implements Observer {
 					frame.revalidate();
 				}
 			}
-
 		} else if (instanceObservable instanceof Manche) {
 			if (arg1 != null) {
 				if (arg1.equals("manche terminee")) {

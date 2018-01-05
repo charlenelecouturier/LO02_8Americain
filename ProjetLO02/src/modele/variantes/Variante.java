@@ -30,7 +30,7 @@ public abstract class Variante {
 				if (carte.get(i).getSymbole().equals(Partie.getPartie().getManche().getTalon().getCarteDessus().getSymbole())
 						|| carte.get(i).getValeur().equals(Partie.getPartie().getManche().getTalon().getCarteDessus().getValeur())
 						|| carte.get(i).getValeur().equals("8")|| carte.get(i).getValeur().equals("JOKER")|| Partie.getPartie().getManche().getTalon().getCarteDessus().getSymbole().equals("JOKER")){
-					return true; // le joueur peut jouer
+					return true; // le joueur peut jouer				
 				}
 			}
 		} else if (joueurActuel.getEffetVariante().equals("Pioche2ouAsou8")) {

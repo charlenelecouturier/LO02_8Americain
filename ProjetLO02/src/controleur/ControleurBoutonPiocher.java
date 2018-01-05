@@ -18,9 +18,7 @@ public class ControleurBoutonPiocher {
 						&& !p.getManche().getVarianteManche()
 								.estPossibleDeJouer(p.getManche().getJoueur().get(0).getCartes())
 						&& p.getManche().getJoueur().get(0).getEffetVariante().equals("Aucun")) {
-					System.out.println("\nPIOCHEEEE\n");
-
-					((JoueurPhysique) p.getManche().getJoueur().get(0)).jouerTourGraphique(-2);
+								((JoueurPhysique) p.getManche().getJoueur().get(0)).jouerTourGraphique(-2);
 					// on envoie -2 en paramètre : le joueur pioche
 				}
 			}

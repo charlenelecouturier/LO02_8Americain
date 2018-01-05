@@ -10,6 +10,7 @@ public class VueEffetJeu extends JTextArea implements Observer {
 	private static int num = 1;
 
 	public VueEffetJeu() {
+		VueEffetJeu.num=1;
 		Font f = new Font("Serif", Font.BOLD, 18);
 		this.setFont(f);
 		this.setLineWrap(true);

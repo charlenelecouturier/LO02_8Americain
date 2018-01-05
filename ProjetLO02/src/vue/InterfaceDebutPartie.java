@@ -82,7 +82,7 @@ private JMenuItem item5;
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane jop = new JOptionPane();
 				String mess = "8 : Changer de famille \n 10 : Oblige a rejouer\n";
-				jop.showMessageDialog(null, mess, "À propos", JOptionPane.INFORMATION_MESSAGE);
+				jop.showMessageDialog(null, mess, "Variante Minimale", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 
@@ -92,7 +92,7 @@ private JMenuItem item5;
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane jop = new JOptionPane();
 				String mess = "8 : Changer de famille \n10 : Oblige à rejouer\nVALET : Changer de sens  ou oblige à rejouer s'il n'y a que 2 joueurs\n7 : Bloquer le joueur suivant ou oblige à rejouer s'il n'y a que 2 joueurs\n9 : Fait piocher 1 carte\nAS : Fait piocher 3 cartes au suivant a moins qu'il rajoute un AS ou qu'il contre l'attaque avec un 8";
-				jop.showMessageDialog(null, mess, "À propos", JOptionPane.INFORMATION_MESSAGE);
+				jop.showMessageDialog(null, mess, "Variante de Monclar", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		variantes.add(item3 = new JMenuItem("Variante 4"));
@@ -100,7 +100,7 @@ private JMenuItem item5;
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane jop = new JOptionPane();
 				String mess = "8 : Changer de famille \n10 : Changer de sens ou oblige à rejouer s'il n'y a que 2 joueurs\nVALET : Bloquer le joueur suivant\n2 : Fait piocher 2 cartes\n2 de PIQUE : Fait piocher 4 cartes\nAS : Permet au joueur de se défausser de toutes ses cartes du même symbole\nJOKER : Fait piocher 5 cartes au suivant et permet de changer de famille";
-				jop.showMessageDialog(null, mess, "À propos", JOptionPane.INFORMATION_MESSAGE);
+				jop.showMessageDialog(null, mess, "Variante 4", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		variantes.add(item4 = new JMenuItem("Variante 5"));
@@ -108,7 +108,7 @@ private JMenuItem item5;
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane jop = new JOptionPane();
 				String mess = "8 : Changer de famille \n10 : Oblige à rejouer\n7 : Changer de sens ou oblige à rejouer s'il n'y a que 2 joueurs\nAS : Fait piocher 2 cartes au suivant a moins qu'il rajoute un AS ou qu'il contre l'attaque avec un 8";
-				jop.showMessageDialog(null, mess, "À propos", JOptionPane.INFORMATION_MESSAGE);
+				jop.showMessageDialog(null, mess, "Variante 5", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		variantes.add(item5 = new JMenuItem("Variante 7"));
@@ -116,7 +116,7 @@ private JMenuItem item5;
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane jop = new JOptionPane();
 				String mess = "8 : Changer de famille \n10 : Oblige à rejouer\n7 : Bloquer le joueur suivant ou oblige à rejouer s'il n'y a que 2 joueurs\nVALET : Changer de sens ou oblige à rejouer s'il n'y a que 2 joueurs\nDAME de TREFLE : Fait piocher 3 cartes\nAS : Fait piocher 2 cartes au suivant a moins qu'il rajoute un AS ";
-				jop.showMessageDialog(null, mess, "À propos", JOptionPane.INFORMATION_MESSAGE);
+				jop.showMessageDialog(null, mess, "Variante 7", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		frame.setJMenuBar(menuBar);

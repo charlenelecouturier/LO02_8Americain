@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Random;
 import java.util.Scanner;
+
+import modele.effets.DireContreCarte;
+import modele.effets.Effet;
 import modele.strategies.*;
 
 //package pckg;
@@ -83,30 +86,30 @@ public class JoueurVirtuel extends Joueur {
 		
 		boolean contreCarte;
 		if (Partie.getPartie().getManche().getJoueur().get(0) instanceof JoueurPhysique) {
-			if (Partie.getPartie().getManche().getJoueur().get(0).typeInterface.equals("LDC")) {
+			// dire contrecarte en graphique
+			if (!Partie.getPartie().getManche().getJoueur().get(0).typeInterface.equals("LDC")) {
+				Effet ditContrecarte = new DireContreCarte(this);
+				ditContrecarte.effet();
+			}
+			// en ligne de commande
+			else {
 				contreCarte = ((JoueurPhysique) Partie.getPartie().getManche().getJoueur().get(0)).direContreCarte();
-			
-			if (contreCarte) {
-				this.piocher(1);
-				this.setChanged();
-				this.notifyObservers("CONTRE-CARTE ! ");
-			} else {
-				this.setChanged();
-				this.notifyObservers("CARTE ! ");
-			}}
-		 else {
-			((JoueurPhysique) Partie.getPartie().getManche().getJoueur().get(0)).direContreCarteGraphique(this);
-		}
-	}else{
-
-		System.out.println("Ce joueur n'a plus qu'une carte !");
-		// Un joueur virtuel a une chance sur 4 de dire contre-carte
-		Random r = new Random();
-		int proba1Sur4 = 1 + r.nextInt(3);
-		if (proba1Sur4 == 1) {
-			// si le joueur a la place 0 est le joueur qui n'a plus qu'une carte
-			if (this.equals(Partie.getPartie().getManche().getJoueur().get(0))) {
-					// On choisi un numero de joueur au hasard , sauf celui a la place 0 pour dire carte
+				if (contreCarte) {
+					this.setContreCarte();
+				} else {
+					this.setaDitcarte();
+				}
+			}
+		} else {
+			System.out.println("Ce joueur n'a plus qu'une carte !");
+			// Un joueur virtuel a une chance sur 4 de dire contre-carte
+			Random r = new Random();
+			int proba1Sur4 = 1 + r.nextInt(3);
+			if (proba1Sur4 == 1) {
+				// si le joueur a la place 0 est le joueur qui n'a plus qu'une carte
+				if (this.equals(Partie.getPartie().getManche().getJoueur().get(0))) {
+					// On choisi un numero de joueur au hasard , sauf celui a la place 0 pour dire
+					// carte
 					int numJoueurDitContreCarte = (int) (Math.random()
 							* (Partie.getPartie().getManche().getJoueur().size() - 2)) + 1;
 					System.out.println(Partie.getPartie().getManche().getJoueur().get(numJoueurDitContreCarte).getName()
@@ -121,18 +124,16 @@ public class JoueurVirtuel extends Joueur {
 				contreCarte = false;
 			}
 			if (contreCarte) {
-				this.piocher(1);
-				this.setChanged();
-				this.notifyObservers("CONTRE-CARTE ! ");
+				this.setContreCarte();
 			} else {
-				this.setChanged();
-				this.notifyObservers("CARTE ! ");
+				this.setaDitcarte();
 			}
 		}
+
 	}
 
 	/**
-	 * Fonction assocee a� la detection d'exception sur l'entree du niveau du
+	 * Fonction assocee a la detection d'exception sur l'entree du niveau du
 	 * joueur
 	 * 
 	 * @param userInput
@@ -168,7 +169,4 @@ public class JoueurVirtuel extends Joueur {
 		this.strat = strat;
 	}
 
-	public int choisirCarte(Carte carte) {
-		return 0;
-	}
 }

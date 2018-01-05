@@ -6,13 +6,15 @@ import modele.variantes.*;
 import java.util.ListIterator;
 import java.util.Scanner;
 
-public class JoueurPhysique extends Joueur {
+public class JoueurPhysique extends Joueur implements Runnable {
+	private boolean aChangeDeFamille;
 	Scanner sc = new Scanner(System.in);
 
 	public JoueurPhysique() {
 		super();
 		System.out.println("Entrez votre nom : ");
 		this.name = sc.nextLine();
+		this.aChangeDeFamille=false;
 		System.out.println("OK Joueur1  : " + this.name);
 	}
 	
@@ -22,43 +24,33 @@ public class JoueurPhysique extends Joueur {
 		this.name=nom;
 	}
 	
-	public int choisirCarte(Carte carteChoisie) {
-		int indexCarteChoisie = -1;
-		ListIterator<Carte> parcourirCarteJoueur = this.getCartes().listIterator();
-		while(parcourirCarteJoueur.hasNext()) {
-			int index = parcourirCarteJoueur.nextIndex();
-			if(parcourirCarteJoueur.next() == carteChoisie &&
-			   Partie.getPartie().getManche().getVarianteManche().estCompatible(carteChoisie)
-				) {
-				indexCarteChoisie =index;
-			}
-		}
-		return indexCarteChoisie;
-	}
-	
 	public void jouerTourGraphique(int indexCarteChoisie) {
 		int tour;
 		this.aDitcarte=false;
 		this.contreCarte=false;
+		this.aChangeDeFamille=false;
 		boolean gagne = false;
 		this.poserCarteGraphique(indexCarteChoisie);
-		this.EffetVariante = "Aucun";
-		gagne = this.gagnePartie();	// on regarde si le fait d'avoir pose une carte permet au joueur de gagner la manche
-		tour = Partie.getPartie().getManche().getTourJoueur();
-		if (Partie.getPartie().getManche().getSens() == 1) {
-			if (!gagne) {
-				tour++;
+		if (!this.EffetVariante.equals("doit rejouer")) {
+			gagne = this.gagnePartie(); // on regarde si le fait d'avoir pose une carte permet au joueur de gagner la
+										// manche
+			tour = Partie.getPartie().getManche().getTourJoueur();
+			if (Partie.getPartie().getManche().getSens() == 1) {
+				if (!gagne) {
+					tour++;
+				}
+				if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
+					tour = 1;
+				}
+			} else {
+				tour--;
+				if (tour <= 0) {
+					tour = Partie.getPartie().getManche().getNbJoueursEnCours();
+				}
 			}
-			if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
-				tour = 1;
-			}
-		} else {
-			tour--;
-			if (tour <= 0) {
-				tour = Partie.getPartie().getManche().getNbJoueursEnCours();
-			}
+			Partie.getPartie().getManche().setTourJoueur(tour);
 		}
-		Partie.getPartie().getManche().setTourJoueur(tour);
+		this.EffetVariante = "Aucun";
 
 	}
 
@@ -80,8 +72,13 @@ public class JoueurPhysique extends Joueur {
 				this.direCarteGraphique();
 			}
 			String effet = cartePose.getEffet();
-			if (!effet.equals("Aucun")) {
-				//cartePose.appliquerEffet();
+			if (!effet.equals("Aucun")&&!effet.equals("Changer Famille")) {
+				cartePose.appliquerEffet();
+			}else if(effet.equals("Changer Famille")) {
+				this.setChanged();
+				//this.notifyObservers("Changer Famille");
+				//while(!this.aChangeDeFamille) {}
+				//this.changerFamilleGraphiquement();}
 			}
 
 		}
@@ -127,10 +124,6 @@ public class JoueurPhysique extends Joueur {
 		ditCarte.effet();
 	}
 	
-	public void direContreCarteGraphique(Joueur j) {
-		Effet ditContrecarte =new DireContreCarte(j);
-		ditContrecarte.effet();
-	}
 	@Override
 	public void direCarte() {
 		Scanner scan = new Scanner(System.in);
@@ -191,4 +184,19 @@ public class JoueurPhysique extends Joueur {
 			this.changerFamille();
 		}
 	}
+	
+	/**
+	 * @param aChangeDeFamille the aChangeDeFamille to set
+	 */
+	public void setaChangeDeFamille(boolean aChangeDeFamille) {
+		this.aChangeDeFamille = aChangeDeFamille;
+		this.setChanged();
+		this.notifyObservers("a change de famille");
+	}
+
+	@Override
+	public void run() {
+
+	}
+	
 }
