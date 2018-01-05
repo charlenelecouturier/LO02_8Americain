@@ -129,8 +129,6 @@ public abstract class Joueur extends Observable{
 			int numeroCarte = this.choisirCarte();
 			Carte cartePose = this.cartes.get(numeroCarte);
 			Partie.getPartie().getManche().getTalon().getCartes().add(cartePose);
-			System.out.println(
-					"Test : il y a " + Partie.getPartie().getManche().getTalon().getCartes().size() + " cartes dans le talon");
 			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole(cartePose.getSymbole());
 			Partie.getPartie().getManche().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
 			System.out.println(this.getName() + " pose " + cartePose);
@@ -161,16 +159,16 @@ public abstract class Joueur extends Observable{
 		}
 		for (int i = 1; i <= nombrePioche; i++) {
 			Carte cartePioche = Partie.getPartie().getManche().getPioche().cartes
-					.get(Partie.getPartie().getManche().getPioche().cartes.size() - 1); // -1 car indice commence � 0
+					.get(Partie.getPartie().getManche().getPioche().cartes.size() - 1); 
 			cartes.add(cartePioche);
-			Partie.getPartie().getManche().getPioche().cartes.remove(Partie.getPartie().getManche().getPioche().cartes.size() - 1);
-			System.out.println("\n" + this.name + " a pioche " + cartePioche);
-			System.out.println("\nTest : il reste " + Partie.getPartie().getManche().getPioche().getCartes().size()
-					+ " cartes dans la pioche\n");	
-		this.setChanged();
-		this.notifyObservers("a pioche");
+			Partie.getPartie().getManche().getPioche().cartes
+					.remove(Partie.getPartie().getManche().getPioche().cartes.size() - 1);
+			if (this instanceof JoueurPhysique) {
+				System.out.println("\n" + this.name + " a pioche " + cartePioche);
+			}
 		}
-	
+		this.setChanged();
+		this.notifyObservers("a pioche "+ nombrePioche + " cartes!");
 	}
 
 	public boolean gagnePartie() {

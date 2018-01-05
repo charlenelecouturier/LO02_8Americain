@@ -222,8 +222,7 @@ public class InterfaceManche implements Observer {
 			this.panel_Pioche.update(instanceObservable, arg1);
 
 			if (arg1 != null) {
-				if (arg1.equals("CARTE ! ") || arg1.equals("CONTRE-CARTE ! ") || arg1.equals("a pioche")
-						|| arg1.equals("gagne")) {
+				if (!arg1.equals("Changer Famille") && !arg1.equals("tour")&&!arg1.equals("a fini")) {
 					this.effetsJeu.update(instanceObservable, arg1);
 				}
 			}

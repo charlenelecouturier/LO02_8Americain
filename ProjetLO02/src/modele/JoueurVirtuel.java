@@ -57,20 +57,18 @@ public class JoueurVirtuel extends Joueur {
 
 	public int choisirCarte() {
 		int j;
-		System.out.println("Cartes de " + this.name + " : ");
-		for (j = 1; j <= this.cartes.size(); j++) {
-			System.out.println(j + " : " + this.cartes.get(j - 1));
-		}
 		int numeroCarte;
 		ArrayList<Carte> cartesJouables = new ArrayList<Carte>();
 		int i;
+		System.out.println(this.name + " a " + this.cartes.size()+ " carte(s)");
+		System.out.println("Carte du talon : "+ Partie.getPartie().getManche().getTalon().getCarteDessus());
 		for (i = 0; i < this.cartes.size(); i++) {
 			cartesJouables.add(this.cartes.get(i));
 		}
 		// cartesJouables = this.getCartes();
 		ListIterator<Carte> parcourirCarteJouable = cartesJouables.listIterator();
 		while (parcourirCarteJouable.hasNext()) {
-			// on vrifie a chaque iteration que la carte est compatible
+			// on verifie a chaque iteration que la carte est compatible
 			if (!Partie.getPartie().getManche().getVarianteManche().estCompatible(parcourirCarteJouable.next())) {
 				// on retire les cartes pas compatible de la liste.
 				parcourirCarteJouable.remove();

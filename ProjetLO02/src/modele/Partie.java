@@ -85,14 +85,12 @@ public class Partie extends Observable implements Runnable {
 	 * 
 	 * @return Partie instance unique de la classe Partie
 	 */
-	/*
-	 * public static Partie getPartie() {
-	 * 
-	 * if (Partie.instancePartie == null) { Partie.instancePartie = new Partie(); }
-	 * return Partie.instancePartie; }
-	 */
-
+	
 	public static Partie getPartie() {
+
+		if (Partie.instancePartie == null) {
+			Partie.instancePartie = new Partie();
+		}
 		return Partie.instancePartie;
 	}
 
@@ -257,8 +255,7 @@ public class Partie extends Observable implements Runnable {
 
 	public static void main(String[] args) {
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
-		//Partie p =new Partie();
-		//new VueLigneCommande();
+	
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -268,6 +265,7 @@ public class Partie extends Observable implements Runnable {
 					e.printStackTrace();
 				}
 			}
-		});
+		});	
+		new VueLigneCommande();
 	}
 }

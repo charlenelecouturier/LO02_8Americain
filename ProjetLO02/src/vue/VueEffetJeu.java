@@ -7,8 +7,6 @@ import java.awt.Color;
 import modele.Joueur;
 
 public class VueEffetJeu extends JTextArea implements Observer {
-	private static int num = 1;
-
 	public VueEffetJeu() {
 
 		Font f = new Font("Serif", Font.BOLD, 18);
@@ -27,12 +25,11 @@ public class VueEffetJeu extends JTextArea implements Observer {
 		} else if (arg1.equals("CONTRE-CARTE ! ")) {
 			this.insert(((Joueur) arg0).getName() + " recoit un " + arg1 + "\n", 0);
 
-		} else if (arg1.equals("a pioche")) {
-			this.insert(((Joueur) arg0).getName() + " " + arg1 + "\n", 0);
 		} else if (arg1.equals("gagne")) {
 			this.insert(((Joueur) arg0).getName() + " a " + arg1 + " !\n", 0);
-
+		}else {
+			this.insert(((Joueur) arg0).getName() + " " + arg1 + " \n", 0);
 		}
-		num++;
+		
 	}
 }

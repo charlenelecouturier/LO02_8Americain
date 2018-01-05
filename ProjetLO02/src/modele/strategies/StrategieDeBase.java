@@ -9,8 +9,6 @@ public class StrategieDeBase implements Strategie
 	public int choixCarte(ArrayList<Carte> cartesCompatibles) {
 		Joueur joueurEnCours = Partie.getPartie().getManche().getJoueur().get(Partie.getPartie().getManche().getTourJoueur()-1);
 		int i=0;
-		System.out.println(joueurEnCours.getName() + " a " + joueurEnCours.getCartes().size() + " carte(s)");
-		System.out.println("Carte du talon : "+ Partie.getPartie().getManche().getTalon().getCarteDessus());
 		while(!Partie.getPartie().getManche().getVarianteManche().estCompatible(joueurEnCours.getCartes().get(i)))
 		{
 			i++;

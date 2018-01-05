@@ -9,8 +9,6 @@ import modele.variantes.*;
 public class StratAvancee implements Strategie {
 
 	public int choixCarte(ArrayList<Carte> cartesCompatibles) {
-		System.out.println("Carte du talon : " + Partie.getPartie().getManche().getTalon().getCarteDessus());
-		System.out.println("Nombre de cartes compatibles : " + cartesCompatibles.size());
 		Joueur joueurEnCours = Partie.getPartie().getManche().getJoueur().get(Partie.getPartie().getManche().getTourJoueur() - 1);
 		int carteChoisie;
 		ListIterator<Carte> parcourirCartesCompatibles = cartesCompatibles.listIterator();
