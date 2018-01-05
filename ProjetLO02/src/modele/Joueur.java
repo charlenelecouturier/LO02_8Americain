@@ -72,7 +72,6 @@ public abstract class Joueur extends Observable{
 		this.name = name;
 	}
 
-
 	/**
 	 * @return the effetVariante
 	 */
@@ -81,7 +80,8 @@ public abstract class Joueur extends Observable{
 	}
 
 	/**
-	 * @param effetVariante the effetVariante to set
+	 * @param effetVariante
+	 *            the effetVariante to set
 	 */
 	public void setEffetVariante(String effetVariante) {
 		EffetVariante = effetVariante;
@@ -94,8 +94,8 @@ public abstract class Joueur extends Observable{
 	public void jouerTour() {
 		this.setChanged();
 		this.notifyObservers("tour");
-		this.contreCarte=false;
-		this.aDitcarte=false;
+		this.contreCarte = false;
+		this.aDitcarte = false;
 		System.out.println("effet : " + this.EffetVariante);
 		int tour;
 		boolean gagne = false;
@@ -122,9 +122,7 @@ public abstract class Joueur extends Observable{
 			this.notifyObservers("a fini");
 		}
 		this.EffetVariante = "Aucun";
-
 	}
-
 	
 	public void poserCarte() {
 		if (Partie.getPartie().getManche().getVarianteManche().estPossibleDeJouer(this.cartes)) {
@@ -153,22 +151,6 @@ public abstract class Joueur extends Observable{
 
 	public abstract void direCarte();
 	public abstract void changerFamille();
-
-	public void obligeDeRejouer() {
-	this.EffetVariante=("doit rejouer");
-		/*	try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		if (this.cartes.isEmpty()) {
-			this.piocher(1);
-		} else {
-			this.poserCarte();
-		}*/
-	}
-
 	public abstract int choisirCarte();
 
 	public void piocher(int nombrePioche) {

@@ -26,14 +26,17 @@ public class JoueurPhysique extends Joueur {
 	
 	public void jouerTourGraphique(int indexCarteChoisie) {
 		int tour;
-		this.aDitcarte=false;
-		this.contreCarte=false;
-		this.aChangeDeFamille=false;
+		this.aDitcarte = false;
+		this.contreCarte = false;
+		this.aChangeDeFamille = false;
 		boolean gagne = false;
 		this.poserCarteGraphique(indexCarteChoisie);
-		if (!this.EffetVariante.equals("doit rejouer")) {
-			gagne = this.gagnePartie(); // on regarde si le fait d'avoir pose une carte permet au joueur de gagner la
-										// manche
+		gagne = this.gagnePartie();
+		// effets pour lesquels on ne doit pas changer le tour
+		if (!this.EffetVariante.equals("doit rejouer") && !this.EffetVariante.equals("JouerMemeCouleur")
+				&& !this.EffetVariante.equals("Changer Famille")) {
+			// on regarde si le fait d'avoir pose une carte permet au joueur de gagner la
+			// manche
 			tour = Partie.getPartie().getManche().getTourJoueur();
 			if (Partie.getPartie().getManche().getSens() == 1) {
 				if (!gagne) {
@@ -50,15 +53,15 @@ public class JoueurPhysique extends Joueur {
 			}
 			Partie.getPartie().getManche().setTourJoueur(tour);
 		}
-		this.EffetVariante = "Aucun";
+		if (this.EffetVariante.equals("doit rejouer")) {
+			this.EffetVariante = "Aucun";
+		}
 
 	}
 
 	public void poserCarteGraphique(int numeroCarte) {
-		
-		if (numeroCarte ==-2) { // le joueur pioche 1 carte
-			this.piocher(1);
-		} else if (Partie.getPartie().getManche().getVarianteManche().estPossibleDeJouer(this.cartes)) {
+
+		if (Partie.getPartie().getManche().getVarianteManche().estPossibleDeJouer(this.cartes)) {
 
 			Carte cartePose = this.cartes.get(numeroCarte);
 			Partie.getPartie().getManche().getTalon().getCartes().add(cartePose);
@@ -66,22 +69,26 @@ public class JoueurPhysique extends Joueur {
 			Partie.getPartie().getManche().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
 			System.out.println("vous jouezz " + cartePose);
 			cartes.remove(cartePose);
-			// On notifie l'interface que la carte a ete retiree de la main du joueur
-
 			if (this.cartes.size() == 1) {
 				this.direCarteGraphique();
-			}
+			} 
+			// On notifie l'interface que la carte a ete retiree de la main du joueur
+			this.setChanged();
+			this.notifyObservers();
 			String effet = cartePose.getEffet();
-			if (!effet.equals("Aucun")&&!effet.equals("Changer Famille")) {
+			if (!effet.equals("Aucun") && !effet.equals("Changer Famille")
+					&& !effet.equals("Defausser tous les mêmes symboles")
+					&& !this.EffetVariante.equals("JouerMemeCouleur")) {
 				cartePose.appliquerEffet();
-			}else if(effet.equals("Changer Famille")) {
+			} else if (effet.equals("Changer Famille")) {
+				this.EffetVariante="Changer Famille";
 				this.setChanged();
 				this.notifyObservers("Changer Famille");
-				//while(!this.aChangeDeFamille) {}			
+
+			} else if (effet.equals("Defausser tous les mêmes symboles")) {
+				this.EffetVariante = "JouerMemeCouleur";
 			}
 		}
-		this.setChanged();
-		this.notifyObservers();
 	}
 
 	public int choisirCarte() { 
@@ -185,8 +192,26 @@ public class JoueurPhysique extends Joueur {
 	 */
 	public void setaChangeDeFamille() {
 		this.aChangeDeFamille = true;
+		this.EffetVariante="Aucun";
 		this.setChanged();
 		this.notifyObservers("a change de famille");
+		boolean gagne = false;
+		int tour = Partie.getPartie().getManche().getTourJoueur();
+		if (Partie.getPartie().getManche().getSens() == 1) {
+			if (!gagne) {
+				tour++;
+			}
+			if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
+				tour = 1;
+			}
+		} else {
+			tour--;
+			if (tour <= 0) {
+				tour = Partie.getPartie().getManche().getNbJoueursEnCours();
+			}
+		}
+		Partie.getPartie().getManche().setTourJoueur(tour);
+	
 	}
 	
 }

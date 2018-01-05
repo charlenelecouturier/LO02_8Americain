@@ -21,8 +21,8 @@ public class BloquerSuivant implements Effet {
 					tour = 1;
 				}
 			} else {// sens =-1
-					// si on trouve un num�ro n�gatif, on revient au tour du dernier joueur ( joueur
-					// ayant le dernier num�ro)
+					// si on trouve un numero negatif, on revient au tour du dernier joueur ( joueur
+					// ayant le dernier numero)
 				tour--;
 				if (tour <= 0) {
 					tour = Partie.getPartie().getManche().getNbJoueursEnCours();

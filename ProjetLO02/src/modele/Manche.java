@@ -44,6 +44,7 @@ public class Manche extends Observable {
 			Joueur joueurNext = it.next();
 			joueurNext.getCartes().clear();
 			joueurNext.setScoreManche(0);
+			joueurNext.setEffetVariante("Aucun");
 			this.joueur.add(joueurNext);
 		}
 		Variante.nombreAs = 0;
