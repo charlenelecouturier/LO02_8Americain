@@ -2,6 +2,7 @@ package modele;
 import modele.effets.DireCarte;
 import modele.effets.DireContreCarte;
 import modele.effets.Effet;
+import modele.effets.Piocher5Cartes;
 import modele.variantes.*;
 import java.util.ListIterator;
 import java.util.Scanner;
@@ -78,10 +79,15 @@ public class JoueurPhysique extends Joueur {
 			String effet = cartePose.getEffet();
 			if (!effet.equals("Aucun") && !effet.equals("Changer Famille")
 					&& !effet.equals("Defausser tous les mêmes symboles")
-					&& !this.EffetVariante.equals("JouerMemeCouleur")) {
+					&& !this.EffetVariante.equals("JouerMemeCouleur")
+					&& !effet.equals("Changer Famille + Piocher 5 cartes")) {
 				cartePose.appliquerEffet();
-			} else if (effet.equals("Changer Famille")) {
-				this.EffetVariante="Changer Famille";
+			} else if (effet.equals("Changer Famille") || effet.equals("Changer Famille + Piocher 5 cartes")) {
+				if (effet.equals("Changer Famille + Piocher 5 cartes")) {
+					Effet piocher5 = new Piocher5Cartes();
+					piocher5.effet();
+				}
+				this.EffetVariante = "Changer Famille";
 				this.setChanged();
 				this.notifyObservers("Changer Famille");
 

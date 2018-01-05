@@ -91,8 +91,10 @@ public class Carte {
 			Effet JouerToutesCartesMemeSymbole = new JouerMemeCouleur();
 			JouerToutesCartesMemeSymbole.effet();
 		} else if (this.effet.equals("Changer Famille + Piocher 5 cartes")) {
-			Effet changerFamilleEtPioche5 = new ChangerFamilleEtPioche5();
-			changerFamilleEtPioche5.effet();
+			Effet changerFamille = new ChangerFamille();
+			changerFamille.effet();
+			Effet piocher5= new Piocher5Cartes();
+			piocher5.effet();
 		}else if (this.effet.equals("Fait piocher 1 carte")) {
 			Effet piocher1 = new Piocher1();
 			piocher1.effet();
