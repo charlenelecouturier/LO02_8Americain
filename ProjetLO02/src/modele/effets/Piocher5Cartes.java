@@ -23,7 +23,7 @@ public class Piocher5Cartes implements Effet {
 				}
 			}
 			Joueur joueurSuivant = Partie.getPartie().getManche().getJoueur().get(tour - 1);
-			joueurSuivant.piocher(4);
+			joueurSuivant.piocher(5);
 			Effet bloquerSuivant = new BloquerSuivant();
 			bloquerSuivant.effet();
 		}
