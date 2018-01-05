@@ -10,7 +10,7 @@ public class VueEffetJeu extends JTextArea implements Observer {
 	private static int num = 1;
 
 	public VueEffetJeu() {
-		VueEffetJeu.num=1;
+
 		Font f = new Font("Serif", Font.BOLD, 18);
 		this.setFont(f);
 		this.setLineWrap(true);
@@ -23,14 +23,14 @@ public class VueEffetJeu extends JTextArea implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (arg1.equals("CARTE ! ")) {
-			this.insert(num + " : " + ((Joueur) arg0).getName() + " dit " + arg1 + "\n", 0);
+			this.insert(((Joueur) arg0).getName() + " dit " + arg1 + "\n", 0);
 		} else if (arg1.equals("CONTRE-CARTE ! ")) {
-			this.insert(num + " : " + ((Joueur) arg0).getName() + " recoit un " + arg1 + "\n", 0);
+			this.insert(((Joueur) arg0).getName() + " recoit un " + arg1 + "\n", 0);
 
 		} else if (arg1.equals("a pioche")) {
-			this.insert(num + " : " + ((Joueur) arg0).getName() + " " + arg1 + "\n", 0);
+			this.insert(((Joueur) arg0).getName() + " " + arg1 + "\n", 0);
 		} else if (arg1.equals("gagne")) {
-			this.insert(num + " : " + ((Joueur) arg0).getName() + " a " + arg1 + " !\n", 0);
+			this.insert(((Joueur) arg0).getName() + " a " + arg1 + " !\n", 0);
 
 		}
 		num++;

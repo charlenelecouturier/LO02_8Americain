@@ -235,6 +235,12 @@ public class InterfaceManche implements Observer {
 			} else if (instanceObservable instanceof JoueurPhysique) {
 
 				
+				if (arg1 != null) {
+					if (arg1.equals("Changer Famille") ) {
+						this.panelChoixFamille.setVisible(true);
+					}
+				}
+				
 				/**
 				 * Redefinir les cartes visibles en main en fonction du tour qu'a joué le
 				 * joueur.

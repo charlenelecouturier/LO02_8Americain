@@ -1,7 +1,6 @@
 package vue;
 
 import java.awt.*;
-import controleur.ControleurBoutonPiocher;
 import java.util.Observable;
 import java.util.Observer;
 import modele.Partie;
@@ -12,7 +11,7 @@ import javax.swing.*;
 public class VuePiocheTalon extends JPanel implements Observer {
 
 	protected JLabel carteDessusTalon;
-	protected JButton lblPioche;
+	protected JLabel lblPioche;
 
 	public VuePiocheTalon() {
 		/**
@@ -21,17 +20,12 @@ public class VuePiocheTalon extends JPanel implements Observer {
 		 */
 		this.setBackground(new Color(8, 81, 36));
 		initialize();
-		new ControleurBoutonPiocher(Partie.getPartie(), lblPioche);
 	}
 
 	public void initialize() {
 
-		lblPioche = new JButton("Piocher", new ImageIcon("Images/dosPioche.jpg"));
+		lblPioche = new JLabel(new ImageIcon("Images/dosPioche.jpg"));
 		this.add(lblPioche);
-		Font f = new Font("Arial", Font.BOLD | Font.ITALIC, 26);
-		lblPioche.setFont(f);
-		lblPioche.setForeground(new Color(0, 0, 0));
-		lblPioche.setHorizontalTextPosition(SwingConstants.CENTER);
 		Carte carteDessus = Partie.getPartie().getManche().getTalon().getCarteDessus();
 		ImageIcon imageCarte;
 		if (carteDessus.getValeur().equals("JOKER")) {

@@ -185,8 +185,7 @@ public class Partie extends Observable implements Runnable {
 						// piocher)
 				// mais sil ne peut pas jouer ET qu'il a reçu un effet, on applique cet effet
 				// avec l'appel a estPossibleDeJouer() puis on passe au joueur suivant
-				if (!this.manche.getVarianteManche().estPossibleDeJouer(this.manche.getJoueur().get(0).getCartes())
-						&& !this.manche.getJoueur().get(0).getEffetVariante().equals("Aucun")) {
+				if (!this.manche.getVarianteManche().estPossibleDeJouer(this.manche.getJoueur().get(0).getCartes())) {
 					this.manche.getJoueur().get(0).changed();
 					this.manche.getJoueur().get(0).notifyObservers();
 					tour = Partie.getPartie().getManche().getTourJoueur();

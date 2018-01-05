@@ -32,7 +32,10 @@ public abstract class Variante {
 						|| carte.get(i).getValeur().equals("8")|| carte.get(i).getValeur().equals("JOKER")|| Partie.getPartie().getManche().getTalon().getCarteDessus().getSymbole().equals("JOKER")){
 					return true; // le joueur peut jouer				
 				}
+				
 			}
+			System.out.println(joueurActuel.getName() + " ne peut pas jouer !");
+			joueurActuel.piocher(1);
 		} else if (joueurActuel.getEffetVariante().equals("Pioche2ouAsou8")) {
 			for (i = 0; i < carte.size(); i++) {
 				if (carte.get(i).getValeur().equals(Partie.getPartie().getManche().getTalon().getCarteDessus().getValeur())

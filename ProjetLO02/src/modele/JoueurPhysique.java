@@ -6,7 +6,7 @@ import modele.variantes.*;
 import java.util.ListIterator;
 import java.util.Scanner;
 
-public class JoueurPhysique extends Joueur implements Runnable {
+public class JoueurPhysique extends Joueur {
 	private boolean aChangeDeFamille;
 	Scanner sc = new Scanner(System.in);
 
@@ -76,9 +76,9 @@ public class JoueurPhysique extends Joueur implements Runnable {
 				cartePose.appliquerEffet();
 			}else if(effet.equals("Changer Famille")) {
 				this.setChanged();
-				//this.notifyObservers("Changer Famille");
+				this.notifyObservers("Changer Famille");
 				//while(!this.aChangeDeFamille) {}
-				//this.changerFamilleGraphiquement();}
+				
 			}
 
 		}
@@ -188,15 +188,10 @@ public class JoueurPhysique extends Joueur implements Runnable {
 	/**
 	 * @param aChangeDeFamille the aChangeDeFamille to set
 	 */
-	public void setaChangeDeFamille(boolean aChangeDeFamille) {
-		this.aChangeDeFamille = aChangeDeFamille;
+	public void setaChangeDeFamille() {
+		this.aChangeDeFamille = true;
 		this.setChanged();
 		this.notifyObservers("a change de famille");
-	}
-
-	@Override
-	public void run() {
-
 	}
 	
 }

@@ -148,11 +148,6 @@ public abstract class Joueur extends Observable{
 			if (!effet.equals("Aucun")) {
 				cartePose.appliquerEffet();
 			}
-		}else {
-			if(this.EffetVariante.equals("Aucun")) {	
-				System.out.println(this.getName() + " ne peut pas jouer !");
-				this.piocher(1);
-			}
 		}
 	}
 
