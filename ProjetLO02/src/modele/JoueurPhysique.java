@@ -77,10 +77,8 @@ public class JoueurPhysique extends Joueur {
 			}else if(effet.equals("Changer Famille")) {
 				this.setChanged();
 				this.notifyObservers("Changer Famille");
-				//while(!this.aChangeDeFamille) {}
-				
+				//while(!this.aChangeDeFamille) {}			
 			}
-
 		}
 		this.setChanged();
 		this.notifyObservers();
@@ -113,10 +111,7 @@ public class JoueurPhysique extends Joueur {
 		} else if (this.cartes.get(numero - 1).getValeur().equals("8")) {
 			Variante.nombreAs = 0;
 		}
-		if (this.cartes.get(numero - 1).getValeur().equals("1")
-				&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante4) {
-			Variante4.couleur.setSymbole(this.cartes.get(numero - 1).getSymbole());
-		}
+	
 		return numero - 1;
 	}
 	public void direCarteGraphique() {

@@ -6,8 +6,6 @@ import java.util.Iterator;
 
 public class Variante4 extends Variante {
 
-	public static Carte couleur = new Carte(" ", " ");
-
 	public Variante4(int nbJoueursVirtuels) {
 
 		int nbPaquet = 1;

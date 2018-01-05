@@ -75,7 +75,7 @@ public abstract class Variante {
 		} else if (joueurActuel.getEffetVariante().equals("JouerMemeCouleur")) {
 
 			for (i = 0; i < carte.size(); i++) {
-				if (carte.get(i).getSymbole().equals(Variante4.couleur.getSymbole())) {
+				if (carte.get(i).getSymbole().equals(Partie.getPartie().getManche().getTalon().getCarteDessus().getSymbole())) {
 					return true; // le joueur peut jouer
 				}
 			}
@@ -100,7 +100,7 @@ public abstract class Variante {
 				return false;
 			}
 		} else if (joueurActuel.getEffetVariante().equals("JouerMemeCouleur")) {
-			if (carteSymbole.equals(Variante4.couleur.getSymbole())) {
+			if (carteSymbole.equals(carteDessusTalon.getSymbole())) {
 				return true; // la carte choisie par le joueur est compatible
 			} else {
 				return false;

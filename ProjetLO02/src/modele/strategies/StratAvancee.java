@@ -39,10 +39,6 @@ public class StratAvancee implements Strategie {
 				if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")) {
 					Variante.nombreAs++;
 				}
-				if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")
-						&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante4) {
-					Variante4.couleur.setSymbole(joueurEnCours.getCartes().get(carteChoisie).getSymbole());
-				}
 				return carteChoisie;
 			}
 			carteNext = parcourirCartesCompatibles.previous();
@@ -53,11 +49,6 @@ public class StratAvancee implements Strategie {
 			if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")) {
 				Variante.nombreAs++;
 			}
-			 if (joueurEnCours.getCartes().get(carteChoisie).getValeur().equals("1")
-					&& Partie.getPartie().getManche().getVarianteManche() instanceof Variante4) {
-				Variante4.couleur.setSymbole(joueurEnCours.getCartes().get(carteChoisie).getSymbole());
-			}
-
 			return carteChoisie;
 		} else {
 			System.out.println("Je suis oblige de jouer ma carte 'Changer Famille'...");

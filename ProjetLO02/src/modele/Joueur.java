@@ -264,6 +264,13 @@ public abstract class Joueur extends Observable{
 		this.piocher(1);	
 	}
 
+	/**
+	 * @return the typeInterface
+	 */
+	public String getTypeInterface() {
+		return typeInterface;
+	}
+
 	public void changed()
 	{
 		this.setChanged();
