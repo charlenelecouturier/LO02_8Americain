@@ -77,7 +77,6 @@ public class Partie extends Observable implements Runnable {
 			System.out.println(
 					"\nMode de comptage des points choisi : NEGATIF ! Lorsqu'un joueur atteint 100 point, il perd la partie ! \nUne manche se termine lorsqu'un joueur a fini !\n");
 		}
-		Partie.instancePartie = this;
 	}
 
 	/**

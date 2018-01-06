@@ -49,8 +49,7 @@ public class Talon extends Observable {
 
 		// on stocke les dernieres cartes de la pioche dans une collection, dans l'ordre
 		while(Partie.getPartie().getManche().getPioche().getCartes().size()>0) {
-			cartesRestantes.add(Partie.getPartie().getManche().getPioche().getCartes().get(0));
-			Partie.getPartie().getManche().getPioche().getCartes().remove(0);
+			cartesRestantes.add(Partie.getPartie().getManche().getPioche().getCartes().poll());
 		}
 		// On met toutes les cartes du talon, sauf la carte du dessus , dans la pioche
 		while(this.cartes.size()>1) {
@@ -59,12 +58,14 @@ public class Talon extends Observable {
 		}
 		// On melange la pioche
 		Partie.getPartie().getManche().getPioche().melanger();
-		// On rajoute les dernieres cartes a piocher (qui n'�taient pas suffisantes pour
+		// On rajoute les dernieres cartes a piocher (qui n'etaient pas suffisantes pour
 		// que le joueur puisse piocher correctement), dans la pioche
 		while (cartesRestantes.size()>0) {
 			Partie.getPartie().getManche().getPioche().getCartes().add(cartesRestantes.get(0));
 			cartesRestantes.remove(0);
 		}
+		System.out.println(Partie.getPartie().getManche().getPioche().getCartes().size());
+		System.out.println(this.cartes.size());
 	}
 
 	public Carte getCarteDessus() {

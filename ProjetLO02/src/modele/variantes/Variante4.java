@@ -3,6 +3,7 @@ import modele.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Variante4 extends Variante {
 
@@ -43,8 +44,8 @@ public class Variante4 extends Variante {
 	}
 
 	@Override // on doit rajouter les JOKERS
-	public ArrayList<Carte> creerJeuDeCartes(int nbPaquet) {
-		ArrayList<Carte> jeuDeCartes = new ArrayList<Carte>();
+	public LinkedList<Carte> creerJeuDeCartes(int nbPaquet) {
+		LinkedList<Carte> jeuDeCartes = new LinkedList<Carte>();
 		jeuDeCartes = super.creerJeuDeCartes(nbPaquet);
 		int i;
 		for (i = 0; i < nbPaquet; i++) {

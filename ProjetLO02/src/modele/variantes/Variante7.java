@@ -3,6 +3,7 @@ import modele.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Variante7 extends Variante {
 
@@ -50,8 +51,8 @@ public class Variante7 extends Variante {
 	}
 
 	@Override
-	public ArrayList<Carte> creerJeuDeCartes(int nbPaquet) {
-		ArrayList<Carte> jeuDeCartes = new ArrayList<Carte>();
+	public LinkedList<Carte> creerJeuDeCartes(int nbPaquet) {
+		LinkedList<Carte> jeuDeCartes = new LinkedList<Carte>();
 		int k;
 		for (k = 1; k <= nbPaquet; k++) {
 			int i, j;

@@ -158,11 +158,8 @@ public abstract class Joueur extends Observable{
 			Partie.getPartie().getManche().getTalon().devenirPioche();
 		}
 		for (int i = 1; i <= nombrePioche; i++) {
-			Carte cartePioche = Partie.getPartie().getManche().getPioche().cartes
-					.get(Partie.getPartie().getManche().getPioche().cartes.size() - 1); 
+			Carte cartePioche = Partie.getPartie().getManche().getPioche().cartes.pollLast(); 
 			cartes.add(cartePioche);
-			Partie.getPartie().getManche().getPioche().cartes
-					.remove(Partie.getPartie().getManche().getPioche().cartes.size() - 1);
 			if (this instanceof JoueurPhysique) {
 				System.out.println("\n" + this.name + " a pioche " + cartePioche);
 			}

@@ -3,6 +3,7 @@ package modele.variantes;
 import modele.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * @author Charlene et Robin
@@ -14,7 +15,7 @@ public abstract class Variante {
 	 * @param args
 	 */
 	protected int nbCartes;
-	protected ArrayList<Carte> jeuDeCartes;
+	protected LinkedList<Carte> jeuDeCartes;
 	public static int nombreAs = 0;
 
 	/**
@@ -133,8 +134,8 @@ public abstract class Variante {
 	}
 
 	// Méthode permettant de créer un jeu de cartes de base (52 cartes sans JOKER)
-	public ArrayList<Carte> creerJeuDeCartes(int nbPaquet) {
-		ArrayList<Carte> jeuDeCartes = new ArrayList<Carte>();
+	public LinkedList<Carte> creerJeuDeCartes(int nbPaquet) {
+		LinkedList<Carte> jeuDeCartes = new LinkedList<Carte>();
 		int k;
 		for (k = 1; k <= nbPaquet; k++) {
 			int i, j;
@@ -150,7 +151,7 @@ public abstract class Variante {
 		return jeuDeCartes;
 	}
 
-	public ArrayList<Carte> getCartes() {
+	public LinkedList<Carte> getCartes() {
 		return jeuDeCartes;
 	}
 
