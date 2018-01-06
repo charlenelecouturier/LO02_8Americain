@@ -168,7 +168,7 @@ public abstract class Joueur extends Observable{
 			}
 		}
 		this.setChanged();
-		this.notifyObservers("a pioche "+ nombrePioche + " cartes!");
+		this.notifyObservers("a pioche "+ nombrePioche + " carte(s)!");
 	}
 
 	public boolean gagnePartie() {

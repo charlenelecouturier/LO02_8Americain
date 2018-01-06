@@ -188,9 +188,12 @@ public class Partie extends Observable implements Runnable {
 					this.manche.getJoueur().get(0).changed();
 					this.manche.getJoueur().get(0).notifyObservers();
 					tour = Partie.getPartie().getManche().getTourJoueur();
+					boolean gagne = jTour.gagnePartie();
 					jTour.setEffetVariante("Aucun");
 					if (Partie.getPartie().getManche().getSens() == 1) {
-						tour++;
+						if (!gagne) {
+							tour++;
+						}
 						if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
 							tour = 1;
 						}

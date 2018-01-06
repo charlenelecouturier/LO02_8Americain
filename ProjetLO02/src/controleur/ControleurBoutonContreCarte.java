@@ -1,5 +1,5 @@
 package controleur;
-
+import modele.JoueurVirtuel;
 import java.awt.event.*;
 import java.util.*;
 
@@ -20,7 +20,7 @@ public class ControleurBoutonContreCarte {
 				Joueur jNext;
 				while (it.hasNext() && !trouve) {
 					jNext = it.next();
-					if (jNext.getCartes().size()==1) {
+					if (jNext.getCartes().size()==1 && jNext instanceof JoueurVirtuel) {
 						trouve = true;
 					}
 					if (trouve&& !jNext.isaDitcarte()) {

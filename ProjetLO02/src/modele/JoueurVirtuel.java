@@ -151,6 +151,8 @@ public class JoueurVirtuel extends Joueur {
 	@Override
 	public void changerFamille() {
 		this.strategie.changerFamille();
+		this.setChanged();
+		this.notifyObservers(" a change de famille");
 	}
 	
 	/**

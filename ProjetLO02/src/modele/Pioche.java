@@ -78,8 +78,6 @@ public class Pioche extends Observable {
 		Partie.getPartie().getManche().getTalon().getCarteDessus().setValeur(this.cartes.get(this.cartes.size() - 1).getValeur());
 		// On la supprime du paquet de carte de la pioche
 		this.cartes.remove(this.cartes.size() - 1);
-		System.out.println("Test : nombre de cartes du joueur 1 : " + Partie.getPartie().getManche().getJoueur().get(0).getCartes().size());
-		System.out.println("Test : nombre de cartes de la pioche : " + this.cartes.size() + "\n");
 	}
 	/**
 	 * @return the cartes

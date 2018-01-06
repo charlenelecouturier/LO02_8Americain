@@ -63,7 +63,6 @@ public class Variante7 extends Variante {
 				}
 			}
 		}
-		System.out.println(jeuDeCartes.size());
 		return jeuDeCartes;
 	}
 

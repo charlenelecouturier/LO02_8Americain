@@ -237,7 +237,7 @@ public class InterfaceManche implements Observer {
 				if (arg1 != null) {
 					if (arg1.equals("Changer Famille") ) {
 						this.panelChoixFamille.setVisible(true);
-					}else if(arg1.equals("a change de famille") ) {
+					}else if(arg1.equals(" a change de famille") ) {
 						this.panelChoixFamille.setVisible(false);
 
 					}
