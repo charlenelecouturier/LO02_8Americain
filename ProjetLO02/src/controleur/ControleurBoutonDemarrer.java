@@ -31,7 +31,7 @@ public class ControleurBoutonDemarrer {
 				String nom = txtVotreNom.getText();
 				String variante = (String) comboBoxVariante.getSelectedItem();
 				select = (String) comboBoxComptage.getSelectedItem();
-				Partie p = new Partie(niveauxJoueursVirtuels, select, nom, variante);
+				Partie p = Partie.getPartie(niveauxJoueursVirtuels, select, nom, variante);
 				new InterfaceManche(frame, p);
 				p.lancerPartieGraphique();
 			}

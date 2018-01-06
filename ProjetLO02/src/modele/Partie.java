@@ -18,7 +18,7 @@ public class Partie extends Observable implements Runnable {
 	private LinkedList<Joueur> classementJoueursPartie;
 	private String modeComptage;
 
-	public Partie(int nbJoueursVirtuels[], String modeComptage, String nom, String variante) {
+	private Partie(int nbJoueursVirtuels[], String modeComptage, String nom, String variante) {
 		this.nbJoueursVirtuels = nbJoueursVirtuels.length;
 		int i;
 		this.classementJoueursPartie = new LinkedList<Joueur>();
@@ -36,7 +36,7 @@ public class Partie extends Observable implements Runnable {
 		this.manche = new Manche(this.nbJoueursVirtuels, joueur, variante);
 		this.etat = "EN COURS";
 		this.modeComptage = modeComptage;
-		Partie.instancePartie = this;
+		//Partie.instancePartie = this;
 	}
 
 	private Partie() {
@@ -77,6 +77,8 @@ public class Partie extends Observable implements Runnable {
 			System.out.println(
 					"\nMode de comptage des points choisi : NEGATIF ! Lorsqu'un joueur atteint 100 point, il perd la partie ! \nUne manche se termine lorsqu'un joueur a fini !\n");
 		}
+		//Partie.instancePartie = this;
+
 	}
 
 	/**
@@ -89,6 +91,14 @@ public class Partie extends Observable implements Runnable {
 
 		if (Partie.instancePartie == null) {
 			Partie.instancePartie = new Partie();
+		}
+		return Partie.instancePartie;
+	}
+	
+	public static Partie getPartie(int nbJoueursVirtuels[], String modeComptage, String nom, String variante) {
+
+		if (Partie.instancePartie == null) {
+			Partie.instancePartie = new Partie(nbJoueursVirtuels, modeComptage, nom, variante);
 		}
 		return Partie.instancePartie;
 	}

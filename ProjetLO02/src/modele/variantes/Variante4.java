@@ -2,6 +2,7 @@ package modele.variantes;
 import modele.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -44,8 +45,8 @@ public class Variante4 extends Variante {
 	}
 
 	@Override // on doit rajouter les JOKERS
-	public LinkedList<Carte> creerJeuDeCartes(int nbPaquet) {
-		LinkedList<Carte> jeuDeCartes = new LinkedList<Carte>();
+	public HashSet<Carte> creerJeuDeCartes(int nbPaquet) {
+		HashSet<Carte> jeuDeCartes = new HashSet<Carte>();
 		jeuDeCartes = super.creerJeuDeCartes(nbPaquet);
 		int i;
 		for (i = 0; i < nbPaquet; i++) {

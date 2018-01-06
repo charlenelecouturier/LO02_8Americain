@@ -159,9 +159,10 @@ public class InterfaceManche implements Observer {
 		p.addObserver(this);
 		p.getManche().addObserver(this);
 		p.getManche().getTalon().addObserver(this);
-		p.getManche().setPioche(new Pioche());// creation de la pioche
+		if(p.getManche().getPioche()==null)
+		{p.getManche().setPioche(new Pioche());// creation de la pioche
 		p.getManche().getPioche().melanger();// on melange la pioche
-		p.getManche().getPioche().distribuer();// on distribue la pioche
+		p.getManche().getPioche().distribuer();}// on distribue la pioche
 		p.getManche().getPioche().addObserver(this);
 		ListIterator<Joueur> it = joueur.listIterator();
 		while (it.hasNext()) {

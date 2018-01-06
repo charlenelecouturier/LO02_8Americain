@@ -1,4 +1,5 @@
 package modele;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Random;
@@ -27,12 +28,14 @@ public class Pioche extends Observable {
 		// nb cartes definie dans la variante
 		int i;
 		int nbCartes = Partie.getPartie().getManche().getVarianteManche().getNbCartes();
-		for (i = nbCartes - 1; i >= 0; i--) {
 
-			Carte carte = Partie.getPartie().getManche().getVarianteManche().getCartes().poll();
+		Iterator<Carte> it = Partie.getPartie().getManche().getVarianteManche().getCartes().iterator();
+		while (it.hasNext()) {
+			Carte carte = it.next();
 			this.cartes.add(carte); // on place tout le jeu de cartes cr�� dans la variante dans la pioche
 		}
-		
+		System.out.println(this.cartes.size());
+
 	}
 
 	/**
