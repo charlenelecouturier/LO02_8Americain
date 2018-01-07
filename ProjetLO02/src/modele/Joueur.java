@@ -7,7 +7,7 @@ import java.util.Observable;
 /**
  * Joueur est la classe qui represente les participants au jeu, qu'ils soient
  * physiques ou virtuels. Il ne sera pas possible de creer un joueur dont le
- * type n'est pas precise dans le jeu
+ * type n'est pas precise dans le jeu. 
  * 
  * @author Robin et Charlene
  * @see JoueurVirtuel

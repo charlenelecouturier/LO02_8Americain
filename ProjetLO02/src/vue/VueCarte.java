@@ -18,7 +18,6 @@ public class VueCarte extends JButton {
 		// Le programme va chercher l'image associée à la carte dans le dossier Images
 		this.imageCarte = new ImageIcon("Images/" + carte.getSymbole() + "/" + carte.getValeur() + ".png");
 		this.setIcon(imageCarte);
-		System.out.println("Path : " + ("Images/" + carte.getSymbole() + "/" + carte.getValeur()) + ".png");
 		this.setMaximumSize(new Dimension(110, 270));
 	}
 	
