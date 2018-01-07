@@ -1,5 +1,6 @@
 package controleur;
 import modele.JoueurVirtuel;
+
 import java.awt.event.*;
 import java.util.*;
 
@@ -27,7 +28,10 @@ public class ControleurBoutonContreCarte {
 						jNext.setContreCarte();
 					}
 				}
-			}
+		Partie.getPartie().lancerPartieGraphique();	}
+			
 		});
+		
+
 	}
 }

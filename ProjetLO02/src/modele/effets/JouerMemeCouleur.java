@@ -12,6 +12,8 @@ public class JouerMemeCouleur implements Effet {
 		System.out.println("\n" + joueurActuel.getName() + " peut se defausser de toutes ses cartes du meme symbole\n");
 		Carte cartePose = new Carte(" ", " ");
 		joueurActuel.setEffetVariante("JouerMemeCouleur");
+		joueurActuel.changed();
+		joueurActuel.notifyObservers("doit se defausser de tous les mêmes symboles");
 		ArrayList<Carte> mainJoueurActuel = joueurActuel.getCartes();
 		// lejoueur actuel rejoue jusqu'a ce qu'il se soit debarrasse de toutes ses cartes de la meme couleur que l'AS
 		// La derniere carte defaussee peut avoir un effet
@@ -23,7 +25,7 @@ public class JouerMemeCouleur implements Effet {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			int numeroCarte = joueurActuel.choisirCarte();
+			int numeroCarte = ((JoueurVirtuel)joueurActuel).choisirCarte();
 			cartePose = joueurActuel.getCartes().get(numeroCarte);
 			Partie.getPartie().getManche().getTalon().getCartes().add(cartePose);
 			System.out.println("Test : il y a " + Partie.getPartie().getManche().getTalon().getCartes().size()

@@ -85,19 +85,10 @@ public class JoueurVirtuel extends Joueur {
 		boolean contreCarte;
 		if (Partie.getPartie().getManche().getJoueur().get(0) instanceof JoueurPhysique) {
 			// dire contrecarte en graphique
-			if (!Partie.getPartie().getManche().getJoueur().get(0).typeInterface.equals("LDC")) {
+			
 				Effet ditContrecarte = new DireContreCarte(this);
 				ditContrecarte.effet();
-			}
-			// en ligne de commande
-			else {
-				contreCarte = ((JoueurPhysique) Partie.getPartie().getManche().getJoueur().get(0)).direContreCarte();
-				if (contreCarte) {
-					this.setContreCarte();
-				} else {
-					this.setaDitcarte();
-				}
-			}
+
 		} else {
 			System.out.println("Ce joueur n'a plus qu'une carte !");
 			// Un joueur virtuel a une chance sur 4 de dire contre-carte
