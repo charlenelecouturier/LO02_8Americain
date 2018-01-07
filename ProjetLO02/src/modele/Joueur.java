@@ -27,7 +27,8 @@ public abstract class Joueur extends Observable{
 	protected boolean aDitcarte;
 	protected boolean contreCarte;
 	protected boolean rejouer;
-	
+	protected boolean ajoue;
+
 
 	/**
 	 * le Constructeur de Joueur ne doit pas etre utilise directement, il simplifie le code de ses classes filles.
@@ -118,38 +119,41 @@ public abstract class Joueur extends Observable{
 				}
 			}
 			Partie.getPartie().getManche().setTourJoueur(tour);
-			this.setChanged();
-			this.notifyObservers("a fini");
-		}
+		}	
+		this.setChanged();
+		this.notifyObservers("a fini");
 		this.EffetVariante = "Aucun";
+
+
 	}
 	
 	public void poserCarte() {
 		if (Partie.getPartie().getManche().getVarianteManche().estPossibleDeJouer(this.cartes)) {
-			int numeroCarte = this.choisirCarte();
-			Carte cartePose = this.cartes.get(numeroCarte);
-			Partie.getPartie().getManche().getTalon().getCartes().add(cartePose);
-			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole(cartePose.getSymbole());
-			Partie.getPartie().getManche().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
-			System.out.println(this.getName() + " pose " + cartePose);
-			cartes.remove(cartePose);
-			//On notifie l'interface que la carte a ete retiree de la main du joueur
-			this.setChanged();
-			this.notifyObservers();
-			
-			if (this.cartes.size() == 1) {
-				this.direCarte();
-			}
-			String effet = cartePose.getEffet();
-			if (!effet.equals("Aucun")) {
-				cartePose.appliquerEffet();
+			int numeroCarte =( (JoueurVirtuel)this).choisirCarte();
+			if (numeroCarte != -1) {
+				Carte cartePose = this.cartes.get(numeroCarte);
+				Partie.getPartie().getManche().getTalon().getCartes().add(cartePose);
+				Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole(cartePose.getSymbole());
+				Partie.getPartie().getManche().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
+				System.out.println(this.getName() + " pose " + cartePose);
+				cartes.remove(cartePose);
+				// On notifie l'interface que la carte a ete retiree de la main du joueur
+				this.setChanged();
+				this.notifyObservers();
+
+				if (this.cartes.size() == 1) {
+					this.direCarte();
+				}
+				String effet = cartePose.getEffet();
+				if (!effet.equals("Aucun")) {
+					cartePose.appliquerEffet();
+				}
 			}
 		}
 	}
 
 	public abstract void direCarte();
 	public abstract void changerFamille();
-	public abstract int choisirCarte();
 
 	public void piocher(int nombrePioche) {
 		System.out.println("\n" + this.name + " pioche " + nombrePioche + " carte(s) !");

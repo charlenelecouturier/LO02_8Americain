@@ -1,4 +1,6 @@
 package modele.effets;
+import java.util.Scanner;
+
 import modele.*;
 
 public class ChangerFamille implements Effet{
@@ -9,7 +11,17 @@ public class ChangerFamille implements Effet{
 		/* on appelle la fonction changerFamille() du joueur, mais le joueur physique et le joueur virtuel 
 		 vont chacun redefinir  la fonction changerFamille() du joueur, en fonction du type reel du joueur, a l'ex�cution
 		on va appeller l'une ou l'autrre des methodes*/
-		joueur.changerFamille();
+
+		joueur.setEffetVariante("Changer Famille");
+		joueur.changed();
+		joueur.notifyObservers("Changer Famille");
+		if(joueur instanceof JoueurVirtuel) {
+			joueur.changerFamille();
+			
+		}
 		
 	}
+
+	
+	
 }

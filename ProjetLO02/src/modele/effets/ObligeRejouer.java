@@ -10,5 +10,7 @@ public class ObligeRejouer implements Effet{
 		Joueur joueur = Partie.getPartie().getManche().getJoueur()
 				.get(Partie.getPartie().getManche().getTourJoueur() - 1);
 		joueur.setEffetVariante("doit rejouer");
+		joueur.changed();
+		joueur.notifyObservers("doit rejouer ou pioche");
 	}
 }

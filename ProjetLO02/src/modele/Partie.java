@@ -34,9 +34,10 @@ public class Partie extends Observable implements Runnable {
 			this.classementJoueursPartie.add(this.joueur.get(i));
 		}
 		this.manche = new Manche(this.nbJoueursVirtuels, joueur, variante);
-		this.etat = "EN COURS";
 		this.modeComptage = modeComptage;
-		//Partie.instancePartie = this;
+		//Partie.instancePartie = this;	
+		this.etat = "EN COURS";
+
 	}
 
 	private Partie() {
@@ -176,48 +177,6 @@ public class Partie extends Observable implements Runnable {
 		this.manche = manche;
 	}
 
-	public void lancerManche() {
-		while (!this.manche.terminerManche()) {
-			try {// Temps de delais entre chaque tour
-				Thread.sleep(950);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			int tour = Partie.getPartie().manche.getTourJoueur() - 1;
-			Joueur jTour = this.manche.getJoueur().get(tour);
-			// au tour d'un joueur virtuel
-			if (!(jTour instanceof JoueurPhysique)) {
-				Partie.getPartie().manche.getJoueur().get(tour).jouerTour();
-			} else { // Au tour du joueur physique : on attend qu'il fasse une action(poser carte ou
-						// piocher)
-				// mais sil ne peut pas jouer ET qu'il a reçu un effet, on applique cet effet
-				// avec l'appel a estPossibleDeJouer() puis on passe au joueur suivant
-				if (!this.manche.getVarianteManche().estPossibleDeJouer(this.manche.getJoueur().get(0).getCartes())
-						&& !jTour.getEffetVariante().equals("Changer Famille")) {
-					this.manche.getJoueur().get(0).changed();
-					this.manche.getJoueur().get(0).notifyObservers();
-					tour = Partie.getPartie().getManche().getTourJoueur();
-					boolean gagne = jTour.gagnePartie();
-					jTour.setEffetVariante("Aucun");
-					if (Partie.getPartie().getManche().getSens() == 1) {
-						if (!gagne) {
-							tour++;
-						}
-						if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
-							tour = 1;
-						}
-					} else {
-						tour--;
-						if (tour <= 0) {
-							tour = Partie.getPartie().getManche().getNbJoueursEnCours();
-						}
-					}
-					Partie.getPartie().getManche().setTourJoueur(tour);
-				}
-			}
-		}
-
-	}
 
 	public void lancerPartieGraphique() {
 
@@ -227,29 +186,25 @@ public class Partie extends Observable implements Runnable {
 
 	public void run() {
 
-		this.lancerManche();
+		this.lancerPartie();
 	}
 
 	public void lancerPartie() {
 
 		while (Partie.getPartie().etat.equals("EN COURS")) {
-
-			// tant que la partie n'est pas terminee, on joue des manches
-			 Partie.getPartie().manche.setPioche(new Pioche());// creation de la pioche
+			VueLigneCommande.getLDC();
+			if(this.manche.getPioche()==null)// tant que la partie n'est pas terminee, on joue des manches
+			{ Partie.getPartie().manche.setPioche(new Pioche());// creation de la pioche
 			 Partie.getPartie().manche.getPioche().melanger();// on melange la pioche
-			 Partie.getPartie().manche.getPioche().distribuer();// on distribue la pioche
-			// vue concurente : ligne de commande et interface
-			System.out.println(Thread.currentThread());
-
+			 Partie.getPartie().manche.getPioche().distribuer();}// on distribue la pioche
 			while (!Partie.getPartie().manche.terminerManche()) { // tant que la manche n'est pas terminee, on joue des
-																	// tours
-				Partie.getPartie().manche.getJoueur().get(Partie.getPartie().manche.getTourJoueur() - 1).jouerTour();
-				System.out.println("\n");
-				try {// Temps de delais entre chaque tour
-					Thread.sleep(2000);
+			try {// Temps de delais entre chaque tour
+					Thread.sleep(700);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				Partie.getPartie().manche.getJoueur().get(Partie.getPartie().manche.getTourJoueur() - 1).jouerTour();
+				System.out.println("\n");
 			}
 			if (!Partie.getPartie().terminerPartie()) {
 				System.out.println("\nNOUVELLE MANCHE\n");
@@ -268,16 +223,14 @@ public class Partie extends Observable implements Runnable {
 	public static void main(String[] args) {
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
 	
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
 				try {
 					InterfaceDebutPartie window = new InterfaceDebutPartie();
 					window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-				}
+				};
 			}
-		});	
-		new VueLigneCommande();
-	}
+			
+		
+	
 }

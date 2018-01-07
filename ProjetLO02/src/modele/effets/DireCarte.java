@@ -21,13 +21,15 @@ public class DireCarte extends Observable  implements Runnable,Effet{
 	@Override
 	public void run() {
 		try {// Temps de delais entre chaque tour
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		if (!this.jDoitDireCarte.isaDitcarte() &&this.jDoitDireCarte.getCartes().size()==1) {
 			this.jDoitDireCarte.setContreCarte();		
 		}
+		this.jDoitDireCarte.changed();
+		this.jDoitDireCarte.notifyObservers("a fini");
 		
 	}
 

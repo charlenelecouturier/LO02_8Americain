@@ -218,12 +218,12 @@ public class InterfaceManche implements Observer {
 	}
 
 	public void update(Observable instanceObservable, Object arg1) {
-		
+
 		if (instanceObservable instanceof Joueur) {
 			this.panel_Pioche.update(instanceObservable, arg1);
 
 			if (arg1 != null) {
-				if (!arg1.equals("Changer Famille") && !arg1.equals("tour")&&!arg1.equals("a fini")) {
+				if (!arg1.equals("Changer Famille") && !arg1.equals("tour") && !arg1.equals("a fini")) {
 					this.effetsJeu.update(instanceObservable, arg1);
 				}
 			}
@@ -234,38 +234,40 @@ public class InterfaceManche implements Observer {
 				frame.revalidate();
 			} else if (instanceObservable instanceof JoueurPhysique) {
 
-				
 				if (arg1 != null) {
-					if (arg1.equals("Changer Famille") ) {
+					if (arg1.equals("Changer Famille")) {
 						this.panelChoixFamille.setVisible(true);
-					}else if(arg1.equals(" a change de famille") ) {
+					} else if (arg1.equals(" a change de famille")) {
 						this.panelChoixFamille.setVisible(false);
 
 					}
-				}
-				
-				/**
-				 * Redefinir les cartes visibles en main en fonction du tour qu'a joué le
-				 * joueur.
-				 */
-				panel_Main.removeAll();
-				ArrayList<Carte> cartesJoueurPhysique = Partie.getPartie().getJoueur().get(0).getCartes();
-				ListIterator<Carte> parcourirCarteJoueur = cartesJoueurPhysique.listIterator();
+				 else if (arg1.equals("a fini")) {
+					/**
+					 * Redefinir les cartes visibles en main en fonction du tour qu'a joué le
+					 * joueur.
+					 */
+					panel_Main.removeAll();
+					ArrayList<Carte> cartesJoueurPhysique = Partie.getPartie().getJoueur().get(0).getCartes();
+					ListIterator<Carte> parcourirCarteJoueur = cartesJoueurPhysique.listIterator();
 
-				while (parcourirCarteJoueur.hasNext()) {
-					Carte prochaineCarte = (Carte) parcourirCarteJoueur.next();
-					VueCarte vueProchaineCarte = new VueCarte(prochaineCarte);
-					ControleurCarte controleurProchaineCarte = new ControleurCarte(Partie.getPartie(), prochaineCarte,
-							vueProchaineCarte);
-					panel_Main.add(vueProchaineCarte);
-					frame.repaint();
-					frame.revalidate();
+					while (parcourirCarteJoueur.hasNext()) {
+						Carte prochaineCarte = (Carte) parcourirCarteJoueur.next();
+						VueCarte vueProchaineCarte = new VueCarte(prochaineCarte);
+						ControleurCarte controleurProchaineCarte = new ControleurCarte(Partie.getPartie(),
+								prochaineCarte, vueProchaineCarte);
+						panel_Main.add(vueProchaineCarte);
+						frame.repaint();
+						frame.revalidate();
+					}}
 				}
 			}
+
 		} else if (instanceObservable instanceof Manche) {
 			if (arg1 != null) {
 				if (arg1.equals("manche terminee")) {
 					new VueFinManche(this);
+				}else if (arg1.equals("Le sens a chang� !")) {
+					this.effetsJeu.update(instanceObservable, arg1);
 				}
 			}
 		}

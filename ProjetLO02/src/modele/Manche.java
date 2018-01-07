@@ -290,6 +290,8 @@ public class Manche extends Observable {
 
 	public void setSens() {
 		sens = sens * (-1);
+		this.setChanged();
+		this.notifyObservers("Le sens a changé !");
 	}
 
 	/**

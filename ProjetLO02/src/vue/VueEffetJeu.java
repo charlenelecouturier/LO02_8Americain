@@ -27,6 +27,8 @@ public class VueEffetJeu extends JTextArea implements Observer {
 
 		} else if (arg1.equals("gagne")) {
 			this.insert(((Joueur) arg0).getName() + " a " + arg1 + " !\n", 0);
+		}else if (arg1.equals("Le sens a changé !")) {
+			this.insert(arg1 + " \n", 0);
 		}else {
 			this.insert(((Joueur) arg0).getName() + " " + arg1 + " \n", 0);
 		}
