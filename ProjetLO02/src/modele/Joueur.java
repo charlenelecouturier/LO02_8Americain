@@ -5,11 +5,18 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 /**
- * Joueur est la classe qui represente les participants au jeu, qu'ils soient
- * physiques ou virtuels. Il ne sera pas possible de creer un joueur dont le
- * type n'est pas precise dans le jeu. 
- * 
- * @author Robin et Charlene
+ *<b>Classe définissant les joueurs de la partie </b> 
+ *<p>
+ *Chaque instance de Joueur provient d'une classe fille, JoueurPhysique ou JoueurVirtuel. un joueur est caractérisé par : <ul> 
+ *<li>une ArrayList de cartes représentant sa main</li>
+ *<li>son nom</li>
+ *<li>un numero, permettant de déterminer le prochain joueur à jouer</li>
+ *<li>son score dans la partie et dans la manche.
+ *</ul>
+ *</p>
+ *
+ *@author Charlene et Robin
+ *@version 1.0
  * @see JoueurVirtuel
  * @see JoueurPhysique
  */
@@ -89,8 +96,9 @@ public abstract class Joueur extends Observable{
 	}
 
 	/**
-	 * Le corps meme de cette classe, jouerTour permet a un joueur physique ou
-	 * virtuel de choisir une carte dans son jeu et la poser sur le talon.
+	 * <b> Méthode principale du Joueur, jouerTour appelle poserCarte puis vérifie que le joueur n'a pas gagné, avant de passer au tour du prochain joueur.</b>
+	 * 
+	 *  @see Joueur#poserCarte()
 	 */
 	public void jouerTour() {
 		this.setChanged();
@@ -127,6 +135,18 @@ public abstract class Joueur extends Observable{
 
 	}
 	
+	/**
+	 * <b> Méthode permettant à un joueur de poser une carte compatible sur le talon. </b>
+	 * <p>Dans un premier temps, la méthode vérifie que le joueur peut poser au moins une carte sur le talon de sa main.
+	 * La méthode appelle ensuite <b>choisirCarte()</b> (<i> méthode redéfinie selon le type du joueur</i>), avant de remplacer la carte 
+	 * du dessus du talon par celle choisie par le joueur. Il l'enlève alors de la main de ce dernier, vérifie si le joueur 
+	 * n'a plus qu'une carte (auquel cas il appelle <b>direCarte()</b> ), puis applique les effets de la carte si celle-ci en a.
+	 * 
+	 * @see JoueurVirtuel#choisirCarte()
+	 * @see JoueurPhysique#choisirCarte()
+	 * @see JoueurVirtuel#direCarte()
+	 * @see JoueurPhysique#direCarte()
+	 */
 	public void poserCarte() {
 		if (Partie.getPartie().getManche().getVarianteManche().estPossibleDeJouer(this.cartes)) {
 			int numeroCarte =( (JoueurVirtuel)this).choisirCarte();
@@ -155,6 +175,11 @@ public abstract class Joueur extends Observable{
 	public abstract void direCarte();
 	public abstract void changerFamille();
 
+	/**
+	 * <b>Méthode permettant d'ajouter un nombre de cartes à la main du joueur.</b>
+	 * Retire chaque carte de la pioche, et les ajoute à la main du joueur.
+	 * @param nombrePioche le nombre de cartes que le joueur doit piocher
+	 */
 	public void piocher(int nombrePioche) {
 		System.out.println("\n" + this.name + " pioche " + nombrePioche + " carte(s) !");
 
@@ -172,6 +197,10 @@ public abstract class Joueur extends Observable{
 		this.notifyObservers("a pioche "+ nombrePioche + " carte(s)!");
 	}
 
+	/**
+	 * <b>Méthode permettant de vérifier si le joueur a gagné ou non.</b>
+	 * @return Un booléen valant vrai si le joueur n'a plus de cartes, et faux si il lui en reste.
+	 */
 	public boolean gagnePartie() {
 		
 		if (this.cartes.isEmpty()) {

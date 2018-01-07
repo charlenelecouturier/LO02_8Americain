@@ -8,11 +8,26 @@ import modele.effets.DireContreCarte;
 import modele.effets.Effet;
 import modele.strategies.*;
 
-//package pckg;
+/**
+ *<b>Classe fille de Joueur, qui représente les joueurs virtuels à l'intérieur de la partie. </b> 
+ *<p>
+ *Les méthodes de cette classe permettent aux joueurs virtuels de simuler des joueurs réels.
+ *Chaque Joueur virtuel se voit attribué une stratégie, simple ou avancée, qui détermine son niveau de difficulté.
+ *Ces stratégies sont implémentées via le pattern strategy.
+ *</p>
+ *@author Charlene et Robin
+ *@version 1.0
+ *@see Joueur
+ *@see Strategie
+ */
 
 public class JoueurVirtuel extends Joueur {
 	private int strat;
-	
+	/**
+	 * <b>Constructeur des joueurs virtuels</b>
+	 * <p> attribue à chaque joueur son type de stratégie, ainsi qu'un nom. </p>
+	 * @throws NiveauJoueurException exception levée lorsque le joueur ne rentre pas un niveau de difficulté acceptable
+	 */
 	public JoueurVirtuel() throws NiveauJoueurException {
 		super();
 		setName("Joueur " + getNumero());
@@ -41,7 +56,10 @@ public class JoueurVirtuel extends Joueur {
 		}
 		
 	}
-	
+	/**
+	 * <b> Constructeur utilisé par l'interface graphique. </b>
+	 * @param niveau la stratégie du joueur.
+	 */
 	public JoueurVirtuel(int niveau){
 		super();
 		this.typeInterface="graphique";
@@ -52,11 +70,16 @@ public class JoueurVirtuel extends Joueur {
 		} else {
 			this.strategie = new StratAvancee(); 
 		}
-		}
+	}
 		
-
+/**
+ * <b> Méthode permettant aux joueurs virtuels de choisir la carte qu'ils souhaitent jouer. </b>
+ * <p> La méthode construit une liste des cartes jouables par le joueur dans sa main, 
+ * puis appelle la méthode <b>choixCarte()</b> associée à sa stratégie, qui choisit une carte pour lui.
+ * @return numeroCarte, le numero de la carte choisie.
+ */
 	public int choisirCarte() {
-		int j;
+		
 		int numeroCarte;
 		ArrayList<Carte> cartesJouables = new ArrayList<Carte>();
 		int i;
@@ -65,7 +88,6 @@ public class JoueurVirtuel extends Joueur {
 		for (i = 0; i < this.cartes.size(); i++) {
 			cartesJouables.add(this.cartes.get(i));
 		}
-		// cartesJouables = this.getCartes();
 		ListIterator<Carte> parcourirCarteJouable = cartesJouables.listIterator();
 		while (parcourirCarteJouable.hasNext()) {
 			// on verifie a chaque iteration que la carte est compatible
@@ -79,7 +101,9 @@ public class JoueurVirtuel extends Joueur {
 		return numeroCarte;
 	}
 
-	@Override
+	/**
+	 * <b> Méthode permettant à un joueur virtuel de dire Carte et contreCarte. </b>
+	 */
 	public void direCarte() {
 		
 		boolean contreCarte;
@@ -122,7 +146,7 @@ public class JoueurVirtuel extends Joueur {
 	}
 
 	/**
-	 * Fonction assocee a la detection d'exception sur l'entree du niveau du
+	 * Fonction associee a la detection d'exception sur l'entree du niveau du
 	 * joueur
 	 * 
 	 * @param userInput
@@ -139,7 +163,10 @@ public class JoueurVirtuel extends Joueur {
 		}
 	}
 
-	@Override
+	/**
+	 * <b> Méthode permettant à un joueur virtuel de changer de famille, en faisant appel à la méthode
+	 *  <i>changerFamille()</i> de sa stratégie. </b>
+	 */
 	public void changerFamille() {
 		this.strategie.changerFamille();
 		this.setChanged();

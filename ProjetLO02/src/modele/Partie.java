@@ -1,13 +1,22 @@
 package modele;
 import vue.VueLigneCommande;
 
-import java.awt.EventQueue;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Scanner;
+
 import java.util.Observable;
 import vue.InterfaceDebutPartie;
-
+/**
+ *<b>Classe définissant la Partie en tant que singleton </b> 
+ *<p> La partie est créé lors de l'execution du programme.\n 
+ *Elle est une composition de Manches, et possède une liste de Joueurs ainsi qu'un mode de comptage des points.
+ *
+ *@author Charlene et Robin
+ *@version 1.0
+ *@see Manche
+ *@see Joueur
+ */
 public class Partie extends Observable implements Runnable {
 
 	private static Partie instancePartie;
@@ -17,7 +26,17 @@ public class Partie extends Observable implements Runnable {
 	private LinkedList<Joueur> joueur;
 	private LinkedList<Joueur> classementJoueursPartie;
 	private String modeComptage;
-
+/**
+ * <b>Le constructeur de la Partie (mode graphique)</b>
+ * <p>
+ * Lors de la construction de la partie, la liste des joueurs de celle-ci est créée. 
+ * On initialise également le classement de ceux-ci.
+ * </p>
+ * @param nbJoueursVirtuels le nombre de joueurs virtuels tel que demandé par l'utilisateur
+ * @param modeComptage le mode de comptage des points
+ * @param nom le nom du Joueur Physique
+ * @param variante la Variante choisie par l'utilisateur pour commencer la Partie.
+ */
 	private Partie(int nbJoueursVirtuels[], String modeComptage, String nom, String variante) {
 		this.nbJoueursVirtuels = nbJoueursVirtuels.length;
 		int i;
@@ -39,7 +58,17 @@ public class Partie extends Observable implements Runnable {
 		this.etat = "EN COURS";
 
 	}
-
+	/**
+	 * <b>Le constructeur de la Partie </b>
+	 * <p>
+	 * Lors de la construction de la partie, la liste des joueurs de celle-ci est créée. 
+	 * On initialise également le classement de ceux-ci.
+	 * </p>
+	 * @param nbJoueursVirtuels le nombre de joueurs virtuels tel que demandé par l'utilisateur
+	 * @param modeComptage le mode de comptage des points
+	 * @param nom le nom du Joueur Physique
+	 * @param variante la Variante choisie par l'utilisateur pour commencer la Partie.
+	 */
 	private Partie() {
 
 		Scanner sc = new Scanner(System.in);
@@ -83,7 +112,8 @@ public class Partie extends Observable implements Runnable {
 	}
 
 	/**
-	 * Singleton
+	 * <b> Implémentation du pattern Singleton</b>
+	 * <p> Permet de s'assurer de l'unicité d'une Partie. </p>
 	 * 
 	 * @return Partie instance unique de la classe Partie
 	 */
@@ -103,7 +133,11 @@ public class Partie extends Observable implements Runnable {
 		}
 		return Partie.instancePartie;
 	}
-
+/**
+ * <b> Méthode permettant de vérifier qu'un Joueur a terminé la partie </b>
+ * <p> Cette méthode différencie deux cas en fonction du mode de comptage de points. </p>
+ * @return true si la partie est terminée, false sinon.
+ */
 	public boolean terminerPartie() {
 		boolean terminer = false;
 		if (this.modeComptage.equals("POSITIF")) {
@@ -111,7 +145,7 @@ public class Partie extends Observable implements Runnable {
 			if (this.classementJoueursPartie.get(0).getScore() >= 100) {
 				terminer = true;
 				this.etat = "TERMINEE";
-				System.out.println("Partie termininee! Un joueur a eu au moins 60 point !");
+				System.out.println("Partie termininee! Un joueur a eu au moins 100 point !");
 			}
 
 		} else {// mode de comptage negatif, le premier qui arrive a 100 point a perdu et la
@@ -177,7 +211,9 @@ public class Partie extends Observable implements Runnable {
 		this.manche = manche;
 	}
 
-
+/**
+ * <b> Méthode lançant le thread de la partie Graphique. </b>
+ */
 	public void lancerPartieGraphique() {
 
 		Thread t = new Thread(this);
@@ -188,7 +224,9 @@ public class Partie extends Observable implements Runnable {
 
 		this.lancerPartie();
 	}
-
+/**
+ * <b> Méthode permettant de lancer la partie. </b>
+ */
 	public void lancerPartie() {
 
 		while (Partie.getPartie().etat.equals("EN COURS")) {

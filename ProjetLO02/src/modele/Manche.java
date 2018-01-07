@@ -6,8 +6,29 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Random;
+
 import modele.variantes.*;
 
+/**
+ *<b>Classe représentant la manche en cours de la partie. </b> 
+ *<p>
+ *La manche est caractérisée par :<ul>
+ *<li> une variante (issue de Variante) </li>
+ *<li> le classement des Joueurs </li>
+ *<li> un talon (issu de Talon) </li>
+ *<li> une pioche (issue de Pioche) </li>
+ *<li> une liste de Joueurs </li>
+ *</ul>
+ *Cette classe est capitale, car elle est responsable de la gestion du déroulement de la manche
+ * (dont la partie est composée).
+ *</p>
+ *@author Charlene et Robin
+ *@version 1.0
+ *@see Joueur
+ *@see Talon
+ *@see Variante
+ *@see Pioche
+ */
 public class Manche extends Observable {
 	private Variante varianteManche;
 	private LinkedList<Joueur> classementJoueurs;
@@ -18,7 +39,15 @@ public class Manche extends Observable {
 	private HashMap<String, Variante> variantes;
 	private Pioche pioche;
 	private LinkedList<Joueur> joueur;
-
+/**
+ * <b>Constructeur de la manche</b>
+ * <p>
+ * Dans un premier temps, le constructeur désigne le joueur qui commencera la partie.\n
+ * Il créé ensuite un Talon, appelle <b>choisirVariante()</b> et initialise les joueurs.
+ * </p>
+ * @param nbJoueursVirtuels le nombre de joueurs virtuels dans la partie
+ * @param joueur la liste des joueurs dans la partie
+ */
 	public Manche(int nbJoueursVirtuels, LinkedList<Joueur> joueur) {
 
 		int nbJoueursEnCours = nbJoueursVirtuels + 1;
@@ -37,7 +66,7 @@ public class Manche extends Observable {
 		this.variantes.put("Variante 7", new Variante7(nbJoueursVirtuels));
 		this.variantes.put("Variante 4", new Variante4(nbJoueursVirtuels));
 		this.variantes.put("Variante 5", new Variante5(nbJoueursVirtuels));
-		choisirVariante(nbJoueursVirtuels);
+		choisirVariante();
 		ListIterator<Joueur> it = joueur.listIterator();
 		this.joueur = new LinkedList<Joueur>();
 		while (it.hasNext()) {
@@ -49,8 +78,10 @@ public class Manche extends Observable {
 		}
 		Variante.nombreAs = 0;
 	}
-
-	public void choisirVariante(int nbJoueursVirtuels) {
+/**
+ * <b> Méthode permettant au joueur de sélectionner la variante qu'il souhaite.</b>
+ */
+	public void choisirVariante() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println(
 				"Saisissez le nom exact de la variante que vous souhaitez :\nMinimale\nMonclar\nVariante 7\nVariante 4\nVariante 5 ");
@@ -59,10 +90,18 @@ public class Manche extends Observable {
 			this.setVarianteManche(variante);
 		} else {
 			System.out.println("Mauvaise saisie.");
-			this.choisirVariante(nbJoueursVirtuels);
+			this.choisirVariante();
 		}
 	}
-
+	/**
+	 * <b>Constructeur de la manche (version graphique)</b>
+	 * <p>
+	 * Dans un premier temps, le constructeur désigne le joueur qui commencera la partie.\n
+	 * Il créé ensuite un Talon, appelle <b>choisirVariante()</b> et initialise les joueurs.
+	 * </p>
+	 * @param nbJoueursVirtuels le nombre de joueurs virtuels dans la partie
+	 * @param joueur la liste des joueurs dans la partie
+	 */
 	public Manche(int nbJoueursVirtuels, LinkedList<Joueur> joueur, String variante) {
 
 		int nbJoueursEnCours = nbJoueursVirtuels + 1;
@@ -73,7 +112,7 @@ public class Manche extends Observable {
 		this.tourJoueur = tourJoueur;
 		this.sens = 1; // sens des aiguilles d'une montre
 		this.talon = new Talon();
-		// On remplie la HashMap , le param�tre en entr� "variante" sera la cl�
+		// On remplie la HashMap , le param�tre en entr� "variante" sera la cl�
 		// qui va permettre d'instancier la nouvelle variante
 		this.variantes = new HashMap<String, Variante>();
 		this.variantes.put("Minimale", new VarianteMinimale(nbJoueursVirtuels));
@@ -81,7 +120,7 @@ public class Manche extends Observable {
 		this.variantes.put("Variante 7", new Variante7(nbJoueursVirtuels));
 		this.variantes.put("Variante 4", new Variante4(nbJoueursVirtuels));
 		this.variantes.put("Variante 5", new Variante5(nbJoueursVirtuels));
-		this.setVarianteManche(variante);// variante est la cl�
+		this.setVarianteManche(variante);// variante est la cl�
 		ListIterator<Joueur> it = joueur.listIterator();
 		this.joueur = new LinkedList<Joueur>();
 		while (it.hasNext()) {
@@ -92,7 +131,13 @@ public class Manche extends Observable {
 
 		Variante.nombreAs = 0;
 	}
-
+/**
+ * <b> Méthode permettant de terminer une manche.</b>
+ * <p> Si la partie est terminée, classe les joueurs en fonction du comptage de points choisi par l'utilisateur.
+ * Si la partie n'est pas terminée à l'issue du comptage des points, une nouvelle manche recommence.</p>
+ * 
+ * @return true si la manche est terminée, false sinon.
+ */
 	public boolean terminerManche() {
 
 		boolean terminer = false;
@@ -126,7 +171,9 @@ public class Manche extends Observable {
 		}
 		return terminer;
 	}
-
+/**
+ * <b> Méthode comptant les points en positif</b>
+ */
 	public void compterPointsPositif() {
 		int i;
 		// on ajoute les points correspondant aux 3 premiers
@@ -154,7 +201,9 @@ public class Manche extends Observable {
 					+ " -- SCORE : " + Partie.getPartie().getClassementJoueursPartie().get(i - 1).getScore());
 		}
 	}
-
+/**
+ * <b> Méthode comptant les points en mode négatif </b>
+ */
 	public void compterPointsNegatif() {
 
 		int i;
@@ -291,7 +340,7 @@ public class Manche extends Observable {
 	public void setSens() {
 		sens = sens * (-1);
 		this.setChanged();
-		this.notifyObservers("Le sens a chang� !");
+		this.notifyObservers("Le sens a chang� !");
 	}
 
 	/**

@@ -1,51 +1,50 @@
 package modele;
 
 import modele.effets.DireCarte;
-import modele.effets.DireContreCarte;
 import modele.effets.Effet;
 import modele.effets.Piocher5Cartes;
 import modele.variantes.*;
-import vue.VueLigneCommande;
-
-import java.util.ListIterator;
 import java.util.Scanner;
 
+/**
+ *<b>Classe fille de Joueur, qui représente le joueur réel à l'intérieur de la partie. </b> 
+ *<p>
+ *Les méthodes de cette classe permette au joueur d'interagir avec le moteur 
+ *du jeu au même titre que ses adversaires virtuels.
+ *</p>
+ *@author Charlene et Robin
+ *@version 1.0
+ *@see Joueur
+ */
 public class JoueurPhysique extends Joueur {
 	private boolean aChangeDeFamille;
 	private Scanner sc = new Scanner(System.in);
 	private boolean attenteVue = true;
-
+/**
+ * Constructeur utilisé pour l'interface en ligne de commande.
+ */
 	public JoueurPhysique() {
 		super();
 		System.out.println("Entrez votre nom : ");
 		this.name = sc.nextLine();
-		this.aChangeDeFamille = false;
+		this.setaChangeDeFamille(false);
 		System.out.println("OK Joueur1  : " + this.name);
 	}
-
+/**
+ * Constructeur utilisé pour l'interface graphique.
+ * @param nom le nom du joueur physique.
+ */
 	public JoueurPhysique(String nom) {
 		super();
 		this.typeInterface = "graphique";
 		this.name = nom;
 	}
-
-	public boolean isAttenteVue() {
-		return attenteVue;
-	}
-
-	public void setAttenteVue(boolean attenteVue) {
-		this.attenteVue = attenteVue;
-	}
-
-	public void afficherCartes() {
-		for (int i = 0; i < cartes.size(); i++) {
-			System.out.println(i + 1 + " : " + cartes.get(i));
-		}
-		System.out.println("Numero de la carte choisie ?");
-	}
-
+/**
+ * <b>redéfinition de la méthode jouerTour() de Joueur.</b>
+ * @see Joueur
+ */
 	public void jouerTour() {
-	
+		
 		if (!Partie.getPartie().getManche().getVarianteManche().estPossibleDeJouer(this.cartes)
 				&& !this.getEffetVariante().equals("Changer Famille")) {
 			this.EffetVariante = "Aucun";
@@ -62,7 +61,6 @@ public class JoueurPhysique extends Joueur {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated caxtch block
 					e.printStackTrace();
 				}
 			}
@@ -71,13 +69,15 @@ public class JoueurPhysique extends Joueur {
 			this.notifyObservers("a fini");
 		}
 	}
-
+	/**
+	 * <b>redéfinition de la méthode jouerTour() de Joueur. (version graphique)</b>
+	 * @see Joueur
+	 */
 	public void jouerTourGraphique(int indexCarteChoisie) {
 		
 		this.aDitcarte = false;
 		this.contreCarte = false;
-		this.aChangeDeFamille = false;
-		boolean gagne = false;
+		this.setaChangeDeFamille(false);
 		this.poserCarteGraphique(indexCarteChoisie);
 
 		// effets pour lesquels on ne doit pas changer le tour
@@ -93,55 +93,14 @@ public class JoueurPhysique extends Joueur {
 		}
 		setAttenteVue(false);
 	}
-
-	public void poserCarteGraphique(int numeroCarte) {
-
-		if (Partie.getPartie().getManche().getVarianteManche().estPossibleDeJouer(this.cartes)) {
-
-			Carte cartePose = this.cartes.get(numeroCarte);
-			Partie.getPartie().getManche().getTalon().getCartes().add(cartePose);
-			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole(cartePose.getSymbole());
-			Partie.getPartie().getManche().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
-			System.out.println("Vous jouez " + cartePose);
-			cartes.remove(cartePose);
-			if (cartePose.getValeur().equals("1")) {
-				Variante.nombreAs++;
-			} else if (cartePose.getValeur().equals("8")) {
-				Variante.nombreAs = 0;
-			}
-			if (this.cartes.size() == 1) {
-				this.direCarteGraphique();
-			}
-			// On notifie l'interface que la carte a ete retiree de la main du joueur
-			this.setChanged();
-			this.notifyObservers();
-			String effet = cartePose.getEffet();
-			if (!effet.equals("Aucun") && !effet.equals("Defausser tous les m�mes symboles")
-					&& !this.EffetVariante.equals("JouerMemeCouleur")
-					&& !effet.equals("Changer Famille + Piocher 5 cartes")&& !effet.equals("Changer Famille")) {
-				cartePose.appliquerEffet();
-			} else if (effet.equals("Changer Famille") || effet.equals("Changer Famille + Piocher 5 cartes")) {
-				if (effet.equals("Changer Famille + Piocher 5 cartes")) {
-					Effet piocher5 = new Piocher5Cartes();
-					piocher5.effet();
-				}
-				this.EffetVariante = "Changer Famille";
-				this.setChanged();
-				this.notifyObservers("a choisi");
-				setChanged();
-				this.notifyObservers("Changer Famille");
-
-			} else if (effet.equals("Defausser tous les m�mes symboles")) {
-				this.EffetVariante = "JouerMemeCouleur";
-				this.setChanged();
-				this.notifyObservers("doit se defausser de tous les m�mes symboles");
-			}
-		}		
-		
-		this.setChanged();
-		this.notifyObservers("a fini");
-	}
-
+	
+	
+	/**
+	 * <b> Méthode permettant au joueur de choisir la carte qu'il souhaite poser sur le talon </b>
+	 * <p>
+	 * Après lui avoir demandé de choisir la carte via un scanner, 
+	 * le jeu vérifie que cette carte soit bien compatible avec le talon.
+	 */
 	public void choisirCarte() { 
 		boolean choix;
 		int numero;
@@ -185,14 +144,89 @@ public class JoueurPhysique extends Joueur {
 			this.notifyObservers("a choisi");
 		}
 	}
+	
+	public boolean isAttenteVue() {
+		return attenteVue;
+	}
 
+	public void setAttenteVue(boolean attenteVue) {
+		this.attenteVue = attenteVue;
+	}
+
+	public void afficherCartes() {
+		for (int i = 0; i < cartes.size(); i++) {
+			System.out.println(i + 1 + " : " + cartes.get(i));
+		}
+		System.out.println("Numero de la carte choisie ?");
+	}
+/**
+ * <b> Permet de poser la carte sur le talon dans l'interface graphique 
+ * (reprend le principe de <i>poserCarte()</i> de Joueur)
+ * 
+ * @param numeroCarte le numero de la carte à poser de la main vers le talon.
+ * @see Joueur#poserCarte()
+ */
+	public void poserCarteGraphique(int numeroCarte) {
+
+		if (Partie.getPartie().getManche().getVarianteManche().estPossibleDeJouer(this.cartes)) {
+
+			Carte cartePose = this.cartes.get(numeroCarte);
+			Partie.getPartie().getManche().getTalon().getCartes().add(cartePose);
+			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole(cartePose.getSymbole());
+			Partie.getPartie().getManche().getTalon().getCarteDessus().setValeur(cartePose.getValeur());
+			System.out.println("Vous jouez " + cartePose);
+			cartes.remove(cartePose);
+			if (cartePose.getValeur().equals("1")) {
+				Variante.nombreAs++;
+			} else if (cartePose.getValeur().equals("8")) {
+				Variante.nombreAs = 0;
+			}
+			if (this.cartes.size() == 1) {
+				this.direCarteGraphique();
+			}
+			// On notifie l'interface que la carte a ete retiree de la main du joueur
+			this.setChanged();
+			this.notifyObservers();
+			String effet = cartePose.getEffet();
+			if (!effet.equals("Aucun") && !effet.equals("Defausser tous les m�mes symboles")
+					&& !this.EffetVariante.equals("JouerMemeCouleur")
+					&& !effet.equals("Changer Famille + Piocher 5 cartes")&& !effet.equals("Changer Famille")) {
+				cartePose.appliquerEffet();
+			} else if (effet.equals("Changer Famille") || effet.equals("Changer Famille + Piocher 5 cartes")) {
+				if (effet.equals("Changer Famille + Piocher 5 cartes")) {
+					Effet piocher5 = new Piocher5Cartes();
+					piocher5.effet();
+				}
+				this.EffetVariante = "Changer Famille";
+				this.setChanged();
+				this.notifyObservers("a choisi");
+				setChanged();
+				this.notifyObservers("Changer Famille");
+
+			} else if (effet.equals("Defausser tous les m�mes symboles")) {
+				this.EffetVariante = "JouerMemeCouleur";
+				this.setChanged();
+				this.notifyObservers("doit se defausser de tous les m�mes symboles");
+			}
+		}		
+		
+		this.setChanged();
+		this.notifyObservers("a fini");
+	}
+
+	
+	/**
+	 * <b>Méthode permettant au joueur physique de dire "Carte!" lorsqu'il n'a plus qu'une carte. (version graphique)</b>
+	 */
 	public void direCarteGraphique() {
 		Effet ditCarte =new DireCarte(this);
 		ditCarte.effet();
 
 	}
 	
-	@Override
+	/**
+	 * <b>Méthode permettant au joueur physique de dire "Carte!" lorsqu'il n'a plus qu'une carte.</b>
+	 */
 	public void direCarte() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("\nVite vous n'avez plus qu'une carte ! Dites'CARTE' :");
@@ -206,7 +240,9 @@ public class JoueurPhysique extends Joueur {
 			System.out.println("Vous dites 'CARTE'! ");
 		}
 	}
-
+	/**
+	 * <b>Méthode permettant au joueur physique de dire "Contre Carte!" lorsqu'un adversaire n'a plus qu'une carte.</b>
+	 */
 	public boolean direContreCarte() {
 
 		Scanner scan = new Scanner(System.in);
@@ -223,7 +259,9 @@ public class JoueurPhysique extends Joueur {
 		}
 	}
 
-	@Override
+	/**
+	 * <b> Méthode permettant au joueur de changer de famille lorsque la carte jouée possède cet effet. </b>
+	 */
 	public void changerFamille() {
 		System.out.println("on change de famille");
 		System.out.println("Quel Symbole voulez-vous mettre ?\n1 : TREFLE\n2 : PIQUE\n3 : COEUR\n4 : CARREAU");
@@ -243,6 +281,10 @@ public class JoueurPhysique extends Joueur {
 		}
 	}
 
+	/**
+	 * <b>Méthode permettant de changer la famille lorsque le joueur pose une carte possédant cet effet.
+	 * @param rep entier qui indique la famille choisie
+	 */
 	public void setFamille(int rep) {
 		switch (rep) {
 		case 1:
@@ -305,6 +347,12 @@ public class JoueurPhysique extends Joueur {
 		}
 		Partie.getPartie().getManche().setTourJoueur(tour);
 		
+	}
+	public boolean isaChangeDeFamille() {
+		return aChangeDeFamille;
+	}
+	public void setaChangeDeFamille(boolean aChangeDeFamille) {
+		this.aChangeDeFamille = aChangeDeFamille;
 	}
 	
 }
