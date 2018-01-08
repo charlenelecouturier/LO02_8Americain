@@ -3,21 +3,20 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 /**
+ * <b>Représente le Talon de la Partie, c'est-à-dire la pile de cartes sur lequel le joueur doit jouer. </b>
+ * 
  * @author Robin et Charlene
  *
  */
 public class Talon extends Observable {
 
-	/**
-	 * @param args
-	 */
 	protected ArrayList<Carte> cartes= new ArrayList<Carte>(); // on fait une arraylist pour les cartes 
 	private Carte carteDessus;
 
 	
 	
 	/** Constructeur de la classe Talon
-	 * il permet de creer un reference vers une carteDuDessus du talon inconnue, qui ne correspondra pas a la reference 
+	 * il permet de creer une reference vers une carteDuDessus du talon inconnue, qui ne correspondra pas a la reference 
 	 * de la carte reellement placee au dessus du talon dans la collection cartes ( a la place talon.cartes.size()-1 ).
 	 * Ainsi, lorsque qu'une carte ayant pour effet de changer le symbole de la carte du dessus est pos�e, on pourra 
 	 * changer le symbole de l'attribut carte du dessus, sans transformer reellement la carte du Talon
@@ -40,7 +39,6 @@ public class Talon extends Observable {
 	 * dernieres cartes de la pioche au dessus de celle-ci La methode ne renvoie
 	 * rien en retour
 	 */
-
 	public void devenirPioche() {
 		
 		int nombreCartesPioche = Partie.getPartie().getManche().getPioche().getCartes().size();
@@ -73,9 +71,8 @@ public class Talon extends Observable {
 	}
 
 	/**
-	 * @param carteDessus
+	 * @param carteDessus la nouvelle carte à ajouter au dessus du talon
 	 */
-
 	public void setCarteDessus(Carte carteDessus) {
 		this.carteDessus = carteDessus;
 		setChanged();
