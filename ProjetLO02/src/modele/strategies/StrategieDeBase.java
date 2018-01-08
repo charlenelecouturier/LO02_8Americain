@@ -4,8 +4,19 @@ import modele.*;
 import java.util.ArrayList;
 import java.util.Random;
 import modele.variantes.*;
+/**
+ * <b> Stratégie basique pour les joueurs Virtuels</b>
+ * <p> Dans cette stratégie, le joueur virtuel choisit ses cartes au hasard parmi les cartes qu'il peut jouer.\n
+ *  Cette stratégie n'est donc pas la plus performante. </p>
+ * @author Robin et Charlene
+ * @version 1.0
+ */
 public class StrategieDeBase implements Strategie
 {
+	/**
+	 * <b>Le joueur virtuel choisit la première carte jouable qu'il possède dans son paquet.</b>
+	 * <p> Une boucle permet d'avancer parmi ses cartes jusqu'à trouver une carte compatible avec celle du dessus du talon.</p>
+	 */
 	public int choixCarte(ArrayList<Carte> cartesCompatibles) {
 		Joueur joueurEnCours = Partie.getPartie().getManche().getJoueur().get(Partie.getPartie().getManche().getTourJoueur()-1);
 		int i=0;
@@ -21,7 +32,9 @@ public class StrategieDeBase implements Strategie
 		}
 		return i;
 	}
-	
+	/**
+	 * <b> Le joueur choisit une famille au hasard parmi les 4. </b>
+	 */
 	public void changerFamille() {
 
 		Random r = new Random();
