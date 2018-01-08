@@ -34,6 +34,7 @@ public class DireCarte extends Observable  implements Runnable,Effet{
 			e.printStackTrace();
 		}
 		if (!this.jDoitDireCarte.isaDitcarte() &&this.jDoitDireCarte.getCartes().size()==1) {
+			System.out.println(jDoitDireCarte.getName()+ " est contre-carte !");
 			this.jDoitDireCarte.setContreCarte();		
 		}
 		this.jDoitDireCarte.changed();

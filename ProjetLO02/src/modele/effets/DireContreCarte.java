@@ -35,6 +35,7 @@ public class DireContreCarte extends Observable implements Runnable, Effet {
 		}
 		if (!this.jAContrer.isContreCarte() && this.jAContrer.getCartes().size() == 1 && !jAContrer.isaDitcarte()) {
 			// si apres 3 secondes, on n'a pas contr� le joueur
+			System.out.println(jAContrer.getName()+ " dit carte !");
 			this.jAContrer.setaDitcarte();// il dit carte
 
 		}

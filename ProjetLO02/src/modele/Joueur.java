@@ -197,6 +197,8 @@ public abstract class Joueur extends Observable{
 		}
 		this.setChanged();
 		this.notifyObservers("a pioche "+ nombrePioche + " carte(s)!");
+		this.setChanged();
+		this.notifyObservers("a fini");
 	}
 
 	/**

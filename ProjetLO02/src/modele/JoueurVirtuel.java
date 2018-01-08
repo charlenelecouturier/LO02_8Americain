@@ -136,8 +136,10 @@ public class JoueurVirtuel extends Joueur {
 				contreCarte = false;
 			}
 			if (contreCarte) {
+				System.out.println(this.name+ " est contre-carte !");
 				this.setContreCarte();
 			} else {
+				System.out.println(this.name+ " dit carte !");
 				this.setaDitcarte();
 			}
 		}

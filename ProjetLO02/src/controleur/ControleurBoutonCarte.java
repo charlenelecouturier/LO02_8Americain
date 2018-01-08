@@ -17,6 +17,8 @@ public class ControleurBoutonCarte {
 				Joueur jPhysique = p.getManche().getJoueur().get(0);
 				if (jPhysique.getCartes().size() == 1 && jPhysique instanceof JoueurPhysique
 						&& !jPhysique.isContreCarte() && !jPhysique.isaDitcarte()) {
+					System.out.println(jPhysique.getName()+ " dit carte !");
+
 					jPhysique.setaDitcarte();
 
 				}
