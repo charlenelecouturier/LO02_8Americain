@@ -1,5 +1,4 @@
 package controleur;
-import modele.Joueur;
 import modele.JoueurPhysique;
 import java.awt.event.*;
 

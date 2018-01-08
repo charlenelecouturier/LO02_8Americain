@@ -7,7 +7,6 @@ import java.util.*;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import modele.Joueur;
-import modele.JoueurPhysique;
 import modele.Partie;
 
 public class ControleurBoutonContreCarte {

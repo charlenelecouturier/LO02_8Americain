@@ -4,11 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import modele.Partie;
-import modele.Pioche;
-import modele.Manche;
 import vue.InterfaceChoixVarianteNouvelleManche;
 import vue.InterfaceFinPartie;
-import vue.InterfaceManche;
 
 public class ControleurBontonSuivant {
 
