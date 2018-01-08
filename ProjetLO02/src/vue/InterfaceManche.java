@@ -233,7 +233,7 @@ public class InterfaceManche implements Observer {
 			this.panel_Pioche.update(instanceObservable, arg1);
 
 			if (arg1 != null) {
-				if (!arg1.equals("Changer Famille") && !arg1.equals("tour") && !arg1.equals("a fini")) {
+				if (!arg1.equals("Changer Famille") && !arg1.equals("tour") && !arg1.equals("a fini")&&!arg1.equals(" a change de famille") ) {
 					this.effetsJeu.update(instanceObservable, arg1);
 				}
 			}
@@ -249,7 +249,6 @@ public class InterfaceManche implements Observer {
 						this.panelChoixFamille.setVisible(true);
 					} else if (arg1.equals(" a change de famille")) {
 						this.panelChoixFamille.setVisible(false);
-
 					}
 				 else if (arg1.equals("a fini")) {
 					/**

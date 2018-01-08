@@ -107,7 +107,7 @@ public class Carte {
 			Effet pioche4 = new Piocher4Cartes();
 			pioche4.effet();
 			break;
-		case "Defausser tous les m�mes symboles" :
+		case "Defausser tous les memes symboles" :
 			Effet JouerToutesCartesMemeSymbole = new JouerMemeCouleur();
 			JouerToutesCartesMemeSymbole.effet();
 			break;

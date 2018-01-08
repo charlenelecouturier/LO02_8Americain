@@ -52,8 +52,7 @@ public class JoueurPhysique extends Joueur {
 			this.setChanged();
 			this.notifyObservers("a fini");
 		} else {
-			if (!this.getEffetVariante().equals("Changer Famille")) {
-
+			if (!this.EffetVariante.equals("Changer Famille")) {
 				this.setChanged();
 				this.notifyObservers("joue");
 			}
@@ -139,9 +138,11 @@ public class JoueurPhysique extends Joueur {
 			} else if (this.cartes.get(numero - 1).getValeur().equals("8")) {
 				Variante.nombreAs = 0;
 			}
-			jouerTourGraphique(numero - 1);
+			
 			this.setChanged();
 			this.notifyObservers("a choisi");
+			jouerTourGraphique(numero - 1);
+			
 		}
 	}
 	
@@ -199,14 +200,12 @@ public class JoueurPhysique extends Joueur {
 				}
 				this.EffetVariante = "Changer Famille";
 				this.setChanged();
-				this.notifyObservers("a choisi");
-				setChanged();
 				this.notifyObservers("Changer Famille");
 
-			} else if (effet.equals("Defausser tous les m�mes symboles")) {
+			} else if (effet.equals("Defausser tous les memes symboles")) {
 				this.EffetVariante = "JouerMemeCouleur";
 				this.setChanged();
-				this.notifyObservers("doit se defausser de tous les m�mes symboles");
+				this.notifyObservers("doit se defausser de tous les memes symboles");
 			}
 		}		
 		
@@ -267,6 +266,8 @@ public class JoueurPhysique extends Joueur {
 		System.out.println("Quel Symbole voulez-vous mettre ?\n1 : TREFLE\n2 : PIQUE\n3 : COEUR\n4 : CARREAU");
 		int rep = sc.nextInt();
 		if (this.EffetVariante.equals("Changer Famille")) {
+			this.setChanged();
+			this.notifyObservers("a choisi famille");
 			setFamille(rep);
 
 		} else { // le scanner attendais le numero d'une carte
@@ -275,9 +276,10 @@ public class JoueurPhysique extends Joueur {
 			} else if (this.cartes.get(rep - 1).getValeur().equals("8")) {
 				Variante.nombreAs = 0;
 			}
-			jouerTourGraphique(rep - 1);
 			this.setChanged();
 			this.notifyObservers("a choisi");
+			jouerTourGraphique(rep - 1);
+		
 		}
 	}
 
@@ -290,24 +292,32 @@ public class JoueurPhysique extends Joueur {
 		case 1:
 			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("TREFLE");
 			System.out.println("Vous avez choisi comme symbole : TREFLE ! ");
+			this.setChanged();
+			this.notifyObservers("TREFLE");
 			this.setaChangeDeFamille();
 
 			break;
 		case 2:
 			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("PIQUE");
 			System.out.println("Vous avez choisi comme symbole : PIQUE! ");
+			this.setChanged();
+			this.notifyObservers("PIQUE");
 			this.setaChangeDeFamille();
 
 			break;
 		case 3:
 			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("COEUR");
 			System.out.println("Vous avez choisi comme symbole : COEUR ! ");
+			this.setChanged();
+			this.notifyObservers("COEUR");
 			this.setaChangeDeFamille();
 
 			break;
 		case 4:
 			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("CARREAU");
 			System.out.println("Vous avez choisi comme symbole : CARREAU ! ");
+			this.setChanged();
+			this.notifyObservers("CARREAU");
 			this.setaChangeDeFamille();
 
 			break;

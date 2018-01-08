@@ -17,10 +17,7 @@ public class ControleurCarte {
 				if(p.getManche().getTourJoueur() == 1 && Partie.getPartie().getManche().getVarianteManche().estCompatible(carteAControler)) {
 					int indexCarteChoisie =p.getJoueur().get(0).getCartes().indexOf(carteAControler);
 					((JoueurPhysique)p.getJoueur().get(0)).jouerTourGraphique(indexCarteChoisie);
-					//((JoueurPhysique)p.getJoueur().get(0)).sc.close();
-
-				
-					//Partie.getPartie().lancerPartieGraphique();
+					
 				}
 			}
 		});

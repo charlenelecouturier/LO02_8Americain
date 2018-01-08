@@ -44,7 +44,6 @@ public abstract class Joueur extends Observable{
 		this.aDitcarte=false;
 		this.contreCarte=false;
 		this.rejouer=false;
-		this.typeInterface="LDC";
 		this.EffetVariante = "Aucun";
 		this.numero = donneurNum;
 		donneurNum++;
@@ -103,6 +102,8 @@ public abstract class Joueur extends Observable{
 	public void jouerTour() {
 		this.setChanged();
 		this.notifyObservers("tour");
+		this.setChanged();
+		this.notifyObservers("joue");
 		this.contreCarte = false;
 		this.aDitcarte = false;
 		System.out.println("effet : " + this.EffetVariante);
@@ -150,7 +151,6 @@ public abstract class Joueur extends Observable{
 	public void poserCarte() {
 		if (Partie.getPartie().getManche().getVarianteManche().estPossibleDeJouer(this.cartes)) {
 			int numeroCarte =( (JoueurVirtuel)this).choisirCarte();
-			if (numeroCarte != -1) {
 				Carte cartePose = this.cartes.get(numeroCarte);
 				Partie.getPartie().getManche().getTalon().getCartes().add(cartePose);
 				Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole(cartePose.getSymbole());
@@ -168,7 +168,7 @@ public abstract class Joueur extends Observable{
 				if (!effet.equals("Aucun")) {
 					cartePose.appliquerEffet();
 				}
-			}
+			
 		}
 	}
 
