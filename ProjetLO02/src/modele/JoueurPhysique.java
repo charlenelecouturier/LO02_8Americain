@@ -338,26 +338,6 @@ public class JoueurPhysique extends Joueur {
 		this.setAttenteVue(false);
 	}
 	
-	public void changerTour() {
-		boolean gagne = false;
-		gagne = this.gagnePartie();
-		int tour = Partie.getPartie().getManche().getTourJoueur();
-		if (Partie.getPartie().getManche().getSens() == 1) {
-			if (!gagne) {
-				tour++;
-			}
-			if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
-				tour = 1;
-			}
-		} else {
-			tour--;
-			if (tour <= 0) {
-				tour = Partie.getPartie().getManche().getNbJoueursEnCours();
-			}
-		}
-		Partie.getPartie().getManche().setTourJoueur(tour);
-		
-	}
 	public boolean isaChangeDeFamille() {
 		return aChangeDeFamille;
 	}
