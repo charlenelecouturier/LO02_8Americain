@@ -58,58 +58,6 @@ public class Partie extends Observable implements Runnable {
 		this.etat = "EN COURS";
 
 	}
-	/**
-	 * <b>Le constructeur de la Partie </b>
-	 * <p>
-	 * Lors de la construction de la partie, la liste des joueurs de celle-ci est créée. 
-	 * On initialise également le classement de ceux-ci.
-	 * </p>
-	 * @param nbJoueursVirtuels le nombre de joueurs virtuels tel que demandé par l'utilisateur
-	 * @param modeComptage le mode de comptage des points
-	 * @param nom le nom du Joueur Physique
-	 * @param variante la Variante choisie par l'utilisateur pour commencer la Partie.
-	 */
-	private Partie() {
-
-		Scanner sc = new Scanner(System.in);
-
-		try {
-			System.out.println("Saisissez le nombre de joueurs virtuels :");
-			this.nbJoueursVirtuels = sc.nextInt();
-		} catch (InputMismatchException exception) {
-			// Affiche un message d'erreur si l'utilisateur n'entre pas de chiffre pour les
-			// joueurs virtuels
-			System.out.println("Veuillez recommencer en entrant un nombre entier s'il vous plait.");
-		}
-		this.classementJoueursPartie = new LinkedList<Joueur>();
-		this.joueur = new LinkedList<Joueur>();
-		this.joueur.add(new JoueurPhysique());
-		int i;
-		for (i = 1; i <= this.nbJoueursVirtuels; i++) {
-			try {
-				this.joueur.add(new JoueurVirtuel());
-			} catch (NiveauJoueurException e) {
-			}
-		}
-		for (i = 0; i < this.joueur.size(); i++) {// on initialise le classement de la partie
-			this.classementJoueursPartie.add(this.joueur.get(i));
-		}
-		this.manche = new Manche(this.nbJoueursVirtuels, joueur);
-		this.etat = "EN COURS";
-		// mode de comptage des points
-		System.out.println("\nSaisir le mode de comptage des points : 'POSITIF' ou 'NEGATIF'");
-		Scanner text = new Scanner(System.in);
-		this.modeComptage = text.nextLine();
-		if (this.modeComptage.equals("POSITIF")) {
-			System.out.println(
-					"\nMode de comptage des points choisi : POSITIF ! Le premier joueur qui arrive 60 points gagne la partie ! \nLorsque 3 joueurs ont fini la manche, celle-ci se termine\n");
-		} else {
-			System.out.println(
-					"\nMode de comptage des points choisi : NEGATIF ! Lorsqu'un joueur atteint 100 point, il perd la partie ! \nUne manche se termine lorsqu'un joueur a fini !\n");
-		}
-		//Partie.instancePartie = this;
-
-	}
 
 	/**
 	 * <b> Implémentation du pattern Singleton</b>
@@ -120,9 +68,6 @@ public class Partie extends Observable implements Runnable {
 	
 	public static Partie getPartie() {
 
-		if (Partie.instancePartie == null) {
-			Partie.instancePartie = new Partie();
-		}
 		return Partie.instancePartie;
 	}
 	

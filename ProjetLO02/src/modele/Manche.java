@@ -19,50 +19,6 @@ public class Manche extends Observable {
 	private Pioche pioche;
 	private LinkedList<Joueur> joueur;
 
-	public Manche(int nbJoueursVirtuels, LinkedList<Joueur> joueur) {
-
-		int nbJoueursEnCours = nbJoueursVirtuels + 1;
-		this.nbJoueursEnCours = nbJoueursEnCours;
-		this.classementJoueurs = new LinkedList<Joueur>();
-		Random r = new Random();
-		int tourJoueur = 1 + r.nextInt(nbJoueursEnCours - 1); // le joueur qui debute la partie est choisi aleatoirement
-		this.tourJoueur = tourJoueur;
-		this.sens = 1; // sens des aiguilles d'une montre
-		this.talon = new Talon();
-		// choix de la variante
-		// initialisation de la HashMap de variantes
-		this.variantes = new HashMap<String, Variante>();
-		this.variantes.put("Minimale", new VarianteMinimale(nbJoueursVirtuels));
-		this.variantes.put("Monclar", new VarianteMonclar(nbJoueursVirtuels));
-		this.variantes.put("Variante 7", new Variante7(nbJoueursVirtuels));
-		this.variantes.put("Variante 4", new Variante4(nbJoueursVirtuels));
-		this.variantes.put("Variante 5", new Variante5(nbJoueursVirtuels));
-		choisirVariante(nbJoueursVirtuels);
-		ListIterator<Joueur> it = joueur.listIterator();
-		this.joueur = new LinkedList<Joueur>();
-		while (it.hasNext()) {
-			Joueur joueurNext = it.next();
-			joueurNext.getCartes().clear();
-			joueurNext.setScoreManche(0);
-			joueurNext.setEffetVariante("Aucun");
-			this.joueur.add(joueurNext);
-		}
-		Variante.nombreAs = 0;
-	}
-
-	public void choisirVariante(int nbJoueursVirtuels) {
-		Scanner sc = new Scanner(System.in);
-		System.out.println(
-				"Saisissez le nom exact de la variante que vous souhaitez :\nMinimale\nMonclar\nVariante 7\nVariante 4\nVariante 5 ");
-		String variante = sc.nextLine();
-		if (this.variantes.containsKey(variante)) {
-			this.setVarianteManche(variante);
-		} else {
-			System.out.println("Mauvaise saisie.");
-			this.choisirVariante(nbJoueursVirtuels);
-		}
-	}
-
 	public Manche(int nbJoueursVirtuels, LinkedList<Joueur> joueur, String variante) {
 
 		int nbJoueursEnCours = nbJoueursVirtuels + 1;
