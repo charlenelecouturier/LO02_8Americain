@@ -62,6 +62,7 @@ public class StratAvancee implements Strategie {
 	public void changerFamille() {
 
 		int tour = Partie.getPartie().getManche().getTourJoueur();
+		Joueur joueurEnCours = Partie.getPartie().getManche().getJoueur().get(tour-1);
 		ArrayList<Carte> carteJoueur = Partie.getPartie().getManche().getJoueur().get(tour - 1).getCartes();
 		if (!(carteJoueur.isEmpty())) {
 			int i;
@@ -95,18 +96,27 @@ public class StratAvancee implements Strategie {
 				// carreau est majoritaire
 				Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("CARREAU");
 				System.out.println("Symbole choisi : CARREAU ! ");
+				joueurEnCours.changed();
+				joueurEnCours.notifyObservers("CARREAU");
+				
 				break;
 			case 1:
 				Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("PIQUE");
 				System.out.println("Symbole choisi : PIQUE! ");
+				joueurEnCours.changed();
+				joueurEnCours.notifyObservers("PIQUE");
 				break;
 			case 3:
 				Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("COEUR");
 				System.out.println("Symbole choisi : COEUR ! ");
+				joueurEnCours.changed();
+				joueurEnCours.notifyObservers("COEUR");
 				break;
 			case 2:
 				Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("TREFLE");
 				System.out.println("Symbole choisi : TREFLE! ");
+				joueurEnCours.changed();
+				joueurEnCours.notifyObservers("TREFLE");
 				break;
 			}
 		}

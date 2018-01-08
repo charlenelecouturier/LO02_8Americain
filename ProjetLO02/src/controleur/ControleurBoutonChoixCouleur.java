@@ -14,6 +14,8 @@ public class ControleurBoutonChoixCouleur {
 			public void actionPerformed(ActionEvent e) {
 				choix.setVisible(false);
 				p.getManche().getTalon().getCarteDessus().setSymbole(couleur);
+				((JoueurPhysique)p.getJoueur().get(0)).changed();
+				((JoueurPhysique)p.getJoueur().get(0)).notifyObservers(couleur);
 				((JoueurPhysique)p.getJoueur().get(0)).setaChangeDeFamille();
 				//p.lancerPartieGraphique();
 			}

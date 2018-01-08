@@ -290,24 +290,32 @@ public class JoueurPhysique extends Joueur {
 		case 1:
 			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("TREFLE");
 			System.out.println("Vous avez choisi comme symbole : TREFLE ! ");
+			this.setChanged();
+			this.notifyObservers("TREFLE");
 			this.setaChangeDeFamille();
 
 			break;
 		case 2:
 			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("PIQUE");
 			System.out.println("Vous avez choisi comme symbole : PIQUE! ");
+			this.setChanged();
+			this.notifyObservers("PIQUE");
 			this.setaChangeDeFamille();
 
 			break;
 		case 3:
 			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("COEUR");
 			System.out.println("Vous avez choisi comme symbole : COEUR ! ");
+			this.setChanged();
+			this.notifyObservers("COEUR");
 			this.setaChangeDeFamille();
 
 			break;
 		case 4:
 			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("CARREAU");
 			System.out.println("Vous avez choisi comme symbole : CARREAU ! ");
+			this.setChanged();
+			this.notifyObservers("CARREAU");
 			this.setaChangeDeFamille();
 
 			break;

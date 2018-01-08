@@ -23,11 +23,15 @@ public class StrategieDeBase implements Strategie
 	}
 	
 	public void changerFamille() {
-		
-	    Random r= new Random();
-	    int i = r.nextInt(3);
-	    String random = Carte.symboles[i];
-	    Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole(random);
-		System.out.println("Symbole choisi: "+random);
+
+		Random r = new Random();
+		int i = r.nextInt(3);
+		String random = Carte.symboles[i];
+		Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole(random);
+		System.out.println("Symbole choisi: " + random);
+		Joueur joueurEnCours = Partie.getPartie().getManche().getJoueur()
+				.get(Partie.getPartie().getManche().getTourJoueur() - 1);
+		joueurEnCours.changed();
+		joueurEnCours.notifyObservers(random);
 		}
 }

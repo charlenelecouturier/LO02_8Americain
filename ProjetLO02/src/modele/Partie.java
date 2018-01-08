@@ -236,12 +236,7 @@ public class Partie extends Observable implements Runnable {
  */
 	public void lancerPartie() {
 
-		while (Partie.getPartie().etat.equals("EN COURS")) {
 			VueLigneCommande.getLDC();
-			if(this.manche.getPioche()==null)// tant que la partie n'est pas terminee, on joue des manches
-			{ Partie.getPartie().manche.setPioche(new Pioche());// creation de la pioche
-			 Partie.getPartie().manche.getPioche().melanger();// on melange la pioche
-			 Partie.getPartie().manche.getPioche().distribuer();}// on distribue la pioche
 			while (!Partie.getPartie().manche.terminerManche()) { // tant que la manche n'est pas terminee, on joue des
 			try {// Temps de delais entre chaque tour
 					Thread.sleep(700);
@@ -251,11 +246,6 @@ public class Partie extends Observable implements Runnable {
 				Partie.getPartie().manche.getJoueur().get(Partie.getPartie().manche.getTourJoueur() - 1).jouerTour();
 				System.out.println("\n");
 			}
-			if (!Partie.getPartie().terminerPartie()) {
-				System.out.println("\nNOUVELLE MANCHE\n");
-				Partie.getPartie().manche = new Manche(Partie.getPartie().nbJoueursVirtuels, Partie.getPartie().joueur);
-			}
-		}
 	}
 
 	/**
