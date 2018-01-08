@@ -19,8 +19,8 @@ public class VueFinManche {
 	private JButton btnSuivant;
 	private JPanel classement;
 	
-	public VueFinManche(InterfaceManche im){
-		this.frame=im.getFrame();
+	public VueFinManche(JFrame frame){
+		this.frame=frame;
 		this.initialize();
 		new ControleurBontonSuivant(this.btnSuivant, Partie.getPartie(), frame);
 	}

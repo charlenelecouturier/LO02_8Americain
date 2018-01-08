@@ -76,9 +76,6 @@ public class Manche extends Observable {
 			} else {
 				this.compterPointsNegatif();
 			}
-			this.setChanged();
-			this.notifyObservers("manche terminee");// Si la partie n'est pas terminee, on debute une nouvelle manche
-			// pour se faire on entre dans un nouveau Thread qui appelle lancerManche()
 		}
 		return terminer;
 	}

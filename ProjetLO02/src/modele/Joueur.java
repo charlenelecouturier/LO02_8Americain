@@ -30,7 +30,6 @@ public abstract class Joueur extends Observable{
 	private int scoreManche;
 	protected Strategie strategie;
 	protected String EffetVariante;
-	protected String typeInterface;
 	protected boolean aDitcarte;
 	protected boolean contreCarte;
 	protected boolean rejouer;
@@ -275,13 +274,6 @@ public abstract class Joueur extends Observable{
 		this.setChanged();
 		this.notifyObservers("CONTRE-CARTE ! ");
 		this.piocher(1);	
-	}
-
-	/**
-	 * @return the typeInterface
-	 */
-	public String getTypeInterface() {
-		return typeInterface;
 	}
 
 	public void changed()

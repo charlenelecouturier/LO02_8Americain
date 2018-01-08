@@ -62,7 +62,6 @@ public class JoueurVirtuel extends Joueur {
 	 */
 	public JoueurVirtuel(int niveau){
 		super();
-		this.typeInterface="graphique";
 		setName("Joueur " + getNumero());
 		this.strat=niveau;
 		if (strat == 1) {

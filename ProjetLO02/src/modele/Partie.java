@@ -191,7 +191,9 @@ public class Partie extends Observable implements Runnable {
 				Partie.getPartie().manche.getJoueur().get(Partie.getPartie().manche.getTourJoueur() - 1).jouerTour();
 				System.out.println("\n");
 			}
-		
+			this.setChanged();
+			this.notifyObservers("manche terminee");// Si la partie n'est pas terminee, on debute une nouvelle manche
+			// pour se faire on entre dans un nouveau Thread qui appelle lancerManche()
 	}
 
 	/**

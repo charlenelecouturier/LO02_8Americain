@@ -18,8 +18,8 @@ import java.util.Scanner;
  */
 public class JoueurPhysique extends Joueur {
 	private boolean aChangeDeFamille;
-	private Scanner sc = new Scanner(System.in);
-	private boolean attenteVue = true;
+	private Scanner sc;
+	private boolean attenteVue ;
 /**
  * Constructeur utilisé pour l'interface en ligne de commande.
  */
@@ -27,7 +27,7 @@ public class JoueurPhysique extends Joueur {
 		super();
 		System.out.println("Entrez votre nom : ");
 		this.name = sc.nextLine();
-		this.setaChangeDeFamille(false);
+		this.aChangeDeFamille=false;
 		System.out.println("OK Joueur1  : " + this.name);
 	}
 /**
@@ -36,8 +36,10 @@ public class JoueurPhysique extends Joueur {
  */
 	public JoueurPhysique(String nom) {
 		super();
-		this.typeInterface = "graphique";
+		this.sc=new Scanner(System.in);
 		this.name = nom;
+		this.attenteVue= true;
+		this.aChangeDeFamille=false;
 	}
 /**
  * <b>redéfinition de la méthode jouerTour() de Joueur.</b>
@@ -52,7 +54,7 @@ public class JoueurPhysique extends Joueur {
 			this.setChanged();
 			this.notifyObservers("a fini");
 		} else {
-			if (!this.EffetVariante.equals("Changer Famille")) {
+			if (!this.EffetVariante.equals("Changer Famille")&& !this.EffetVariante.equals("Bloquer")) {
 				this.setChanged();
 				this.notifyObservers("joue");
 			}
