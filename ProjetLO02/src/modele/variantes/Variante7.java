@@ -1,10 +1,7 @@
 package modele.variantes;
 import modele.*;
-
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
 
 public class Variante7 extends Variante {
 
@@ -21,7 +18,6 @@ public class Variante7 extends Variante {
 		this.assignerEffetCarte();
 	}
 
-	@Override
 	public void assignerEffetCarte() {
 		Iterator<Carte> it = this.jeuDeCartes.iterator();
 		Carte carteNext;
@@ -51,7 +47,6 @@ public class Variante7 extends Variante {
 		} while (it.hasNext());
 	}
 
-	@Override
 	public HashSet<Carte> creerJeuDeCartes(int nbPaquet) {
 		HashSet<Carte> jeuDeCartes = new HashSet<Carte>();
 		int k;

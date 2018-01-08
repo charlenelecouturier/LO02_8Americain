@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 public class Variante5 extends Variante {
 
-
 	public Variante5(int nbJoueursVirtuels) {
 
 		int nbPaquet = 1;
@@ -17,7 +16,7 @@ public class Variante5 extends Variante {
 		this.assignerEffetCarte();
 	}
 
-	@Override
+	
 	public void assignerEffetCarte() {
 		Iterator<Carte> it = this.jeuDeCartes.iterator();
 		Carte carteNext;

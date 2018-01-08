@@ -1,9 +1,11 @@
 package modele.effets;
 import modele.*;
-import modele.variantes.*;
-
 import java.util.ArrayList;
-
+/**
+ * <b> Effet ou le joueur se défausse de toutes ses cartes d'une même famille.</b>
+ * @author Jarvis
+ * @version 1.0
+ */
 public class JouerMemeCouleur implements Effet {
 
 	public void effet() {
@@ -13,13 +15,13 @@ public class JouerMemeCouleur implements Effet {
 		Carte cartePose = new Carte(" ", " ");
 		joueurActuel.setEffetVariante("JouerMemeCouleur");
 		joueurActuel.changed();
-		joueurActuel.notifyObservers("doit se defausser de tous les m�mes symboles");
+		joueurActuel.notifyObservers("doit se defausser de tous les m�mes symboles");
 		ArrayList<Carte> mainJoueurActuel = joueurActuel.getCartes();
 		// lejoueur actuel rejoue jusqu'a ce qu'il se soit debarrasse de toutes ses cartes de la meme couleur que l'AS
 		// La derniere carte defaussee peut avoir un effet
 		while (Partie.getPartie().getManche().getVarianteManche().estPossibleDeJouer(mainJoueurActuel)) {
 
-			// Temps de delais entre chaque carte posze
+			// Temps de delais entre chaque carte pose
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {

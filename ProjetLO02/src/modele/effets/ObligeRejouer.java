@@ -1,7 +1,11 @@
 package modele.effets;
 import modele.*;
 
-
+/**
+ * <b> Permet au joueur de rejouer immédiatement</b>
+ * @author Robin et Charlene
+ * @version 1.0
+ */
 public class ObligeRejouer implements Effet{
 
 	public void effet() {

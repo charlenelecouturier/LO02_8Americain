@@ -1,8 +1,10 @@
 package modele.effets;
-import java.util.Scanner;
-
 import modele.*;
-
+/**
+ * <b> Appelle les redéfinitions des méthodes changerFamille() des types de joueurs. </b>
+ * @author Robine et Charlene
+ * @version 1.0
+ */
 public class ChangerFamille implements Effet{
 	public void effet() {
 		//On selectionne le joueur a qui c'est le tour (celui qui vient de poser une carte)

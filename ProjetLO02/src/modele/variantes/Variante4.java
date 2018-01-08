@@ -1,10 +1,8 @@
 package modele.variantes;
-import modele.*;
 
-import java.util.ArrayList;
+import modele.*;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
 
 public class Variante4 extends Variante {
 
@@ -36,7 +34,7 @@ public class Variante4 extends Variante {
 					carteNext.setEffet("Fait piocher 4 cartes");
 				}
 			} else if (carteNext.getValeur().equals("1")) {
-				carteNext.setEffet("Defausser tous les mêmes symboles");
+				carteNext.setEffet("Defausser tous les mï¿½mes symboles");
 			} else if (carteNext.getValeur().equals("JOKER")) {
 				carteNext.setEffet("Changer Famille + Piocher 5 cartes");
 			}
@@ -44,7 +42,9 @@ public class Variante4 extends Variante {
 		} while (it.hasNext());
 	}
 
-	@Override // on doit rajouter les JOKERS
+	/** Jeu auquel on doit ajouter les JOKERS.
+	 * 
+	 */
 	public HashSet<Carte> creerJeuDeCartes(int nbPaquet) {
 		HashSet<Carte> jeuDeCartes = new HashSet<Carte>();
 		jeuDeCartes = super.creerJeuDeCartes(nbPaquet);

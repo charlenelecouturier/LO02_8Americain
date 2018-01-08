@@ -4,35 +4,42 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Observable;
 import modele.*;
 import javax.swing.*;
-
 import controleur.ControleurBoutonCarte;
 import controleur.ControleurBoutonChoixCouleur;
 import controleur.ControleurBoutonContreCarte;
 import controleur.ControleurCarte;
 
 import java.util.*;
-
+/**
+ * <b> Interface graphique principale, s'ouvre à chaque manche et contient 5 panneaux organisés en Border Layout : </b> <ul>
+ * <li>Le panneau des Joueurs Virtuels, qui contient des VueJoueurVirtuel pour chaque adversaire</li>
+ * <li>Le panneau de la Pioche et du Talon, qui contient les vues du Talon et de la Pioche</li>
+ * <li>Le panneau ActionCarte, qui contient les boutons Carte, contrecarte ainsi que le log des actions</li>
+ * <li>Le panneau de la Main, qui contient les cartes en main du joueur Physique</li>
+ * <li>Le panneau des scores, qui contient les scores de chaque joueur.</li>
+ * </ul>
+ * @author Charlene et Robin
+ * @version 1.0
+ *
+ */
 public class InterfaceManche implements Observer {
 
 	private ArrayList<VueJoueurVirtuel> vueJVirtuel;
 
-	// Fen�tre principale et conteneurs de l'interface
-
+	// Fen�tre principale et conteneurs de l'interface
 	private JFrame frame;
 	private JPanel panelActionCarte;
 	private JPanel panel_JoueurVirtuel;
 	private JPanel panel_Main;
 	private JPanel panel_Classement;
+	private JPanel panelChoixFamille;
 	private VuePiocheTalon panel_Pioche;
 	// Labels et autres presents dans l'Interface
 	private JButton btnCarte;
@@ -41,19 +48,22 @@ public class InterfaceManche implements Observer {
 	private JButton btnCarreau;
 	private JButton btnTrefle;
 	private JButton btnPique;
-	private JPanel panelChoixFamille;
+	
 	private JLabel lblClassement;
 	private VueEffetJeu effetsJeu;
 	// Objets du modele a observer
 	private LinkedList<Joueur> joueur;
-	private Partie p;
+	
 
 	public InterfaceManche(JFrame frame, Partie p) {
 		this.frame = frame;
-		this.p = p;
 		this.initializeGame(p);
 	}
-
+/**
+ * <b> Initialisation de la fenêtre de la Manche. Chaque panneau composant de la fenêtre est créé, placé dans le Layout,
+ *  et les objets qui le composent définis. </b>
+ * @param p la Partie en cours.
+ */
 	public void initializeGame(Partie p) {
 
 		frame.getContentPane().setVisible(false);
@@ -72,7 +82,6 @@ public class InterfaceManche implements Observer {
 		 * Gestion du conteneur des boutons Carte et Contre-carte. On definit sa
 		 * position et les composants qu'il contient.
 		 */
-
 		JPanel panelWEST = new JPanel();
 		panelWEST.setBackground(new Color(8, 81, 36));
 		getFrame().getContentPane().add(panelWEST, BorderLayout.WEST);
@@ -169,7 +178,7 @@ public class InterfaceManche implements Observer {
 			Joueur jNext = it.next();
 			jNext.addObserver(this);
 		}
-		// VueTourJoueur = new VueTourJoueur;
+
 		/**
 		 * Gestion du conteneur de la main du joueur physique. On d�finit sa position
 		 * et les composants qu'il contient.
@@ -179,17 +188,12 @@ public class InterfaceManche implements Observer {
 		GridLayout grid1 = new GridLayout();
 		panel_Main.setLayout(grid1);
 		panel_Main.setBackground(background);
-		// Partie permettant de tester la main
-		/*
-		 * Carte carte10Pique = new Carte("10", "PIQUE"); VueCarte vueCarte =new
-		 * VueCarte(carte10Pique); panel_Main.add(vueCarte);
-		 */
+		
 		/**
 		 * Iteration qui permet d'afficher les cartes du joueur � l'�cran dans sa
 		 * main.
 		 */
-
-		// On cr�� un it�rateur qui va parcourir les cartes de notre jeu
+		// On cr�� un it�rateur qui va parcourir les cartes de notre jeu
 		ArrayList<Carte> cartesJoueurPhysique = Partie.getPartie().getJoueur().get(0).getCartes();
 
 		ListIterator<Carte> parcourirCarteJoueur = cartesJoueurPhysique.listIterator();
@@ -217,6 +221,12 @@ public class InterfaceManche implements Observer {
 		getFrame().getContentPane().setVisible(true);
 	}
 
+	/**
+	 * <b>implémentation de l'interface Observer, permet de mettre à jour les composants 
+	 * de la manche lorsque le Modèle notifie des changements. </b>
+	 * <p> Consulter le design pattern Observer pour plus d'informations.</p>
+	 * @see modele
+	 */
 	public void update(Observable instanceObservable, Object arg1) {
 
 		if (instanceObservable instanceof Joueur) {
@@ -266,7 +276,7 @@ public class InterfaceManche implements Observer {
 			if (arg1 != null) {
 				if (arg1.equals("manche terminee")) {
 					new VueFinManche(this);
-				}else if (arg1.equals("Le sens a chang� !")) {
+				}else if (arg1.equals("Le sens a chang� !")) {
 					this.effetsJeu.update(instanceObservable, arg1);
 				}
 			}

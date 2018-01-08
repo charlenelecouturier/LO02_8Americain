@@ -4,7 +4,9 @@ import modele.*;
 public class BloquerSuivant implements Effet {
 
 	public void effet() {
-
+/**
+ * <p> S'il n'y a que deux joueurs, l'effet devient ObligeRejouer(). Sinon, le tour du joueur Suivant est bloqué. </p>
+ */
 		if (Partie.getPartie().getManche().getNbJoueursEnCours() == 2) {
 			Effet obligerRejouer = new ObligeRejouer();
 			obligerRejouer.effet();

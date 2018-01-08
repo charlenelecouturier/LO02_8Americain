@@ -3,10 +3,6 @@ import modele.*;
 
 import java.util.Iterator;
 
-/**
- * @author Robin et Charlène
- *
- */
 
 public class VarianteMonclar extends Variante {
 	
@@ -23,7 +19,6 @@ public class VarianteMonclar extends Variante {
 		this.assignerEffetCarte();
 	}
 	
-	@Override
 	public void assignerEffetCarte() {
 		Iterator<Carte> it = this.jeuDeCartes.iterator();
 		Carte carteNext;

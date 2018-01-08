@@ -1,20 +1,21 @@
 package modele.variantes;
 
 import modele.*;
-
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 
 /**
+ * <b> Classe abstraites qui représente les différentes variantes de la partie. </b>
+ * <p> Chaque Variante possède ses règles propres. 
+ * la classe Variante est donc responsable de faire appliquer ces règles. Elle définit le nombre de cartes à distribuer. 
+ * Consultez la page wikipédia du 8 américain pour plus d'informations sur les règles des différentes variantes.</p>
  * @author Charlene et Robin
- *
+ * @version 1.0
+ * 
+ * @see https://fr.wikipedia.org/wiki/8_am%C3%A9ricain
  */
 public abstract class Variante {
 
-	/**
-	 * @param args
-	 */
 	protected int nbCartes;
 	protected HashSet<Carte> jeuDeCartes;
 	public static int nombreAs = 0;
@@ -26,7 +27,12 @@ public abstract class Variante {
 	public void setNbCartes(int nbCartes) {
 		this.nbCartes = nbCartes;
 	}
-
+/**
+ * <b>Vérifie qu'un joueur peut jouer, c'est à dire qu'une règle ne l'empêche pas de jouer son tour(et non pas qu'il n'a pas de cartes posable.)</b>
+ * 
+ * @param carte La liste de ses cartes
+ * @return true si le joueur peut jouer, false sinon.
+ */
 	public boolean estPossibleDeJouer(ArrayList<Carte> carte) {
 		int i;
 		Joueur joueurActuel = Partie.getPartie().getManche().getJoueur()
@@ -92,7 +98,11 @@ public abstract class Variante {
 		}
 		return false; // le joueur ne peut pas jouer
 	}
-
+/**
+ * <b> Vérifie qu'une carte est compatible avec celle posée sur le talon, conformément aux règles de la partie. </b>
+ * @param carte la carte en question
+ * @return true si la carte est jouable, false sinon.
+ */
 	public boolean estCompatible(Carte carte) {
 		Joueur joueurActuel = Partie.getPartie().getManche().getJoueur()
 				.get(Partie.getPartie().getManche().getTourJoueur() - 1);
@@ -134,7 +144,12 @@ public abstract class Variante {
 		return false;
 	}
 
-	// M�thode permettant de cr�er un jeu de cartes de base (52 cartes sans JOKER)
+	/**
+	 * <b> Méthode permettant de créer un ou des jeux de cartes de base (52 cartes sans JOKER). </b>
+	 * <p> La méthode est redéfinie dans les variantes qui nécessitent des paquets spéciaux. </p>
+	 * @param nbPaquet le nombre de paquet à créer
+	 * @return Les jeux de cartes créés, non mélangés.
+	 */
 	public HashSet<Carte> creerJeuDeCartes(int nbPaquet) {
 		HashSet<Carte> jeuDeCartes = new HashSet<Carte>();
 		int k;
@@ -159,6 +174,10 @@ public abstract class Variante {
 	public int getNbCartes() {
 		return nbCartes;
 	}
-
+/**
+ * <b>Méthode redéfinie dans chaque Variante, qui assigne à chaque carte des paquets leurs effets en fonction de la variante. </b>
+ * 
+ * @see Effet
+ */
 	public abstract void assignerEffetCarte();
 }

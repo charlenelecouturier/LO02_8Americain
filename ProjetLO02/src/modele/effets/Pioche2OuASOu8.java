@@ -1,7 +1,11 @@
 package modele.effets;
 import modele.*;
 import modele.variantes.*;
-
+/**
+ * 
+ * @author Jarvis
+ *
+ */
 public class Pioche2OuASOu8 implements Effet {
 
 	public void effet() {
