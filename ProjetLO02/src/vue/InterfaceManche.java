@@ -275,7 +275,7 @@ public class InterfaceManche implements Observer {
 			if (arg1 != null) {
 				if (arg1.equals("manche terminee")) {
 					new VueFinManche(this);
-				}else if (arg1.equals("Le sens a chang� !")) {
+				}else if (arg1.equals("Le sens a change !")) {
 					this.effetsJeu.update(instanceObservable, arg1);
 				}
 			}

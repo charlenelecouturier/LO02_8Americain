@@ -95,15 +95,18 @@ public abstract class Joueur extends Observable{
 	}
 
 	/**
-	 * <b> Méthode principale du Joueur, jouerTour appelle poserCarte puis vérifie que le joueur n'a pas gagné, avant de passer au tour du prochain joueur.</b>
+	 * <b> Méthode principale du Joueur, jouerTour appelle poserCarte puis vérifie
+	 * que le joueur n'a pas gagné, avant de passer au tour du prochain joueur.</b>
 	 * 
-	 *  @see Joueur#poserCarte()
+	 * @see Joueur#poserCarte()
 	 */
 	public void jouerTour() {
 		this.setChanged();
 		this.notifyObservers("tour");
-		this.setChanged();
-		this.notifyObservers("joue");
+		if (!this.EffetVariante.equals("Bloquer")) {
+			this.setChanged();
+			this.notifyObservers("joue");
+		}
 		this.contreCarte = false;
 		this.aDitcarte = false;
 		System.out.println("effet : " + this.EffetVariante);
