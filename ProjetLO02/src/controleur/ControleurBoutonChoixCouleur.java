@@ -2,7 +2,6 @@ package controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import vue.VuePiocheTalon;
 import modele.Partie;
 import modele.JoueurPhysique;
 import javax.swing.*;
