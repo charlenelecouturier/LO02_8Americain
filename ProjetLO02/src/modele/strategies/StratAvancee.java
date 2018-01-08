@@ -6,8 +6,27 @@ import java.util.Random;
 import java.util.ListIterator;
 import java.util.Iterator;
 import modele.variantes.*;
+/**
+ * <b> Stratégie plus complexe pour les joueurs virtuels</b>
+ * <p> Dans cette stratégie, les joueurs virtuels analysent leurs cartes jouables et sélectionnent 
+ * celle qui est la plus optimisée à jouer</p>
+ * <p> <b> TO DO </b> </hr>
+ * Cette stratégie est perfectible, et devrait notamment s'adapter en fonction de la Variante sélectionnée pour être optimale.
+ * </p>
+ * @author Robin et Charlene
+ * @version 1.0
+ *
+ */
 public class StratAvancee implements Strategie {
-
+/**
+ * <b> Le joueur analyse ses cartes compatibles avec le talon, et choisit la meilleure. </b>
+ * <p> L'algorithme s'effectue dans cet ordre : <ul>
+ * <li> On vérifie si le joueur a une carte qui l'oblige à rejouer. Si c'est le cas <b>et </b> qu'il possède une carte de cette même famille, il la choisit.</li>
+ * <li> Sinon, il pose n'importe quelle carte qui n'ait pas l'effet "changerFamille".</li>
+ * <li> En dernier lieu, il pose une carte changerFamille. </li>
+ * </ul>
+ * 
+ */
 	public int choixCarte(ArrayList<Carte> cartesCompatibles) {
 		Joueur joueurEnCours = Partie.getPartie().getManche().getJoueur().get(Partie.getPartie().getManche().getTourJoueur() - 1);
 		int carteChoisie;
@@ -58,7 +77,11 @@ public class StratAvancee implements Strategie {
 			return carteChoisie;
 		}
 	}
-
+/**
+ * <b> Choisit la famille dans laquelle le joueur a le plus de cartes</b>
+ * <p> Utilisé en cas de choix d'une carte avec l'effet changerFamille.
+ *  Au cas ou le joueur n'a plus qu'une carte, il ne se soucie pas de la couleur à choisir.</p>
+ */
 	public void changerFamille() {
 
 		int tour = Partie.getPartie().getManche().getTourJoueur();
@@ -121,7 +144,11 @@ public class StratAvancee implements Strategie {
 			System.out.println("Symbole choisi: " + random);
 		}
 	}
-
+/**
+ * <b> Retourne la première carte ayant l'effet "Changer Famille" de la main du joueur</b>
+ * @param joueurEnCours le joueur en cours
+ * @return l'index du premier 8.
+ */
 	public int jouer8(Joueur joueurEnCours) {
 
 		int i = 0;
@@ -136,7 +163,13 @@ public class StratAvancee implements Strategie {
 		}
 		return i;
 	}
-
+/**
+ * <b> Vérifie que, si le joueur a une carte à l'effet "Oblige a Rejouer", il peut rejouer après.</b>
+ * @param carteRejouer la carte avec l'Effet
+ * @param joueurEnCours le joueur
+ * @param cartesCompatibles l'ensemble des cartes jouables sur le talon
+ * @return un booléen qui indique si il devrait oui ou non jouer son 10
+ */
 	public boolean jouer10(Carte carteRejouer, Joueur joueurEnCours, ArrayList<Carte> cartesCompatibles) {
 
 		String symboleCarteRejouer = carteRejouer.getSymbole();
@@ -168,7 +201,7 @@ public class StratAvancee implements Strategie {
 
 		if (cartesCompatibles.size() == 1) {
 			// le joueur n'a plus qu'un 10 il doit le jouer
-			System.out.println("Mince, je dois jouer mon ma carte 'Rejouer'... Elle va me forcer a piocher");
+			System.out.println("Mince, je dois jouer ma carte 'Rejouer'... Elle va me forcer a piocher");
 			return true;
 		}
 		return trouveAutreCarteCompatible;
