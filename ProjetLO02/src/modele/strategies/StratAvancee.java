@@ -85,6 +85,8 @@ public class StratAvancee implements Strategie {
 	 */
 	public void changerFamille() {
 
+
+		String symbole="";
 		int tour = Partie.getPartie().getManche().getTourJoueur();
 		Joueur joueurEnCours = Partie.getPartie().getManche().getJoueur().get(tour-1);
 		ArrayList<Carte> carteJoueur = Partie.getPartie().getManche().getJoueur().get(tour - 1).getCartes();
@@ -118,29 +120,16 @@ public class StratAvancee implements Strategie {
 
 			case 0:
 				// carreau est majoritaire
-				Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("CARREAU");
-				System.out.println("Symbole choisi : CARREAU ! ");
-				joueurEnCours.changed();
-				joueurEnCours.notifyObservers("CARREAU");
-				
+				symbole ="CARREAU";
 				break;
 			case 1:
-				Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("PIQUE");
-				System.out.println("Symbole choisi : PIQUE! ");
-				joueurEnCours.changed();
-				joueurEnCours.notifyObservers("PIQUE");
+				symbole="PIQUE";
 				break;
 			case 3:
-				Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("COEUR");
-				System.out.println("Symbole choisi : COEUR ! ");
-				joueurEnCours.changed();
-				joueurEnCours.notifyObservers("COEUR");
+				symbole="COEUR";
 				break;
 			case 2:
-				Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole("TREFLE");
-				System.out.println("Symbole choisi : TREFLE! ");
-				joueurEnCours.changed();
-				joueurEnCours.notifyObservers("TREFLE");
+				symbole="TREFLE";
 				break;
 			}
 		}
@@ -150,11 +139,23 @@ public class StratAvancee implements Strategie {
 			String[] symboles = new String[] { "TREFLE", "COEUR", "CARREAU", "PIQUE" };
 			Random r = new Random();
 			int i = r.nextInt(3);
-			String random = symboles[i];
-			Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole(random);
-			System.out.println("Symbole choisi: " + random);
+			symbole = symboles[i];
 		}
+
+		joueurEnCours.changed();
+		joueurEnCours.notifyObservers();
+		try {
+			Thread.sleep(300);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Partie.getPartie().getManche().getTalon().getCarteDessus().setSymbole(symbole);
+		System.out.println("Symbole choisi: " + symbole);
+		joueurEnCours.changed();
+		joueurEnCours.notifyObservers(symbole);
 	}
+	
 	/**
 	 * <b> Retourne la première carte ayant l'effet "Changer Famille" de la main du joueur</b>
 	 * @param joueurEnCours le joueur en cours

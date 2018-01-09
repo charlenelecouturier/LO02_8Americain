@@ -32,8 +32,7 @@ public abstract class Joueur extends Observable{
 	protected String EffetVariante;
 	protected boolean aDitcarte;
 	protected boolean contreCarte;
-	protected boolean rejouer;
-	protected boolean ajoue;
+
 
 
 	/**
@@ -42,7 +41,6 @@ public abstract class Joueur extends Observable{
 	public Joueur() {
 		this.aDitcarte=false;
 		this.contreCarte=false;
-		this.rejouer=false;
 		this.EffetVariante = "Aucun";
 		this.numero = donneurNum;
 		donneurNum++;

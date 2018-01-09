@@ -205,7 +205,6 @@ public class Partie extends Observable implements Runnable {
 
 	public static void main(String[] args) {
 		System.out.println("JEU DE 8 AMERICAIN \nPAR ROBIN LALLIER ET CHARLENE LECOUTURIER\n");
-	
 				try {
 					InterfaceDebutPartie window = new InterfaceDebutPartie();
 					window.getFrame().setVisible(true);

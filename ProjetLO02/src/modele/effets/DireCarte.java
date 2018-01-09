@@ -29,16 +29,17 @@ public class DireCarte extends Observable  implements Runnable,Effet{
 	 */
 	public void run() {
 		try {// Temps de delais entre chaque tour
-			Thread.sleep(3000);
+			Thread.sleep(2500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		if (!this.jDoitDireCarte.isaDitcarte() &&this.jDoitDireCarte.getCartes().size()==1) {
 			System.out.println(jDoitDireCarte.getName()+ " est contre-carte !");
-			this.jDoitDireCarte.setContreCarte();		
+			this.jDoitDireCarte.setContreCarte();	
+			this.jDoitDireCarte.changed();
+			this.jDoitDireCarte.notifyObservers("a fini");
 		}
-		this.jDoitDireCarte.changed();
-		this.jDoitDireCarte.notifyObservers("a fini");
+		
 		
 	}
 
