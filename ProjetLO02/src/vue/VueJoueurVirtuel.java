@@ -1,11 +1,12 @@
 package vue;
 
 import java.awt.*;
+import java.rmi.NotBoundException;
 import java.util.Observable;
 import java.util.Observer;
 import modele.Partie;
 import javax.swing.*;
-import javax.swing.BorderFactory;
+
 import modele.*;
 
 // ===========Concernant les joueurs virtuels ============
@@ -36,9 +37,20 @@ public class VueJoueurVirtuel extends JPanel implements Observer {
 			this.niveauJoueur = new JLabel("Niveau : Eleve");
 
 		}
-
+		niveauJoueur.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNomJoueur = new JLabel(j.getName() + " ");
+		lblNomJoueur.setHorizontalAlignment(SwingConstants.CENTER);
 		nbCartes = new JLabel("Cartes restantes: 8  ");
+		nbCartes.setHorizontalAlignment(SwingConstants.CENTER);
+		Font f = new Font("Serif", Font.BOLD, 16);
+		Font f2 = new Font("Serif", Font.BOLD|Font.ITALIC, 18);
+		nbCartes.setFont(f2);
+		niveauJoueur.setFont(f);
+		lblNomJoueur.setFont(f);
+		Color noir = new Color(0, 0, 0);
+		nbCartes.setForeground(noir);
+		niveauJoueur.setForeground(noir);
+		lblNomJoueur.setForeground(noir);
 		this.add(iconeJoueur);
 		this.add(dosCarte);
 		this.add(lblNomJoueur);
@@ -52,7 +64,9 @@ public class VueJoueurVirtuel extends JPanel implements Observer {
 		iconeJoueur = new JLabel();
 		dosCarte = new JLabel();
 		iconeJoueur.setIcon(new ImageIcon("Images/joueur.png"));
+		iconeJoueur.setHorizontalAlignment(SwingConstants.CENTER);
 		dosCarte.setIcon(new ImageIcon("Images/dosCarte.jpg"));
+		dosCarte.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 
 	public void changerCouleurBordure(String type) {

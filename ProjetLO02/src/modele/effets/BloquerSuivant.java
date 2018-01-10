@@ -31,6 +31,8 @@ public class BloquerSuivant implements Effet {
 				}
 			}
 			Joueur joueurSuivant = Partie.getPartie().getManche().getJoueur().get(tour - 1);
+			joueurSuivant.changed();
+			joueurSuivant.notifyObservers("est bloque !");
 			joueurSuivant.setEffetVariante("Bloquer");
 		}
 	}

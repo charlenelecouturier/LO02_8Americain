@@ -273,14 +273,19 @@ public class InterfaceManche implements Observer {
 
 		} else if (instanceObservable instanceof Manche) {
 			if (arg1 != null) {
-				if (arg1.equals("manche terminee")) {
-					new VueFinManche(this);
-				}else if (arg1.equals("Le sens a chang� !")) {
+				if (arg1.equals("Le sens a change !")) {
 					this.effetsJeu.update(instanceObservable, arg1);
+				}
+			}
+		} else if (instanceObservable instanceof Partie) {
+			if (arg1 != null) {
+				if (arg1.equals("manche terminee")) {
+					new VueFinManche(this.frame);
 				}
 			}
 		}
 	}
+	
 
 	public void setFrame(JFrame frame) {
 		this.frame = frame;

@@ -64,8 +64,6 @@ public class VueLigneCommande implements Runnable, Observer {
 
 			} else if (arg1.equals("a choisi famille")) {
 				attendre = false;
-				jPhysique.setaChangeDeFamille();
-
 			} else if (arg1.equals("Changer Famille")) {
 				if (attendre==false) {
 					Thread t = new Thread(this);

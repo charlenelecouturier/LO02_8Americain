@@ -18,19 +18,18 @@ public class ControleurBoutonContreCarte {
 				Iterator<Joueur> it = joueur.iterator();
 				boolean trouve = false;
 				Joueur jNext;
-				while (it.hasNext() && !trouve) {
+				do {
 					jNext = it.next();
-					if (jNext.getCartes().size()==1 && jNext instanceof JoueurVirtuel) {
+					if (jNext.getCartes().size() == 1 && jNext instanceof JoueurVirtuel) {
 						trouve = true;
 					}
-					if (trouve&& !jNext.isaDitcarte()) {
-						jNext.setContreCarte();
-					}
+				} while (it.hasNext() && !trouve);
+				if (trouve && !jNext.isaDitcarte()) {
+					System.out.println(jNext.getName()+ " est contre-carte !");
+					jNext.setContreCarte();
 				}
-		Partie.getPartie().lancerPartieGraphique();	}
-			
-		});
-		
+			}
 
+		});
 	}
 }

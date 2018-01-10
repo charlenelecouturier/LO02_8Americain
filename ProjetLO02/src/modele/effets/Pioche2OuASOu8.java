@@ -9,6 +9,7 @@ import modele.variantes.*;
 public class Pioche2OuASOu8 implements Effet {
 
 	public void effet() {
+		Joueur jActuel = Partie.getPartie().getManche().getJoueur().get(Partie.getPartie().getManche().getTourJoueur()-1);
 		System.out.println("Si le joueur suivant n'a pas de 8 ou d'AS alors : + "+ 2* Variante.nombreAs+" cartes");
 		// on cherche la joueur suivant
 		int tour;
@@ -31,5 +32,7 @@ public class Pioche2OuASOu8 implements Effet {
 		}
 		Joueur joueurSuivant = Partie.getPartie().getManche().getJoueur().get(tour - 1);
 		joueurSuivant.setEffetVariante("Pioche2ouAsou8");
+		jActuel.changed();
+		jActuel.notifyObservers("pose un + 2, le joueur suivant doit jouer un AS ou un 8");
 	}
 }

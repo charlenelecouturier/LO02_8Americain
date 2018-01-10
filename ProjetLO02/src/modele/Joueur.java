@@ -30,11 +30,9 @@ public abstract class Joueur extends Observable{
 	private int scoreManche;
 	protected Strategie strategie;
 	protected String EffetVariante;
-	protected String typeInterface;
 	protected boolean aDitcarte;
 	protected boolean contreCarte;
-	protected boolean rejouer;
-	protected boolean ajoue;
+
 
 
 	/**
@@ -43,7 +41,6 @@ public abstract class Joueur extends Observable{
 	public Joueur() {
 		this.aDitcarte=false;
 		this.contreCarte=false;
-		this.rejouer=false;
 		this.EffetVariante = "Aucun";
 		this.numero = donneurNum;
 		donneurNum++;
@@ -95,45 +92,49 @@ public abstract class Joueur extends Observable{
 	}
 
 	/**
-	 * <b> Méthode principale du Joueur, jouerTour appelle poserCarte puis vérifie que le joueur n'a pas gagné, avant de passer au tour du prochain joueur.</b>
+	 * <b> Méthode principale du Joueur, jouerTour appelle poserCarte puis vérifie
+	 * que le joueur ne doit pas rejouer, avant de passer au tour du prochain joueur en appelant changerTour()</b>
 	 * 
-	 *  @see Joueur#poserCarte()
+	 * @see Joueur#poserCarte()
+	 * @see Joueur#changerTour()
 	 */
 	public void jouerTour() {
 		this.setChanged();
 		this.notifyObservers("tour");
-		this.setChanged();
-		this.notifyObservers("joue");
+		if (!this.EffetVariante.equals("Bloquer")) {
+			this.setChanged();
+			this.notifyObservers("joue");
+		}
 		this.contreCarte = false;
 		this.aDitcarte = false;
 		System.out.println("effet : " + this.EffetVariante);
-		int tour;
-		boolean gagne = false;
 		this.poserCarte();
 		if (!this.EffetVariante.equals("doit rejouer")) {
-			gagne = this.gagnePartie(); // on regarde si le fait d'avoir pose une carte permet au joueur de gagner la
-										// manche
-			tour = Partie.getPartie().getManche().getTourJoueur();
-			if (Partie.getPartie().getManche().getSens() == 1) {
-				if (!gagne) {
-					tour++;
-				}
-				if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
-					tour = 1;
-				}
-			} else {
-				tour--;
-				if (tour <= 0) {
-					tour = Partie.getPartie().getManche().getNbJoueursEnCours();
-				}
-			}
-			Partie.getPartie().getManche().setTourJoueur(tour);
+			this.changerTour();
 		}	
 		this.setChanged();
 		this.notifyObservers("a fini");
 		this.EffetVariante = "Aucun";
-
-
+	}
+	
+	public void changerTour() {
+		boolean gagne = false;
+		gagne = this.gagnePartie();
+		int tour = Partie.getPartie().getManche().getTourJoueur();
+		if (Partie.getPartie().getManche().getSens() == 1) {
+			if (!gagne) {
+				tour++;
+			}
+			if (tour > Partie.getPartie().getManche().getNbJoueursEnCours()) {
+				tour = 1;
+			}
+		} else {
+			tour--;
+			if (tour <= 0) {
+				tour = Partie.getPartie().getManche().getNbJoueursEnCours();
+			}
+		}
+		Partie.getPartie().getManche().setTourJoueur(tour);	
 	}
 	
 	/**
@@ -167,8 +168,7 @@ public abstract class Joueur extends Observable{
 				String effet = cartePose.getEffet();
 				if (!effet.equals("Aucun")) {
 					cartePose.appliquerEffet();
-				}
-			
+				}			
 		}
 	}
 
@@ -195,6 +195,8 @@ public abstract class Joueur extends Observable{
 		}
 		this.setChanged();
 		this.notifyObservers("a pioche "+ nombrePioche + " carte(s)!");
+		this.setChanged();
+		this.notifyObservers("a fini");
 	}
 
 	/**
@@ -274,15 +276,9 @@ public abstract class Joueur extends Observable{
 		this.piocher(1);	
 	}
 
-	/**
-	 * @return the typeInterface
-	 */
-	public String getTypeInterface() {
-		return typeInterface;
-	}
-
 	public void changed()
 	{
 		this.setChanged();
 	}
+
 }

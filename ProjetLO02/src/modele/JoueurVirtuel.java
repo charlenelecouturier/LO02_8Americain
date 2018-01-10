@@ -62,7 +62,6 @@ public class JoueurVirtuel extends Joueur {
 	 */
 	public JoueurVirtuel(int niveau){
 		super();
-		this.typeInterface="graphique";
 		setName("Joueur " + getNumero());
 		this.strat=niveau;
 		if (strat == 1) {
@@ -137,8 +136,10 @@ public class JoueurVirtuel extends Joueur {
 				contreCarte = false;
 			}
 			if (contreCarte) {
+				System.out.println(this.name+ " est contre-carte !");
 				this.setContreCarte();
 			} else {
+				System.out.println(this.name+ " dit carte !");
 				this.setaDitcarte();
 			}
 		}
