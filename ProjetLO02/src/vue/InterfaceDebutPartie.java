@@ -5,9 +5,9 @@ import java.awt.GridLayout;
 import javax.swing.*;
 import controleur.*;
 /**
- * <b> Interface du début de la partie. 
+ * <b> Interface du début de la partie.
  * Permet au joueur de sélectionner facilement les paramètres de la partie avant de lancer celle-ci. </b>
- * 
+ * Cette fenêtre est composée de boutons qui sont ensuite controlés selon le design pattern Model-View-Controler.
  * @author Charlene et Robin
  * @version 1.0
  */
@@ -41,16 +41,7 @@ private JMenuItem item5;
 	private JTextField txtModeDeComptage;
 	private JComboBox comboBoxComptage;
 	private JComboBox comboBoxVariante;
-
-	/**
-	 * Launch the application.
-	 */
-	/*
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { TestInterface window = new
-	 * TestInterface(); window.getFrame().setVisible(true); } catch (Exception e) {
-	 * e.printStackTrace(); } } }); }
-	 */
+	
 	/**
 	 * Create the application.
 	 */
