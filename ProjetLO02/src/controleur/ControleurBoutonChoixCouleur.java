@@ -12,7 +12,7 @@ public class ControleurBoutonChoixCouleur {
 		choixcouleur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				choix.setVisible(false);
-				System.out.println(couleur);
+				System.out.println(couleur); 
 				p.getManche().getTalon().getCarteDessus().setSymbole(couleur);
 				((JoueurPhysique)p.getJoueur().get(0)).changed();
 				((JoueurPhysique)p.getJoueur().get(0)).notifyObservers(couleur);
