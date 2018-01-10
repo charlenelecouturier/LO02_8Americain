@@ -2,23 +2,25 @@ package vue;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.util.ListIterator;
-import java.util.Observable;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import controleur.ControleurBoutonSuivant2;
-import modele.Joueur;
 import modele.Partie;
 
+/**
+ * <b> Interface de choix de la Variante .</b>
+ * <p>Apparait une fois une manche terminée pour permettre au joueur de sélectionner facilement sa variante 
+ * à la manche suivante. \n
+ * Cette fenêtre est composée d'un bouton pour lancer la manche suivante et d'une JComboBox permettant de sélectionner
+ * la variante voulue. qui sont ensuite controlés selon le design pattern Model-View-Controler.</p>
+ * @author Charlene et Robin
+ * @version 1.0
+ */
 public class InterfaceChoixVarianteNouvelleManche {
 	private JFrame frame;
 	private JButton btnSuivant;

@@ -7,7 +7,11 @@ import java.awt.Font;
 import javax.swing.*;
 import modele.Carte;
 
-
+/**
+ * <b>Controle la 
+ * @author Charlene et Robin
+ *
+ */
 public class VueCarte extends JButton {
 
 	private ImageIcon imageCarte;
@@ -20,6 +24,4 @@ public class VueCarte extends JButton {
 		this.setIcon(imageCarte);
 		this.setMaximumSize(new Dimension(110, 270));
 	}
-	
-	
 }
