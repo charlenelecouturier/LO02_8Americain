@@ -6,7 +6,7 @@ import java.util.Observable;
  * <b>Représente le Talon de la Partie, c'est-à-dire la pile de cartes sur lequel le joueur doit jouer. </b>
  * 
  * @author Robin et Charlene
- *
+ * @version 1.0
  */
 public class Talon extends Observable {
 
@@ -15,16 +15,16 @@ public class Talon extends Observable {
 
 	
 	
-	/** Constructeur de la classe Talon
-	 * il permet de creer une reference vers une carteDuDessus du talon inconnue, qui ne correspondra pas a la reference 
+	/** <b>Constructeur de la classe Talon</b>
+	 * <p>il permet de creer une reference vers une carteDuDessus du talon inconnue, qui ne correspondra pas a la reference 
 	 * de la carte reellement placee au dessus du talon dans la collection cartes ( a la place talon.cartes.size()-1 ).
-	 * Ainsi, lorsque qu'une carte ayant pour effet de changer le symbole de la carte du dessus est pos�e, on pourra 
+	 * Ainsi, lorsque qu'une carte ayant pour effet de changer le symbole de la carte du dessus est posée, on pourra 
 	 * changer le symbole de l'attribut carte du dessus, sans transformer reellement la carte du Talon
 	 * ( a la place Talon.carte.size()-1 ).
 	 * Quand on ajoute une carte au talon, on va faire un cartes.add() pour ajouter une carte a la collection carte
-	 *  correspondant au paquet, puis on va changer � part la carte a la ref carteDessus en faisant : 
+	 *  correspondant au paquet, puis on va changer à part la carte a la ref carteDessus en faisant : 
 	 * carteDessus.setSymbole(carteAjoutee.getSymbole()) 
-	 * et carteDessus.setValeur(carteAjoutee.getValeur())
+	 * et carteDessus.setValeur(carteAjoutee.getValeur())</p>
 	 * */
 	
 	public Talon() {

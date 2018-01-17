@@ -3,7 +3,6 @@ package modele;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.LinkedList;
-import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Random;
 import modele.variantes.*;
@@ -29,7 +28,7 @@ public class Manche extends Observable {
 		this.tourJoueur = tourJoueur;
 		this.sens = 1; // sens des aiguilles d'une montre
 		this.talon = new Talon();
-		// On remplie la HashMap , le paramètre en entré "variante" sera la clé
+		// On remplie la HashMap , le paramï¿½tre en entrï¿½ "variante" sera la clï¿½
 		// qui va permettre d'instancier la nouvelle variante
 		this.variantes = new HashMap<String, Variante>();
 		this.variantes.put("Minimale", new VarianteMinimale(nbJoueursVirtuels));
@@ -37,7 +36,7 @@ public class Manche extends Observable {
 		this.variantes.put("Variante 7", new Variante7(nbJoueursVirtuels));
 		this.variantes.put("Variante 4", new Variante4(nbJoueursVirtuels));
 		this.variantes.put("Variante 5", new Variante5(nbJoueursVirtuels));
-		this.setVarianteManche(variante);// variante est la clé
+		this.setVarianteManche(variante);// variante est la clï¿½
 		ListIterator<Joueur> it = joueur.listIterator();
 		this.joueur = new LinkedList<Joueur>();
 		while (it.hasNext()) {
