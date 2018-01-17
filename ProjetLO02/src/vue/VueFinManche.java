@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ListIterator;
 import javax.swing.*;
-import controleur.ControleurBontonSuivant;
+import controleur.ControleurBoutonSuivant;
 import modele.Joueur;
 import modele.Partie;
 /**
@@ -24,7 +24,7 @@ public class VueFinManche {
 	public VueFinManche(JFrame frame){
 		this.frame=frame;
 		this.initialize();
-		new ControleurBontonSuivant(this.btnSuivant, Partie.getPartie(), frame);
+		new ControleurBoutonSuivant(this.btnSuivant, Partie.getPartie(), frame);
 	}
 	
 	private void initialize() {

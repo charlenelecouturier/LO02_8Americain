@@ -1,17 +1,13 @@
 package modele;
-import vue.VueLigneCommande;
-
-import java.util.InputMismatchException;
 import java.util.LinkedList;
-import java.util.Scanner;
-
 import java.util.Observable;
 import vue.InterfaceDebutPartie;
+import vue.VueLigneCommande;
 /**
  *<b>Classe définissant la Partie en tant que singleton </b> 
  *<p> La partie est créé lors de l'execution du programme.\n 
  *Elle est une composition de Manches, et possède une liste de Joueurs ainsi qu'un mode de comptage des points.
- *
+ *</p>
  *@author Charlene et Robin
  *@version 1.0
  *@see Manche

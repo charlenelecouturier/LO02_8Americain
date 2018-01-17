@@ -9,7 +9,12 @@ import javax.swing.*;
 
 import modele.Joueur;
 import modele.Partie;
-
+/**
+ * <b> Interface de la fin d'une partie.</b>
+ * <p>Affiche au sein d'une nouvelle fenêtre le classement final de la partie jouée au préalable.</p>
+ * @author Charlene et Robin
+ * @version 1.0
+ */
 public class InterfaceFinPartie {
 	private JFrame frame;
 	private Partie p;

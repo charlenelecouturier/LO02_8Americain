@@ -7,11 +7,11 @@ import modele.Partie;
 import vue.InterfaceChoixVarianteNouvelleManche;
 import vue.InterfaceFinPartie;
 
-public class ControleurBontonSuivant {
+public class ControleurBoutonSuivant {
 
 	private JButton suivant;
 
-	public ControleurBontonSuivant(JButton choixSuivant, Partie p, JFrame frame) {
+	public ControleurBoutonSuivant(JButton choixSuivant, Partie p, JFrame frame) {
 
 		this.suivant = choixSuivant;
 

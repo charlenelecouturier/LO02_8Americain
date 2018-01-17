@@ -6,7 +6,26 @@ import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.Random;
 import modele.variantes.*;
-
+/**
+ *<b>Classe représentant la manche en cours de la partie. </b> 
+ *<p>
+ *La manche est caractérisée par :<ul>
+ *<li> une variante (issue de Variante) </li>
+ *<li> le classement des Joueurs </li>
+ *<li> un talon (issu de Talon) </li>
+ *<li> une pioche (issue de Pioche) </li>
+ *<li> une liste de Joueurs </li>
+ *</ul>
+ *Cette classe est capitale, car elle est responsable de la gestion du déroulement de la manche
+ * (dont la partie est composée).
+ *</p>
+ *@author Charlene et Robin
+ *@version 1.0
+ *@see Joueur
+ *@see Talon
+ *@see Variante
+ *@see Pioche
+ */
 public class Manche extends Observable {
 	private Variante varianteManche;
 	private LinkedList<Joueur> classementJoueurs;
@@ -18,6 +37,16 @@ public class Manche extends Observable {
 	private Pioche pioche;
 	private LinkedList<Joueur> joueur;
 
+	
+	/**
+	 * <b>Constructeur de la manche</b>
+	 * <p>
+	 * Dans un premier temps, le constructeur désigne le joueur qui commencera la partie.\n
+	 * Il créé ensuite un Talon, appelle <b>choisirVariante()</b> et initialise les joueurs.
+	 * </p>
+	 * @param nbJoueursVirtuels le nombre de joueurs virtuels dans la partie
+	 * @param joueur la liste des joueurs dans la partie
+	 */
 	public Manche(int nbJoueursVirtuels, LinkedList<Joueur> joueur, String variante) {
 
 		int nbJoueursEnCours = nbJoueursVirtuels + 1;
@@ -47,7 +76,13 @@ public class Manche extends Observable {
 
 		Variante.nombreAs = 0;
 	}
-
+	/**
+	 * <b> Méthode permettant de terminer une manche.</b>
+	 * <p> Si la partie est terminée, classe les joueurs en fonction du comptage de points choisi par l'utilisateur.
+	 * Si la partie n'est pas terminée à l'issue du comptage des points, une nouvelle manche recommence.</p>
+	 * 
+	 * @return true si la manche est terminée, false sinon.
+	 */
 	public boolean terminerManche() {
 
 		boolean terminer = false;
@@ -78,7 +113,9 @@ public class Manche extends Observable {
 		}
 		return terminer;
 	}
-
+	/**
+	 * <b> Méthode comptant les points en positif</b>
+	 */
 	public void compterPointsPositif() {
 		int i;
 		// on ajoute les points correspondant aux 3 premiers
@@ -106,7 +143,9 @@ public class Manche extends Observable {
 					+ " -- SCORE : " + Partie.getPartie().getClassementJoueursPartie().get(i - 1).getScore());
 		}
 	}
-
+	/**
+	 * <b> Méthode comptant les points en mode négatif </b>
+	 */
 	public void compterPointsNegatif() {
 
 		int i;

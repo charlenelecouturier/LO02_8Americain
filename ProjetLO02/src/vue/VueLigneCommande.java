@@ -1,16 +1,16 @@
 package vue;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.*;
-import java.util.*;
+import java.util.Observable;
+import java.util.Observer;
 
-import modele.Joueur;
 import modele.JoueurPhysique;
-import modele.JoueurVirtuel;
 import modele.Partie;
-import java.util.*;
-
+/**
+ * <b> Gestionnaire de l'interface en ligne de commande. </b>
+ * <p>Instancie un singleton de vue en Ligne de commande, qui permet au joueur de jouer dans la console s'il le souhaite.</p>
+ * @author Charlene et Robin
+ * @version 1.0
+ */
 public class VueLigneCommande implements Runnable, Observer {
 	private static VueLigneCommande instanceVueLDC;
 	private JoueurPhysique jPhysique;
@@ -46,10 +46,11 @@ public class VueLigneCommande implements Runnable, Observer {
 		}
 		
 	}
-	@Override
+	/**
+	 * <p>Met à jour la partie en fonction de l'avancée du modèle lorsqu'un objet du modèle envoie une notification à VueLigneCommande.</p>
+	 */
 	public void update(Observable arg0, Object arg1) {
 
-		// TODO Auto-generated method stub
 		if (arg1 != null) {
 			if (arg1.equals("a choisi")) {
 				attendre = false;

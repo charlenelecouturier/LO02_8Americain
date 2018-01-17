@@ -7,8 +7,15 @@ import modele.Partie;
 import javax.swing.*;
 
 import modele.*;
-
-
+/**
+ * <b> Panneau dédié à la représentation graphique d'un joueur virtuel</b>
+ * <p>Affiche une icone de personnage, le nom du joueur, une icone de carte retournée ainsi que le niveau du Joueur et le nombre de cartes lui restant./n
+ * Cette représentation est ensuite insérée pour chaque adversaire (maximum 5) dans l'<b>InterfaceManche</b></p>
+ * 
+ * @see InterfaceManche
+ * @author Charlene et Robin
+ * @version 1.0
+ */
 public class VueJoueurVirtuel extends JPanel implements Observer {
 	
 	private static final long serialVersionUID = 1L;
@@ -80,7 +87,9 @@ public class VueJoueurVirtuel extends JPanel implements Observer {
 		}
 	}
 
-	
+	/**
+	 * <p>Met à jour la VueJoueurVirtuel à chaque notification de celui-ci, en entourant le joueur actuel d'un cadre rouge et en actualisant le nombre de cartes restantes à la fin du tour.</p>
+	 */
 	public void update(Observable o, Object arg) {
 		this.nbCartes.setText(
 				"Cartes restantes: " + Partie.getPartie().getJoueur().get(this.numJoueur - 1).getCartes().size());
