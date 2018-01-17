@@ -1,14 +1,22 @@
 package controleur;
-import modele.JoueurVirtuel;
-
-import java.awt.event.*;
-import java.util.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 import javax.swing.JButton;
 import javax.swing.JTextArea;
-import modele.Joueur;
-import modele.Partie;
 
+import modele.Joueur;
+import modele.JoueurVirtuel;
+import modele.Partie;
+/**
+ * <b>Contrôleur du Bouton de l'action dire Contre-carte selon le pattern MVC.</b>
+ * <p>Fait la transition lors d'un clic sur le bouton Contre-carte vers l'action <i>setContreCarte() </i>du joueur suivant. </p>
+ * @see JoueurVirtuel#setContreCarte()
+ * @author Robin et Charlene
+ * @version 1.0
+ */
 public class ControleurBoutonContreCarte {
 
 	public ControleurBoutonContreCarte(Partie p, JButton Ccarte, JTextArea effetjeu) {

@@ -15,13 +15,13 @@ import modele.Partie;
  * @version 1.0
  * @see InterfaceChoixVarianteNouvelleManche
  */
-public class VueFinManche {
+public class InterfaceFinManche {
 
 	private JFrame frame;
 	private JButton btnSuivant;
 	private JPanel classement;
 	
-	public VueFinManche(JFrame frame){
+	public InterfaceFinManche(JFrame frame){
 		this.frame=frame;
 		this.initialize();
 		new ControleurBoutonSuivant(this.btnSuivant, Partie.getPartie(), frame);

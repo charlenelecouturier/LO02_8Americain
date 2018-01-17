@@ -280,7 +280,7 @@ public class InterfaceManche implements Observer {
 		} else if (instanceObservable instanceof Partie) {
 			if (arg1 != null) {
 				if (arg1.equals("manche terminee")) {
-					new VueFinManche(this.frame);
+					new InterfaceFinManche(this.frame);
 				}
 			}
 		}

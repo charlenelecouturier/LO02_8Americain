@@ -9,7 +9,13 @@ import javax.swing.JTextArea;
 import modele.Joueur;
 import modele.JoueurPhysique;
 import modele.Partie;
-
+/**
+ * <b>Contrôleur du Bouton de l'action dire carte selon le pattern MVC.</b>
+ * <p>Fait la transition lors d'un clic sur le bouton carte vers l'action <i>jPhysique.setaDitcarte() </i> </p>
+ * @see JoueurPhysique#setaDitcarte()
+ * @author Robin et Charlene
+ * @version 1.0
+ */
 public class ControleurBoutonCarte {
 	public ControleurBoutonCarte(Partie p, JButton carte, JTextArea effetjeu) {
 		carte.addActionListener(new ActionListener() {

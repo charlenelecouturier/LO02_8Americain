@@ -5,10 +5,15 @@ import java.awt.event.*;
 import modele.Carte;
 import modele.Partie;
 import vue.VueCarte;
-
+/**
+ * <b>Contrôleur du Bouton des cartes selon le pattern MVC.</b>
+ * <p>Fait la transition lors d'un clic sur l'une des cartes de la main vers l'action <i>jouerTourGraphique(indexCarteChoisie) </i> du JoueurPhysique. </p>
+ * @see JoueurPhysique#jouerTourGraphique(int)
+ * @author Robin et Charlene
+ * @version 1.0
+ */
 public class ControleurCarte {
 
-	
 	public ControleurCarte(Partie p, Carte carteAControler, VueCarte vueCarteAControler) {
 		
 		vueCarteAControler.addActionListener(new ActionListener() {

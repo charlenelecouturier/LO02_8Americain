@@ -4,10 +4,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+import modele.JoueurPhysique;
+import vue.VueJoueurVirtuel;
+/**
+ * <b>Contrôle la visibilité des VueJoueurVirtuel.</b>
+ * <p>L'interface d'une manche comprend 5 JoueursVirtuels (le maximum). Si il y en a moins, celles en trop sont alors cachées pour éviter l'incompréhension du joueur./n
+ * </p>
+ * @see VueJoueurVirtuel
+ * @author Robin et Charlene
+ * @version 1.0
+ */
 public class ControleurNbJVirtuel {
 
 	private JComboBox choix;
-	private int[] niveauxJoueurs;
 
 	public ControleurNbJVirtuel(JComboBox nbJoueurs, JPanel panelJ2, JPanel panelJ3, JPanel panelJ4,JPanel panelJ5,JPanel panelJ6, JComboBox comboBoxNbJoueursVirtuels) {
 
@@ -61,8 +70,6 @@ public class ControleurNbJVirtuel {
 
 				break;
 				}
-				//JLabel niveauxJoueurs = new
-
 			}
 		});
 	}

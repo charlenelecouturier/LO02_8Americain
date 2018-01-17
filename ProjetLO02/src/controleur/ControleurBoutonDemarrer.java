@@ -5,7 +5,13 @@ import java.awt.event.ActionListener;
 import vue.*;
 import javax.swing.*;
 import modele.*;
-
+/**
+ * <b>Contrôleur du Bouton Démarrer de l'interface de début de partie</b>
+ * <p>Transmet au modèle les choix sélectionnés par le Joueur lors d'un clic sur le bouton démarrer. </p>
+ * @see InterfaceDebutPartie
+ * @author Robin et Charlene
+ * @version 1.0
+ */
 public class ControleurBoutonDemarrer {
 
 	private JButton choix;
