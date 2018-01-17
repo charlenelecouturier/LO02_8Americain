@@ -1,7 +1,6 @@
 package vue;
 
 import java.awt.*;
-import java.rmi.NotBoundException;
 import java.util.Observable;
 import java.util.Observer;
 import modele.Partie;
@@ -9,12 +8,12 @@ import javax.swing.*;
 
 import modele.*;
 
-// ===========Concernant les joueurs virtuels ============
 
-// 1. Creer une classe a part qu'on instanciera dans l'interface : VueJoueurVirtuel
 public class VueJoueurVirtuel extends JPanel implements Observer {
-	// 1.1 a l'Interieur, mettre une icone de joueur, une carte de dos, le nombre de
-	// cartes restantes et le nom du joueur
+	
+	private static final long serialVersionUID = 1L;
+
+	
 	protected static Color FOND_JOUEURS = new Color(112, 181, 134);
 
 	protected JLabel iconeJoueur;
@@ -81,7 +80,7 @@ public class VueJoueurVirtuel extends JPanel implements Observer {
 		}
 	}
 
-	@Override
+	
 	public void update(Observable o, Object arg) {
 		this.nbCartes.setText(
 				"Cartes restantes: " + Partie.getPartie().getJoueur().get(this.numJoueur - 1).getCartes().size());

@@ -87,11 +87,4 @@ public class Pioche extends Observable {
 		return cartes;
 	}
 
-	/**
-	 * @param cartes
-	 *            the cartes to set
-	 */
-	/*public void LinkedCartes(LinkedList<Carte> cartes) {
-		this.cartes = cartes;
-	}*/
 }

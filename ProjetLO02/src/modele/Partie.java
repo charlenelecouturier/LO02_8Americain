@@ -171,12 +171,9 @@ public class Partie extends Observable implements Runnable {
 	}
 /**
  * <b> Méthode permettant de lancer la partie. </b>
- * <p> Cette méthode est chargée de créer la Pioche d'une manche, de mélanger et de distribuer les cartes aux joueurs,
- * via <b>melanger()</b> et <b>distribuer</b> de la Pioche.\n
- * Ensuite, la méthode donne un temps de repos entre chaque tour, avant d'appeler la méthode <b>jouerTour()</b> du prochain joueur.
+ * <p>
+ * La méthode donne un temps de repos entre chaque tour, avant d'appeler la méthode <b>jouerTour()</b> du prochain joueur.
  * 
- * @see Pioche#melanger()
- * @see Pioche#distribuer()
  * @see Joueur#jouerTour()
  */
 	public void lancerPartie() {

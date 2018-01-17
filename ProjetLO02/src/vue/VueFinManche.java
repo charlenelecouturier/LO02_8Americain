@@ -4,15 +4,17 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ListIterator;
-import java.util.Observable;
 import javax.swing.*;
-
 import controleur.ControleurBontonSuivant;
 import modele.Joueur;
 import modele.Partie;
-
-import java.util.Observer;
-
+/**
+ * <b> Fenêtre ouverte lors de la fin d'une manche. Permet de consulter les scores de chaque joueur.</b>
+ * <p> Comporte du texte pour les classements des joueurs et un bouton pour passer à l'écran de sélection de la variante.</p>
+ * @author Charlene et Robin
+ * @version 1.0
+ * @see InterfaceChoixVarianteNouvelleManche
+ */
 public class VueFinManche {
 
 	private JFrame frame;
