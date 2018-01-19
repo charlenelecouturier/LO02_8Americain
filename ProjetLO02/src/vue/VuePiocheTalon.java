@@ -33,14 +33,14 @@ public class VuePiocheTalon extends JPanel implements Observer {
 
 	public void initialize() {
 
-		lblPioche = new JLabel(new ImageIcon("Images/dosPioche.jpg"));
+		lblPioche = new JLabel(new ImageIcon("./Images/dosPioche.jpg"));
 		this.add(lblPioche);
 		Carte carteDessus = Partie.getPartie().getManche().getTalon().getCarteDessus();
 		ImageIcon imageCarte;
 		if (carteDessus.getValeur().equals("JOKER")) {
-			imageCarte = new ImageIcon("Images/JOKER/JOKER.png");
+			imageCarte = new ImageIcon("./Images/JOKER/JOKER.png");
 		} else {
-			imageCarte = new ImageIcon("Images/" + carteDessus.getSymbole() + "/" + carteDessus.getValeur() + ".png");
+			imageCarte = new ImageIcon("./Images/" + carteDessus.getSymbole() + "/" + carteDessus.getValeur() + ".png");
 		}
 		this.carteDessusTalon = new JLabel();
 		this.carteDessusTalon.setIcon(imageCarte);
@@ -55,9 +55,9 @@ public class VuePiocheTalon extends JPanel implements Observer {
 		Carte carteDessus = Partie.getPartie().getManche().getTalon().getCarteDessus();
 		ImageIcon imageCarte;
 		if (carteDessus.getValeur().equals("JOKER")) {
-			imageCarte = new ImageIcon("Images/JOKER/JOKER.png");
+			imageCarte = new ImageIcon("./Images/JOKER/JOKER.png");
 		} else {
-			imageCarte = new ImageIcon("Images/" + carteDessus.getSymbole() + "/" + carteDessus.getValeur() + ".png");
+			imageCarte = new ImageIcon("./Images/" + carteDessus.getSymbole() + "/" + carteDessus.getValeur() + ".png");
 		}
 		this.carteDessusTalon.setIcon(imageCarte);
 		this.add(carteDessusTalon);
