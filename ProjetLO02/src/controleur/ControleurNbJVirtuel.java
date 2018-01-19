@@ -20,7 +20,6 @@ public class ControleurNbJVirtuel {
 
 	public ControleurNbJVirtuel(JComboBox nbJoueurs, JPanel panelJ2, JPanel panelJ3, JPanel panelJ4,JPanel panelJ5,JPanel panelJ6, JComboBox comboBoxNbJoueursVirtuels) {
 
-		// public ControleurInterrupteur(Interrupteur itr, JButton jbt){
 		this.choix = nbJoueurs;
 		choix.addActionListener(new ActionListener() {
 
@@ -28,7 +27,6 @@ public class ControleurNbJVirtuel {
 				
 				String select = (String) choix.getSelectedItem();
 				int nbSelect =Integer.parseInt(select);
-				//Partie.getPartie().setNbJoueursVirtuels(nbSelect);
 				switch (nbSelect) {
 				case 1 :
 					panelJ2.setVisible(true);
