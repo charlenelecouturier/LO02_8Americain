@@ -69,9 +69,9 @@ public class VueJoueurVirtuel extends JPanel implements Observer {
 	public void initialize() {
 		iconeJoueur = new JLabel();
 		dosCarte = new JLabel();
-		iconeJoueur.setIcon(new ImageIcon("./Images/joueur.png"));
+		iconeJoueur.setIcon(new ImageIcon("Images/joueur.png"));
 		iconeJoueur.setHorizontalAlignment(SwingConstants.CENTER);
-		dosCarte.setIcon(new ImageIcon("./Images/dosCarte.jpg"));
+		dosCarte.setIcon(new ImageIcon("Images/dosCarte.jpg"));
 		dosCarte.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 
